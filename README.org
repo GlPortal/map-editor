@@ -1,0 +1,7 @@
+* GlPortal tools Repository
+This repository holds important software for the GlPortal toolchain.
+- GlPortal Map Editor Blender Module
+- Alan the automated assistant
+- Tool configuration files
+
+Check out glportal.de for more information.
