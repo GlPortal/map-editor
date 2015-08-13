@@ -134,19 +134,11 @@ class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
                     elif param.tag == "rotation":
                         rotation = extrackRotation(param, 90);
                 
-                realpath = os.path.expanduser(Paths.GLPORTAL_DATA_DIR + "meshes/Door.obj")
-                bpy.ops.import_scene.obj(filepath=realpath)
-                bpy.types.Object.glpType = bpy.props.StringProperty()
+                addDoor.execute(self, context)
                 
-                # make sure to get all imported objects
-                obj_objects = bpy.context.selected_objects[:]
-                
-                # iterate through all objects to find new
-                for object in obj_objects:
-                    if object.glpTypes == "none":
-                        object.glpTypes = "door"
-                        object.location = location
-                        object.rotation_euler = rotation
+                object = bpy.context.active_object
+                object.location = location
+                object.rotation_euler = rotation
             elif child.tag == "trigger":
                 bpy.ops.mesh.primitive_cube_add()
                 object = bpy.context.active_object

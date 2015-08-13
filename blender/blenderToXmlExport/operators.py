@@ -19,13 +19,27 @@ class addDoor(bpy.types.Operator):
         bpy.ops.transform.translate(value=(bpy.context.scene.cursor_location))
         bpy.types.Object.glpType = bpy.props.StringProperty()
         
+        mat = getMaterial(Paths.GLPORTAL_DATA_DIR + 'textures/door/door00.png', (1, 1, 1))
+        mat.texture_slots[0].texture_coords = 'UV'
+        mat.texture_slots[0].mapping = 'FLAT'
+        
         # make sure to get all imported objects
         obj_objects = bpy.context.selected_objects[:]
         
         # iterate through all objects to find new
         for object in obj_objects:
-            if object.glpTypes == "none":
+            if object.glpTypes and object.glpTypes == "none":
+                object.select = True
                 object.glpTypes = "door"
+                context.scene.objects.active = object
+
+                me = object.data
+                if (len(me.materials) == 0):
+                    me.materials.append(mat)
+                else:
+                    me.materials[0] = mat
+                
+                fixDoorTexture(me)
         
         return {'FINISHED'}
 

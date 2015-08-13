@@ -1,5 +1,24 @@
 import bpy
 import os
+import bmesh
+
+def fixDoorTexture(me):
+    bpy.ops.object.mode_set(mode='EDIT')
+    bm = bmesh.from_edit_mesh(me)
+    bm.faces.ensure_lookup_table()
+    uv_layer = bm.loops.layers.uv[0]
+    
+    nFaces = len(bm.faces)
+    bm.faces[7].loops[0][uv_layer].uv = (0.5, 0.5)
+    bm.faces[7].loops[1][uv_layer].uv = (0.5, 0)
+    bm.faces[7].loops[2][uv_layer].uv = (0.5, 0)
+    
+    bm.faces[25].loops[0][uv_layer].uv = (0.5, 0.5)
+    bm.faces[25].loops[1][uv_layer].uv = (0.5, 0)
+    bm.faces[25].loops[2][uv_layer].uv = (0.5, 0)
+    
+    bmesh.update_edit_mesh(me)
+    bpy.ops.object.mode_set(mode='OBJECT')
 
 def clearGlpProperties():
     object = bpy.context.active_object
