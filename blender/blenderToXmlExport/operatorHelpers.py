@@ -2,6 +2,17 @@ import bpy
 import os
 import bmesh
 
+def setTrigger(object, type):
+    addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+    clearGlpProperties(object)
+    
+    object.glpTypes = "trigger"
+    object.glpTriggerTypes = type
+    object.draw_type = "WIRE"
+    object.show_x_ray = addon_prefs.triggerXrays
+    object.show_bounds = True
+    object.draw_bounds_type = "CAPSULE"
+
 def fixDoorTexture(me):
     bpy.ops.object.mode_set(mode='EDIT')
     bm = bmesh.from_edit_mesh(me)
@@ -19,13 +30,11 @@ def fixDoorTexture(me):
     bmesh.update_edit_mesh(me)
     bpy.ops.object.mode_set(mode='OBJECT')
 
-def clearGlpProperties():
-    object = bpy.context.active_object
-    if object:
-        object.glpTypes = "none"
-        object.glpVolumeTypes = "none"
-        object.glpTriggerTypes = "none"
-        object.glpWallTypes = "none"
+def clearGlpProperties(object):
+    object.glpTypes = "none"
+    object.glpVolumeTypes = "none"
+    object.glpTriggerTypes = "none"
+    object.glpWallTypes = "none"
 
 def getMaterial(texturePath, diffuse):
     addon_prefs = bpy.context.user_preferences.addons[__package__].preferences

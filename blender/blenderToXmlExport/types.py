@@ -10,6 +10,7 @@ glpTypes = [
 ]
 
 glpWallTypes = [
+    ("none" ,       "None" ,        "No special property"),
     ("default" ,    "Default" ,     "Nothing special just a painted concrete wall"),
     ("invisible" ,  "Invisible" ,   "Invisible (Not implemented)"),
     ("glass" ,      "Glass" ,       "Glass (Not implemented)"),
@@ -17,7 +18,8 @@ glpWallTypes = [
 ]
 
 glpVolumeTypes = [
-    ("acid", "Acid Pool", "A pool full of acid, hurts..")
+    ("none" ,   "None" ,     "No special property"),
+    ("acid",    "Acid Pool", "A pool full of acid, hurts..")
 ]
 
 glpTriggerTypes = [
