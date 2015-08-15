@@ -15,7 +15,7 @@ class GlPortalPanel(bpy.types.Panel):
         split = layout.split()
         col = split.column(align=True)
         col.operator("wm.set_portalable", text="Portalable", icon='MESH_PLANE')
-        col.operator("wm.set_wall", text="Tiles", icon='MESH_PLANE')
+        col.operator("wm.set_wall", text="Tiles", icon='META_PLANE')
         
         layout.label("Volume:")
         row = layout.row()
@@ -28,11 +28,12 @@ class GlPortalPanel(bpy.types.Panel):
         split = layout.split()
         col = split.column(align=True)
         col.operator("wm.set_death", text="Death", icon='MESH_CUBE')
-        col.operator("wm.set_radiation", text="Radiation", icon='MESH_CUBE')
+        col.operator("wm.set_radiation", text="Radiation", icon='RADIO')
         col.operator("wm.set_win", text="Win", icon='MESH_CUBE')
         
         layout.label("Map:")
         row = layout.row()
         split = layout.split()
         col = split.column(align=True)
-        col.operator("wm.fix_map", text="Fix Map", icon='MESH_CUBE')
+        col.operator("wm.fix_map", text="Fix Map", icon='SCRIPTWIN')
+        col.operator("wm.check_map", text="Check Map", icon='QUESTION')

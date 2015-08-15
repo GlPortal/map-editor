@@ -1,12 +1,13 @@
 #!BPY
 bl_info = {
     "name":         "GlPortal XML Format",
-    "author":       "Henry Hirsch, Juraj Oravec",
+    "author":       "Henry Hirsch, Julian Thijssen, Juraj Oravec",
     "blender":      (2, 6, 3),
-    "version":      (0, 0, 5),
+    "version":      (0, 0, 6),
     "location":     "File > Import-Export",
     "description":  "GlPortal XML Format",
-    "category":     "Import-Export"
+    "category":     "Import-Export",
+    "tracker_url":  "https://github.com/GlPortal/tools/issues"
 }
 
 import bpy
@@ -27,6 +28,8 @@ from .operators import *
 from .triggerOperators import *
 from .volumeOperators import *
 from .mapOperators import *
+from .glportalpreferences import *
+from .mapHelpers import *
 
 def menu_func_export(self, context):
     self.layout.operator(ExportGlPortalFormat.bl_idname, text="GlPortal Map (.xml)")
@@ -41,11 +44,8 @@ def register():
 
 def unregister():
     bpy.utils.unregister_module(__name__)
-    bpy.types.INFO_MT_file_export.remove(menu_func_export)
     bpy.types.INFO_MT_file_export.remove(menu_func_import)
-    bpy.utils.unregister_class(GlPortalPanel)
-    bpy.utils.unregister_class(GlPortalCreationPanel)
-    bpy.utils.unregister_class(GlPortalObjectPanel)
+    bpy.types.INFO_MT_file_export.remove(menu_func_export)
 
 if __name__ == "__main__":
     register()

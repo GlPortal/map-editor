@@ -21,14 +21,14 @@ class GlPortalCreationPanel(bpy.types.Panel):
         split = layout.split()
         col = split.column(align=True)
         col.operator("wm.add_portalable", text="Portalable", icon='MESH_PLANE')
-        col.operator("wm.add_wall", text="Tiles", icon='MESH_PLANE')
+        col.operator("wm.add_wall", text="Tiles", icon='META_PLANE')
         
         layout.label("Trigger:")
         row = layout.row()
         split = layout.split()
         col = split.column(align=True)
         col.operator("wm.add_death", text="Death", icon='MESH_CUBE')
-        col.operator("wm.add_radiation", text="Radiation", icon='MESH_CUBE')
+        col.operator("wm.add_radiation", text="Radiation", icon='RADIO')
         col.operator("wm.add_win", text="Win", icon='MESH_CUBE')
         
         layout.label("Models:")

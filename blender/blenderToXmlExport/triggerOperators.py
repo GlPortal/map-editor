@@ -14,10 +14,12 @@ class setWin(bpy.types.Operator):
     def execute(self, context):
         object = bpy.context.active_object
         if object:
+            addon_prefs = context.user_preferences.addons[__package__].preferences
+            
             object.glpTypes = "trigger"
             object.glpTriggerTypes = "win"
             object.draw_type = "WIRE"
-            object.show_x_ray = True
+            object.show_x_ray = addon_prefs.triggerXrays
             object.show_bounds = True
             object.draw_bounds_type = "CAPSULE"
         return {'FINISHED'}
@@ -42,10 +44,12 @@ class setDeath(bpy.types.Operator):
     def execute(self, context):
         object = bpy.context.active_object
         if object:
+            addon_prefs = context.user_preferences.addons[__package__].preferences
+
             object.glpTypes = "trigger"
             object.glpTriggerTypes = "death"
             object.draw_type = "WIRE"
-            object.show_x_ray = True
+            object.show_x_ray = addon_prefs.triggerXrays
             object.show_bounds = True
             object.draw_bounds_type = "CAPSULE"
         return {'FINISHED'}
@@ -70,10 +74,12 @@ class setRadiation(bpy.types.Operator):
     def execute(self, context):
         object = bpy.context.active_object
         if object:
+            addon_prefs = context.user_preferences.addons[__package__].preferences
+
             object.glpTypes = "trigger"
             object.glpTriggerTypes = "radiation"
             object.draw_type = "WIRE"
-            object.show_x_ray = True
+            object.show_x_ray = addon_prefs.triggerXrays
             object.show_bounds = True
             object.draw_bounds_type = "CAPSULE"
         return {'FINISHED'}

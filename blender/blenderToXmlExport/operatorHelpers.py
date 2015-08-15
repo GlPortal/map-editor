@@ -8,7 +8,6 @@ def fixDoorTexture(me):
     bm.faces.ensure_lookup_table()
     uv_layer = bm.loops.layers.uv[0]
     
-    nFaces = len(bm.faces)
     bm.faces[7].loops[0][uv_layer].uv = (0.5, 0.5)
     bm.faces[7].loops[1][uv_layer].uv = (0.5, 0)
     bm.faces[7].loops[2][uv_layer].uv = (0.5, 0)
@@ -28,7 +27,7 @@ def clearGlpProperties():
         object.glpTriggerTypes = "none"
         object.glpWallTypes = "none"
 
-def getMaterial(texturePath, diffuse, dimensions = [1,1,1]):
+def getMaterial(texturePath, diffuse):
     realpath = os.path.expanduser(texturePath)
     try:
         WallImage = bpy.data.images.load(realpath)
@@ -52,6 +51,5 @@ def getMaterial(texturePath, diffuse, dimensions = [1,1,1]):
     mtex.mapping = 'CUBE'
     mtex.use_map_emit = True
     mtex.emit_factor = 0.3
-#    mtex.offset = [0, -0.25, 0]
     
     return mat
