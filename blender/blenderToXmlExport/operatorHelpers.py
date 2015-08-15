@@ -16,7 +16,10 @@ def setTrigger(object, type):
 def fixDoorTexture(me):
     bpy.ops.object.mode_set(mode='EDIT')
     bm = bmesh.from_edit_mesh(me)
-    bm.faces.ensure_lookup_table()
+    
+    if hasattr(bm.verts, "ensure_lookup_table"): 
+        bm.faces.ensure_lookup_table()
+    
     uv_layer = bm.loops.layers.uv[0]
     
     bm.faces[7].loops[0][uv_layer].uv = (0.5, 0.5)
