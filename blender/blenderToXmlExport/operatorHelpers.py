@@ -28,7 +28,9 @@ def clearGlpProperties():
         object.glpWallTypes = "none"
 
 def getMaterial(texturePath, diffuse):
-    realpath = os.path.expanduser(texturePath)
+    addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+    
+    realpath = os.path.expanduser(addon_prefs.dataDir + texturePath)
     try:
         WallImage = bpy.data.images.load(realpath)
     except:

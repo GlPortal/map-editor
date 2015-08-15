@@ -2,7 +2,6 @@ import bpy
 import os
 import string
 import re
-from .paths import *
 from .operatorHelpers import *
 
 # we are using this for <end> (exit door)
@@ -14,12 +13,14 @@ class addDoor(bpy.types.Operator):
     bl_options = {"UNDO"}
     
     def execute(self, context):
-        realpath = os.path.expanduser(Paths.GLPORTAL_DATA_DIR + "meshes/Door.obj")
+        addon_prefs = context.user_preferences.addons[__package__].preferences
+        
+        realpath = os.path.expanduser(addon_prefs.dataDir + "meshes/Door.obj")
         bpy.ops.import_scene.obj(filepath=realpath)
         bpy.ops.transform.translate(value=(bpy.context.scene.cursor_location))
         bpy.types.Object.glpType = bpy.props.StringProperty()
         
-        mat = getMaterial(Paths.GLPORTAL_DATA_DIR + 'textures/door/door00.png', (1, 1, 1))
+        mat = getMaterial('textures/door/door00.png', (1, 1, 1))
         mat.texture_slots[0].texture_coords = 'UV'
         mat.texture_slots[0].mapping = 'FLAT'
         
@@ -50,7 +51,9 @@ class addLamp(bpy.types.Operator):
     bl_options = {"UNDO"}
     
     def execute(self, context):
-        realpath = os.path.expanduser(Paths.GLPORTAL_DATA_DIR + "meshes/Lamp.obj")
+        addon_prefs = context.user_preferences.addons[__package__].preferences
+        
+        realpath = os.path.expanduser(addon_prefs.dataDir + "meshes/Lamp.obj")
         bpy.ops.import_scene.obj(filepath=realpath)
         bpy.ops.transform.translate(value=(bpy.context.scene.cursor_location))
         bpy.types.Object.glpType = bpy.props.StringProperty()
@@ -66,7 +69,9 @@ class addButton(bpy.types.Operator):
     bl_options = {"UNDO"}
     
     def execute(self, context):
-        realpath = os.path.expanduser(Paths.GLPORTAL_DATA_DIR + "meshes/Button.obj")
+        addon_prefs = context.user_preferences.addons[__package__].preferences
+        
+        realpath = os.path.expanduser(addon_prefs.dataDir + "meshes/Button.obj")
         bpy.ops.import_scene.obj(filepath=realpath)
         bpy.ops.transform.translate(value=(bpy.context.scene.cursor_location))
         bpy.types.Object.glpType = bpy.props.StringProperty()
@@ -82,7 +87,7 @@ class setPortalable(bpy.types.Operator):
     bl_options = {"UNDO"}
     
     def execute(self, context):
-        mat = getMaterial(Paths.GLPORTAL_DATA_DIR + 'textures/concrete/wall00.png', (1, 1, 1))
+        mat = getMaterial('textures/concrete/wall00.png', (1, 1, 1))
         bpy.types.Object.glpType = bpy.props.StringProperty()
         object = bpy.context.active_object
         if object:
@@ -102,7 +107,7 @@ class setWall(bpy.types.Operator):
     bl_options = {"UNDO"}
     
     def execute(self, context):
-        mat = getMaterial(Paths.GLPORTAL_DATA_DIR + 'textures/metal/tiles00x3.jpg', (0.2, 0.2, 0.2))
+        mat = getMaterial('textures/metal/tiles00x3.jpg', (0.2, 0.2, 0.2))
         bpy.types.Object.glpType = bpy.props.StringProperty()
         object = bpy.context.active_object
         if object:

@@ -12,7 +12,7 @@ class setAcid(bpy.types.Operator):
     bl_options = {"UNDO"}
     
     def execute(self, context):
-        mat = getMaterial('~/.glportal/data/textures/fluid/acid00.png', (0.2, 1.0, 0.2))
+        mat = getMaterial('textures/fluid/acid00.png', (0.2, 1.0, 0.2))
         bpy.types.Object.glpType = bpy.props.StringProperty()
         object = bpy.context.active_object
         if object:
