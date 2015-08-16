@@ -101,16 +101,19 @@ class checkMapDialog(bpy.types.Operator):
             
             layout.prop(self, "exitDoor")
             layout.label(text = "There aren't an exit door, use it only once.", icon = 'CANCEL')
+            layout.separator()
         if result['camera'] != 1:
             self.camera = result['camera']
             error = True
             
             layout.prop(self, "camera")
             layout.label(text = "We are using object camera for spawn position, use it only once.",icon = 'ERROR')
+            layout.separator()
         if result['light'] == 0:
             error = True
             
             layout.label(text = "There isn't a light in the map. You have to add some lights.", icon = 'CANCEL')
+            layout.separator()
         elif result['light'] > 5:
             self.light = result['light']
             error = True
@@ -118,23 +121,27 @@ class checkMapDialog(bpy.types.Operator):
             layout.prop(self, "light")
             layout.label(text = "There is too many lights in the map.", icon = 'INFO')
             layout.label(text = "We are sorry but we have some performance issues with lights.", icon = 'INFO')
+            layout.separator()
         if result['wallPortalable'] == 0:
             self.wallPortalable = result['wallPortalable']
             error = True
             
             layout.prop(self, "wallPortalable")
             layout.label(text = "There isn't a portalable wall.", icon = 'ERROR')
+            layout.separator()
         if result['wallMetal'] == 0:
             self.wallMetal = result['wallMetal']
             error = True
             
             layout.prop(self, "wallMetal")
             layout.label(text = "There isn't a metal wall.", icon = 'INFO')
+            layout.separator()
         if result['triggerDeath'] < result['acid']:
             error = True
             
             layout.label(text = "We have some implementation problems.", icon = 'INFO')
             layout.label(text = "Use death trigger for each volume of acid in the map.")
+            layout.separator()
         if result['camera'] == 1:
             isOver = controlSpawnPosition(objects)
             
@@ -143,12 +150,14 @@ class checkMapDialog(bpy.types.Operator):
                 
                 layout.label(text = "Camera is in the air.", icon = 'CANCEL')
                 layout.label(text = "Remember, we are using camera as spawn position.", icon = 'INFO')
+                layout.separator()
             elif isOver == 2:
                 error = True
                 
                 layout.label(text = "Camera is very close to the floor.", icon = 'ERROR')
                 layout.label(text = "Player can be stuck in floor or unable to go through portal.", icon = 'ERROR')
                 layout.label(text = "Remember, we are using camera as spawn position.", icon = 'INFO')
+                layout.separator()
         
         if not error:
             layout.label(text = "Nice work, there isn't an error or a warning in the map", icon = 'FILE_TICK')
