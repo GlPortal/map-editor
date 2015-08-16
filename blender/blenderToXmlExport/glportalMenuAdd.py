@@ -14,9 +14,9 @@ class GlPortalAddMenuMain(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
         
-        layout.menu("OBJECT_MT_glportal_add_menu_walls")
-        layout.menu("OBJECT_MT_glportal_add_menu_volumes")
-        layout.menu("OBJECT_MT_glportal_add_menu_triggers")
+        layout.menu("OBJECT_MT_glportal_add_menu_walls", icon = 'MOD_BUILD')
+        layout.menu("OBJECT_MT_glportal_add_menu_volumes", icon = 'MOD_FLUIDSIM')
+        layout.menu("OBJECT_MT_glportal_add_menu_triggers", icon = 'MOD_SCREW')
         
         layout.operator("object.lamp_add", text = "Light", icon = 'LAMP_POINT').type = 'POINT'
         layout.operator("object.camera_add", text = "Spawn (Camera)", icon = 'OUTLINER_OB_CAMERA')
