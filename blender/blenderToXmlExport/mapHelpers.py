@@ -97,7 +97,7 @@ class checkMapDialog(bpy.types.Operator):
             
             layout.prop(self, "wallMetal")
             layout.label(text = "There isn't a metal wall.", icon = 'INFO')
-        if result['triggerDeath'] != result['acid']:
+        if result['triggerDeath'] < result['acid']:
             error = True
             
             layout.label(text = "We have some implementation problems.", icon = 'INFO')
