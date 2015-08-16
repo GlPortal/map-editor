@@ -1,8 +1,40 @@
 import bpy
 from bpy.props import *
 
-def countObjects(context):
-    objects = context.scene.objects
+def isOverObject(position, object):
+    pMin = object.location[0] - abs(object.dimensions[0]) / 2
+    pMax = object.location[0] + abs(object.dimensions[0]) / 2
+    
+    if position[0] > pMin and position[0] < pMax:
+        pMin = object.location[1] - abs(object.dimensions[1]) / 2
+        pMax = object.location[1] + abs(object.dimensions[1]) / 2
+        
+        if position[1] > pMin and position[1] < pMax:
+            pMax = object.location[2] + abs(object.dimensions[2]) / 2
+
+            if position[2] >= pMax + 1:
+                return 1
+            elif position[2] >= pMax:
+                return 2
+    
+    return 0
+
+def controlSpawnPosition(objects):
+    # find spawn position
+    for object in objects:
+        if object.type == "CAMERA":
+            cameraPosition = object.location
+            break
+    
+    for object in objects:
+        if object.type == "MESH" and object.glpTypes == "wall":
+            isOver = isOverObject(cameraPosition, object)
+            if isOver != 0:
+                return isOver
+    
+    return 0
+
+def countObjects(objects):
     result = {
         'camera':           0,
         'wallPortalable':   0,
@@ -58,7 +90,8 @@ class checkMapDialog(bpy.types.Operator):
         return context.window_manager.invoke_props_dialog(self, 400)
     
     def draw(self, context):
-        result = countObjects(context)
+        objects = context.scene.objects
+        result = countObjects(objects)
         layout = self.layout
         error = False
         
@@ -84,7 +117,7 @@ class checkMapDialog(bpy.types.Operator):
             
             layout.prop(self, "light")
             layout.label(text = "There is too many lights in the map.", icon = 'INFO')
-            layout.label(text = "We are sorry but we have some performance issues with lights.")
+            layout.label(text = "We are sorry but we have some performance issues with lights.", icon = 'INFO')
         if result['wallPortalable'] == 0:
             self.wallPortalable = result['wallPortalable']
             error = True
@@ -102,6 +135,20 @@ class checkMapDialog(bpy.types.Operator):
             
             layout.label(text = "We have some implementation problems.", icon = 'INFO')
             layout.label(text = "Use death trigger for each volume of acid in the map.")
+        if result['camera'] == 1:
+            isOver = controlSpawnPosition(objects)
+            
+            if isOver == 0:
+                error = True
+                
+                layout.label(text = "Camera is in the air.", icon = 'CANCEL')
+                layout.label(text = "Remember, we are using camera as spawn position.", icon = 'INFO')
+            elif isOver == 2:
+                error = True
+                
+                layout.label(text = "Camera is very close to the floor.", icon = 'ERROR')
+                layout.label(text = "Player can be stuck in floor or unable to go through portal.", icon = 'ERROR')
+                layout.label(text = "Remember, we are using camera as spawn position.", icon = 'INFO')
         
         if not error:
             layout.label(text = "Nice work, there isn't an error or a warning in the map", icon = 'FILE_TICK')
