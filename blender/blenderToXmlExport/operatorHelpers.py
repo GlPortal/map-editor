@@ -2,6 +2,14 @@ import bpy
 import os
 import bmesh
 
+def resetTriggerSettings(object):
+    if object.glpTypes and object.glpTypes == "trigger":
+        object.glpTriggerTypes = "none"
+        object.draw_type = "TEXTURED"
+        object.show_x_ray = False
+        object.show_bounds = False
+        object.draw_bounds_type = "BOX"
+
 def setTrigger(object, type):
     addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
     clearGlpProperties(object)

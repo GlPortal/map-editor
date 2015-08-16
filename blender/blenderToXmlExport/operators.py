@@ -91,6 +91,8 @@ class setPortalable(bpy.types.Operator):
         bpy.types.Object.glpType = bpy.props.StringProperty()
         object = bpy.context.active_object
         if object:
+            resetTriggerSettings(object)
+            
             object.glpTypes = "wall"
             object.glpWallTypes = "portalable"
             me = object.data
@@ -111,6 +113,8 @@ class setWall(bpy.types.Operator):
         bpy.types.Object.glpType = bpy.props.StringProperty()
         object = bpy.context.active_object
         if object:
+            resetTriggerSettings(object)
+            
             object.glpTypes = "wall"
             object.glpWallTypes = "default"
             me = object.data

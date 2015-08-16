@@ -16,6 +16,8 @@ class setAcid(bpy.types.Operator):
         bpy.types.Object.glpType = bpy.props.StringProperty()
         object = bpy.context.active_object
         if object:
+            resetTriggerSettings(object)
+            
             object.glpTypes = "volume"
             object.glpVolumeTypes = "acid"
             me = object.data
