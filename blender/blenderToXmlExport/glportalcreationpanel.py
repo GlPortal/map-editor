@@ -23,6 +23,12 @@ class GlPortalCreationPanel(bpy.types.Panel):
         col.operator("wm.add_portalable", text="Portalable", icon='MESH_PLANE')
         col.operator("wm.add_wall", text="Tiles", icon='META_PLANE')
         
+        layout.label("Volume:")
+        row = layout.row()
+        split = layout.split()
+        col = split.column(align=True)
+        col.operator("wm.add_acid", text="Acid", icon='MESH_CUBE')
+        
         layout.label("Trigger:")
         row = layout.row()
         split = layout.split()

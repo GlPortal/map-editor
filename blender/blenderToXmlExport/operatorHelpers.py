@@ -17,7 +17,7 @@ def fixDoorTexture(me):
     bpy.ops.object.mode_set(mode='EDIT')
     bm = bmesh.from_edit_mesh(me)
     
-    if hasattr(bm.verts, "ensure_lookup_table"): 
+    if hasattr(bm.faces, "ensure_lookup_table"): 
         bm.faces.ensure_lookup_table()
     
     uv_layer = bm.loops.layers.uv[0]

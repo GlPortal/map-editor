@@ -5,7 +5,7 @@ bl_info = {
     "blender":      (2, 6, 3),
     "version":      (0, 0, 6),
     "location":     "File > Import-Export",
-    "description":  "GlPortal XML Format",
+    "description":  "Module for loading, editing and saving GlPortal maps.",
     "category":     "Import-Export",
     "tracker_url":  "https://github.com/GlPortal/tools/issues"
 }
@@ -30,6 +30,7 @@ from .volumeOperators import *
 from .mapOperators import *
 from .glportalpreferences import *
 from .mapHelpers import *
+from .glportalMenuAdd import *
 
 def menu_func_export(self, context):
     self.layout.operator(ExportGlPortalFormat.bl_idname, text="GlPortal Map (.xml)")
@@ -41,11 +42,13 @@ def register():
     bpy.utils.register_module(__name__)
     bpy.types.INFO_MT_file_export.append(menu_func_export)
     bpy.types.INFO_MT_file_import.append(menu_func_import)
+    bpy.types.INFO_MT_add.prepend(glportal_add_menu)
 
 def unregister():
     bpy.utils.unregister_module(__name__)
     bpy.types.INFO_MT_file_export.remove(menu_func_import)
     bpy.types.INFO_MT_file_export.remove(menu_func_export)
+    bpy.types.INFO_MT_add.remove(glportal_add_menu)
 
 if __name__ == "__main__":
     register()
