@@ -22,10 +22,10 @@ def setTrigger(object, type):
     object.draw_bounds_type = "CAPSULE"
 
 def fixDoorTexture(me):
-    bpy.ops.object.mode_set(mode='EDIT')
-    bm = bmesh.from_edit_mesh(me)
+    bm = bmesh.new()
+    bm.from_mesh(me)
     
-    if hasattr(bm.faces, "ensure_lookup_table"): 
+    if hasattr(bm.faces, "ensure_lookup_table"):
         bm.faces.ensure_lookup_table()
     
     uv_layer = bm.loops.layers.uv[0]
@@ -38,8 +38,8 @@ def fixDoorTexture(me):
     bm.faces[25].loops[1][uv_layer].uv = (0.5, 0)
     bm.faces[25].loops[2][uv_layer].uv = (0.5, 0)
     
-    bmesh.update_edit_mesh(me)
-    bpy.ops.object.mode_set(mode='OBJECT')
+    bm.to_mesh(me)
+    bm.free()
 
 def clearGlpProperties(object):
     object.glpTypes = "none"
