@@ -3,6 +3,7 @@ import os
 import string
 import re
 from .operatorHelpers import *
+from .updateTextures import *
 
 # we are using this for <end> (exit door)
 class addDoor(bpy.types.Operator):
@@ -100,6 +101,8 @@ class setPortalable(bpy.types.Operator):
                 me.materials.append(mat)
             else:
                 me.materials[0] = mat
+            
+            UpdateTexture.updateTexture(object)
         return {'FINISHED'}
 
 class setWall(bpy.types.Operator):
@@ -122,6 +125,8 @@ class setWall(bpy.types.Operator):
                 me.materials.append(mat)
             else:
                 me.materials[0] = mat
+            
+            UpdateTexture.updateTexture(object)
         return {'FINISHED'}
 
 class addWall(bpy.types.Operator):

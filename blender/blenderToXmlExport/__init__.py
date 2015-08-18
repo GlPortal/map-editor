@@ -31,6 +31,7 @@ from .mapOperators import *
 from .glportalpreferences import *
 from .mapHelpers import *
 from .glportalMenuAdd import *
+from .updateTextures import *
 
 def menu_func_export(self, context):
     self.layout.operator(ExportGlPortalFormat.bl_idname, text="GlPortal Map (.xml)")

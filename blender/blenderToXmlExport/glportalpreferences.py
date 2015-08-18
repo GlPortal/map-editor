@@ -13,6 +13,12 @@ class glportalPreferences(AddonPreferences):
         default = True,
         update = updateTriggerXrays
     )
+    smartTexturesMapping = BoolProperty (
+        name = "Smart textures mapping",
+        description = "This is an experimental function",
+        default = False,
+        update = updateSmartTexturesMapping
+    )
     dataDir = StringProperty (
         name = "Set up GlPortal data directory",
         default = os.path.expanduser("~/.glportal/data/"),
@@ -22,4 +28,5 @@ class glportalPreferences(AddonPreferences):
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "triggerXrays")
+        layout.prop(self, "smartTexturesMapping")
         layout.prop(self, "dataDir")

@@ -65,13 +65,18 @@ def getMaterial(texturePath, diffuse):
     # Add texture slot for color texture
     mtex = mat.texture_slots.add()
     mtex.texture = WallTexture
-    mtex.texture_coords = 'GLOBAL'
     mtex.use_map_color_diffuse = True
     mtex.use_map_color_emission = True
     mtex.emission_color_factor = 0.5
     mtex.use_map_density = True
-    mtex.mapping = 'CUBE'
     mtex.use_map_emit = True
     mtex.emit_factor = 0.3
+
+    if addon_prefs.smartTexturesMapping:
+        mtex.texture_coords = 'UV'
+        mtex.mapping = 'FLAT'
+    else:
+        mtex.texture_coords = 'GLOBAL'
+        mtex.mapping = 'CUBE'
     
     return mat

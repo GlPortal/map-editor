@@ -4,6 +4,7 @@ import string
 import re
 
 from .operatorHelpers import *
+from .updateTextures import *
 
 class setAcid(bpy.types.Operator):
     bl_idname = "wm.set_acid"
@@ -25,6 +26,8 @@ class setAcid(bpy.types.Operator):
                 me.materials.append(mat)
             else:
                 me.materials[0] = mat
+            
+            UpdateTexture.updateTexture(object)
         return {'FINISHED'}
 
 class addAcid(bpy.types.Operator):
