@@ -20,7 +20,7 @@ def storePosition(element, object):
 
 # prepare rotation before exporting
 def prepareRot(degree):
-    return str(round(abs(degree), d_p))
+    return str(round(degree % 360, d_p))
 
 def checkRotation(object):
     x = math.degrees(object.rotation_euler[0])
@@ -103,9 +103,9 @@ class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
                 storePosition(positionElement, object);
                 
                 rotationElement = tree.SubElement(boxElement, "rotation")
-                rotationElement.set("x", prepareRot(math.degrees(object.rotation_euler[2])))
-                rotationElement.set("y", prepareRot(math.degrees(object.rotation_euler[0]) - 90))
-                rotationElement.set("z", prepareRot(math.degrees(-object.rotation_euler[1]) - 180))
+                rotationElement.set("x", prepareRot(math.degrees(object.rotation_euler[0]) - 90))
+                rotationElement.set("y", prepareRot(math.degrees(object.rotation_euler[2])))
+                rotationElement.set("z", "0")
             elif object.type == "MESH" and type == "door":
                 # tempotary add <end> instead of <door>
                 boxElement = tree.SubElement(root, "end")

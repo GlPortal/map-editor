@@ -106,9 +106,9 @@ class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
                         if param.tag == "position":
                             object.location = extrackPosition(param)
                         elif param.tag == "rotation":
-                            rotation = [math.radians(float(param.get("y")) + 90),
-                                        math.radians(float(param.get("z")) - 180),
-                                        math.radians(float(param.get("x")))]
+                            rotation = [math.radians(float(param.get("x")) + 90),
+                                        math.radians(0),
+                                        math.radians(float(param.get("y")))]
                             object.rotation_euler = rotation
             elif child.tag == "light":
                 bpy.ops.object.lamp_add(type="POINT")
