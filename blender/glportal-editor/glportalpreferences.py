@@ -16,7 +16,7 @@ class glportalPreferences(AddonPreferences):
     smartTexturesMapping = BoolProperty (
         name = "Smart textures mapping",
         description = "This is an experimental function",
-        default = False,
+        default = True,
         update = updateSmartTexturesMapping
     )
     dataDir = StringProperty (
