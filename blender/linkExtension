@@ -31,7 +31,7 @@ getopts "h?vb:" opt
             ADDONSPATH="$BLENDERVERPATH/$OPTARG/scripts/addons"
             mkdir -p "$ADDONSPATH"
             DIR=$(CDPATH= cd "$(dirname "$0")" && pwd)
-            ln -fs "$DIR/blenderToXmlExport/" "$ADDONSPATH/toGlPortalXml"
+            ln -fs "$DIR/glportal-editor/" "$ADDONSPATH/toGlPortalXml"
         else
             echo "No blender installation found."
             exit 0
