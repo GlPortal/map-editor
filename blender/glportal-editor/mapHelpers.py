@@ -100,27 +100,27 @@ class checkMapDialog(bpy.types.Operator):
             error = True
             
             layout.prop(self, "exitDoor")
-            layout.label(text = "There aren't an exit door, use it only once.", icon = 'CANCEL')
+            layout.label(text = "There is no exit door use it exactly once.", icon = 'CANCEL')
             layout.separator()
         if result['camera'] != 1:
             self.camera = result['camera']
             error = True
             
             layout.prop(self, "camera")
-            layout.label(text = "We are using object camera for spawn position, use it only once.",icon = 'ERROR')
+            layout.label(text = "The camera object is used for determining the spawn position use it exactly once.",icon = 'ERROR')
             layout.separator()
         if result['light'] == 0:
             error = True
             
-            layout.label(text = "There isn't a light in the map. You have to add some lights.", icon = 'CANCEL')
+            layout.label(text = "There is no light in the map you need at least one light.", icon = 'CANCEL')
             layout.separator()
         elif result['light'] > 5:
             self.light = result['light']
             error = True
             
             layout.prop(self, "light")
-            layout.label(text = "There is too many lights in the map.", icon = 'INFO')
-            layout.label(text = "We are sorry but we have some performance issues with lights.", icon = 'INFO')
+            layout.label(text = "There are too many lights in the map.", icon = 'INFO')
+            layout.label(text = "This is a performance issue and has to be fixed..", icon = 'INFO')
             layout.separator()
         if result['wallPortalable'] == 0:
             self.wallPortalable = result['wallPortalable']
@@ -139,7 +139,7 @@ class checkMapDialog(bpy.types.Operator):
         if result['triggerDeath'] < result['acid']:
             error = True
             
-            layout.label(text = "We have some implementation problems.", icon = 'INFO')
+            layout.label(text = "Acid without death trigger.", icon = 'INFO')
             layout.label(text = "Use death trigger for each volume of acid in the map.")
             layout.separator()
         if result['camera'] == 1:
@@ -155,9 +155,9 @@ class checkMapDialog(bpy.types.Operator):
                 error = True
                 
                 layout.label(text = "Camera is very close to the floor.", icon = 'ERROR')
-                layout.label(text = "Player can be stuck in floor or unable to go through portal.", icon = 'ERROR')
+                layout.label(text = "Player can get stuck in the floor or unable to go through portal.", icon = 'ERROR')
                 layout.label(text = "Remember, we are using camera as spawn position.", icon = 'INFO')
                 layout.separator()
         
         if not error:
-            layout.label(text = "Nice work, there isn't an error or a warning in the map", icon = 'FILE_TICK')
+            layout.label(text = "Nice work. There are no errors or warnings in the map", icon = 'FILE_TICK')
