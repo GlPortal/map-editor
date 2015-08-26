@@ -17,8 +17,7 @@ class addDoor(bpy.types.Operator):
         addon_prefs = context.user_preferences.addons[__package__].preferences
         
         realpath = os.path.expanduser(addon_prefs.dataDir + "meshes/Door.obj")
-        bpy.ops.import_scene.obj(filepath=realpath)
-        bpy.ops.transform.translate(value=(bpy.context.scene.cursor_location))
+        bpy.ops.import_scene.obj(filepath = realpath)
         bpy.types.Object.glpType = bpy.props.StringProperty()
         
         mat = getMaterial('textures/door/door00.png', (1, 1, 1))
@@ -31,10 +30,10 @@ class addDoor(bpy.types.Operator):
         # iterate through all objects to find new
         for object in obj_objects:
             if object.glpTypes and object.glpTypes == "none":
-                object.select = True
+                object.location = context.scene.cursor_location
                 object.glpTypes = "door"
                 context.scene.objects.active = object
-
+                
                 me = object.data
                 if (len(me.materials) == 0):
                     me.materials.append(mat)
