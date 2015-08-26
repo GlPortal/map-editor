@@ -7,7 +7,7 @@ The GlPortal editor allow Blender to import, edit, create and export GlPortal ma
 - Preview with textures
 - Language: English
 
-** Instalation
+** Installation
 - Install [[http://www.blender.org/download/][Blender]]
 - Download GlPortal editor. *Don’t unzip*.
 - Run Blender:
