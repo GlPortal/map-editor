@@ -15,7 +15,7 @@ The GlPortal editor allow Blender to import, edit, create and export GlPortal ma
   - Move to the Addons tab.
   - Click ~Install From File...~ in the bottom of the window.
   - Find the downloaded zip file and select it.
-  - Find and check the ~GlPortal XML Fortmat~ box. Wait a moment for activation to complete.
+  - Find and check the ~GlPortal XML Format~ box. Wait a moment for activation to complete.
   - Find and click on right Arrow to display details and preferences.
   - Go to ~Set up GlPortal data directory~ and find GlPortal data directory.
   - Click ~Save User Settings~ and close the window.
