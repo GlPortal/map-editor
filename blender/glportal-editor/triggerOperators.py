@@ -14,7 +14,10 @@ class setWin(bpy.types.Operator):
     def execute(self, context):
         object = bpy.context.active_object
         if object:
-            setTrigger(object, "win")
+            if object.type == "MESH":
+                setTrigger(object, "win")
+            else:
+                self.report({'ERROR'}, "Object of type '%s' can't be converted to the win trigger." % (object.type))
         return {'FINISHED'}
 
 class addWin(bpy.types.Operator):
@@ -37,7 +40,10 @@ class setDeath(bpy.types.Operator):
     def execute(self, context):
         object = bpy.context.active_object
         if object:
-            setTrigger(object, "death")
+            if object.type == "MESH":
+                setTrigger(object, "death")
+            else:
+                self.report({'ERROR'}, "Object of type '%s' can't be converted to the death trigger." % (object.type))
         return {'FINISHED'}
 
 class addDeath(bpy.types.Operator):
@@ -60,7 +66,10 @@ class setRadiation(bpy.types.Operator):
     def execute(self, context):
         object = bpy.context.active_object
         if object:
-            setTrigger(object, "radiation")
+            if object.type == "MESH":
+                setTrigger(object, "radiation")
+            else:
+                self.report({'ERROR'}, "Object of type '%s' can't be converted to the radiation trigger." % (object.type))
         return {'FINISHED'}
 
 class addRadiation(bpy.types.Operator):

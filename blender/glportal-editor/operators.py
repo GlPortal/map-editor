@@ -91,17 +91,20 @@ class setPortalable(bpy.types.Operator):
         bpy.types.Object.glpType = bpy.props.StringProperty()
         object = bpy.context.active_object
         if object:
-            resetTriggerSettings(object)
-            
-            object.glpTypes = "wall"
-            object.glpWallTypes = "portalable"
-            me = object.data
-            if (len(me.materials) == 0):
-                me.materials.append(mat)
+            if object.type == "MESH":
+                resetTriggerSettings(object)
+                
+                object.glpTypes = "wall"
+                object.glpWallTypes = "portalable"
+                me = object.data
+                if (len(me.materials) == 0):
+                    me.materials.append(mat)
+                else:
+                    me.materials[0] = mat
+                
+                UpdateTexture.updateTexture(object)
             else:
-                me.materials[0] = mat
-            
-            UpdateTexture.updateTexture(object)
+                self.report({'ERROR'}, "Object of type '%s' can't be converted to the portalable wall." % (object.type))
         return {'FINISHED'}
 
 class setWall(bpy.types.Operator):
@@ -115,17 +118,20 @@ class setWall(bpy.types.Operator):
         bpy.types.Object.glpType = bpy.props.StringProperty()
         object = bpy.context.active_object
         if object:
-            resetTriggerSettings(object)
-            
-            object.glpTypes = "wall"
-            object.glpWallTypes = "default"
-            me = object.data
-            if (len(me.materials) == 0):
-                me.materials.append(mat)
+            if object.type == "MESH":
+                resetTriggerSettings(object)
+                
+                object.glpTypes = "wall"
+                object.glpWallTypes = "default"
+                me = object.data
+                if (len(me.materials) == 0):
+                    me.materials.append(mat)
+                else:
+                    me.materials[0] = mat
+                
+                UpdateTexture.updateTexture(object)
             else:
-                me.materials[0] = mat
-            
-            UpdateTexture.updateTexture(object)
+                self.report({'ERROR'}, "Object of type '%s' can't be converted to the metal wall." % (object.type))
         return {'FINISHED'}
 
 class addWall(bpy.types.Operator):
