@@ -37,6 +37,13 @@ class GlPortalCreationPanel(bpy.types.Panel):
         col.operator("wm.add_radiation", text="Radiation", icon='RADIO')
         col.operator("wm.add_win", text="Win", icon='MESH_CUBE')
         
+        layout.label("Light:")
+        row = layout.row()
+        split = layout.split()
+        col = split.column(align=True)
+        col.operator("wm.add_light_common", icon='LAMP_POINT')
+        col.operator("wm.add_light_end", icon='LAMP_POINT')
+        
         layout.label("Models:")
         row = layout.row()
         split = layout.split()

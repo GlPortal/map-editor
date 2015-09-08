@@ -17,8 +17,8 @@ class GlPortalAddMenuMain(bpy.types.Menu):
         layout.menu("OBJECT_MT_glportal_add_menu_walls", icon = 'MOD_BUILD')
         layout.menu("OBJECT_MT_glportal_add_menu_volumes", icon = 'MOD_FLUIDSIM')
         layout.menu("OBJECT_MT_glportal_add_menu_triggers", icon = 'MOD_SCREW')
+        layout.menu("OBJECT_MT_glportal_add_menu_lights", icon = 'LAMP_POINT')
         
-        layout.operator("object.lamp_add", text = "Light", icon = 'LAMP_POINT').type = 'POINT'
         layout.operator("object.camera_add", text = "Spawn (Camera)", icon = 'OUTLINER_OB_CAMERA')
         layout.operator("wm.add_door", text = "Exit", icon = 'MESH_CUBE')
 
@@ -51,3 +51,13 @@ class GlPortalAddMenuVolumes(bpy.types.Menu):
         layout = self.layout
         
         layout.operator("wm.add_acid", text = "Acid", icon = 'MESH_CUBE')
+
+class GlPortalAddMenuLights(bpy.types.Menu):
+    bl_idname = "OBJECT_MT_glportal_add_menu_lights"
+    bl_label = "Lights"
+    
+    def draw(self, context):
+        layout = self.layout
+        
+        layout.operator("wm.add_light_common", text = "Common light", icon = 'LAMP_POINT')
+        layout.operator("wm.add_light_end", text = "End light", icon = 'LAMP_POINT')

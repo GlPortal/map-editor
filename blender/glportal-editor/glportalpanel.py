@@ -31,6 +31,13 @@ class GlPortalPanel(bpy.types.Panel):
         col.operator("wm.set_radiation", text="Radiation", icon='RADIO')
         col.operator("wm.set_win", text="Win", icon='MESH_CUBE')
         
+        layout.label("Light:")
+        row = layout.row()
+        split = layout.split()
+        col = split.column(align=True)
+        col.operator("wm.set_light_common", icon='LAMP_POINT')
+        col.operator("wm.set_light_end", icon='LAMP_POINT')
+        
         layout.label("Map:")
         row = layout.row()
         split = layout.split()
