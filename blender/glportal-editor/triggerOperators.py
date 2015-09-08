@@ -7,7 +7,7 @@ from .operatorHelpers import *
 
 class setWin(bpy.types.Operator):
     bl_idname = "wm.set_win"
-    bl_label = "Mark as win trigger."
+    bl_label = "Win"
     bl_description = "Mark the selection as win trigger. (Not implemented)"
     bl_options = {"UNDO"}
     
@@ -22,7 +22,7 @@ class setWin(bpy.types.Operator):
 
 class addWin(bpy.types.Operator):
     bl_idname = "wm.add_win"
-    bl_label = "Add win trigger"
+    bl_label = "Win"
     bl_description = "Add a win trigger. (Not implemented)"
     bl_options = {"UNDO"}
     
@@ -33,7 +33,7 @@ class addWin(bpy.types.Operator):
 
 class setDeath(bpy.types.Operator):
     bl_idname = "wm.set_death"
-    bl_label = "Mark as death trigger"
+    bl_label = "Death"
     bl_description = "Mark the selection as death trigger."
     bl_options = {"UNDO"}
     
@@ -48,7 +48,7 @@ class setDeath(bpy.types.Operator):
 
 class addDeath(bpy.types.Operator):
     bl_idname = "wm.add_death"
-    bl_label = "Add a death trigger"
+    bl_label = "Death"
     bl_description = "Add a death trigger."
     bl_options = {"UNDO"}
     
@@ -59,7 +59,7 @@ class addDeath(bpy.types.Operator):
 
 class setRadiation(bpy.types.Operator):
     bl_idname = "wm.set_radiation"
-    bl_label = "Mark as radiation trigger"
+    bl_label = "Radiation"
     bl_description = "Mark the selection as radiation trigger."
     bl_options = {"UNDO"}
     
@@ -74,7 +74,7 @@ class setRadiation(bpy.types.Operator):
 
 class addRadiation(bpy.types.Operator):
     bl_idname = "wm.add_radiation"
-    bl_label = "Add a radiation trigger"
+    bl_label = "Radiation"
     bl_description = "Add a radiation trigger."
     bl_options = {"UNDO"}
     

@@ -82,7 +82,7 @@ class addButton(bpy.types.Operator):
 
 class setPortalable(bpy.types.Operator):
     bl_idname = "wm.set_portalable"
-    bl_label = "Mark as portalable wall"
+    bl_label = "Portalable"
     bl_description = "Mark the selection as portalable wall."
     bl_options = {"UNDO"}
     
@@ -109,7 +109,7 @@ class setPortalable(bpy.types.Operator):
 
 class setWall(bpy.types.Operator):
     bl_idname = "wm.set_wall"
-    bl_label = "Merk as metal wall"
+    bl_label = "Tiles"
     bl_description = "Mark the selection as metal wall."
     bl_options = {"UNDO"}
     
@@ -136,7 +136,7 @@ class setWall(bpy.types.Operator):
 
 class addWall(bpy.types.Operator):
     bl_idname = "wm.add_wall"
-    bl_label = "Add a metal wall"
+    bl_label = "Tiles"
     bl_description = "Add a metal wall."
     bl_options = {"UNDO"}
     
@@ -147,7 +147,7 @@ class addWall(bpy.types.Operator):
 
 class addPortalable(bpy.types.Operator):
     bl_idname = "wm.add_portalable"
-    bl_label = "Add a portalable wall"
+    bl_label = "Portalable"
     bl_description = "Add a portalable wall."
     bl_options = {"UNDO"}
     

@@ -29,8 +29,8 @@ class GlPortalAddMenuWalls(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
         
-        layout.operator("wm.add_portalable", text = "Portalable", icon = 'MESH_PLANE')
-        layout.operator("wm.add_wall", text = "Metal", icon = 'META_PLANE')
+        layout.operator("wm.add_portalable", icon = 'MESH_PLANE')
+        layout.operator("wm.add_wall", icon = 'META_PLANE')
 
 class GlPortalAddMenuTriggers(bpy.types.Menu):
     bl_idname = "OBJECT_MT_glportal_add_menu_triggers"
@@ -39,9 +39,9 @@ class GlPortalAddMenuTriggers(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
         
-        layout.operator("wm.add_death", text = "Death", icon = 'MESH_CUBE')
-        layout.operator("wm.add_radiation", text = "Radiation", icon = 'RADIO')
-        layout.operator("wm.add_win", text = "Win", icon = 'MESH_CUBE')
+        layout.operator("wm.add_death", icon = 'MESH_CUBE')
+        layout.operator("wm.add_radiation", icon = 'RADIO')
+        layout.operator("wm.add_win", icon = 'MESH_CUBE')
 
 class GlPortalAddMenuVolumes(bpy.types.Menu):
     bl_idname = "OBJECT_MT_glportal_add_menu_volumes"
@@ -50,7 +50,7 @@ class GlPortalAddMenuVolumes(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
         
-        layout.operator("wm.add_acid", text = "Acid", icon = 'MESH_CUBE')
+        layout.operator("wm.add_acid", icon = 'MESH_CUBE')
 
 class GlPortalAddMenuLights(bpy.types.Menu):
     bl_idname = "OBJECT_MT_glportal_add_menu_lights"
@@ -59,5 +59,5 @@ class GlPortalAddMenuLights(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
         
-        layout.operator("wm.add_light_common", text = "Common light", icon = 'LAMP_POINT')
-        layout.operator("wm.add_light_end", text = "End light", icon = 'LAMP_POINT')
+        layout.operator("wm.add_light_common", icon = 'LAMP_POINT')
+        layout.operator("wm.add_light_end", icon = 'LAMP_POINT')
