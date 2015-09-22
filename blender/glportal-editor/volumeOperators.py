@@ -17,18 +17,21 @@ class setAcid(bpy.types.Operator):
         bpy.types.Object.glpType = bpy.props.StringProperty()
         object = bpy.context.active_object
         if object:
-            if (object.type == "MESH"):
-                resetTriggerSettings(object)
-                
-                object.glpTypes = "volume"
-                object.glpVolumeTypes = "acid"
-                me = object.data
-                if (len(me.materials) == 0):
-                    me.materials.append(mat)
+            if object.type == "MESH":
+                if object.glpTypes != "door":
+                    resetTriggerSettings(object)
+                    
+                    object.glpTypes = "volume"
+                    object.glpVolumeTypes = "acid"
+                    me = object.data
+                    if (len(me.materials) == 0):
+                        me.materials.append(mat)
+                    else:
+                        me.materials[0] = mat
+                    
+                    UpdateTexture.updateTexture(object)
                 else:
-                    me.materials[0] = mat
-                
-                UpdateTexture.updateTexture(object)
+                    self.report({'ERROR'}, "Door can't be converted to the volume of acid.")
             else:
                 self.report({'ERROR'}, "Object of type '%s' can't be converted to the volume of acid." % (object.type))
         return {'FINISHED'}

@@ -92,24 +92,27 @@ class setPortalable(bpy.types.Operator):
         object = bpy.context.active_object
         if object:
             if object.type == "MESH":
-                resetTriggerSettings(object)
-                
-                object.glpTypes = "wall"
-                object.glpWallTypes = "portalable"
-                me = object.data
-                if (len(me.materials) == 0):
-                    me.materials.append(mat)
+                if object.glpTypes != "door":
+                    resetTriggerSettings(object)
+                    
+                    object.glpTypes = "wall"
+                    object.glpWallTypes = "portalable"
+                    me = object.data
+                    if (len(me.materials) == 0):
+                        me.materials.append(mat)
+                    else:
+                        me.materials[0] = mat
+                    
+                    UpdateTexture.updateTexture(object)
                 else:
-                    me.materials[0] = mat
-                
-                UpdateTexture.updateTexture(object)
+                    self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
             else:
                 self.report({'ERROR'}, "Object of type '%s' can't be converted to the portalable wall." % (object.type))
         return {'FINISHED'}
 
 class setWall(bpy.types.Operator):
     bl_idname = "wm.set_wall"
-    bl_label = "Tiles"
+    bl_label = "Metal tiles"
     bl_description = "Mark the selection as metal wall."
     bl_options = {"UNDO"}
     
@@ -119,24 +122,27 @@ class setWall(bpy.types.Operator):
         object = bpy.context.active_object
         if object:
             if object.type == "MESH":
-                resetTriggerSettings(object)
-                
-                object.glpTypes = "wall"
-                object.glpWallTypes = "default"
-                me = object.data
-                if (len(me.materials) == 0):
-                    me.materials.append(mat)
+                if object.glpTypes != "door":
+                    resetTriggerSettings(object)
+                    
+                    object.glpTypes = "wall"
+                    object.glpWallTypes = "default"
+                    me = object.data
+                    if (len(me.materials) == 0):
+                        me.materials.append(mat)
+                    else:
+                        me.materials[0] = mat
+                    
+                    UpdateTexture.updateTexture(object)
                 else:
-                    me.materials[0] = mat
-                
-                UpdateTexture.updateTexture(object)
+                    self.report({'ERROR'}, "Door can't be converted to the metal wall.")
             else:
                 self.report({'ERROR'}, "Object of type '%s' can't be converted to the metal wall." % (object.type))
         return {'FINISHED'}
 
 class addWall(bpy.types.Operator):
     bl_idname = "wm.add_wall"
-    bl_label = "Tiles"
+    bl_label = "Metal tiles"
     bl_description = "Add a metal wall."
     bl_options = {"UNDO"}
     
