@@ -15,7 +15,7 @@ class glportalPreferences(AddonPreferences):
     )
     smartTexturesMapping = BoolProperty (
         name = "Smart textures mapping",
-        description = "This is an experimental function",
+        description = "Calculate position of each texture.",
         default = True,
         update = updateSmartTexturesMapping
     )
