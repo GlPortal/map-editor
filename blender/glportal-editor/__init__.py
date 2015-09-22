@@ -3,7 +3,7 @@ bl_info = {
     "name":         "GlPortal XML Format",
     "author":       "Henry Hirsch, Julian Thijssen, Juraj Oravec",
     "blender":      (2, 6, 3),
-    "version":      (0, 0, 7),
+    "version":      (1, 0, 0),
     "location":     "File > Import-Export",
     "description":  "Module for loading, editing and saving GlPortal maps.",
     "category":     "Import-Export",
