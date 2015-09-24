@@ -6,7 +6,7 @@ from .preferencesHelper import *
 
 class glportalPreferences(AddonPreferences):
     bl_idname = __package__
-    
+
     triggerXrays = BoolProperty (
         name = "Use X-Rays for triggers",
         description = "Enable / Disable X-rays for triggers",
@@ -29,7 +29,7 @@ class glportalPreferences(AddonPreferences):
         default = os.path.expanduser("/usr/bin/glportal"),
         subtype = 'FILE_PATH'
     )
-    
+
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "triggerXrays")

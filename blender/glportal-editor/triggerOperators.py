@@ -10,7 +10,7 @@ class setWin(bpy.types.Operator):
     bl_label = "Win"
     bl_description = "Mark the selection as win trigger. (Not implemented)"
     bl_options = {"UNDO"}
-    
+
     def execute(self, context):
         object = bpy.context.active_object
         if object:
@@ -28,7 +28,7 @@ class addWin(bpy.types.Operator):
     bl_label = "Win"
     bl_description = "Add a win trigger. (Not implemented)"
     bl_options = {"UNDO"}
-    
+
     def execute(self, context):
         bpy.ops.mesh.primitive_cube_add()
         setWin.execute(self, context)
@@ -39,7 +39,7 @@ class setDeath(bpy.types.Operator):
     bl_label = "Death"
     bl_description = "Mark the selection as death trigger."
     bl_options = {"UNDO"}
-    
+
     def execute(self, context):
         object = bpy.context.active_object
         if object:
@@ -57,7 +57,7 @@ class addDeath(bpy.types.Operator):
     bl_label = "Death"
     bl_description = "Add a death trigger."
     bl_options = {"UNDO"}
-    
+
     def execute(self, context):
         bpy.ops.mesh.primitive_cube_add()
         setDeath.execute(self, context)
@@ -68,7 +68,7 @@ class setRadiation(bpy.types.Operator):
     bl_label = "Radiation"
     bl_description = "Mark the selection as radiation trigger."
     bl_options = {"UNDO"}
-    
+
     def execute(self, context):
         object = bpy.context.active_object
         if object:
@@ -86,7 +86,7 @@ class addRadiation(bpy.types.Operator):
     bl_label = "Radiation"
     bl_description = "Add a radiation trigger."
     bl_options = {"UNDO"}
-    
+
     def execute(self, context):
         bpy.ops.mesh.primitive_cube_add()
         setRadiation.execute(self, context)

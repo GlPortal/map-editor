@@ -8,12 +8,12 @@ class GlPortalObjectPanel(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "object"
-    
+
     def draw(self, context):
         object = context.active_object
         layout = self.layout
         row = layout.row()
-        
+
         layout.prop(object, "glpTypes")
         if object.glpTypes == "trigger":
             layout.prop(object, "glpTriggerTypes")

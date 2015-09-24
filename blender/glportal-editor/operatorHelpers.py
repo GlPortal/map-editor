@@ -13,7 +13,7 @@ def resetTriggerSettings(object):
 def setTrigger(object, type):
     addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
     clearGlpProperties(object)
-    
+
     object.glpTypes = "trigger"
     object.glpTriggerTypes = type
     object.draw_type = "WIRE"
@@ -24,20 +24,20 @@ def setTrigger(object, type):
 def fixDoorTexture(me):
     bm = bmesh.new()
     bm.from_mesh(me)
-    
+
     if hasattr(bm.faces, "ensure_lookup_table"):
         bm.faces.ensure_lookup_table()
-    
+
     uv_layer = bm.loops.layers.uv[0]
-    
+
     bm.faces[7].loops[0][uv_layer].uv = (0.5, 0.5)
     bm.faces[7].loops[1][uv_layer].uv = (0.5, 0)
     bm.faces[7].loops[2][uv_layer].uv = (0.5, 0)
-    
+
     bm.faces[25].loops[0][uv_layer].uv = (0.5, 0.5)
     bm.faces[25].loops[1][uv_layer].uv = (0.5, 0)
     bm.faces[25].loops[2][uv_layer].uv = (0.5, 0)
-    
+
     bm.to_mesh(me)
     bm.free()
 
@@ -49,19 +49,19 @@ def clearGlpProperties(object):
 
 def getMaterial(texturePath, diffuse):
     addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
-    
+
     realpath = os.path.expanduser(addon_prefs.dataDir + texturePath)
     try:
         WallImage = bpy.data.images.load(realpath)
     except:
         raise NameError("Cannot load image %s" % realpath)
-    
+
     WallTexture = bpy.data.textures.new(name = 'ColorTex', type = 'IMAGE')
     WallTexture.image = WallImage
-    
+
     mat = bpy.data.materials.new('TexMat')
     mat.diffuse_color = diffuse
-    
+
     # Add texture slot for color texture
     mtex = mat.texture_slots.add()
     mtex.texture = WallTexture
@@ -78,5 +78,5 @@ def getMaterial(texturePath, diffuse):
     else:
         mtex.texture_coords = 'GLOBAL'
         mtex.mapping = 'CUBE'
-    
+
     return mat
