@@ -118,6 +118,8 @@ class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
                 rotationElement.set("y", prepareRot(math.degrees(object.rotation_euler[2])))
                 rotationElement.set("z", prepareRot(math.degrees(-object.rotation_euler[1])))
             elif object.type == "MESH":
+                boxElement = None
+                
                 if type == "trigger":
                     boxElement = tree.SubElement(root, "trigger")
                     if object.glpTriggerTypes:
@@ -134,19 +136,20 @@ class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
                 # disabled, will be enabled in the future
 #                else:
 #                    boxElement = tree.SubElement(root, "door")
-                object.select = True
-                
-                positionElement = tree.SubElement(boxElement, "position")
-                storePosition(positionElement, object);
-                
-                if checkRotation(object):
-                    rotationElement = tree.SubElement(boxElement, "rotation")
-                    storeRotation(rotationElement, object);
-                
-                scaleElement = tree.SubElement(boxElement, "scale")
-                storeScale(scaleElement, object);
-                
-                object.select = False
+                if boxElement != None:
+                    object.select = True
+                    
+                    positionElement = tree.SubElement(boxElement, "position")
+                    storePosition(positionElement, object);
+                    
+                    if checkRotation(object):
+                        rotationElement = tree.SubElement(boxElement, "rotation")
+                        storeRotation(rotationElement, object);
+                    
+                    scaleElement = tree.SubElement(boxElement, "scale")
+                    storeScale(scaleElement, object);
+                    
+                    object.select = False
         
         xml = minidom.parseString(tree.tostring(root))
         
