@@ -24,9 +24,15 @@ class glportalPreferences(AddonPreferences):
         default = os.path.expanduser("~/.glportal/data/"),
         subtype = 'DIR_PATH'
     )
+    gameExe = StringProperty (
+        name = "Set up GlPortal executable",
+        default = os.path.expanduser("/usr/bin/glportal"),
+        subtype = 'FILE_PATH'
+    )
     
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "triggerXrays")
         layout.prop(self, "smartTexturesMapping")
         layout.prop(self, "dataDir")
+        layout.prop(self, "gameExe")
