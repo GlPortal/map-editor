@@ -2,8 +2,10 @@ import bpy
 import os
 import string
 import re
+from subprocess import call
 
 from .mapHelpers import *
+from .exportglportalformat import *
 
 class fixMap(bpy.types.Operator):
     bl_idname = "wm.fix_map"
@@ -26,5 +28,26 @@ class checkMap(bpy.types.Operator):
 
     def execute(self, context):
         bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
+
+        return {'FINISHED'}
+
+class runGame(bpy.types.Operator):
+    bl_idname = "wm.run_game"
+    bl_label = "Run game"
+    bl_description = "Run game with this map"
+    filepath = ""
+
+    def execute(self, context):
+        addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+        self.filepath = os.path.expanduser("/tmp/glpotal_testmap.xml")
+
+        Exporter.filepath = self.filepath
+        Exporter.execute(self, context)
+
+        call([addon_prefs.gameExe, "--datadir", addon_prefs.dataDir, "--mapfrompath", self.filepath])
+
+        # export map to /tmp
+        # launch game with ths map
+        # than delete exportet map from data/maps
 
         return {'FINISHED'}

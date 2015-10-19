@@ -44,3 +44,4 @@ class GlPortalPanel(bpy.types.Panel):
         col = split.column(align=True)
         col.operator("wm.fix_map", icon='SCRIPTWIN')
         col.operator("wm.check_map", icon='QUESTION')
+        col.operator("wm.run_game", icon='GAME')
