@@ -62,13 +62,8 @@ def writeLampToTree(object, targetTree):
     if lamp.use_specular:
         lightElement.set("specular", "1")
 
-class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
-    bl_idname = "export_glportal_xml.xml"
-    bl_label = "Export GlPortal XML"
-    bl_description = "Export to GlPortal XML file (.xml)"
-    bl_options = {'PRESET'}
-    filename_ext = ".xml"
-    filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
+class Exporter():
+    filepath = ""
 
     def execute(self, context):
         dir = os.path.dirname(self.filepath)
@@ -158,5 +153,22 @@ class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
         fixed_output = re.sub(fix, '', xml.toprettyxml())
         file.write(fixed_output)
         file.close()
+
+        return {'FINISHED'}
+
+    def setFilepath(target):
+        self.filepath = target
+
+class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
+    bl_idname = "export_glportal_xml.xml"
+    bl_label = "Export GlPortal XML"
+    bl_description = "Export to GlPortal XML file (.xml)"
+    bl_options = {'PRESET'}
+    filename_ext = ".xml"
+    filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
+
+    def execute(self, context):
+        Exporter.filepath = self.filepath
+        Exporter.execute(self, context)
 
         return {'FINISHED'}
