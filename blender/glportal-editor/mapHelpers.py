@@ -100,14 +100,26 @@ class checkMapDialog(bpy.types.Operator):
             error = True
 
             layout.prop(self, "exitDoor")
-            layout.label(text = "There is no exit door use it exactly once.", icon = 'CANCEL')
+
+            if result['exitDoor'] == 0:
+                layout.label(text = "There is no exit door, use it exactly once.", icon = 'CANCEL')
+            else:
+                layout.label(text = "There are too many exit doors, use it exactly once.", icon = 'ERROR')
+
             layout.separator()
         if result['camera'] != 1:
             self.camera = result['camera']
             error = True
 
             layout.prop(self, "camera")
-            layout.label(text = "The camera object is used for determining the spawn position use it exactly once.",icon = 'ERROR')
+
+            if result['camera'] == 0:
+                layout.label(text = "There is no camera.", icon = 'CANCEL')
+            else:
+                layout.label(text = "There are too many cameras.", icon = 'ERROR')
+
+            layout.label(text = "The camera object is used for determining the spawn position.",icon = 'INFO')
+            layout.label(text = "Use it exactly once.",icon = 'INFO')
             layout.separator()
         if result['light'] == 0:
             error = True
@@ -139,8 +151,8 @@ class checkMapDialog(bpy.types.Operator):
         if result['triggerDeath'] < result['acid']:
             error = True
 
-            layout.label(text = "Acid without death trigger.", icon = 'INFO')
-            layout.label(text = "Use death trigger for each volume of acid in the map.")
+            layout.label(text = "Acid without death trigger.", icon = 'ERROR')
+            layout.label(text = "Use death trigger for each volume of acid in the map.", icon = 'INFO')
             layout.separator()
         if result['camera'] == 1:
             isOver = controlSpawnPosition(objects)
@@ -155,7 +167,7 @@ class checkMapDialog(bpy.types.Operator):
                 error = True
 
                 layout.label(text = "Camera is very close to the floor.", icon = 'ERROR')
-                layout.label(text = "Player can get stuck in the floor or unable to go through portal.", icon = 'ERROR')
+                layout.label(text = "Player can get stuck in the floor or unable to go through portal.", icon = 'INFO')
                 layout.label(text = "Remember, we are using camera as spawn position.", icon = 'INFO')
                 layout.separator()
 
