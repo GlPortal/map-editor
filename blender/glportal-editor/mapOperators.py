@@ -46,6 +46,8 @@ class runGame(bpy.types.Operator):
 
         call([addon_prefs.gameExe, "--datadir", addon_prefs.dataDir, "--mapfrompath", self.filepath])
 
+        os.remove(self.filepath)
+
         # export map to /tmp
         # launch game with ths map
         # than delete exportet map from data/maps
