@@ -9,59 +9,60 @@ import string
 from mathutils import Vector
 import re
 
+# decimal points for rounding
+d_p = 5
+
+def storePosition(element, object):
+    element.set("x", str(round(object.location[0], d_p)))
+    element.set("y", str(round(object.location[2], d_p)))
+    element.set("z", str(-round(object.location[1], d_p)))
+
+# prepare rotation before exporting
+def prepareRot(degree):
+    return str(round(degree % 360, d_p))
+
+def checkRotation(object):
+    x = math.degrees(object.rotation_euler[0])
+    y = math.degrees(object.rotation_euler[2])
+    z = math.degrees(-object.rotation_euler[1])
+
+    if prepareRot(x) == "0.0" and prepareRot(y) == "0.0" and prepareRot(z) == "0.0":
+        return False
+    else:
+        return True
+
+def storeRotation(element, object):
+    element.set("x", prepareRot(math.degrees(object.rotation_euler[0])))
+    element.set("y", prepareRot(math.degrees(object.rotation_euler[2])))
+    element.set("z", prepareRot(math.degrees(-object.rotation_euler[1])))
+
+def storeScale(element, object):
+    element.set("x", str(round(object.dimensions[0], d_p)))
+    element.set("y", str(round(object.dimensions[2], d_p)))
+    element.set("z", str(round(object.dimensions[1], d_p)))
+
+def writeLampToTree(object, targetTree):
+    lamp = object.data
+
+    colorArray = lamp.color
+    lightDistance = lamp.distance
+    lightEnergy = lamp.energy
+
+    lightElement = tree.SubElement(targetTree, "light")
+    storePosition(lightElement, object);
+
+    lightElement.set("r", str(round(colorArray[0], d_p)))
+    lightElement.set("g", str(round(colorArray[1], d_p)))
+    lightElement.set("b", str(round(colorArray[2], d_p)))
+
+    lightElement.set("distance", str(round(lightDistance, d_p)))
+    lightElement.set("energy", str(round(lightEnergy, d_p)))
+
+    if lamp.use_specular:
+        lightElement.set("specular", "1")
 
 class Exporter():
     filepath = ""
-    d_p = 5 # decimal points for rounding
-
-    def storePosition(element, object):
-        element.set("x", str(round(object.location[0], d_p)))
-        element.set("y", str(round(object.location[2], d_p)))
-        element.set("z", str(-round(object.location[1], d_p)))
-
-    # prepare rotation before exporting
-    def prepareRot(degree):
-        return str(round(degree % 360, d_p))
-
-    def checkRotation(object):
-        x = math.degrees(object.rotation_euler[0])
-        y = math.degrees(object.rotation_euler[2])
-        z = math.degrees(-object.rotation_euler[1])
-
-        if prepareRot(x) == "0.0" and prepareRot(y) == "0.0" and prepareRot(z) == "0.0":
-            return False
-        else:
-            return True
-
-    def storeRotation(element, object):
-        element.set("x", prepareRot(math.degrees(object.rotation_euler[0])))
-        element.set("y", prepareRot(math.degrees(object.rotation_euler[2])))
-        element.set("z", prepareRot(math.degrees(-object.rotation_euler[1])))
-
-    def storeScale(element, object):
-        element.set("x", str(round(object.dimensions[0], d_p)))
-        element.set("y", str(round(object.dimensions[2], d_p)))
-        element.set("z", str(round(object.dimensions[1], d_p)))
-
-    def writeLampToTree(object, targetTree):
-        lamp = object.data
-
-        colorArray = lamp.color
-        lightDistance = lamp.distance
-        lightEnergy = lamp.energy
-
-        lightElement = tree.SubElement(targetTree, "light")
-        storePosition(lightElement, object);
-
-        lightElement.set("r", str(round(colorArray[0], d_p)))
-        lightElement.set("g", str(round(colorArray[1], d_p)))
-        lightElement.set("b", str(round(colorArray[2], d_p)))
-
-        lightElement.set("distance", str(round(lightDistance, d_p)))
-        lightElement.set("energy", str(round(lightEnergy, d_p)))
-
-        if lamp.use_specular:
-            lightElement.set("specular", "1")
 
     def execute(self, context):
         dir = os.path.dirname(self.filepath)
