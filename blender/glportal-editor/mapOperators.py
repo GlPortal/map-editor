@@ -38,15 +38,22 @@ class runGame(bpy.types.Operator):
     filepath = ""
 
     def execute(self, context):
-        addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
-        self.filepath = os.path.expanduser("/tmp/glpotal_testmap.xml")
+        objects = context.scene.objects
+        result = countObjects(objects)
 
-        Exporter.filepath = self.filepath
-        Exporter.execute(self, context)
+        if (result['exitDoor'] == 0 or result['camera'] == 0 or result['light'] == 0 or
+                (result['wallPortalable'] == 0 and result['wallMetal'] == 0)):
+            bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
+        else:
+            addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+            self.filepath = os.path.expanduser("/tmp/glpotal_testmap.xml")
 
-        call([addon_prefs.gameExe, "--datadir", addon_prefs.dataDir, "--mapfrompath", self.filepath])
+            Exporter.filepath = self.filepath
+            Exporter.execute(self, context)
 
-        os.remove(self.filepath)
+            call([addon_prefs.gameExe, "--datadir", addon_prefs.dataDir, "--mapfrompath", self.filepath])
+
+            os.remove(self.filepath)
 
         # export map to /tmp
         # launch game with ths map
