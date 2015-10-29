@@ -5,7 +5,7 @@ import re
 from subprocess import call
 
 from .mapHelpers import *
-from .exportglportalformat import *
+from .exporter import *
 
 class fixMap(bpy.types.Operator):
     bl_idname = "wm.fix_map"
