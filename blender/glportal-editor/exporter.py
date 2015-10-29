@@ -9,6 +9,8 @@ import string
 from mathutils import Vector
 import re
 
+from .mapHelpers import *
+
 # decimal points for rounding
 d_p = 5
 
@@ -65,6 +67,8 @@ class Exporter():
     filepath = ""
 
     def execute(self, context):
+        fixObjects()
+
         dir = os.path.dirname(self.filepath)
         objects = context.scene.objects
         root = tree.Element("map")
