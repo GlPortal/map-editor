@@ -14,10 +14,7 @@ class fixMap(bpy.types.Operator):
     bl_options = {"UNDO"}
 
     def execute(self, context):
-        bpy.ops.object.select_all(action='SELECT')
-        bpy.ops.object.transform_apply(rotation=True)
-        bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
-        bpy.ops.object.select_all(action='DESELECT')
+        fixObjects()
 
         return {'FINISHED'}
 

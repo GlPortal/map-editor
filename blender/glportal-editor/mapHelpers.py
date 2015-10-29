@@ -1,6 +1,12 @@
 import bpy
 from bpy.props import *
 
+def fixObjects():
+    bpy.ops.object.select_all(action='SELECT')
+    bpy.ops.object.transform_apply(rotation=True)
+    bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
+    bpy.ops.object.select_all(action='DESELECT')
+
 def isOverObject(position, object):
     pMin = object.location[0] - abs(object.dimensions[0]) / 2
     pMax = object.location[0] + abs(object.dimensions[0]) / 2
