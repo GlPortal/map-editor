@@ -43,7 +43,7 @@ class runGame(bpy.types.Operator):
             bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
         else:
             addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
-            self.filepath = os.path.expanduser("/tmp/glpotal_testmap.xml")
+            self.filepath = os.path.expanduser(bpy.app.tempdir + "glpotal_testmap.xml")
 
             Exporter.filepath = self.filepath
             Exporter.execute(self, context)
