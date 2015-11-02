@@ -77,5 +77,3 @@ def sceneUpdater(scene):
             if (object.glpTypes == "wall" or object.glpTypes == "volume"):
                 if not UpdateTexture.isRunning:
                     UpdateTexture.updateTexture(object)
-
-bpy.app.handlers.scene_update_post.append(sceneUpdater)
