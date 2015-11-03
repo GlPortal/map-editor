@@ -112,7 +112,7 @@ class Exporter():
                 storePosition(positionElement, object);
 
                 rotationElement = tree.SubElement(boxElement, "rotation")
-                rotationElement.set("x", prepareRot(math.degrees(object.rotation_euler[0]) - 90))
+                rotationElement.set("x", prepareRot(math.degrees(object.rotation_euler[0])))
                 rotationElement.set("y", prepareRot(math.degrees(object.rotation_euler[2])))
                 rotationElement.set("z", prepareRot(math.degrees(-object.rotation_euler[1])))
             elif object.type == "MESH":
