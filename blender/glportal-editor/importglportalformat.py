@@ -132,7 +132,7 @@ class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
                     if param.tag == "position":
                         location = extrackPosition(param)
                     elif param.tag == "rotation":
-                        rotation = extrackRotation(param, 90);
+                        rotation = extrackRotation(param);
 
                 addDoor.execute(self, context)
 
