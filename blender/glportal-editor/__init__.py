@@ -62,10 +62,10 @@ from mathutils import Vector
 import re
 
 def menu_func_export(self, context):
-    self.layout.operator(ExportGlPortalFormat.bl_idname, text="GlPortal Map (.xml)")
+    self.layout.operator(exportglportalformat.ExportGlPortalFormat.bl_idname, text="GlPortal Map (.xml)")
 
 def menu_func_import(self, context):
-    self.layout.operator(ImportGlPortalFormat.bl_idname, text="GlPortal Map (.xml)")
+    self.layout.operator(importglportalformat.ImportGlPortalFormat.bl_idname, text="GlPortal Map (.xml)")
 
 def register():
     bpy.utils.register_module(__name__)
