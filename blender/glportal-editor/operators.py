@@ -4,6 +4,7 @@ import string
 import re
 from .operatorHelpers import *
 from .updateTextures import *
+import mathutils
 
 # we are using this for <end> (exit door)
 class addDoor(bpy.types.Operator):
@@ -35,6 +36,11 @@ class addDoor(bpy.types.Operator):
                 context.scene.objects.active = object
 
                 me = object.data
+                # Manually switch the coordinate system from X,Y,-Z to X,Z,Y
+                m = mathutils.Matrix([[1,0,0,0], [0, 0, -1, 0], [0, 1, 0, 0], [0, 0, 0, 1]])
+                for i in range(0, len(object.data.vertices)):
+                    object.data.vertices[i].co = m * object.data.vertices[i].co
+
                 if (len(me.materials) == 0):
                     me.materials.append(mat)
                 else:
