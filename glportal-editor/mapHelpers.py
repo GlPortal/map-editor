@@ -1,11 +1,33 @@
 import bpy
+import math
 from bpy.props import *
 
+def fixRotation(rotation):
+    x = math.degrees(rotation[0])
+    y = math.degrees(rotation[2])
+    z = math.degrees(rotation[1])
+
+    x = math.radians(float(x - x % 90))
+    y = math.radians(float(y - y % 90))
+    z = math.radians(float(z - z % 90))
+
+    return [x, y, y]
+
 def fixObjects():
-    bpy.ops.object.select_all(action='SELECT')
-    bpy.ops.object.transform_apply(rotation=True)
-    bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
+    objects = bpy.context.scene.objects
     bpy.ops.object.select_all(action='DESELECT')
+
+    for object in objects:
+        if object.type == 'MESH':
+            type = object.glpTypes
+
+            if type == "wall" or type == "trigger" or type == "volume":
+                bpy.context.scene.objects.active = object
+                bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
+
+                object.rotation_euler = fixRotation(object.rotation_euler)
+            elif type == "door":
+                object.rotation_euler = fixRotation(object.rotation_euler)
 
 def isOverObject(position, object):
     pMin = object.location[0] - abs(object.dimensions[0]) / 2
