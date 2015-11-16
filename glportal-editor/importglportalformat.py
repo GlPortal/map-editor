@@ -138,6 +138,10 @@ class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
 
                 object = bpy.context.active_object
                 object.location = location
+
+                object.rotation_euler = [math.radians(float(90)), 0, 0]
+                bpy.ops.object.transform_apply(rotation=True)
+
                 object.rotation_euler = rotation
             elif child.tag == "trigger":
                 bpy.ops.mesh.primitive_cube_add()
