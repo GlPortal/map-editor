@@ -7,7 +7,7 @@ else
 fi
 
 help() {
-    echo "                                  Blender Linker"
+    echo "GlPortal Blender Linker"
     echo ""
     echo ""
     echo "Links GlPortal module to blender for development."
