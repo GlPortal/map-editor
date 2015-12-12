@@ -22,4 +22,4 @@ The GlPortal editor allow Blender to import, edit, create and export GlPortal ma
 If you are upgrading, you may need to restart Blender.
 
 ## Development
-If you want to develop the map editor you can symlink it to your blender plugin directory with the linkExtension software call the linkExtension script with the h option.
+If you want to use the development verson the map editor you can symlink it to your blender plugin directory with the linkExtension software call the linkExtension script with the h option.
