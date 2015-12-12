@@ -1,3 +1,4 @@
+[![chat and bugs](https://img.shields.io/badge/chat_and_bugs-more_links_→-brightgreen.svg)](https://github.com/GlPortal/glPortal)
 # GlPortal editor
 The GlPortal editor allow Blender to import, edit, create and export GlPortal maps.
 
