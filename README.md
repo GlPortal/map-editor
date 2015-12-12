@@ -1,13 +1,13 @@
-* GlPortal editor
+# GlPortal editor
 The GlPortal editor allow Blender to import, edit, create and export GlPortal maps.
 
-** Features
+## Features
 - Easy import and export GlPortal maps
 - Support for Blender features
 - Preview with textures
 - Language: English
 
-** Installation
+## Installation
 - Install [[http://www.blender.org/download/][Blender]]
 - [[https://bintray.com/artifact/download/glportal/generic/1.0.0/glportal-editor.zip][Download GlPortal editor.]] *Don’t unzip*.
 - Run Blender:
@@ -20,6 +20,3 @@ The GlPortal editor allow Blender to import, edit, create and export GlPortal ma
   - Go to ~Set up GlPortal data directory~ and find GlPortal data directory.
   - Click ~Save User Settings~ and close the window.
 If you are upgrading, you may need to restart Blender.
-
-** Documentation
-Coming soon...
