@@ -1,9 +1,6 @@
 import bpy
 from bpy.props import *
 from bpy_extras.io_utils import ExportHelper
-import os
-import string
-import re
 
 from .exporter import *
 

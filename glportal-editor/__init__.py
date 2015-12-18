@@ -52,14 +52,6 @@ else:
   from . import preferencesHelper
 
 import bpy
-import xml.etree.cElementTree as tree
-import xml.dom.minidom as minidom
-import os
-import mathutils
-import math
-import string
-from mathutils import Vector
-import re
 
 def menu_func_export(self, context):
   self.layout.operator(exportglportalformat.ExportGlPortalFormat.bl_idname, text="GlPortal Map (.xml)")

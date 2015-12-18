@@ -1,4 +1,5 @@
 import bpy
+
 from .updateTextures import *
 
 def updateTriggerXrays(self, context):

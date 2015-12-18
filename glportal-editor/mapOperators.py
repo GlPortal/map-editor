@@ -1,7 +1,5 @@
 import bpy
 import os
-import string
-import re
 from subprocess import call
 
 from .mapHelpers import *

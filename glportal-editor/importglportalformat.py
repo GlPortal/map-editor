@@ -3,11 +3,8 @@ from bpy.props import *
 from bpy_extras.io_utils import ImportHelper
 import os
 import xml.etree.cElementTree as ET
-import mathutils
 import math
-import string
-from mathutils import Vector
-import re
+
 from .operators import *
 from .triggerOperators import *
 from .volumeOperators import *

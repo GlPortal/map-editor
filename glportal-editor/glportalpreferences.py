@@ -2,6 +2,7 @@ import bpy
 import os
 from bpy.types import Operator, AddonPreferences
 from bpy.props import BoolProperty, StringProperty
+
 from .preferencesHelper import *
 
 class glportalPreferences(AddonPreferences):
