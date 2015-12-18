@@ -45,8 +45,8 @@ class runGame(bpy.types.Operator):
       addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
       self.filepath = os.path.expanduser(bpy.app.tempdir + "glpotal_testmap.xml")
 
-      Exporter.filepath = self.filepath
-      Exporter.execute(self, context)
+      exporter = Exporter(self.filepath);
+      exporter.execute(context)
 
       call([addon_prefs.gameExe, "--datadir", addon_prefs.dataDir, "--mapfrompath", self.filepath])
 
