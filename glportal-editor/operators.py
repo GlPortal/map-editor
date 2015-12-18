@@ -32,6 +32,7 @@ class addDoor(bpy.types.Operator):
         object.location = context.scene.cursor_location
         object.glpTypes = "door"
         context.scene.objects.active = object
+        bpy.ops.object.transform_apply(rotation=True)
 
         me = object.data
         if (len(me.materials) == 0):
