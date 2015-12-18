@@ -16,7 +16,7 @@ class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
   filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
 
   def execute(self, context):
-    Exporter.filepath = self.filepath
-    Exporter.execute(self, context)
+    exporter = Exporter(self.filepath)
+    exporter.execute(context)
 
     return {'FINISHED'}
