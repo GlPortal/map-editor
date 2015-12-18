@@ -29,6 +29,7 @@ if "bpy" in locals():
   importlib.reload(updateTextures)
   importlib.reload(lightsOperators)
   importlib.reload(exporter)
+  importlib.reload(importer)
   importlib.reload(operatorHelpers)
   importlib.reload(preferencesHelper)
 else:
@@ -48,6 +49,7 @@ else:
   from . import updateTextures
   from . import lightsOperators
   from . import exporter
+  from . import importer
   from . import operatorHelpers
   from . import preferencesHelper
 
