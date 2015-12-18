@@ -8,15 +8,15 @@ import re
 from .exporter import *
 
 class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
-    bl_idname = "export_glportal_xml.xml"
-    bl_label = "Export GlPortal XML"
-    bl_description = "Export to GlPortal XML file (.xml)"
-    bl_options = {'PRESET'}
-    filename_ext = ".xml"
-    filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
+  bl_idname = "export_glportal_xml.xml"
+  bl_label = "Export GlPortal XML"
+  bl_description = "Export to GlPortal XML file (.xml)"
+  bl_options = {'PRESET'}
+  filename_ext = ".xml"
+  filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
 
-    def execute(self, context):
-        Exporter.filepath = self.filepath
-        Exporter.execute(self, context)
+  def execute(self, context):
+    Exporter.filepath = self.filepath
+    Exporter.execute(self, context)
 
-        return {'FINISHED'}
+    return {'FINISHED'}
