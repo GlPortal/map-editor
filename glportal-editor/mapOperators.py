@@ -30,7 +30,6 @@ class runGame(bpy.types.Operator):
   bl_idname = "wm.run_game"
   bl_label = "Run game"
   bl_description = "Run game with this map"
-  filepath = ""
 
   def execute(self, context):
     objects = context.scene.objects
@@ -41,14 +40,14 @@ class runGame(bpy.types.Operator):
       bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
     else:
       addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
-      self.filepath = os.path.expanduser(bpy.app.tempdir + "glpotal_testmap.xml")
+      filepath = os.path.expanduser(bpy.app.tempdir + "glpotal_testmap.xml")
 
-      exporter = Exporter(self.filepath);
+      exporter = Exporter(filepath);
       exporter.execute(context)
 
-      call([addon_prefs.gameExe, "--datadir", addon_prefs.dataDir, "--mapfrompath", self.filepath])
+      call([addon_prefs.gameExe, "--datadir", addon_prefs.dataDir, "--mapfrompath", filepath])
 
-      os.remove(self.filepath)
+      os.remove(filepath)
 
     # export map to /tmp
     # launch game with ths map
