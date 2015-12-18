@@ -49,8 +49,4 @@ class runGame(bpy.types.Operator):
 
       os.remove(filepath)
 
-    # export map to /tmp
-    # launch game with ths map
-    # than delete exportet map from data/maps
-
     return {'FINISHED'}
