@@ -11,7 +11,7 @@ def fixRotation(rotation):
     y = math.radians(float(y - y % 90))
     z = math.radians(float(z - z % 90))
 
-    return [x, y, y]
+    return [x, z, y]
 
 def fixObjects():
     objects = bpy.context.scene.objects
