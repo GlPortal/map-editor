@@ -86,7 +86,7 @@ class Exporter():
         # Exporting
         for object in objects:
             object.select = False
-        for object in objects:
+        for object in reversed(objects):
             if object.glpTypes:
                 type = object.glpTypes
             else:
