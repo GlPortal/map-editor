@@ -1,5 +1,6 @@
 import bpy
 from bpy.props import *
+
 from .types import *
 
 class GlPortalObjectPanel(bpy.types.Panel):

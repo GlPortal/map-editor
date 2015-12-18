@@ -1,7 +1,5 @@
 import bpy
 import bmesh
-import time
-import math
 from bpy.app.handlers import persistent
 
 class UpdateTexture:
