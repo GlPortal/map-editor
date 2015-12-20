@@ -42,11 +42,17 @@ class runGame(bpy.types.Operator):
       prefs = bpy.context.user_preferences.addons[__package__].preferences
       filepath = os.path.expanduser(bpy.app.tempdir + "glpotal_testmap.xml")
 
-      exporter = Exporter(filepath);
-      exporter.execute(context)
+      if os.path.isdir(prefs.dataDir):
+        if os.path.isfile(prefs.gameExe):
+          exporter = Exporter(filepath);
+          exporter.execute(context)
 
-      call([prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath])
+          call([prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath])
 
-      os.remove(filepath)
+          os.remove(filepath)
+        else:
+          self.report({'ERROR'}, "GlPortal executable does not exist.")
+      else:
+        self.report({'ERROR'}, "GlPortal data directory does not exist.")
 
     return {'FINISHED'}
