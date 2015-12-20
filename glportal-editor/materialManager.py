@@ -29,10 +29,10 @@ class materialManager():
     return mat
 
   def load(self):
-    addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
-    path = addon_prefs.dataDir + 'textures'
+    prefs = bpy.context.user_preferences.addons[__package__].preferences
+    path = prefs.dataDir + 'textures'
 
-    if os.path.exists(os.path.expanduser(addon_prefs.dataDir)) == True and os.path.isdir(os.path.expanduser(addon_prefs.dataDir)) == True:
+    if os.path.exists(os.path.expanduser(prefs.dataDir)) == True and os.path.isdir(os.path.expanduser(prefs.dataDir)) == True:
       dirs = [ name for name in os.listdir(os.path.expanduser(path)) if os.path.isdir(os.path.join(os.path.expanduser(path), name)) ]
 
       for dir in dirs:

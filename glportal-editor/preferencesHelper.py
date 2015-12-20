@@ -3,17 +3,17 @@ import bpy
 from .updateTextures import *
 
 def updateTriggerXrays(self, context):
-  addon_prefs = context.user_preferences.addons[__package__].preferences
-  triggerXrays = addon_prefs.triggerXrays
+  prefs = context.user_preferences.addons[__package__].preferences
+  triggerXrays = prefs.triggerXrays
   objects = context.scene.objects
 
   for object in objects:
     if object.glpTypes and object.glpTypes == "trigger":
-      object.show_x_ray = addon_prefs.triggerXrays
+      object.show_x_ray = prefs.triggerXrays
 
 def updateSmartTexturesMapping(self, context):
-  addon_prefs = context.user_preferences.addons[__package__].preferences
-  SmartTextures = addon_prefs.smartTexturesMapping
+  prefs = context.user_preferences.addons[__package__].preferences
+  SmartTextures = prefs.smartTexturesMapping
   objects = context.scene.objects
 
   for object in objects:

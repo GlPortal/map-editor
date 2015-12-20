@@ -39,13 +39,13 @@ class runGame(bpy.types.Operator):
         (result['wallPortalable'] == 0 and result['wallMetal'] == 0)):
       bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
     else:
-      addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+      prefs = bpy.context.user_preferences.addons[__package__].preferences
       filepath = os.path.expanduser(bpy.app.tempdir + "glpotal_testmap.xml")
 
       exporter = Exporter(filepath);
       exporter.execute(context)
 
-      call([addon_prefs.gameExe, "--datadir", addon_prefs.dataDir, "--mapfrompath", filepath])
+      call([prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath])
 
       os.remove(filepath)
 

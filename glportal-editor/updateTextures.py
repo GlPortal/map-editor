@@ -6,9 +6,9 @@ class UpdateTexture:
   isRunning = False
 
   def updateTexture(object):
-    addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+    prefs = bpy.context.user_preferences.addons[__package__].preferences
 
-    if addon_prefs.smartTexturesMapping:
+    if prefs.smartTexturesMapping:
       UpdateTexture.isRunning = True
 
       bpy.context.scene.objects.active = object
@@ -67,10 +67,10 @@ class UpdateTexture:
 
 @persistent
 def sceneUpdater(scene):
-  addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+  prefs = bpy.context.user_preferences.addons[__package__].preferences
   object = scene.objects.active
 
-  if addon_prefs.smartTexturesMapping:
+  if prefs.smartTexturesMapping:
     if object is not None and object.is_updated:
       if (object.glpTypes == "wall" or object.glpTypes == "volume"):
         if not UpdateTexture.isRunning:

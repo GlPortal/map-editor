@@ -13,9 +13,9 @@ class addDoor(bpy.types.Operator):
   bl_options = {"UNDO"}
 
   def execute(self, context):
-    addon_prefs = context.user_preferences.addons[__package__].preferences
+    prefs = context.user_preferences.addons[__package__].preferences
 
-    realpath = os.path.expanduser(addon_prefs.dataDir + "meshes/Door.obj")
+    realpath = os.path.expanduser(prefs.dataDir + "meshes/Door.obj")
     bpy.ops.import_scene.obj(filepath = realpath)
     bpy.types.Object.glpType = bpy.props.StringProperty()
 
@@ -51,9 +51,9 @@ class addLamp(bpy.types.Operator):
   bl_options = {"UNDO"}
 
   def execute(self, context):
-    addon_prefs = context.user_preferences.addons[__package__].preferences
+    prefs = context.user_preferences.addons[__package__].preferences
 
-    realpath = os.path.expanduser(addon_prefs.dataDir + "meshes/Lamp.obj")
+    realpath = os.path.expanduser(prefs.dataDir + "meshes/Lamp.obj")
     bpy.ops.import_scene.obj(filepath=realpath)
     bpy.ops.transform.translate(value=(bpy.context.scene.cursor_location))
     bpy.types.Object.glpType = bpy.props.StringProperty()
@@ -69,9 +69,9 @@ class addButton(bpy.types.Operator):
   bl_options = {"UNDO"}
 
   def execute(self, context):
-    addon_prefs = context.user_preferences.addons[__package__].preferences
+    prefs = context.user_preferences.addons[__package__].preferences
 
-    realpath = os.path.expanduser(addon_prefs.dataDir + "meshes/Button.obj")
+    realpath = os.path.expanduser(prefs.dataDir + "meshes/Button.obj")
     bpy.ops.import_scene.obj(filepath=realpath)
     bpy.ops.transform.translate(value=(bpy.context.scene.cursor_location))
     bpy.types.Object.glpType = bpy.props.StringProperty()

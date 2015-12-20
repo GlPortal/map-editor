@@ -11,13 +11,13 @@ def resetTriggerSettings(object):
     object.draw_bounds_type = "BOX"
 
 def setTrigger(object, type):
-  addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+  prefs = bpy.context.user_preferences.addons[__package__].preferences
   clearGlpProperties(object)
 
   object.glpTypes = "trigger"
   object.glpTriggerTypes = type
   object.draw_type = "WIRE"
-  object.show_x_ray = addon_prefs.triggerXrays
+  object.show_x_ray = prefs.triggerXrays
   object.show_bounds = True
   object.draw_bounds_type = "CAPSULE"
 
@@ -48,9 +48,9 @@ def clearGlpProperties(object):
   object.glpWallTypes = "none"
 
 def getMaterial(texturePath, diffuse):
-  addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+  prefs = bpy.context.user_preferences.addons[__package__].preferences
 
-  realpath = os.path.expanduser(addon_prefs.dataDir + texturePath)
+  realpath = os.path.expanduser(prefs.dataDir + texturePath)
   try:
     WallImage = bpy.data.images.load(realpath)
   except:
@@ -72,7 +72,7 @@ def getMaterial(texturePath, diffuse):
   mtex.use_map_emit = True
   mtex.emit_factor = 0.3
 
-  if addon_prefs.smartTexturesMapping:
+  if prefs.smartTexturesMapping:
     mtex.texture_coords = 'UV'
     mtex.mapping = 'FLAT'
   else:
