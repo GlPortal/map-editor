@@ -32,6 +32,7 @@ if "bpy" in locals():
   importlib.reload(importer)
   importlib.reload(operatorHelpers)
   importlib.reload(preferencesHelper)
+  importlib.reload(materialManager)
 else:
   from . import types
   from . import glportalcreationpanel
@@ -52,6 +53,7 @@ else:
   from . import importer
   from . import operatorHelpers
   from . import preferencesHelper
+  from . import materialManager
 
 import bpy
 
@@ -68,12 +70,18 @@ def register():
   bpy.types.INFO_MT_add.prepend(glportalMenuAdd.glportal_add_menu)
   bpy.app.handlers.scene_update_post.append(updateTextures.sceneUpdater)
 
+  MM = materialManager.materialManager()
+  MM.load()
+  del MM
+
 def unregister():
   bpy.utils.unregister_module(__name__)
   bpy.types.INFO_MT_file_export.remove(menu_func_import)
   bpy.types.INFO_MT_file_export.remove(menu_func_export)
   bpy.types.INFO_MT_add.remove(glportalMenuAdd.glportal_add_menu)
   bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
+
+  materialManager.materialManager.materials.clear()
 
 if __name__ == "__main__":
   register()
