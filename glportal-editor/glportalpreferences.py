@@ -5,7 +5,7 @@ from bpy.props import BoolProperty, StringProperty
 
 from .preferencesHelper import *
 
-class glportalPreferences(AddonPreferences):
+class preferences(AddonPreferences):
   bl_idname = __package__
 
   triggerXrays = BoolProperty (
