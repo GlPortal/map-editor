@@ -23,7 +23,7 @@ if "bpy" in locals():
   importlib.reload(triggerOperators)
   importlib.reload(volumeOperators)
   importlib.reload(mapOperators)
-  importlib.reload(glportalpreferences)
+  importlib.reload(preferences)
   importlib.reload(mapHelpers)
   importlib.reload(glportalMenuAdd)
   importlib.reload(updateTextures)
@@ -44,7 +44,7 @@ else:
   from . import triggerOperators
   from . import volumeOperators
   from . import mapOperators
-  from . import glportalpreferences
+  from . import preferences
   from . import mapHelpers
   from . import glportalMenuAdd
   from . import updateTextures
