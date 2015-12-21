@@ -48,7 +48,6 @@ def isOverObject(position, object):
   return 0
 
 def controlSpawnPosition(objects):
-  # find spawn position
   for object in objects:
     if object.type == "CAMERA":
       cameraPosition = object.location
@@ -104,7 +103,6 @@ class checkMapDialog(bpy.types.Operator):
   bl_idname = "object.map_check_dialog"
   bl_label = "Check map results"
 
-  # define properties for popup dialog
   camera = bpy.props.IntProperty (name = "Number of cameras")
   light = bpy.props.IntProperty (name = "Number of lights")
   wallPortalable = bpy.props.IntProperty (name = "Number of portalable wall")

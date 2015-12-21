@@ -4,7 +4,6 @@ from bpy.props import *
 from .types import *
 
 class GlPortalObjectPanel(bpy.types.Panel):
-  """GlPortal panel in the toolbar"""
   bl_label = "GlPortal"
   bl_space_type = 'PROPERTIES'
   bl_region_type = 'WINDOW'

@@ -26,7 +26,6 @@ class UpdateTexture:
       if hasattr(bm.faces, "ensure_lookup_table"):
         bm.faces.ensure_lookup_table()
 
-      # the real game starting now :)
       uv_layer = bm.loops.layers.uv[0]
       # back
       bm.faces[0].loops[0][uv_layer].uv = (scale[1], 0)

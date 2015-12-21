@@ -18,7 +18,6 @@ class Exporter():
     element.set("y", str(round(object.location[2], self.__d_p)))
     element.set("z", str(-round(object.location[1], self.__d_p)))
 
-  # prepare rotation before exporting
   def prepareRot(self, degree):
     return str(round(degree % 360, self.__d_p))
 
@@ -69,7 +68,6 @@ class Exporter():
     objects = context.scene.objects
     root = tree.Element("map")
 
-    # Materials
     materialElement = tree.SubElement(root, "materials")
     material1 = tree.SubElement(materialElement, "mat")
     material2 = tree.SubElement(materialElement, "mat")
@@ -79,7 +77,6 @@ class Exporter():
     material2.set("mid", "2")
     material2.set("name", "metal/tiles00x3")
 
-    # Exporting
     for object in objects:
       object.select = False
     for object in reversed(objects):

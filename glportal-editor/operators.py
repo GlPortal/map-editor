@@ -23,10 +23,8 @@ class addDoor(bpy.types.Operator):
     mat.texture_slots[0].texture_coords = 'UV'
     mat.texture_slots[0].mapping = 'FLAT'
 
-    # make sure to get all imported objects
     obj_objects = bpy.context.selected_objects[:]
 
-    # iterate through all objects to find new
     for object in obj_objects:
       if object.glpTypes and object.glpTypes == "none":
         object.location = context.scene.cursor_location

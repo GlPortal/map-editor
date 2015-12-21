@@ -62,7 +62,6 @@ def getMaterial(texturePath, diffuse):
   mat = bpy.data.materials.new('TexMat')
   mat.diffuse_color = diffuse
 
-  # Add texture slot for color texture
   mtex = mat.texture_slots.add()
   mtex.texture = WallTexture
   mtex.use_map_color_diffuse = True

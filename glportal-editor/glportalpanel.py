@@ -1,7 +1,6 @@
 import bpy
 
 class GlPortalPanel(bpy.types.Panel):
-  """GlPortal panel in the toolbar"""
   bl_label = "Set Type"
   bl_space_type = 'VIEW_3D'
   bl_region_type = 'TOOLS'
