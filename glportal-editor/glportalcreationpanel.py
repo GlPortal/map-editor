@@ -1,6 +1,6 @@
 import bpy
 
-class GlPortalCreationPanel(bpy.types.Panel):
+class CreationPanel(bpy.types.Panel):
   bl_label = "GlPortal"
   bl_space_type = 'VIEW_3D'
   bl_region_type = 'TOOLS'
