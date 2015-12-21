@@ -14,7 +14,7 @@ if "bpy" in locals():
   import importlib
 
   importlib.reload(types)
-  importlib.reload(glportalcreationpanel)
+  importlib.reload(CreationPanel)
   importlib.reload(glportalpanel)
   importlib.reload(glportalobjectpanel)
   importlib.reload(exportglportalformat)
@@ -35,7 +35,7 @@ if "bpy" in locals():
   importlib.reload(materialManager)
 else:
   from . import types
-  from . import glportalcreationpanel
+  from . import CreationPanel
   from . import glportalpanel
   from . import glportalobjectpanel
   from . import exportglportalformat
