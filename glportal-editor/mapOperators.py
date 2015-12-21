@@ -3,7 +3,7 @@ import os
 from subprocess import call
 
 from .mapHelpers import *
-from .exporter import *
+from .Exporter import *
 
 class fixMap(bpy.types.Operator):
   bl_idname = "wm.fix_map"

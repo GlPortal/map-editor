@@ -2,7 +2,7 @@ import bpy
 from bpy.props import *
 from bpy_extras.io_utils import ExportHelper
 
-from .exporter import *
+from .Exporter import *
 
 class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
   bl_idname = "export_glportal_xml.xml"

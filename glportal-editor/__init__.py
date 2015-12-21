@@ -28,7 +28,7 @@ if "bpy" in locals():
   importlib.reload(glportalMenuAdd)
   importlib.reload(updateTextures)
   importlib.reload(lightsOperators)
-  importlib.reload(exporter)
+  importlib.reload(Exporter)
   importlib.reload(importer)
   importlib.reload(operatorHelpers)
   importlib.reload(preferencesHelper)
@@ -49,7 +49,7 @@ else:
   from . import glportalMenuAdd
   from . import updateTextures
   from . import lightsOperators
-  from . import exporter
+  from . import Exporter
   from . import importer
   from . import operatorHelpers
   from . import preferencesHelper
