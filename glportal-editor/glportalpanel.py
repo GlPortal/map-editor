@@ -1,6 +1,6 @@
 import bpy
 
-class GlPortalPanel(bpy.types.Panel):
+class SidePanel(bpy.types.Panel):
   bl_label = "Set Type"
   bl_space_type = 'VIEW_3D'
   bl_region_type = 'TOOLS'
