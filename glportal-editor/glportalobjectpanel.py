@@ -3,7 +3,7 @@ from bpy.props import *
 
 from .types import *
 
-class GlPortalObjectPanel(bpy.types.Panel):
+class ObjectPanel(bpy.types.Panel):
   bl_label = "GlPortal"
   bl_space_type = 'PROPERTIES'
   bl_region_type = 'WINDOW'
