@@ -14,10 +14,13 @@ class GlPortalObjectPanel(bpy.types.Panel):
     layout = self.layout
     row = layout.row()
 
-    layout.prop(object, "glpTypes")
-    if object.glpTypes == "trigger":
-      layout.prop(object, "glpTriggerTypes")
-    elif object.glpTypes == "wall":
-      layout.prop(object, "glpWallTypes")
-    elif object.glpTypes == "volume":
-      layout.prop(object, "glpVolumeTypes")
+    if object.glpTypes != "none":
+      layout.prop(object, "glpTypes")
+      if object.glpTypes == "trigger":
+        layout.prop(object, "glpTriggerTypes")
+      elif object.glpTypes == "wall":
+        layout.prop(object, "glpWallTypes")
+      elif object.glpTypes == "volume":
+        layout.prop(object, "glpVolumeTypes")
+    else:
+      layout.label(text="This is no GlPortal object")
