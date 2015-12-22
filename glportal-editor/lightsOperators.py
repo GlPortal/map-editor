@@ -26,7 +26,7 @@ class addLightCommon(bpy.types.Operator):
   bl_options = {"UNDO"}
 
   def execute(self, context):
-    bpy.ops.object.lamp_add(type = "POINT")
+    bpy.ops.object.lamp_add(type="POINT")
     setLightCommon.execute(self, context)
 
     return {'FINISHED'}
@@ -59,7 +59,7 @@ class addLightEnd(bpy.types.Operator):
   bl_options = {"UNDO"}
 
   def execute(self, context):
-    bpy.ops.object.lamp_add(type = "POINT")
+    bpy.ops.object.lamp_add(type="POINT")
     setLightEnd.execute(self, context)
 
     return {'FINISHED'}

@@ -56,7 +56,7 @@ def getMaterial(texturePath, diffuse):
   except:
     raise NameError("Cannot load image %s" % realpath)
 
-  WallTexture = bpy.data.textures.new(name = 'ColorTex', type = 'IMAGE')
+  WallTexture = bpy.data.textures.new(name='ColorTex', type='IMAGE')
   WallTexture.image = WallImage
 
   mat = bpy.data.materials.new('TexMat')
