@@ -5,7 +5,7 @@ from .operatorHelpers import *
 class setWin(bpy.types.Operator):
   bl_idname = "wm.set_win"
   bl_label = "Win"
-  bl_description = "Mark the selection as win trigger. (Not implemented)"
+  bl_description = "Mark the selection as win trigger."
   bl_options = {"UNDO"}
 
   def execute(self, context):
@@ -23,7 +23,7 @@ class setWin(bpy.types.Operator):
 class addWin(bpy.types.Operator):
   bl_idname = "wm.add_win"
   bl_label = "Win"
-  bl_description = "Add a win trigger. (Not implemented)"
+  bl_description = "Add a win trigger."
   bl_options = {"UNDO"}
 
   def execute(self, context):
