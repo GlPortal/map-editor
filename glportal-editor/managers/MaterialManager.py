@@ -2,7 +2,7 @@ import bpy
 import os
 import xml.etree.cElementTree as ET
 
-class materialManager():
+class MaterialManager():
   materials = {}
 
   def __init__(self):
@@ -28,7 +28,7 @@ class materialManager():
 
     return mat
 
-  def load(self):
+  def preload(self):
     prefs = bpy.context.user_preferences.addons[__package__].preferences
     path = prefs.dataDir + 'textures'
 
