@@ -47,7 +47,7 @@ def isOverObject(position, object):
 
   return 0
 
-def controlSpawnPosition(objects):
+def checkSpawnPosition(objects):
   for object in objects:
     if object.type == "CAMERA":
       cameraPosition = object.location
@@ -181,7 +181,7 @@ class checkMapDialog(bpy.types.Operator):
       layout.label(text = "Use death trigger for each volume of acid in the map.", icon='INFO')
       layout.separator()
     if result['camera'] == 1:
-      isOver = controlSpawnPosition(objects)
+      isOver = checkSpawnPosition(objects)
 
       if isOver == 0:
         error = True
