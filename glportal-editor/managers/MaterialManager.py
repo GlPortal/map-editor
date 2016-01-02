@@ -42,3 +42,45 @@ def preload():
     return True
   else:
     return False
+
+def get(name = '', color = (1, 0, 0)):
+  if name == '':
+    print("Material name is empty.")
+    return False
+
+  if not materials.has_key(name):
+    print("Material '%s' does not exist." % name)
+    return False
+
+  prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
+  material = materials[name]
+  path = os.path.expanduser(prefs.dataDir + material['texture'])
+
+  try:
+    image = bpy.data.images.load(path)
+  except:
+    raise NameError("Cannot load image %s" % path)
+
+  texture = bpy.data.textures.new(name=material['fancyname'], type='IMAGE')
+  texture.image = image
+
+  mat = bpy.data.materials.new(material['fancyname'])
+  mat.diffuse_color = color
+
+  mtex = mat.texture_slots.add()
+  mtex.texture = texture
+  mtex.use_map_color_diffuse = True
+  mtex.use_map_color_emission = True
+  mtex.emission_color_factor = 0.5
+  mtex.use_map_density = True
+  mtex.use_map_emit = True
+  mtex.emit_factor = 0.3
+
+  if prefs.smartTexturesMapping:
+    mtex.texture_coords = 'UV'
+    mtex.mapping = 'FLAT'
+  else:
+    mtex.texture_coords = 'GLOBAL'
+    mtex.mapping = 'CUBE'
+
+  return mat
