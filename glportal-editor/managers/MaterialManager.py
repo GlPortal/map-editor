@@ -43,7 +43,7 @@ def preload():
   else:
     return False
 
-def get(name = '', color = (1, 0, 0)):
+def create(name = '', color = (1, 0, 0)):
   if name == '':
     print("Material name is empty.")
     return False
