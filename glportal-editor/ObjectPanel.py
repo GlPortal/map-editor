@@ -1,8 +1,6 @@
 import bpy
 from bpy.props import *
 
-from .types import *
-
 class ObjectPanel(bpy.types.Panel):
   bl_label = "GlPortal"
   bl_space_type = 'PROPERTIES'
@@ -24,3 +22,4 @@ class ObjectPanel(bpy.types.Panel):
         layout.prop(object, "glpVolumeTypes")
     else:
       layout.label(text="This is no GlPortal object")
+ 
