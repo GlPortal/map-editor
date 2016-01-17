@@ -103,3 +103,7 @@ def set(object, material, color = (1, 0, 0)):
     UpdateTexture.updateTexture(object)
   else:
     return False
+
+def reset(object):
+  if object:
+    object.glpMaterial = "none"
