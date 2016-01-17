@@ -29,7 +29,7 @@ glpTriggerTypes = [
   ("radiation" ,  "Trigger Radiation" ,   "Area triggers radiation")
 ]
 
-def setTypes():
+def setProperties():
   bpy.types.Object.glpTypes = EnumProperty(
     items = glpTypes,
     name = "Type"
@@ -51,4 +51,4 @@ def setTypes():
     default = "none",
   )
 
-setTypes()
+setProperties()
