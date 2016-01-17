@@ -3,6 +3,7 @@ import os
 
 from .operatorHelpers import *
 from .updateTextures import *
+from .managers import MaterialManager
 
 # we are using this for <end> (exit door)
 class addDoor(bpy.types.Operator):
@@ -42,42 +43,6 @@ class addDoor(bpy.types.Operator):
 
     return {'FINISHED'}
 
-class addLamp(bpy.types.Operator):
-  bl_idname = "wm.add_lamp"
-  bl_label = "Add a lamp"
-  bl_description = "Add a lamp. (Not implemented)"
-  bl_options = {"UNDO"}
-
-  def execute(self, context):
-    prefs = context.user_preferences.addons[__package__].preferences
-
-    realpath = os.path.expanduser(prefs.dataDir + "meshes/Lamp.obj")
-    bpy.ops.import_scene.obj(filepath=realpath)
-    bpy.ops.transform.translate(value=(bpy.context.scene.cursor_location))
-    bpy.types.Object.glpType = bpy.props.StringProperty()
-    object = bpy.context.active_object
-    if object:
-      object.glpTypes = "lamp"
-    return {'FINISHED'}
-
-class addButton(bpy.types.Operator):
-  bl_idname = "wm.add_button"
-  bl_label = "Add a button"
-  bl_description = "Add a button. (Not implemented)"
-  bl_options = {"UNDO"}
-
-  def execute(self, context):
-    prefs = context.user_preferences.addons[__package__].preferences
-
-    realpath = os.path.expanduser(prefs.dataDir + "meshes/Button.obj")
-    bpy.ops.import_scene.obj(filepath=realpath)
-    bpy.ops.transform.translate(value=(bpy.context.scene.cursor_location))
-    bpy.types.Object.glpType = bpy.props.StringProperty()
-    object = bpy.context.active_object
-    if object:
-      object.glpTypes = "button"
-    return {'FINISHED'}
-
 class setPortalable(bpy.types.Operator):
   bl_idname = "wm.set_portalable"
   bl_label = "Portalable"
@@ -85,7 +50,6 @@ class setPortalable(bpy.types.Operator):
   bl_options = {"UNDO"}
 
   def execute(self, context):
-    mat = getMaterial('textures/concrete/wall00.png', (1, 1, 1))
     bpy.types.Object.glpType = bpy.props.StringProperty()
     object = bpy.context.active_object
     if object:
@@ -95,13 +59,8 @@ class setPortalable(bpy.types.Operator):
 
           object.glpTypes = "wall"
           object.glpWallTypes = "portalable"
-          me = object.data
-          if (len(me.materials) == 0):
-            me.materials.append(mat)
-          else:
-            me.materials[0] = mat
 
-          UpdateTexture.updateTexture(object)
+          MaterialManager.set(object, "concrete/wall00", (1, 1, 1))
         else:
             self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
       else:
