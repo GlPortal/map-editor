@@ -46,36 +46,3 @@ def clearGlpProperties(object):
   object.glpVolumeTypes = "none"
   object.glpTriggerTypes = "none"
   object.glpWallTypes = "none"
-
-def getMaterial(texturePath, diffuse):
-  prefs = bpy.context.user_preferences.addons[__package__].preferences
-
-  realpath = os.path.expanduser(prefs.dataDir + texturePath)
-  try:
-    WallImage = bpy.data.images.load(realpath)
-  except:
-    raise NameError("Cannot load image %s" % realpath)
-
-  WallTexture = bpy.data.textures.new(name='ColorTex', type='IMAGE')
-  WallTexture.image = WallImage
-
-  mat = bpy.data.materials.new('TexMat')
-  mat.diffuse_color = diffuse
-
-  mtex = mat.texture_slots.add()
-  mtex.texture = WallTexture
-  mtex.use_map_color_diffuse = True
-  mtex.use_map_color_emission = True
-  mtex.emission_color_factor = 0.5
-  mtex.use_map_density = True
-  mtex.use_map_emit = True
-  mtex.emit_factor = 0.3
-
-  if prefs.smartTexturesMapping:
-    mtex.texture_coords = 'UV'
-    mtex.mapping = 'FLAT'
-  else:
-    mtex.texture_coords = 'GLOBAL'
-    mtex.mapping = 'CUBE'
-
-  return mat
