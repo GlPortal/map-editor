@@ -53,7 +53,14 @@ def setWallTypes():
     name = "Wall Type"
   )
 
+def setMaterialType():
+  bpy.types.Object.glpMaterial = StringProperty(
+    name = "Material",
+    default = "",
+  )
+
 setTypes()
 setVolumeTypes()
 setTriggerTypes()
 setWallTypes()
+setMaterialType()
