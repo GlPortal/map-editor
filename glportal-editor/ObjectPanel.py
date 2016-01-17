@@ -22,4 +22,3 @@ class ObjectPanel(bpy.types.Panel):
         layout.prop(object, "glpVolumeTypes")
     else:
       layout.label(text="This is no GlPortal object")
- 

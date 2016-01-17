@@ -20,7 +20,7 @@ class addDoor(bpy.types.Operator):
     bpy.ops.import_scene.obj(filepath = realpath)
     bpy.types.Object.glpType = bpy.props.StringProperty()
 
-    mat = getMaterial('textures/door/door00.png', (1, 1, 1))
+    mat = MaterialManager.create('door/door', (1, 1, 1))
     mat.texture_slots[0].texture_coords = 'UV'
     mat.texture_slots[0].mapping = 'FLAT'
 
@@ -74,7 +74,6 @@ class setWall(bpy.types.Operator):
   bl_options = {"UNDO"}
 
   def execute(self, context):
-    mat = getMaterial('textures/metal/tiles00x3.jpg', (0.2, 0.2, 0.2))
     bpy.types.Object.glpType = bpy.props.StringProperty()
     object = bpy.context.active_object
     if object:
@@ -84,13 +83,8 @@ class setWall(bpy.types.Operator):
 
           object.glpTypes = "wall"
           object.glpWallTypes = "default"
-          me = object.data
-          if (len(me.materials) == 0):
-            me.materials.append(mat)
-          else:
-            me.materials[0] = mat
 
-          UpdateTexture.updateTexture(object)
+          MaterialManager.set(object, "metal/tiles00x3", (0.2, 0.2, 0.2))
         else:
           self.report({'ERROR'}, "Door can't be converted to the metal wall.")
       else:
