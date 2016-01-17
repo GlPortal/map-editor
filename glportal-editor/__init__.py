@@ -7,7 +7,7 @@ bl_info = {
   "location":     "File > Import-Export",
   "description":  "Module for loading, editing and saving GlPortal maps.",
   "category":     "Import-Export",
-  "tracker_url":  "https://github.com/GlPortal/tools/issues"
+  "tracker_url":  "https://bugs.glportal.de/index.php?project=5"
 }
 
 if "bpy" in locals():
