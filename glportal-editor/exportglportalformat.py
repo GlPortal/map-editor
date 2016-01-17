@@ -1,5 +1,5 @@
 import bpy
-from bpy.props import *
+from bpy.props import StringProperty
 from bpy_extras.io_utils import ExportHelper
 
 from .Exporter import *

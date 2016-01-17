@@ -1,6 +1,6 @@
 import bpy
 import math
-from bpy.props import *
+from bpy.props import IntProperty
 
 def fixRotation(rotation):
   x = math.degrees(rotation[0])

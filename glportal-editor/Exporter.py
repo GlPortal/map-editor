@@ -1,5 +1,4 @@
 import bpy
-from bpy.props import *
 import os
 import xml.etree.cElementTree as tree
 import xml.dom.minidom as minidom

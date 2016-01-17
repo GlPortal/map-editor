@@ -1,5 +1,4 @@
 import bpy
-from bpy.props import *
 
 class ObjectPanel(bpy.types.Panel):
   bl_label = "GlPortal"
