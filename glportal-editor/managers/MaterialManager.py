@@ -2,6 +2,9 @@ import bpy
 import os
 import xml.etree.cElementTree as ET
 
+from ..updateTextures import *
+
+
 materials = {}
 
 
@@ -48,39 +51,55 @@ def create(name = '', color = (1, 0, 0)):
     print("Material name is empty.")
     return False
 
-  if not materials.has_key(name):
-    print("Material '%s' does not exist." % name)
+  if name in materials:
+    prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
+    material = materials[name]
+    path = os.path.expanduser(prefs.dataDir + 'textures/' +  material['texture'])
+
+    try:
+      image = bpy.data.images.load(path)
+    except:
+      raise NameError("Cannot load image %s" % path)
+
+    texture = bpy.data.textures.new(name=material['fancyname'], type='IMAGE')
+    texture.image = image
+
+    mat = bpy.data.materials.new(material['fancyname'])
+    mat.diffuse_color = color
+
+    mtex = mat.texture_slots.add()
+    mtex.texture = texture
+    mtex.use_map_color_diffuse = True
+    mtex.use_map_color_emission = True
+    mtex.emission_color_factor = 0.5
+    mtex.use_map_density = True
+    mtex.use_map_emit = True
+    mtex.emit_factor = 0.3
+
+    if prefs.smartTexturesMapping:
+      mtex.texture_coords = 'UV'
+      mtex.mapping = 'FLAT'
+    else:
+      mtex.texture_coords = 'GLOBAL'
+      mtex.mapping = 'CUBE'
+
+    return mat
+  else:
+    print("Material '{0}' does not exist.", name)
     return False
 
-  prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
-  material = materials[name]
-  path = os.path.expanduser(prefs.dataDir + material['texture'])
+def set(object, material, color = (1, 0, 0)):
+  if object:
+    mat = create(material, color)
+    data = object.data
 
-  try:
-    image = bpy.data.images.load(path)
-  except:
-    raise NameError("Cannot load image %s" % path)
+    if (len(data.materials) == 0):
+      data.materials.append(mat)
+    else:
+      data.materials[0] = mat
 
-  texture = bpy.data.textures.new(name=material['fancyname'], type='IMAGE')
-  texture.image = image
+    object.glpMaterial = material
 
-  mat = bpy.data.materials.new(material['fancyname'])
-  mat.diffuse_color = color
-
-  mtex = mat.texture_slots.add()
-  mtex.texture = texture
-  mtex.use_map_color_diffuse = True
-  mtex.use_map_color_emission = True
-  mtex.emission_color_factor = 0.5
-  mtex.use_map_density = True
-  mtex.use_map_emit = True
-  mtex.emit_factor = 0.3
-
-  if prefs.smartTexturesMapping:
-    mtex.texture_coords = 'UV'
-    mtex.mapping = 'FLAT'
+    UpdateTexture.updateTexture(object)
   else:
-    mtex.texture_coords = 'GLOBAL'
-    mtex.mapping = 'CUBE'
-
-  return mat
+    return False
