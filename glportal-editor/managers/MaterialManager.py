@@ -54,6 +54,7 @@ def create(name = '', color = (1, 0, 0)):
   if name in materials:
     prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
     material = materials[name]
+    fancyname = material['fancyname']
     path = os.path.expanduser(prefs.dataDir + 'textures/' +  material['texture'])
 
     try:
@@ -61,20 +62,27 @@ def create(name = '', color = (1, 0, 0)):
     except:
       raise NameError("Cannot load image %s" % path)
 
-    texture = bpy.data.textures.new(name=material['fancyname'], type='IMAGE')
-    texture.image = image
+    if fancyname in bpy.data.textures:
+      texture = bpy.data.textures[fancyname]
+    else:
+      texture = bpy.data.textures.new(name=fancyname, type='IMAGE')
+      texture.image = image
 
-    mat = bpy.data.materials.new(material['fancyname'])
-    mat.diffuse_color = color
+    if fancyname in bpy.data.materials:
+      mat = bpy.data.materials[fancyname]
+      mtex = mat.texture_slots[0]
+    else:
+      mat = bpy.data.materials.new(fancyname)
+      mat.diffuse_color = color
 
-    mtex = mat.texture_slots.add()
-    mtex.texture = texture
-    mtex.use_map_color_diffuse = True
-    mtex.use_map_color_emission = True
-    mtex.emission_color_factor = 0.5
-    mtex.use_map_density = True
-    mtex.use_map_emit = True
-    mtex.emit_factor = 0.3
+      mtex = mat.texture_slots.add()
+      mtex.texture = texture
+      mtex.use_map_color_diffuse = True
+      mtex.use_map_color_emission = True
+      mtex.emission_color_factor = 0.5
+      mtex.use_map_density = True
+      mtex.use_map_emit = True
+      mtex.emit_factor = 0.3
 
     if prefs.smartTexturesMapping:
       mtex.texture_coords = 'UV'
