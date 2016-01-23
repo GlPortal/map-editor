@@ -85,7 +85,7 @@ def create(name = '', color = (1, 0, 0)):
 
     return mat
   else:
-    print("Material '{0}' does not exist.", name)
+    print("Material '", name, "' does not exist.")
     return False
 
 def set(object, material, color = (1, 0, 0)):
