@@ -115,3 +115,7 @@ def set(object, material, color = (1, 0, 0)):
 def reset(object):
   if object:
     object.glpMaterial = "none"
+
+    if (len(object.data.materials) == 1):
+      bpy.context.scene.objects.active = object
+      bpy.ops.object.material_slot_remove()
