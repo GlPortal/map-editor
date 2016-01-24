@@ -2,6 +2,8 @@ import bpy
 import os
 import bmesh
 
+from .managers import MaterialManager
+
 def resetTriggerSettings(object):
   if object.glpTypes and object.glpTypes == "trigger":
     object.glpTriggerTypes = "none"
@@ -13,6 +15,7 @@ def resetTriggerSettings(object):
 def setTrigger(object, type):
   prefs = bpy.context.user_preferences.addons[__package__].preferences
   clearGlpProperties(object)
+  MaterialManager.reset(object)
 
   object.glpTypes = "trigger"
   object.glpTriggerTypes = type
@@ -46,4 +49,3 @@ def clearGlpProperties(object):
   object.glpVolumeTypes = "none"
   object.glpTriggerTypes = "none"
   object.glpWallTypes = "none"
-  object.glpMaterial = "none"
