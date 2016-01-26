@@ -32,8 +32,16 @@ class preferences(AddonPreferences):
   )
 
   def draw(self, context):
+    prefs = context.user_preferences.addons[__package__].preferences
     layout = self.layout
+
     layout.prop(self, "triggerXrays")
     layout.prop(self, "smartTexturesMapping")
+
     layout.prop(self, "dataDir")
+    if os.path.isdir(os.path.expanduser(prefs.dataDir)) == False:
+      layout.label(text="Current data directory does not exist", icon='ERROR')
+
     layout.prop(self, "gameExe")
+    if os.path.isfile(os.path.expanduser(prefs.gameExe)) == False:
+      layout.label(text="Current GlPortal executable does not exist", icon='ERROR')
