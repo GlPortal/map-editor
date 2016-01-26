@@ -12,7 +12,7 @@ def rotTest(degree):
 def fixDegrees(rot):
   rot = round(rot, 2)
   temp = round(abs(rot % 90), 1)
-  print(temp, rot)
+
   if rot == 0:
     return math.radians(0)
 
