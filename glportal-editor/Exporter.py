@@ -8,7 +8,7 @@ import re
 from . import mapHelpers
 
 class Exporter():
-  def __init__(self, filePath, d_p = 5):
+  def __init__(self, filePath, d_p = 4):
     self.__filePath = filePath
     self.__d_p = d_p
 
