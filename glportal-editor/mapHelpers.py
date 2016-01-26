@@ -7,9 +7,20 @@ def fixRotation(rotation):
   y = math.degrees(rotation[2])
   z = math.degrees(rotation[1])
 
-  x = math.radians(float(x - x % 90))
-  y = math.radians(float(y - y % 90))
-  z = math.radians(float(z - z % 90))
+  if x > 0:
+    x = math.radians(float(x - x % 90))
+  else:
+    x = math.radians(float(x - x % -90))
+
+  if y > 0:
+    y = math.radians(float(y - y % 90))
+  else:
+    y = math.radians(float(y - y % -90))
+
+  if z > 0:
+    z = math.radians(float(z - z % 90))
+  else:
+    z = math.radians(float(z - z % -90))
 
   return [x, z, y]
 
