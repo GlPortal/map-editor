@@ -3,13 +3,18 @@ import math
 from bpy.props import IntProperty
 
 def rotTest(degree):
-  if degree > 0 and (degree < 5 or degree > 85):
-    return True
+  if degree > 0:
+    if degree < 5 or degree > 85:
+      return True
 
   return False
 
 def fixDegrees(rot):
-  temp = abs(rot % 90)
+  rot = round(rot, 2)
+  temp = round(abs(rot % 90), 1)
+  print(temp, rot)
+  if rot == 0:
+    return math.radians(0)
 
   if rot > 0:
     if rotTest(temp):
@@ -19,6 +24,7 @@ def fixDegrees(rot):
   else:
     if rotTest(temp):
       rot -= 90
+
     rot = math.radians(float(rot - rot % -90))
 
   return rot
