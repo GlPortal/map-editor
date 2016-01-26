@@ -43,7 +43,7 @@ class Importer():
   def extrackRotation(self, param, o_x = 0, o_y = 0, o_z = 0):
     x = math.radians(float(param.get("x")) + o_x)
     y = math.radians(float(param.get("y")) + o_y)
-    z = math.radians(float(param.get("z")) + o_z)
+    z = math.radians(-float(param.get("z")) + o_z)
 
     return [x, z, y]
 
