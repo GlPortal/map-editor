@@ -2,40 +2,6 @@ import bpy
 import math
 from bpy.props import IntProperty
 
-def rotTest(degree):
-  if degree > 0:
-    if degree < 5 or degree > 85:
-      return True
-
-  return False
-
-def fixDegrees(rot):
-  rot = round(rot, 2)
-  temp = round(abs(rot % 90), 1)
-
-  if rot == 0:
-    return math.radians(0)
-
-  if rot > 0:
-    if rotTest(temp):
-      rot += 90
-
-    rot = math.radians(float(rot - rot % 90))
-  else:
-    if rotTest(temp):
-      rot -= 90
-
-    rot = math.radians(float(rot - rot % -90))
-
-  return rot
-
-def fixRotation(rotation):
-  x = fixDegrees(math.degrees(rotation[0]))
-  y = fixDegrees(math.degrees(rotation[2]))
-  z = fixDegrees(math.degrees(rotation[1]))
-
-  return [x, z, y]
-
 def fixObjects():
   objects = bpy.context.scene.objects
   bpy.ops.object.select_all(action='DESELECT')
@@ -48,9 +14,6 @@ def fixObjects():
         bpy.context.scene.objects.active = object
         bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
 
-        object.rotation_euler = fixRotation(object.rotation_euler)
-      elif type == "door":
-        object.rotation_euler = fixRotation(object.rotation_euler)
 
 def isOverObject(position, object):
   pMin = object.location[0] - abs(object.dimensions[0]) / 2
