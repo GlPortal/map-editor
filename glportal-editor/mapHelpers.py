@@ -2,25 +2,31 @@ import bpy
 import math
 from bpy.props import IntProperty
 
+def rotTest(degree):
+  if degree < 5 or degree > 85:
+    return True
+
+  return False
+
+def fixDegrees(rot):
+  temp = abs(rot % 90)
+
+  if rot > 0:
+    if temp:
+      rot += 90
+
+    rot = math.radians(float(rot - rot % 90))
+  else:
+    if temp:
+      rot -= 90
+    rot = math.radians(float(rot - rot % -90))
+
+  return rot
+
 def fixRotation(rotation):
-  x = math.degrees(rotation[0])
-  y = math.degrees(rotation[2])
-  z = math.degrees(rotation[1])
-
-  if x > 0:
-    x = math.radians(float(x - x % 90))
-  else:
-    x = math.radians(float(x - x % -90))
-
-  if y > 0:
-    y = math.radians(float(y - y % 90))
-  else:
-    y = math.radians(float(y - y % -90))
-
-  if z > 0:
-    z = math.radians(float(z - z % 90))
-  else:
-    z = math.radians(float(z - z % -90))
+  x = fixDegrees(math.degrees(rotation[0]))
+  y = fixDegrees(math.degrees(rotation[2]))
+  z = fixDegrees(math.degrees(rotation[1]))
 
   return [x, z, y]
 
