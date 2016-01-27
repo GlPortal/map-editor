@@ -51,5 +51,9 @@ def setProperties():
     name = "Material",
     default = "none",
   )
+  bpy.types.Object.glpObject = StringProperty (
+    name = "Object",
+    default = "none",
+  )
 
 setProperties()
