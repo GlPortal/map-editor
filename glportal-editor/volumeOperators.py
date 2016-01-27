@@ -1,7 +1,6 @@
 import bpy
 
 from .operatorHelpers import *
-from .updateTextures import *
 from .managers import MaterialManager
 
 class setAcid(bpy.types.Operator):

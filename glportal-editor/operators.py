@@ -2,7 +2,6 @@ import bpy
 import os
 
 from .operatorHelpers import *
-from .updateTextures import *
 from .managers import MaterialManager
 
 # we are using this for <end> (exit door)
