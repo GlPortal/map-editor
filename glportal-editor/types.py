@@ -6,7 +6,8 @@ glpTypes = [
   ("wall" ,   "Wall",     "Wall"),
   ("door" ,   "Door",     "Door"),# temporarily using as <end>
   ("volume",  "Volume",   "Volume"),
-  ("trigger", "Trigger",  "trigger")
+  ("trigger", "Trigger",  "Trigger"),
+  ("object",  "Object",   "Object")
 ]
 
 glpWallTypes = [
