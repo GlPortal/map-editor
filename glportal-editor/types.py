@@ -31,23 +31,23 @@ glpTriggerTypes = [
 ]
 
 def setProperties():
-  bpy.types.Object.glpTypes = EnumProperty(
+  bpy.types.Object.glpTypes = EnumProperty (
     items = glpTypes,
     name = "Type"
   )
-  bpy.types.Object.glpVolumeTypes = EnumProperty(
+  bpy.types.Object.glpVolumeTypes = EnumProperty (
     items = glpVolumeTypes,
     name = "Volume Type"
   )
-  bpy.types.Object.glpTriggerTypes = EnumProperty(
+  bpy.types.Object.glpTriggerTypes = EnumProperty (
     items = glpTriggerTypes,
     name = "Trigger Type"
   )
-  bpy.types.Object.glpWallTypes = EnumProperty(
+  bpy.types.Object.glpWallTypes = EnumProperty (
     items = glpWallTypes,
     name = "Wall Type"
   )
-  bpy.types.Object.glpMaterial = StringProperty(
+  bpy.types.Object.glpMaterial = StringProperty (
     name = "Material",
     default = "none",
   )
