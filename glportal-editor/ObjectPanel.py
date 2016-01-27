@@ -1,5 +1,7 @@
 import bpy
 
+from .managers import MaterialManager
+
 class ObjectPanel(bpy.types.Panel):
   bl_label = "GlPortal"
   bl_space_type = 'PROPERTIES'
@@ -19,5 +21,28 @@ class ObjectPanel(bpy.types.Panel):
         layout.prop(object, "glpWallTypes")
       elif object.glpTypes == "volume":
         layout.prop(object, "glpVolumeTypes")
+
+      if object.glpMaterial != "none":
+        mat = MaterialManager.materials[object.glpMaterial]
+
+        layout.label(text="Material properties", icon='MATERIAL')
+
+        row = layout.row(align=True)
+        row.alignment = 'EXPAND'
+        row.label(text="Name : ")
+        row.label(text=mat['fancyname'])
+
+        row = layout.row(align=True)
+        row.alignment = 'EXPAND'
+        row.label(text="Portalable : ")
+        if mat['portalable']:
+          row.label(text='Yes')
+        else:
+          row.label(text='No')
+
+        row = layout.row(align=True)
+        row.alignment = 'EXPAND'
+        row.label(text="Kind : ")
+        row.label(text=mat['kind'])
     else:
       layout.label(text="This is no GlPortal object")
