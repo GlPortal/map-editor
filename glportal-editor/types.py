@@ -7,7 +7,7 @@ glpTypes = [
   ("door" ,   "Door",     "Door"),# temporarily using as <end>
   ("volume",  "Volume",   "Volume"),
   ("trigger", "Trigger",  "Trigger"),
-  ("object",  "Object",   "Object")
+  ("model",   "Model",    "Model")
 ]
 
 glpWallTypes = [
@@ -51,8 +51,8 @@ def setProperties():
     name = "Material",
     default = "none",
   )
-  bpy.types.Object.glpObject = StringProperty (
-    name = "Object",
+  bpy.types.Object.glpModel = StringProperty (
+    name = "Model",
     default = "none",
   )
 
