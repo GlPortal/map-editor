@@ -43,8 +43,7 @@ def preload():
         materials[mat['name']] = mat['data']
 
     return True
-  else:
-    return False
+  return False
 
 def create(name = '', color = (1, 0, 0)):
   if name == '':
