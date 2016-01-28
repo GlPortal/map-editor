@@ -1,6 +1,5 @@
 import bpy
 import os
-import string
 
 models = {}
 blacklist = [
