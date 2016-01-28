@@ -24,7 +24,7 @@ def updateSmartTexturesMapping(self, context):
         me.materials[0].texture_slots[0].texture_coords = 'UV'
         me.materials[0].texture_slots[0].mapping = 'FLAT'
 
-        UpdateTexture.updateTexture(object)
+        updateTexture(object)
       else:
         me.materials[0].texture_slots[0].texture_coords = 'GLOBAL'
         me.materials[0].texture_slots[0].mapping = 'CUBE'

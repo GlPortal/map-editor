@@ -107,7 +107,7 @@ def set(object, material, color = (1, 0, 0)):
 
     object.glpMaterial = material
 
-    UpdateTexture.updateTexture(object)
+    updateTexture(object)
   else:
     return False
 
