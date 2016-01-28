@@ -33,6 +33,7 @@ if "bpy" in locals():
   importlib.reload(operatorHelpers)
   importlib.reload(preferencesHelper)
   importlib.reload(MaterialManager)
+  importlib.reload(ModelManager)
 else:
   from . import types
   from . import CreationPanel
@@ -54,6 +55,7 @@ else:
   from . import operatorHelpers
   from . import preferencesHelper
   from .managers import MaterialManager
+  from .managers import ModelManager
 
 import bpy
 
@@ -71,6 +73,7 @@ def register():
   bpy.app.handlers.scene_update_post.append(updateTextures.sceneUpdater)
 
   MaterialManager.preload()
+  ModelManager.preload()
 
 def unregister():
   bpy.utils.unregister_module(__name__)
@@ -80,6 +83,7 @@ def unregister():
   bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
 
   MaterialManager.materials.clear()
+  ModelManager.models.clear()
 
 if __name__ == "__main__":
   register()
