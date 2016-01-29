@@ -45,7 +45,7 @@ def preload():
     return True
   return False
 
-def create(name = '', color = (1, 0, 0)):
+def create(name = '', color = (1, 0, 0), model = False):
   if name == '':
     print("Material name is empty.")
     return False
@@ -83,7 +83,7 @@ def create(name = '', color = (1, 0, 0)):
       mtex.use_map_emit = True
       mtex.emit_factor = 0.3
 
-    if prefs.smartTexturesMapping:
+    if prefs.smartTexturesMapping or model:
       mtex.texture_coords = 'UV'
       mtex.mapping = 'FLAT'
     else:
@@ -95,9 +95,9 @@ def create(name = '', color = (1, 0, 0)):
     print("Material '", name, "' does not exist.")
     return False
 
-def set(object, material, color = (1, 0, 0)):
+def set(object, material, color = (1, 0, 0), model = False):
   if object:
-    mat = create(material, color)
+    mat = create(material, color, model)
     data = object.data
 
     if (len(data.materials) == 0):
@@ -107,7 +107,8 @@ def set(object, material, color = (1, 0, 0)):
 
     object.glpMaterial = material
 
-    updateTexture(object)
+    if (object.glpTypes == "wall" or object.glpTypes == "volume"):
+      updateTexture(object)
   else:
     return False
 
