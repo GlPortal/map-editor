@@ -5,7 +5,7 @@ from bpy_extras.io_utils import ImportHelper
 from .importer import *
 
 class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
-  bl_idname = "import_glportal_xml.xml"
+  bl_idname = "glp.import"
   bl_label = "Import GlPortal XML"
   bl_description = "Import GlPortal XML file (.xml)"
   bl_options = {'PRESET'}
