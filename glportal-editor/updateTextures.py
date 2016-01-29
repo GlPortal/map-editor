@@ -66,11 +66,12 @@ def updateTexture(object):
 
 @persistent
 def sceneUpdater(scene):
+  global isRunning
   prefs = bpy.context.user_preferences.addons[__package__].preferences
   object = scene.objects.active
 
-  if prefs.smartTexturesMapping:
-    if object is not None and object.is_updated:
-      if (object.glpTypes == "wall" or object.glpTypes == "volume"):
-        if not isRunning:
+  if not isRunning:
+    if prefs.smartTexturesMapping:
+      if object is not None and object.is_updated:
+        if (object.glpTypes == "wall" or object.glpTypes == "volume"):
           updateTexture(object)
