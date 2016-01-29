@@ -18,6 +18,10 @@ class addDoor(bpy.types.Operator):
 
     ModelManager.create("Door", "door/door")
 
+    object = bpy.context.selected_objects[0]
+    if object:
+      object.glpTypes = "door"
+
     return {'FINISHED'}
 
 class setPortalable(bpy.types.Operator):
