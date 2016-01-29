@@ -24,26 +24,6 @@ def setTrigger(object, type):
   object.show_bounds = True
   object.draw_bounds_type = "CAPSULE"
 
-def fixDoorTexture(me):
-  bm = bmesh.new()
-  bm.from_mesh(me)
-
-  if hasattr(bm.faces, "ensure_lookup_table"):
-    bm.faces.ensure_lookup_table()
-
-  uv_layer = bm.loops.layers.uv[0]
-
-  bm.faces[7].loops[0][uv_layer].uv = (0.5, 0.5)
-  bm.faces[7].loops[1][uv_layer].uv = (0.5, 0)
-  bm.faces[7].loops[2][uv_layer].uv = (0.5, 0)
-
-  bm.faces[25].loops[0][uv_layer].uv = (0.5, 0.5)
-  bm.faces[25].loops[1][uv_layer].uv = (0.5, 0)
-  bm.faces[25].loops[2][uv_layer].uv = (0.5, 0)
-
-  bm.to_mesh(me)
-  bm.free()
-
 def clearGlpProperties(object):
   object.glpTypes = "none"
   object.glpVolumeTypes = "none"
