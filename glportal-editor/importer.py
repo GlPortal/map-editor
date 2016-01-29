@@ -117,7 +117,7 @@ class Importer():
           if param.tag == "position":
             location = self.extrackPosition(param)
           elif param.tag == "rotation":
-            rotation = self.extrackRotation(param);
+            rotation = self.extrackRotation(param)
 
         bpy.ops.glp.add_door()
 
