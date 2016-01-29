@@ -3,6 +3,7 @@ import os
 
 from .operatorHelpers import *
 from .managers import MaterialManager
+from .managers import ModelManager
 
 # we are using this for <end> (exit door)
 class addDoor(bpy.types.Operator):
@@ -15,30 +16,7 @@ class addDoor(bpy.types.Operator):
   def execute(self, context):
     prefs = context.user_preferences.addons[__package__].preferences
 
-    realpath = os.path.expanduser(prefs.dataDir + "meshes/Door.obj")
-    bpy.ops.import_scene.obj(filepath = realpath)
-    bpy.types.Object.glpType = bpy.props.StringProperty()
-
-    mat = MaterialManager.create('door/door', (1, 1, 1))
-    mat.texture_slots[0].texture_coords = 'UV'
-    mat.texture_slots[0].mapping = 'FLAT'
-
-    obj_objects = bpy.context.selected_objects[:]
-
-    for object in obj_objects:
-      if object.glpTypes and object.glpTypes == "none":
-        object.location = context.scene.cursor_location
-        object.glpTypes = "door"
-        context.scene.objects.active = object
-        bpy.ops.object.transform_apply(rotation=True)
-
-        me = object.data
-        if (len(me.materials) == 0):
-          me.materials.append(mat)
-        else:
-          me.materials[0] = mat
-
-        fixDoorTexture(me)
+    ModelManager.create("Door", "door/door")
 
     return {'FINISHED'}
 
