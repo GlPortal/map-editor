@@ -1,7 +1,7 @@
 import bpy
 
 class setLightCommon(bpy.types.Operator):
-  bl_idname = "wm.set_light_common"
+  bl_idname = "glp.set_light_common"
   bl_label = "Common"
   bl_description = "Set a light with predefined color for common lights"
   bl_options = {"UNDO"}
@@ -20,7 +20,7 @@ class setLightCommon(bpy.types.Operator):
     return {'FINISHED'}
 
 class addLightCommon(bpy.types.Operator):
-  bl_idname = "wm.add_light_common"
+  bl_idname = "glp.add_light_common"
   bl_label = "Common"
   bl_description = "Add a light with predefined color for common lights"
   bl_options = {"UNDO"}
@@ -32,7 +32,7 @@ class addLightCommon(bpy.types.Operator):
     return {'FINISHED'}
 
 class setLightEnd(bpy.types.Operator):
-  bl_idname = "wm.set_light_end"
+  bl_idname = "glp.set_light_end"
   bl_label = "End"
   bl_description = "Set a light with predefined color for end lights"
   bl_options = {"UNDO"}
@@ -53,7 +53,7 @@ class setLightEnd(bpy.types.Operator):
     return {'FINISHED'}
 
 class addLightEnd(bpy.types.Operator):
-  bl_idname = "wm.add_light_end"
+  bl_idname = "glp.add_light_end"
   bl_label = "End"
   bl_description = "Add a light with predefined color for end lights"
   bl_options = {"UNDO"}

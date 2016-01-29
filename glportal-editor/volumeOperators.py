@@ -4,7 +4,7 @@ from .operatorHelpers import *
 from .managers import MaterialManager
 
 class setAcid(bpy.types.Operator):
-  bl_idname = "wm.set_acid"
+  bl_idname = "glp.set_acid"
   bl_label = "Acid"
   bl_description = "Mark the selection as a volume of acid."
   bl_options = {"UNDO"}
@@ -28,7 +28,7 @@ class setAcid(bpy.types.Operator):
     return {'FINISHED'}
 
 class addAcid(bpy.types.Operator):
-  bl_idname = "wm.add_acid"
+  bl_idname = "glp.add_acid"
   bl_label = "Acid"
   bl_description = "Add a volume of acid."
   bl_options = {"UNDO"}

@@ -6,7 +6,7 @@ from .mapHelpers import *
 from .Exporter import *
 
 class fixMap(bpy.types.Operator):
-  bl_idname = "wm.fix_map"
+  bl_idname = "glp.fix_map"
   bl_label = "Fix map"
   bl_description = "Fix the map before exporting."
   bl_options = {"UNDO"}
@@ -17,7 +17,7 @@ class fixMap(bpy.types.Operator):
     return {'FINISHED'}
 
 class checkMap(bpy.types.Operator):
-  bl_idname = "wm.check_map"
+  bl_idname = "glp.check_map"
   bl_label = "Check map"
   bl_description = "Check the map for problems."
 
@@ -27,7 +27,7 @@ class checkMap(bpy.types.Operator):
     return {'FINISHED'}
 
 class runGame(bpy.types.Operator):
-  bl_idname = "wm.run_game"
+  bl_idname = "glp.run_game"
   bl_label = "Run game"
   bl_description = "Run game with this map"
 

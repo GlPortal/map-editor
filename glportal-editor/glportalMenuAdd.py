@@ -20,7 +20,7 @@ class GlPortalAddMenuMain(bpy.types.Menu):
     layout.menu("glpMenu.lights", icon='LAMP_POINT')
 
     layout.operator("object.camera_add", text="Spawn (Camera)", icon='OUTLINER_OB_CAMERA')
-    layout.operator("wm.add_door", text="Exit", icon='MESH_CUBE')
+    layout.operator("glp.add_door", text="Exit", icon='MESH_CUBE')
 
 class GlPortalAddMenuWalls(bpy.types.Menu):
   bl_idname = "glpMenu.walls"
@@ -29,8 +29,8 @@ class GlPortalAddMenuWalls(bpy.types.Menu):
   def draw(self, context):
     layout = self.layout
 
-    layout.operator("wm.add_portalable", icon='MESH_PLANE')
-    layout.operator("wm.add_wall", icon='META_PLANE')
+    layout.operator("glp.add_portalable", icon='MESH_PLANE')
+    layout.operator("glp.add_wall", icon='META_PLANE')
 
 class GlPortalAddMenuTriggers(bpy.types.Menu):
   bl_idname = "glpMenu.triggers"
@@ -39,9 +39,9 @@ class GlPortalAddMenuTriggers(bpy.types.Menu):
   def draw(self, context):
     layout = self.layout
 
-    layout.operator("wm.add_death", icon='MESH_CUBE')
-    layout.operator("wm.add_radiation", icon='RADIO')
-    layout.operator("wm.add_win", icon='MESH_CUBE')
+    layout.operator("glp.add_death", icon='MESH_CUBE')
+    layout.operator("glp.add_radiation", icon='RADIO')
+    layout.operator("glp.add_win", icon='MESH_CUBE')
 
 class GlPortalAddMenuVolumes(bpy.types.Menu):
   bl_idname = "glpMenu.volumes"
@@ -50,7 +50,7 @@ class GlPortalAddMenuVolumes(bpy.types.Menu):
   def draw(self, context):
     layout = self.layout
 
-    layout.operator("wm.add_acid", icon='MESH_CUBE')
+    layout.operator("glp.add_acid", icon='MESH_CUBE')
 
 class GlPortalAddMenuLights(bpy.types.Menu):
   bl_idname = "glpMenu.lights"
@@ -59,5 +59,5 @@ class GlPortalAddMenuLights(bpy.types.Menu):
   def draw(self, context):
     layout = self.layout
 
-    layout.operator("wm.add_light_common", icon='LAMP_POINT')
-    layout.operator("wm.add_light_end", icon='LAMP_POINT')
+    layout.operator("glp.add_light_common", icon='LAMP_POINT')
+    layout.operator("glp.add_light_end", icon='LAMP_POINT')

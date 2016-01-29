@@ -6,7 +6,7 @@ from .managers import MaterialManager
 
 # we are using this for <end> (exit door)
 class addDoor(bpy.types.Operator):
-  bl_idname = "wm.add_door"
+  bl_idname = "glp.add_door"
   bl_label = "Add a door"
   #bl_description = "Add a door." # for the future
   bl_description = "Add an exit door (use only once)"
@@ -43,7 +43,7 @@ class addDoor(bpy.types.Operator):
     return {'FINISHED'}
 
 class setPortalable(bpy.types.Operator):
-  bl_idname = "wm.set_portalable"
+  bl_idname = "glp.set_portalable"
   bl_label = "Portalable"
   bl_description = "Mark the selection as portalable wall."
   bl_options = {"UNDO"}
@@ -67,7 +67,7 @@ class setPortalable(bpy.types.Operator):
     return {'FINISHED'}
 
 class setWall(bpy.types.Operator):
-  bl_idname = "wm.set_wall"
+  bl_idname = "glp.set_wall"
   bl_label = "Metal tiles"
   bl_description = "Mark the selection as metal wall."
   bl_options = {"UNDO"}
@@ -91,7 +91,7 @@ class setWall(bpy.types.Operator):
     return {'FINISHED'}
 
 class addWall(bpy.types.Operator):
-  bl_idname = "wm.add_wall"
+  bl_idname = "glp.add_wall"
   bl_label = "Metal tiles"
   bl_description = "Add a metal wall."
   bl_options = {"UNDO"}
@@ -102,7 +102,7 @@ class addWall(bpy.types.Operator):
     return {'FINISHED'}
 
 class addPortalable(bpy.types.Operator):
-  bl_idname = "wm.add_portalable"
+  bl_idname = "glp.add_portalable"
   bl_label = "Portalable"
   bl_description = "Add a portalable wall."
   bl_options = {"UNDO"}
