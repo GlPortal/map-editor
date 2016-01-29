@@ -98,7 +98,7 @@ class addWall(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
-    setWall.execute(self, context)
+    bpy.ops.glp.set_wall()
     return {'FINISHED'}
 
 class addPortalable(bpy.types.Operator):
@@ -109,5 +109,5 @@ class addPortalable(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
-    setPortalable.execute(self, context)
+    bpy.ops.glp.set_portalable()
     return {'FINISHED'}

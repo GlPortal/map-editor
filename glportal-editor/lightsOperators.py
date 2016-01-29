@@ -27,7 +27,7 @@ class addLightCommon(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.object.lamp_add(type="POINT")
-    setLightCommon.execute(self, context)
+    bpy.ops.glp.set_light_common()
 
     return {'FINISHED'}
 
@@ -60,6 +60,6 @@ class addLightEnd(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.object.lamp_add(type="POINT")
-    setLightEnd.execute(self, context)
+    bpy.ops.glp.set_light_end()
 
     return {'FINISHED'}

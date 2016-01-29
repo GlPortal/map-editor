@@ -35,5 +35,5 @@ class addAcid(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
-    setAcid.execute(self, context)
+    bpy.ops.glp.set_acid()
     return {'FINISHED'}

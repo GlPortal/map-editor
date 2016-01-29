@@ -3,10 +3,6 @@ import math
 import os
 import xml.etree.cElementTree as ET
 
-from .operators import *
-from .triggerOperators import *
-from .volumeOperators import *
-
 class Importer():
   def __init__(self, filePath, deleteWorld = True):
     self.__filePath = filePath
@@ -80,12 +76,12 @@ class Importer():
 
         if self.createCube(child):
           if mid == portalAble:
-            setPortalable.execute(self, context)
+            bpy.ops.glp.set_portalable()
           else:
-            setWall.execute(self, context)
+            bpy.ops.glp.set_wall()
       elif child.tag == "acid":
         if self.createCube(child):
-          setAcid.execute(self, context)
+          bpy.ops.glp.set_acid()
       elif child.tag == "spawn":
         bpy.ops.object.camera_add()
 
@@ -123,7 +119,7 @@ class Importer():
           elif param.tag == "rotation":
             rotation = self.extrackRotation(param);
 
-        addDoor.execute(self, context)
+        bpy.ops.glp.add_door()
 
         object = bpy.context.active_object
         object.location = location
@@ -132,9 +128,9 @@ class Importer():
       elif child.tag == "trigger":
         if self.createCube(child):
           if child.get("type") == "death":
-            setDeath.execute(self, context)
+            bpy.ops.glp.set_death()
           elif child.get("type") == "radiation":
-            setRadiation.execute(self, context)
+            bpy.ops.glp.set_radiation()
           else:
             object = bpy.context.active_object
             object.delete()

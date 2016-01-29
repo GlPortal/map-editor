@@ -28,7 +28,7 @@ class addWin(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
-    setWin.execute(self, context)
+    bpy.ops.glp.set_win()
     return {'FINISHED'}
 
 class setDeath(bpy.types.Operator):
@@ -57,7 +57,7 @@ class addDeath(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
-    setDeath.execute(self, context)
+    bpy.ops.glp.set_death()
     return {'FINISHED'}
 
 class setRadiation(bpy.types.Operator):
@@ -86,5 +86,5 @@ class addRadiation(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
-    setRadiation.execute(self, context)
+    bpy.ops.glp.add_radiation()
     return {'FINISHED'}
