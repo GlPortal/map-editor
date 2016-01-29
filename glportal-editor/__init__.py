@@ -60,7 +60,7 @@ else:
 import bpy
 
 def menu_func_export(self, context):
-  self.layout.operator(exportglportalformat.ExportGlPortalFormat.bl_idname, text="GlPortal Map (.xml)")
+  self.layout.operator("glp.export", text="GlPortal Map (.xml)")
 
 def menu_func_import(self, context):
   self.layout.operator("glp.import", text="GlPortal Map (.xml)")
