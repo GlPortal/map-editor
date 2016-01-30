@@ -129,9 +129,6 @@ class Exporter():
         elif type == "volume":
           if object.glpVolumeTypes == "acid":
             boxElement = tree.SubElement(root, "acid")
-        # disabled, will be enabled in the future
-        # else:
-        # boxElement = tree.SubElement(root, "door")
         if boxElement != None:
           positionElement = tree.SubElement(boxElement, "position")
           self.storePosition(positionElement, object)
