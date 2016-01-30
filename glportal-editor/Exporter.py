@@ -13,7 +13,7 @@ class Exporter():
     self.__filePath = filePath
     self.__d_p = d_p
 
-  def storeMaterials(self, root, mats):
+  def writeMaterials(self, root, mats):
     materials = ((k, mats[k]) for k in sorted(mats, key=mats.get))
     materialElement = tree.SubElement(root, "materials")
 
