@@ -10,14 +10,6 @@ glpTypes = [
   ("model",   "Model",    "Model")
 ]
 
-glpWallTypes = [
-  ("none" ,       "None" ,        "No special property"),
-  ("default" ,    "Default" ,     "Nothing special just a painted concrete wall"),
-  ("invisible" ,  "Invisible" ,   "Invisible (Not implemented)"),
-  ("glass" ,      "Glass" ,       "Glass (Not implemented)"),
-  ("portalable" , "Portalable" ,  "Portalable Wall")
-]
-
 glpVolumeTypes = [
   ("none" ,   "None" ,     "No special property"),
   ("acid",    "Acid Pool", "A pool full of acid, hurts..")
@@ -42,10 +34,6 @@ def setProperties():
   bpy.types.Object.glpTriggerTypes = EnumProperty (
     items = glpTriggerTypes,
     name = "Trigger Type"
-  )
-  bpy.types.Object.glpWallTypes = EnumProperty (
-    items = glpWallTypes,
-    name = "Wall Type"
   )
   bpy.types.Object.glpMaterial = StringProperty (
     name = "Material",

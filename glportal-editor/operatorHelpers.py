@@ -28,4 +28,3 @@ def clearGlpProperties(object):
   object.glpTypes = "none"
   object.glpVolumeTypes = "none"
   object.glpTriggerTypes = "none"
-  object.glpWallTypes = "none"

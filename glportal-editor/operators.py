@@ -39,7 +39,6 @@ class setPortalable(bpy.types.Operator):
           resetTriggerSettings(object)
 
           object.glpTypes = "wall"
-          object.glpWallTypes = "portalable"
 
           MaterialManager.set(object, "concrete/wall00", (1, 1, 1))
         else:
@@ -63,7 +62,6 @@ class setWall(bpy.types.Operator):
           resetTriggerSettings(object)
 
           object.glpTypes = "wall"
-          object.glpWallTypes = "default"
 
           MaterialManager.set(object, "metal/tiles00x3", (0.2, 0.2, 0.2))
         else:
