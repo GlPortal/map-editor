@@ -73,18 +73,12 @@ class Exporter():
   def execute(self, context):
     mapHelpers.fixObjects()
 
+    materials = MaterialManager.prepareExport()
     dir = os.path.dirname(self.__filePath)
     objects = context.scene.objects
     root = tree.Element("map")
 
-    materialElement = tree.SubElement(root, "materials")
-    material1 = tree.SubElement(materialElement, "mat")
-    material2 = tree.SubElement(materialElement, "mat")
-
-    material1.set("mid", "1")
-    material1.set("name", "concrete/wall00")
-    material2.set("mid", "2")
-    material2.set("name", "metal/tiles00x3")
+    self.writeMaterials(root, materials)
 
     for object in reversed(objects):
       if object.glpTypes:
@@ -122,10 +116,7 @@ class Exporter():
             boxElement.set("type", object.glpTriggerTypes)
         elif type == "wall":
           boxElement = tree.SubElement(root, "wall")
-          if object.glpWallTypes == "portalable":
-            boxElement.set("mid", "1")
-          else:
-            boxElement.set("mid", "2")
+          boxElement.set("mid", str(materials[object.glpMaterial]))
         elif type == "volume":
           if object.glpVolumeTypes == "acid":
             boxElement = tree.SubElement(root, "acid")
