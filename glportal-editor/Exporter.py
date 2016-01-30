@@ -76,8 +76,6 @@ class Exporter():
     material2.set("mid", "2")
     material2.set("name", "metal/tiles00x3")
 
-    for object in objects:
-      object.select = False
     for object in reversed(objects):
       if object.glpTypes:
         type = object.glpTypes
@@ -125,8 +123,6 @@ class Exporter():
         # else:
         # boxElement = tree.SubElement(root, "door")
         if boxElement != None:
-          object.select = True
-
           positionElement = tree.SubElement(boxElement, "position")
           self.storePosition(positionElement, object);
 
@@ -136,8 +132,6 @@ class Exporter():
 
           scaleElement = tree.SubElement(boxElement, "scale")
           self.storeScale(scaleElement, object);
-
-          object.select = False
 
     xml = minidom.parseString(tree.tostring(root))
 
