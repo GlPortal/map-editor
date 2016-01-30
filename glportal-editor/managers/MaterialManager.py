@@ -6,6 +6,12 @@ from ..updateTextures import *
 
 
 materials = {}
+colors = {
+  "metal/tiles00x3" : (0.2, 0.2, 0.2),
+  "concrete/wall00" : (1, 1, 1),
+  "fluid/acid00"    : (0.2, 1, 0.2),
+  "none"            : (1, 0, 0)
+}
 
 
 def extractData(path, dir, name):
@@ -45,7 +51,7 @@ def preload():
     return True
   return False
 
-def create(name = '', color = (1, 0, 0), model = False):
+def create(name = '', color = (-1, -1, -1), model = False):
   if name == '':
     print("Material name is empty.")
     return False
@@ -72,7 +78,14 @@ def create(name = '', color = (1, 0, 0), model = False):
       mtex = mat.texture_slots[0]
     else:
       mat = bpy.data.materials.new(fancyname)
-      mat.diffuse_color = color
+
+      if color == (-1, -1, -1):
+        if name in colors:
+          mat.diffuse_color = colors[name]
+        else:
+          mat.diffuse_color = colors['none']
+      else:
+        mat.diffuse_color = color
 
       mtex = mat.texture_slots.add()
       mtex.texture = texture
@@ -95,7 +108,7 @@ def create(name = '', color = (1, 0, 0), model = False):
     print("Material '", name, "' does not exist.")
     return False
 
-def set(object, material, color = (1, 0, 0), model = False):
+def set(object, material, color = (-1, -1, -1), model = False):
   if object:
     mat = create(material, color, model)
     data = object.data
