@@ -119,3 +119,15 @@ def reset(object):
     if (len(object.data.materials) == 1):
       bpy.context.scene.objects.active = object
       bpy.ops.object.material_slot_remove()
+
+def prepareExport():
+  id = 1
+  usedMaterials = {}
+  objects = bpy.context.scene.objects
+
+  for object in objects:
+    if object.glpMaterial in materials and object.glpMaterial not in usedMaterials:
+      usedMaterials[object.glpMaterial] = id
+      id += 1
+
+  return usedMaterials
