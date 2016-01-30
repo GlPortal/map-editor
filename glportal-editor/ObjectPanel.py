@@ -22,8 +22,6 @@ class ObjectPanel(bpy.types.Panel):
     layout.prop(object, "glpTypes")
     if object.glpTypes == "trigger":
       layout.prop(object, "glpTriggerTypes")
-    elif object.glpTypes == "wall":
-      layout.prop(object, "glpWallTypes")
     elif object.glpTypes == "volume":
       layout.prop(object, "glpVolumeTypes")
 
