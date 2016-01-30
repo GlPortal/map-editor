@@ -50,8 +50,7 @@ def checkSpawnPosition(objects):
 def countObjects(objects):
   result = {
     'camera':           0,
-    'wallPortalable':   0,
-    'wallMetal':        0,
+    'wall':             0,
     'acid':             0,
     'triggerDeath':     0,
     'light':            0,
@@ -75,10 +74,7 @@ def countObjects(objects):
         if object.glpTriggerTypes == "death":
           result['triggerDeath'] += 1
       elif type == "wall":
-        if object.glpWallTypes == "portalable":
-          result['wallPortalable'] += 1
-        else:
-          result['wallMetal'] += 1
+        result['wall'] += 1
       elif type == "volume":
         if object.glpVolumeTypes == "acid":
           result['acid'] += 1
@@ -91,8 +87,7 @@ class checkMapDialog(bpy.types.Operator):
 
   camera = bpy.props.IntProperty (name="Number of cameras")
   light = bpy.props.IntProperty (name="Number of lights")
-  wallPortalable = bpy.props.IntProperty (name="Number of portalable wall")
-  wallMetal = bpy.props.IntProperty (name="Number of metal wall")
+  wall = bpy.props.IntProperty (name="Number of walls")
   exitDoor = bpy.props.IntProperty (name="Number of exit doors")
 
   def execute(self, context):
@@ -143,28 +138,21 @@ class checkMapDialog(bpy.types.Operator):
       error = True
 
       layout.prop(self, "light")
-      layout.label(text = "There are too many lights in the map.", icon='INFO')
+      layout.label(text = "There are too many lights.", icon='INFO')
       layout.label(text = "This is a performance issue and has to be fixed..", icon='INFO')
       layout.separator()
-    if result['wallPortalable'] == 0:
-      self.wallPortalable = result['wallPortalable']
+    if result['wall'] == 0:
+      self.wall = result['wall']
       error = True
 
-      layout.prop(self, "wallPortalable")
-      layout.label(text = "There isn't a portalable wall.", icon='ERROR')
-      layout.separator()
-    if result['wallMetal'] == 0:
-      self.wallMetal = result['wallMetal']
-      error = True
-
-      layout.prop(self, "wallMetal")
-      layout.label(text = "There isn't a metal wall.", icon='INFO')
+      layout.prop(self, "wall")
+      layout.label(text = "There isn't a wall.", icon='ERROR')
       layout.separator()
     if result['triggerDeath'] < result['acid']:
       error = True
 
       layout.label(text = "Acid without death trigger.", icon='ERROR')
-      layout.label(text = "Use death trigger for each volume of acid in the map.", icon='INFO')
+      layout.label(text = "Use death trigger for each volume of acid.", icon='INFO')
       layout.separator()
     if result['camera'] == 1:
       isOver = checkSpawnPosition(objects)
@@ -184,4 +172,4 @@ class checkMapDialog(bpy.types.Operator):
         layout.separator()
 
     if not error:
-      layout.label(text = "Nice work. There are no errors or warnings in the map", icon='FILE_TICK')
+      layout.label(text = "Nice work. There are no errors or warnings.", icon='FILE_TICK')
