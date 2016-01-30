@@ -3,6 +3,8 @@ import math
 import os
 import xml.etree.cElementTree as ET
 
+from .managers import MaterialManager
+
 class Importer():
   def __init__(self, filePath, deleteWorld = True):
     self.__filePath = filePath
@@ -21,18 +23,11 @@ class Importer():
     for child in root:
       if child.tag == "materials":
         for mat in child:
-          mid = mat.get['mid']
-          name = mat.get['name']
+          mid = mat.get('mid')
+          name = mat.get('name')
 
           materials[mid] = name
       return materials
-
-  def isPortalAble(self, root):
-    for child in root:
-      if child.tag == "materials":
-        for param in child:
-          if param.get("name") == "concrete/wall00":
-            return param.get("mid")
 
   def extrackPosition(self, param):
     x = float(param.get("x"))
@@ -78,19 +73,17 @@ class Importer():
     realpath = os.path.realpath(os.path.expanduser(self.__filePath))
     tree = ET.parse(realpath)
     root = tree.getroot()
-
-    portalAble = self.isPortalAble(root)
-
+    materials = self.extractMaterials(root)
 
     for child in root:
       if child.tag == "wall":
         mid = child.get("mid")
 
         if self.createCube(child):
-          if mid == portalAble:
-            bpy.ops.glp.set_portalable()
-          else:
-            bpy.ops.glp.set_wall()
+          object = bpy.context.active_object
+          object.glpTypes = 'wall'
+
+          MaterialManager.set(object, materials[mid])
       elif child.tag == "acid":
         if self.createCube(child):
           bpy.ops.glp.set_acid()
