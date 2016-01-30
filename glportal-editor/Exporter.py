@@ -114,7 +114,7 @@ class Exporter():
         if type == "model":
           boxElement = tree.SubElement(root, "object")
           boxElement.set("mid", str(materials[object.glpMaterial]))
-          boxElement.set("mesh", (ModelManager.models[object.glpModel]))
+          boxElement.set("mesh", ModelManager.models[object.glpModel])
         elif type == "trigger":
           boxElement = tree.SubElement(root, "trigger")
           if object.glpTriggerTypes:
