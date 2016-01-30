@@ -48,7 +48,7 @@ class Exporter():
     lightEnergy = lamp.energy
 
     lightElement = tree.SubElement(targetTree, "light")
-    self.storePosition(lightElement, object);
+    self.storePosition(lightElement, object)
 
     lightElement.set("r", str(round(colorArray[0], self.__d_p)))
     lightElement.set("g", str(round(colorArray[1], self.__d_p)))
@@ -124,14 +124,14 @@ class Exporter():
         # boxElement = tree.SubElement(root, "door")
         if boxElement != None:
           positionElement = tree.SubElement(boxElement, "position")
-          self.storePosition(positionElement, object);
+          self.storePosition(positionElement, object)
 
           if self.checkRotation(object):
             rotationElement = tree.SubElement(boxElement, "rotation")
-            self.storeRotation(rotationElement, object);
+            self.storeRotation(rotationElement, object)
 
           scaleElement = tree.SubElement(boxElement, "scale")
-          self.storeScale(scaleElement, object);
+          self.storeScale(scaleElement, object)
 
     xml = minidom.parseString(tree.tostring(root))
 

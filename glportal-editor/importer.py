@@ -52,7 +52,7 @@ class Importer():
         if param.tag == "position":
           object.location = self.extrackPosition(param)
         elif param.tag == "rotation":
-          object.rotation_euler = self.extrackRotation(param);
+          object.rotation_euler = self.extrackRotation(param)
         elif param.tag == "scale":
           object.dimensions = self.extrackDimensions(param)
 
