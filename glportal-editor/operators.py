@@ -43,7 +43,7 @@ class setPortalable(bpy.types.Operator):
 
           MaterialManager.set(object, "concrete/wall00", (1, 1, 1))
         else:
-            self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
+          self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
       else:
         self.report({'ERROR'}, "Object of type '%s' can't be converted to the portalable wall." % (object.type))
     return {'FINISHED'}
