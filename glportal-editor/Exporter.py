@@ -58,6 +58,8 @@ class Exporter():
     lightEnergy = lamp.energy
 
     lightElement = tree.SubElement(targetTree, "light")
+    self.storePosition(lightElement, object)
+
     lightElement.set("r", str(round(colorArray[0], self.__d_p)))
     lightElement.set("g", str(round(colorArray[1], self.__d_p)))
     lightElement.set("b", str(round(colorArray[2], self.__d_p)))
@@ -75,7 +77,6 @@ class Exporter():
     objects = context.scene.objects
     root = tree.Element("map")
 
-    self.storeMaterials(root, MaterialManager.prepareExport())
     materialElement = tree.SubElement(root, "materials")
     material1 = tree.SubElement(materialElement, "mat")
     material2 = tree.SubElement(materialElement, "mat")
