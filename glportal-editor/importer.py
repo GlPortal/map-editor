@@ -15,6 +15,18 @@ class Importer():
       ob.select = True
       bpy.ops.object.delete()
 
+  def extractMaterials(self, root):
+    materials = {}
+
+    for child in root:
+      if child.tag == "materials":
+        for mat in child:
+          mid = mat.get['mid']
+          name = mat.get['name']
+
+          materials[mid] = name
+      return materials
+
   def isPortalAble(self, root):
     for child in root:
       if child.tag == "materials":
