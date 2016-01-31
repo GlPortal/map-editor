@@ -4,6 +4,7 @@ import os
 import xml.etree.cElementTree as ET
 
 from .managers import MaterialManager
+from .managers import ModelManager
 
 class Importer():
   def __init__(self, filePath, deleteWorld = True):
@@ -128,7 +129,6 @@ class Importer():
 
         object = bpy.context.active_object
         object.location = location
-
         object.rotation_euler = rotation
       elif child.tag == "trigger":
         if self.createCube(child):
@@ -139,5 +139,20 @@ class Importer():
           else:
             object = bpy.context.active_object
             object.delete()
+      elif child.tag == "object":
+        mid = child.get("mid")
+        mesh = child.get("mesh").rstrip(".obj")
+
+        ModelManager.create(mesh, materials[mid])
+
+        object = bpy.context.selected_objects[0]
+        if object:
+          for param in child:
+            if param.tag == "position":
+              object.location = self.extrackPosition(param)
+            elif param.tag == "rotation":
+              object.rotation_euler = self.extrackRotation(param)
+            elif param.tag == "scale":
+              object.dimensions = self.extrackDimensions(param)
 
     return {'FINISHED'}
