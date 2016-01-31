@@ -143,5 +143,4 @@ class Exporter():
     fixed_output = re.sub(fix, '', xml.toprettyxml())
     file.write(fixed_output)
     file.close()
-
     return {'FINISHED'}

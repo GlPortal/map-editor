@@ -22,7 +22,6 @@ def preload():
 
         if name not in blacklist:
           models[name] = file
-
     return True
   return False
 
@@ -50,7 +49,6 @@ def create(name = '', materialName = '', color = (1, 1, 1)):
 
           MaterialManager.set(object, materialName, color, True)
       return True
-
     return False
 
   print("Model '", name, "' does not exist.")

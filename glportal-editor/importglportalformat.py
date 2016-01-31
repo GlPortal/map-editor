@@ -15,5 +15,4 @@ class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
   def execute(self, context):
     importer = Importer(self.filepath)
     importer.execute(context)
-
     return {'FINISHED'}

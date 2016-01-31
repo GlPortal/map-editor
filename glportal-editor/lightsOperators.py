@@ -16,7 +16,6 @@ class setLightCommon(bpy.types.Operator):
         lamp.use_specular = False
       else:
         self.report({'ERROR'}, "Object of type '%s' can't be converted to the common light." % (object.type))
-
     return {'FINISHED'}
 
 class addLightCommon(bpy.types.Operator):
@@ -28,7 +27,6 @@ class addLightCommon(bpy.types.Operator):
   def execute(self, context):
     bpy.ops.object.lamp_add(type="POINT")
     bpy.ops.glp.set_light_common()
-
     return {'FINISHED'}
 
 class setLightEnd(bpy.types.Operator):
@@ -49,7 +47,6 @@ class setLightEnd(bpy.types.Operator):
         lamp.use_specular = False
       else:
         self.report({'ERROR'}, "Object of type '%s' can't be converted to the end light." % (object.type))
-
     return {'FINISHED'}
 
 class addLightEnd(bpy.types.Operator):
@@ -61,5 +58,4 @@ class addLightEnd(bpy.types.Operator):
   def execute(self, context):
     bpy.ops.object.lamp_add(type="POINT")
     bpy.ops.glp.set_light_end()
-
     return {'FINISHED'}

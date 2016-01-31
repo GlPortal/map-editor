@@ -34,21 +34,18 @@ class Importer():
     x = float(param.get("x"))
     y = float(param.get("y"))
     z = float(param.get("z"))
-
     return [x, -z, y]
 
   def extrackDimensions(self, param):
     x = float(param.get("x"))
     y = float(param.get("y"))
     z = float(param.get("z"))
-
     return [x, z, y]
 
   def extrackRotation(self, param, o_x = 0, o_y = 0, o_z = 0):
     x = math.radians(float(param.get("x")) + o_x)
     y = math.radians(float(param.get("y")) + o_y)
     z = math.radians(-float(param.get("z")) + o_z)
-
     return [x, z, y]
 
   def createCube(self, child):
@@ -154,5 +151,4 @@ class Importer():
               object.rotation_euler = self.extrackRotation(param)
             elif param.tag == "scale":
               object.dimensions = self.extrackDimensions(param)
-
     return {'FINISHED'}

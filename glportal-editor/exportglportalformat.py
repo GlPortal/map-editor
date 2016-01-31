@@ -15,5 +15,4 @@ class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
   def execute(self, context):
     exporter = Exporter(self.filepath)
     exporter.execute(context)
-
     return {'FINISHED'}

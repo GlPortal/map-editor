@@ -13,7 +13,6 @@ class fixMap(bpy.types.Operator):
 
   def execute(self, context):
     fixObjects()
-
     return {'FINISHED'}
 
 class checkMap(bpy.types.Operator):
@@ -23,7 +22,6 @@ class checkMap(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
-
     return {'FINISHED'}
 
 class runGame(bpy.types.Operator):
@@ -54,5 +52,4 @@ class runGame(bpy.types.Operator):
           self.report({'ERROR'}, "GlPortal executable does not exist.")
       else:
         self.report({'ERROR'}, "GlPortal data directory does not exist.")
-
     return {'FINISHED'}

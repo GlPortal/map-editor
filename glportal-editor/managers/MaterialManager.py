@@ -4,7 +4,6 @@ import xml.etree.cElementTree as ET
 
 from ..updateTextures import *
 
-
 materials = {}
 colors = {
   "metal/tiles00x3" : (0.2, 0.2, 0.2),
@@ -12,7 +11,6 @@ colors = {
   "fluid/acid00"    : (0.2, 1, 0.2),
   "none"            : (1, 0, 0)
 }
-
 
 def extractData(path, dir, name):
   mat = {'data': {'portalable': False}}
@@ -47,7 +45,6 @@ def preload():
       for file in files:
         mat = extractData(path + '/', dir, file)
         materials[mat['name']] = mat['data']
-
     return True
   return False
 
@@ -142,5 +139,4 @@ def prepareExport():
     if object.glpMaterial in materials and object.glpMaterial not in usedMaterials:
       usedMaterials[object.glpMaterial] = id
       id += 1
-
   return usedMaterials

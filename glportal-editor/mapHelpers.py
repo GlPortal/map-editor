@@ -14,7 +14,6 @@ def fixObjects():
         bpy.context.scene.objects.active = object
         bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
 
-
 def isOverObject(position, object):
   pMin = object.location[0] - abs(object.dimensions[0]) / 2
   pMax = object.location[0] + abs(object.dimensions[0]) / 2
@@ -30,7 +29,6 @@ def isOverObject(position, object):
         return 1
       elif position[2] >= pMax:
         return 2
-
   return 0
 
 def checkSpawnPosition(objects):
@@ -38,13 +36,11 @@ def checkSpawnPosition(objects):
     if object.type == "CAMERA":
       cameraPosition = object.location
       break
-
   for object in objects:
     if object.type == "MESH" and object.glpTypes == "wall":
       isOver = isOverObject(cameraPosition, object)
       if isOver != 0:
         return isOver
-
   return 0
 
 def countObjects(objects):
@@ -78,7 +74,6 @@ def countObjects(objects):
       elif type == "volume":
         if object.glpVolumeTypes == "acid":
           result['acid'] += 1
-
   return result
 
 class checkMapDialog(bpy.types.Operator):
@@ -112,7 +107,6 @@ class checkMapDialog(bpy.types.Operator):
         layout.label(text = "There is no exit door, use it exactly once.", icon='CANCEL')
       else:
         layout.label(text = "There are too many exit doors, use it exactly once.", icon='ERROR')
-
       layout.separator()
     if result['camera'] != 1:
       self.camera = result['camera']

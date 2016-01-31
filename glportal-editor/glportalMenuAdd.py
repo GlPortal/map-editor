@@ -4,7 +4,6 @@ def glportal_add_menu(self, context):
   layout = self.layout
 
   layout.menu("glpMenu.main", icon="WORLD")
-
   layout.separator()
 
 class MenuMain(bpy.types.Menu):
