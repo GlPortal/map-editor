@@ -4,7 +4,7 @@ from bpy.props import EnumProperty, StringProperty
 glpTypes = [
   ("none" ,   "None",     "No special property"),
   ("wall" ,   "Wall",     "Wall"),
-  ("door" ,   "Door",     "Door"),# temporarily using as <end>
+  ("door" ,   "Door",     "Door"),# REMOVE this
   ("volume",  "Volume",   "Volume"),
   ("trigger", "Trigger",  "Trigger"),
   ("model",   "Model",    "Model")
