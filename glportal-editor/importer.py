@@ -117,7 +117,7 @@ class Importer():
           lamp.use_specular = False
           if "specular" in child.attrib and child.get("specular") == "1":
             lamp.use_specular = True
-      # in futore we will change this for door and separate trigger for win
+      # REMOVE this
       elif child.tag == "end":
         for param in child:
           if param.tag == "position":
