@@ -40,7 +40,7 @@ class setPortalable(bpy.types.Operator):
 
           object.glpTypes = "wall"
 
-          MaterialManager.set(object, "concrete/wall00", (1, 1, 1))
+          MaterialManager.set(object, "concrete/wall00")
         else:
           self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
       else:
@@ -63,7 +63,7 @@ class setWall(bpy.types.Operator):
 
           object.glpTypes = "wall"
 
-          MaterialManager.set(object, "metal/tiles00x3", (0.2, 0.2, 0.2))
+          MaterialManager.set(object, "metal/tiles00x3")
         else:
           self.report({'ERROR'}, "Door can't be converted to the metal wall.")
       else:
