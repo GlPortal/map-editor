@@ -2,8 +2,7 @@ import bpy
 import os
 
 from .operatorHelpers import *
-from .managers import MaterialManager
-from .managers import ModelManager
+from .managers import MaterialManager, ModelManager
 
 # we are using this for <end> (exit door)
 class addDoor(bpy.types.Operator):

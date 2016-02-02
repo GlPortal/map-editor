@@ -3,8 +3,7 @@ import math
 import os
 import xml.etree.cElementTree as ET
 
-from .managers import MaterialManager
-from .managers import ModelManager
+from .managers import MaterialManager, ModelManager
 
 class Importer():
   def __init__(self, filePath, deleteWorld = True):

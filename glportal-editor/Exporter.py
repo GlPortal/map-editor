@@ -6,8 +6,7 @@ import math
 import re
 
 from . import mapHelpers
-from .managers import MaterialManager
-from .managers import ModelManager
+from .managers import MaterialManager, ModelManager
 
 class Exporter():
   def __init__(self, filePath, d_p = 4):
