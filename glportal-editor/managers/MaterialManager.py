@@ -49,6 +49,8 @@ def preload():
   return False
 
 def create(name = '', color = (-1, -1, -1), model = False):
+  global colors, materials
+
   if name == '':
     print("Material name is empty.")
     return False
