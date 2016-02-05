@@ -1,7 +1,6 @@
 import bpy
 import os
 import xml.etree.cElementTree as ET
-from bpy.props import EnumProperty
 
 from ..updateTextures import *
 from .. import types
