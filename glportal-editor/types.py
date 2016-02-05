@@ -32,6 +32,7 @@ def glpMaterialSet():
   bpy.types.Object.glpMaterial = EnumProperty (
     items = glpMaterialTypes,
     name = "Material",
+    description = "Active material",
     default = "none"
   )
 
@@ -42,19 +43,22 @@ def glpMaterialReset():
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty (
     items = glpTypes,
-    name = "Type"
+    name = "Type",
+    default = "none"
   )
   bpy.types.Object.glpVolumeTypes = EnumProperty (
     items = glpVolumeTypes,
-    name = "Volume Type"
+    name = "Volume Type",
+    default = "none"
   )
   bpy.types.Object.glpTriggerTypes = EnumProperty (
     items = glpTriggerTypes,
-    name = "Trigger Type"
+    name = "Trigger Type",
+    default = "none"
   )
   bpy.types.Object.glpModel = StringProperty (
     name = "Model",
-    default = "none",
+    default = "none"
   )
 
 setProperties()
