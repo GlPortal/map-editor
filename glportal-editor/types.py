@@ -1,8 +1,6 @@
 import bpy
 from bpy.props import EnumProperty, StringProperty
 
-from .managers import MaterialManager
-
 glpTypes = [
   ("none",    "None",    "No special property"),
   ("wall",    "Wall",    "Wall"),
