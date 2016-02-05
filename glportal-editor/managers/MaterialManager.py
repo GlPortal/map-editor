@@ -1,8 +1,10 @@
 import bpy
 import os
 import xml.etree.cElementTree as ET
+from bpy.props import EnumProperty
 
 from ..updateTextures import *
+from .. import types
 
 materials = {}
 colors = {
@@ -45,6 +47,9 @@ def preload():
       for file in files:
         mat = extractData(path + '/', dir, file)
         materials[mat['name']] = mat['data']
+        types.glpMaterialTypes.append((mat['name'], mat['data']['fancyname'], mat['data']['fancyname']))
+    types.glpMaterialSet()
+
     return True
   return False
 

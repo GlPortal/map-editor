@@ -1,6 +1,8 @@
 import bpy
 from bpy.props import EnumProperty, StringProperty
 
+from .managers import MaterialManager
+
 glpTypes = [
   ("none",    "None",    "No special property"),
   ("wall",    "Wall",    "Wall"),
@@ -22,6 +24,21 @@ glpTriggerTypes = [
   ("radiation", "Radiation", "Area triggers radiation")
 ]
 
+glpMaterialTypes = [
+  ("none", "None", "No special property")
+]
+
+def glpMaterialSet():
+  bpy.types.Object.glpMaterial = EnumProperty (
+    items = glpMaterialTypes,
+    name = "Material",
+    default = "none"
+  )
+
+def glpMaterialReset():
+  del glpMaterialTypes[:]
+  glpMaterialTypes.append(("none", "None", "No special property"))
+
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty (
     items = glpTypes,
@@ -35,13 +52,10 @@ def setProperties():
     items = glpTriggerTypes,
     name = "Trigger Type"
   )
-  bpy.types.Object.glpMaterial = StringProperty (
-    name = "Material",
-    default = "none",
-  )
   bpy.types.Object.glpModel = StringProperty (
     name = "Model",
     default = "none",
   )
 
 setProperties()
+glpMaterialSet()

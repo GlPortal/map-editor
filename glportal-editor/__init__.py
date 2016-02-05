@@ -82,6 +82,7 @@ def unregister():
   bpy.types.INFO_MT_add.remove(glportalMenuAdd.glportal_add_menu)
   bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
 
+  types.glpMaterialReset()
   MaterialManager.materials.clear()
   ModelManager.models.clear()
 
