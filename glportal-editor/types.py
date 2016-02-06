@@ -9,19 +9,16 @@ glpTypes = [
   ("trigger", "Trigger", "Trigger"),
   ("model",   "Model",   "Model")
 ]
-
 glpVolumeTypes = [
   ("none", "None",      "No special property"),
   ("acid", "Acid Pool", "A pool full of acid, hurts..")
 ]
-
 glpTriggerTypes = [
   ("none",      "None",      "No special property"),
   ("win",       "Win",       "Area triggers win"),
   ("death",     "Death",     "Area triggers death"),
   ("radiation", "Radiation", "Area triggers radiation")
 ]
-
 glpMaterialTypes = [
   ("none", "None", "No special property")
 ]
