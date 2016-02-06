@@ -20,7 +20,7 @@ glpTriggerTypes = [
   ("radiation", "Radiation", "Area triggers radiation")
 ]
 glpMaterialTypes = [
-  ("none", "None", "No special property")
+  ("none", "None", "No material")
 ]
 
 def glpMaterialSet():
@@ -33,7 +33,7 @@ def glpMaterialSet():
 
 def glpMaterialReset():
   del glpMaterialTypes[:]
-  glpMaterialTypes.append(("none", "None", "No special property"))
+  glpMaterialTypes.append(("none", "None", "No material"))
 
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty (
