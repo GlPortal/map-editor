@@ -2,7 +2,7 @@ import bpy
 from bpy.props import StringProperty
 from bpy_extras.io_utils import ExportHelper
 
-from .Exporter import *
+from .Exporter import Exporter
 
 class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
   bl_idname = "glp.export"

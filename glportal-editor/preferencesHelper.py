@@ -1,6 +1,6 @@
 import bpy
 
-from .updateTextures import *
+from .updateTextures import updateTexture
 
 def updateTriggerXrays(self, context):
   prefs = context.user_preferences.addons[__package__].preferences

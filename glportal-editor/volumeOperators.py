@@ -1,18 +1,18 @@
 import bpy
 
-from .operatorHelpers import *
+from .operatorHelpers import resetTriggerSettings
 from .managers import MaterialManager
 
 class setAcid(bpy.types.Operator):
   bl_idname = "glp.set_acid"
   bl_label = "Acid"
   bl_description = "Mark the selection as a volume of acid."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     object = bpy.context.active_object
     if object:
-      if object.type == "MESH":
+      if object.type == 'MESH':
         if object.glpTypes != "door":
           resetTriggerSettings(object)
 
@@ -29,7 +29,7 @@ class addAcid(bpy.types.Operator):
   bl_idname = "glp.add_acid"
   bl_label = "Acid"
   bl_description = "Add a volume of acid."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()

@@ -5,7 +5,7 @@ import xml.dom.minidom as minidom
 import math
 import re
 
-from . import mapHelpers
+from .mapHelpers import fixObjects
 from .managers import MaterialManager, ModelManager
 
 class Exporter():
@@ -71,7 +71,7 @@ class Exporter():
       lightElement.set("specular", "1")
 
   def execute(self, context):
-    mapHelpers.fixObjects()
+    fixObjects()
 
     materials = MaterialManager.prepareExport()
     dir = os.path.dirname(self.__filePath)
@@ -86,9 +86,9 @@ class Exporter():
       else:
         type = "None"
 
-      if object.type == "LAMP":
+      if object.type == 'LAMP':
         self.writeLampToTree(object, root)
-      elif object.type == "CAMERA":
+      elif object.type == 'CAMERA':
         boxElement = tree.SubElement(root, "spawn")
 
         positionElement = tree.SubElement(boxElement, "position")
@@ -98,7 +98,7 @@ class Exporter():
         rotationElement.set("x", self.prepareRot(math.degrees(object.rotation_euler[0]) - 90))
         rotationElement.set("y", self.prepareRot(math.degrees(object.rotation_euler[2])))
         rotationElement.set("z", "0")
-      elif object.type == "MESH" and type == "door":
+      elif object.type == 'MESH' and type == "door":
         # tempotary add <end> instead of <door>
         boxElement = tree.SubElement(root, "end")
 
@@ -107,7 +107,7 @@ class Exporter():
 
         rotationElement = tree.SubElement(boxElement, "rotation")
         self.storeRotation(rotationElement, object)
-      elif object.type == "MESH":
+      elif object.type == 'MESH':
         boxElement = None
 
         if type == "model":
@@ -138,8 +138,8 @@ class Exporter():
     xml = minidom.parseString(tree.tostring(root))
 
     file = open(self.__filePath, "w")
-    fix = re.compile(r'((?<=>)(\n[\t]*)(?=[^<\t]))|(?<=[^>\t])(\n[\t]*)(?=<)')
-    fixed_output = re.sub(fix, '', xml.toprettyxml())
+    fix = re.compile(r"((?<=>)(\n[\t]*)(?=[^<\t]))|(?<=[^>\t])(\n[\t]*)(?=<)")
+    fixed_output = re.sub(fix, "", xml.toprettyxml())
     file.write(fixed_output)
     file.close()
     return {'FINISHED'}

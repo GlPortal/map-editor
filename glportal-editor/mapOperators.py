@@ -2,14 +2,14 @@ import bpy
 import os
 from subprocess import call
 
-from .mapHelpers import *
-from .Exporter import *
+from .mapHelpers import countObjects, fixObjects
+from .Exporter import Exporter
 
 class fixMap(bpy.types.Operator):
   bl_idname = "glp.fix_map"
   bl_label = "Fix map"
   bl_description = "Fix the map before exporting."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     fixObjects()
@@ -33,8 +33,8 @@ class runGame(bpy.types.Operator):
     objects = context.scene.objects
     result = countObjects(objects)
 
-    if (result['exitDoor'] == 0 or result['camera'] == 0 or result['light'] == 0 or
-        result['wall'] == 0):
+    if (result["exitDoor"] == 0 or result["camera"] == 0 or result["light"] == 0 or
+        result["wall"] == 0):
       bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
     else:
       prefs = bpy.context.user_preferences.addons[__package__].preferences

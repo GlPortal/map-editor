@@ -33,11 +33,11 @@ def isOverObject(position, object):
 
 def checkSpawnPosition(objects):
   for object in objects:
-    if object.type == "CAMERA":
+    if object.type == 'CAMERA':
       cameraPosition = object.location
       break
   for object in objects:
-    if object.type == "MESH" and object.glpTypes == "wall":
+    if object.type == 'MESH' and object.glpTypes == "wall":
       isOver = isOverObject(cameraPosition, object)
       if isOver != 0:
         return isOver
@@ -45,12 +45,12 @@ def checkSpawnPosition(objects):
 
 def countObjects(objects):
   result = {
-    'camera':           0,
-    'wall':             0,
-    'acid':             0,
-    'triggerDeath':     0,
-    'light':            0,
-    'exitDoor':         0
+    "camera":       0,
+    "wall":         0,
+    "acid":         0,
+    "triggerDeath": 0,
+    "light":        0,
+    "exitDoor":     0
   }
 
   for object in objects:
@@ -59,21 +59,21 @@ def countObjects(objects):
     else:
       type = "None"
 
-    if object.type == "LAMP":
-      result['light'] += 1
-    elif object.type == "CAMERA":
-      result['camera'] += 1
-    elif object.type == "MESH":
+    if object.type == 'LAMP':
+      result["light"] += 1
+    elif object.type == 'CAMERA':
+      result["camera"] += 1
+    elif object.type == 'MESH':
       if type == "door":
-        result['exitDoor'] += 1
+        result["exitDoor"] += 1
       elif type == "trigger":
         if object.glpTriggerTypes == "death":
-          result['triggerDeath'] += 1
+          result["triggerDeath"] += 1
       elif type == "wall":
-        result['wall'] += 1
+        result["wall"] += 1
       elif type == "volume":
         if object.glpVolumeTypes == "acid":
-          result['acid'] += 1
+          result["acid"] += 1
   return result
 
 class checkMapDialog(bpy.types.Operator):
@@ -97,24 +97,24 @@ class checkMapDialog(bpy.types.Operator):
     layout = self.layout
     error = False
 
-    if result['exitDoor'] != 1:
-      self.exitDoor = result['exitDoor']
+    if result["exitDoor"] != 1:
+      self.exitDoor = result["exitDoor"]
       error = True
 
       layout.prop(self, "exitDoor")
 
-      if result['exitDoor'] == 0:
+      if result["exitDoor"] == 0:
         layout.label(text = "There is no exit door, use it exactly once.", icon='CANCEL')
       else:
         layout.label(text = "There are too many exit doors, use it exactly once.", icon='ERROR')
       layout.separator()
-    if result['camera'] != 1:
-      self.camera = result['camera']
+    if result["camera"] != 1:
+      self.camera = result["camera"]
       error = True
 
       layout.prop(self, "camera")
 
-      if result['camera'] == 0:
+      if result["camera"] == 0:
         layout.label(text = "There is no camera.", icon='CANCEL')
       else:
         layout.label(text = "There are too many cameras.", icon='ERROR')
@@ -122,21 +122,21 @@ class checkMapDialog(bpy.types.Operator):
       layout.label(text = "The camera object is used for determining the spawn position.",icon='INFO')
       layout.label(text = "Use it exactly once.",icon='INFO')
       layout.separator()
-    if result['light'] == 0:
+    if result["light"] == 0:
       error = True
 
       layout.label(text = "There is no light in the map you need at least one light.", icon='CANCEL')
       layout.separator()
-    elif result['light'] > 5:
-      self.light = result['light']
+    elif result["light"] > 5:
+      self.light = result["light"]
       error = True
 
       layout.prop(self, "light")
       layout.label(text = "There are too many lights.", icon='INFO')
       layout.label(text = "This is a performance issue and has to be fixed..", icon='INFO')
       layout.separator()
-    if result['wall'] == 0:
-      self.wall = result['wall']
+    if result["wall"] == 0:
+      self.wall = result["wall"]
       error = True
 
       layout.prop(self, "wall")
@@ -148,7 +148,7 @@ class checkMapDialog(bpy.types.Operator):
       layout.label(text = "Acid without death trigger.", icon='ERROR')
       layout.label(text = "Use death trigger for each volume of acid.", icon='INFO')
       layout.separator()
-    if result['camera'] == 1:
+    if result["camera"] == 1:
       isOver = checkSpawnPosition(objects)
 
       if isOver == 0:

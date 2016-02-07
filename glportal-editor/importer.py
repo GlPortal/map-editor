@@ -23,8 +23,8 @@ class Importer():
     for child in root:
       if child.tag == "materials":
         for mat in child:
-          mid = mat.get('mid')
-          name = mat.get('name')
+          mid = mat.get("mid")
+          name = mat.get("name")
 
           materials[mid] = name
       return materials
@@ -78,7 +78,7 @@ class Importer():
 
         if self.createCube(child):
           object = bpy.context.active_object
-          object.glpTypes = 'wall'
+          object.glpTypes = "wall"
 
           MaterialManager.set(object, materials[mid])
       elif child.tag == "acid":
@@ -98,7 +98,7 @@ class Importer():
                           math.radians(float(param.get("y")))]
               object.rotation_euler = rotation
       elif child.tag == "light":
-        bpy.ops.object.lamp_add(type="POINT")
+        bpy.ops.object.lamp_add(type='POINT')
 
         object = bpy.context.active_object
         if object:

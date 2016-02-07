@@ -3,7 +3,7 @@ import os
 from bpy.types import AddonPreferences
 from bpy.props import BoolProperty, StringProperty
 
-from .preferencesHelper import *
+from .preferencesHelper import updateTriggerXrays, updateSmartTexturesMapping
 
 class preferences(AddonPreferences):
   bl_idname = __package__

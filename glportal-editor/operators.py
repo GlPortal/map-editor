@@ -1,7 +1,7 @@
 import bpy
 import os
 
-from .operatorHelpers import *
+from .operatorHelpers import resetTriggerSettings
 from .managers import MaterialManager, ModelManager
 
 # we are using this for <end> (exit door)
@@ -10,7 +10,7 @@ class addDoor(bpy.types.Operator):
   bl_label = "Add a door"
   #bl_description = "Add a door." # for the future
   bl_description = "Add an exit door (use only once)"
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     prefs = context.user_preferences.addons[__package__].preferences
@@ -27,12 +27,12 @@ class setPortalable(bpy.types.Operator):
   bl_idname = "glp.set_portalable"
   bl_label = "Portalable"
   bl_description = "Mark the selection as portalable wall."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     object = bpy.context.active_object
     if object:
-      if object.type == "MESH":
+      if object.type == 'MESH':
         if object.glpTypes != "door":
           resetTriggerSettings(object)
 
@@ -48,12 +48,12 @@ class setWall(bpy.types.Operator):
   bl_idname = "glp.set_wall"
   bl_label = "Metal tiles"
   bl_description = "Mark the selection as metal wall."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     object = bpy.context.active_object
     if object:
-      if object.type == "MESH":
+      if object.type == 'MESH':
         if object.glpTypes != "door":
           resetTriggerSettings(object)
 
@@ -69,7 +69,7 @@ class addWall(bpy.types.Operator):
   bl_idname = "glp.add_wall"
   bl_label = "Metal tiles"
   bl_description = "Add a metal wall."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
@@ -80,7 +80,7 @@ class addPortalable(bpy.types.Operator):
   bl_idname = "glp.add_portalable"
   bl_label = "Portalable"
   bl_description = "Add a portalable wall."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()

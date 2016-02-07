@@ -1,17 +1,17 @@
 import bpy
 
-from .operatorHelpers import *
+from .operatorHelpers import setTrigger
 
 class setWin(bpy.types.Operator):
   bl_idname = "glp.set_win"
   bl_label = "Win"
   bl_description = "Mark the selection as win trigger."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     object = bpy.context.active_object
     if object:
-      if object.type == "MESH":
+      if object.type == 'MESH':
         if object.glpTypes != "door":
           setTrigger(object, "win")
         else:
@@ -24,7 +24,7 @@ class addWin(bpy.types.Operator):
   bl_idname = "glp.add_win"
   bl_label = "Win"
   bl_description = "Add a win trigger."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
@@ -35,12 +35,12 @@ class setDeath(bpy.types.Operator):
   bl_idname = "glp.set_death"
   bl_label = "Death"
   bl_description = "Mark the selection as death trigger."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     object = bpy.context.active_object
     if object:
-      if object.type == "MESH":
+      if object.type == 'MESH':
         if object.glpTypes != "door":
           setTrigger(object, "death")
         else:
@@ -53,7 +53,7 @@ class addDeath(bpy.types.Operator):
   bl_idname = "glp.add_death"
   bl_label = "Death"
   bl_description = "Add a death trigger."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
@@ -64,12 +64,12 @@ class setRadiation(bpy.types.Operator):
   bl_idname = "glp.set_radiation"
   bl_label = "Radiation"
   bl_description = "Mark the selection as radiation trigger."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     object = bpy.context.active_object
     if object:
-      if object.type == "MESH":
+      if object.type == 'MESH':
         if object.glpTypes != "door":
           setTrigger(object, "radiation")
         else:
@@ -82,7 +82,7 @@ class addRadiation(bpy.types.Operator):
   bl_idname = "glp.add_radiation"
   bl_label = "Radiation"
   bl_description = "Add a radiation trigger."
-  bl_options = {"UNDO"}
+  bl_options = {'UNDO'}
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
