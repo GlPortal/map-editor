@@ -155,15 +155,14 @@ class checkMapDialog(bpy.types.Operator):
         error = True
 
         layout.label(text = "Camera is in the air.", icon='CANCEL')
-        layout.label(text = "Remember, we are using camera as spawn position.", icon='INFO')
-        layout.separator()
       elif isOver == 2:
         error = True
 
         layout.label(text = "Camera is very close to the floor.", icon='ERROR')
         layout.label(text = "Player can get stuck in the floor or unable to go through portal.", icon='INFO')
-        layout.label(text = "Remember, we are using camera as spawn position.", icon='INFO')
-        layout.separator()
+
+      layout.label(text = "Remember, we are using camera as spawn position.", icon='INFO')
+      layout.separator()
 
     if not error:
       layout.label(text = "Nice work. There are no errors or warnings.", icon='FILE_TICK')
