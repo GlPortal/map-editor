@@ -86,5 +86,5 @@ class addRadiation(bpy.types.Operator):
 
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
-    bpy.ops.glp.add_radiation()
+    bpy.ops.glp.set_radiation()
     return {'FINISHED'}
