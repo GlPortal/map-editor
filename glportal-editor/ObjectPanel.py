@@ -17,7 +17,6 @@ class ObjectPanel(bpy.types.Panel):
   def draw(self, context):
     object = context.active_object
     layout = self.layout
-    row = layout.row()
 
     layout.prop(object, "glpTypes")
     if object.glpTypes == "trigger":
