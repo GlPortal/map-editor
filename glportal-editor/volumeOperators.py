@@ -18,7 +18,7 @@ class setAcid(bpy.types.Operator):
 
           object.glpTypes = "volume"
           object.glpVolumeTypes = "acid"
-          MaterialManager.set(object, "fluid/acid00")
+          object.glpMaterial = "fluid/acid00"
         else:
           self.report({'ERROR'}, "Door can't be converted to the volume of acid.")
       else:

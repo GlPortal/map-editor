@@ -43,11 +43,12 @@ def create(name = "", materialName = "", color = (1, 1, 1)):
           object.location = bpy.context.scene.cursor_location
           object.glpTypes = "model"
           object.glpModel = name
+          object.glpMaterial = materialName
 
           bpy.context.scene.objects.active = object
           bpy.ops.object.transform_apply(rotation=True)
 
-          MaterialManager.set(object, materialName, color, True)
+          MaterialManager.set(object, color, True)
       return True
     return False
 

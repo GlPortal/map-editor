@@ -37,7 +37,7 @@ class setPortalable(bpy.types.Operator):
           resetTriggerSettings(object)
 
           object.glpTypes = "wall"
-          MaterialManager.set(object, "concrete/wall00")
+          object.glpMaterial = "concrete/wall00"
         else:
           self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
       else:
@@ -58,7 +58,7 @@ class setWall(bpy.types.Operator):
           resetTriggerSettings(object)
 
           object.glpTypes = "wall"
-          MaterialManager.set(object, "metal/tiles00x3")
+          object.glpMaterial = "metal/tiles00x3"
         else:
           self.report({'ERROR'}, "Door can't be converted to the metal wall.")
       else:

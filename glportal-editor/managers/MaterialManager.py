@@ -37,6 +37,8 @@ def preload():
   prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
   path = prefs.dataDir + "textures"
 
+  materials["none"] = {"portalable": False, "kind": "None", "fancyname": "None"}
+
   if os.path.isdir(os.path.expanduser(prefs.dataDir)) == True:
     dirs = [ name for name in os.listdir(os.path.expanduser(path)) if os.path.isdir(os.path.join(os.path.expanduser(path), name)) ]
 
@@ -58,8 +60,25 @@ def create(name = "", color = (-1, -1, -1), model = False):
   if name == "":
     print("Material name is empty.")
     return False
+  elif name == "none":
+    material = materials[name]
+    fancyname = material["fancyname"]
 
-  if name in materials:
+    if fancyname in bpy.data.materials:
+      mat = bpy.data.materials[fancyname]
+    else:
+      mat = bpy.data.materials.new(fancyname)
+
+      if color == (-1, -1, -1):
+        if name in colors:
+          mat.diffuse_color = colors[name]
+        else:
+          mat.diffuse_color = colors["none"]
+      else:
+        mat.diffuse_color = color
+
+    return mat
+  elif name in materials:
     prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
     material = materials[name]
     fancyname = material["fancyname"]
@@ -111,17 +130,15 @@ def create(name = "", color = (-1, -1, -1), model = False):
     print("Material '", name, "' does not exist.")
     return False
 
-def set(object, material, color = (-1, -1, -1), model = False):
+def set(object, color = (-1, -1, -1), model = False):
   if object:
-    mat = create(material, color, model)
+    mat = create(object.glpMaterial, color, model)
     data = object.data
 
     if (len(data.materials) == 0):
       data.materials.append(mat)
     else:
       data.materials[0] = mat
-
-    object.glpMaterial = material
 
     if (object.glpTypes == "wall" or object.glpTypes == "volume"):
       updateTexture(object)

@@ -1,6 +1,8 @@
 import bpy
 from bpy.props import EnumProperty, StringProperty
 
+from .managers import MaterialManager
+
 glpTypes = [
   ("none",    "None",    "No special property"),
   ("wall",    "Wall",    "Wall"),
@@ -28,12 +30,17 @@ def glpMaterialSet():
     items = glpMaterialTypes,
     name = "Material",
     description = "Active material",
-    default = "none"
+    default = "none",
+    update = glpMaterialUpdate
   )
 
 def glpMaterialReset():
   del glpMaterialTypes[:]
   glpMaterialTypes.append(("none", "None", "No material"))
+
+def glpMaterialUpdate(self, context):
+  if context.active_object.glpTypes and context.active_object.glpTypes != "none":
+    MaterialManager.set(context.active_object)
 
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty (
