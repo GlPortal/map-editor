@@ -10,6 +10,7 @@ colors = {
   "metal/tiles00x3" : (0.2, 0.2, 0.2),
   "concrete/wall00" : (1, 1, 1),
   "fluid/acid00"    : (0.2, 1, 0.2),
+  "boxes/dev00"     : (0.8, 0.31, 0),
   "none"            : (1, 0, 0)
 }
 
