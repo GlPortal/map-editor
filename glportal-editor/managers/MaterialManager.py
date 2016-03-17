@@ -11,6 +11,7 @@ colors = {
   "concrete/wall00" : (1, 1, 1),
   "fluid/acid00"    : (0.2, 1, 0.2),
   "boxes/dev00"     : (0.8, 0.31, 0),
+  "door/door"       : (1, 1, 1),
   "none"            : (1, 0, 0)
 }
 
@@ -55,7 +56,7 @@ def preload():
     return True
   return False
 
-def create(name = "", color = (-1, -1, -1), model = False):
+def create(name = "", model = False):
   global colors, materials
 
   if name == "":
@@ -70,13 +71,10 @@ def create(name = "", color = (-1, -1, -1), model = False):
     else:
       mat = bpy.data.materials.new(fancyname)
 
-      if color == (-1, -1, -1):
-        if name in colors:
-          mat.diffuse_color = colors[name]
-        else:
-          mat.diffuse_color = colors["none"]
+      if name in colors:
+        mat.diffuse_color = colors[name]
       else:
-        mat.diffuse_color = color
+        mat.diffuse_color = colors["none"]
 
     return mat
   elif name in materials:
@@ -102,13 +100,10 @@ def create(name = "", color = (-1, -1, -1), model = False):
     else:
       mat = bpy.data.materials.new(fancyname)
 
-      if color == (-1, -1, -1):
-        if name in colors:
-          mat.diffuse_color = colors[name]
-        else:
-          mat.diffuse_color = colors["none"]
+      if name in colors:
+        mat.diffuse_color = colors[name]
       else:
-        mat.diffuse_color = color
+        mat.diffuse_color = colors["none"]
 
       mtex = mat.texture_slots.add()
       mtex.texture = texture
@@ -131,9 +126,9 @@ def create(name = "", color = (-1, -1, -1), model = False):
     print("Material '", name, "' does not exist.")
     return False
 
-def set(object, color = (-1, -1, -1), model = False):
+def set(object, model = False):
   if object:
-    mat = create(object.glpMaterial, color, model)
+    mat = create(object.glpMaterial, model)
     data = object.data
 
     if (len(data.materials) == 0):

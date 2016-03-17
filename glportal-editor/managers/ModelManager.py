@@ -25,7 +25,7 @@ def preload():
     return True
   return False
 
-def create(name = "", materialName = "", color = (1, 1, 1)):
+def create(name = "", materialName = ""):
   if name == "":
     print("Model name is empty.")
     return False
@@ -48,7 +48,6 @@ def create(name = "", materialName = "", color = (1, 1, 1)):
 
         if materialName != "":
           object.glpMaterial = materialName
-          MaterialManager.set(object, color, True)
       return True
     return False
 
