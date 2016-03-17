@@ -24,25 +24,24 @@ class ObjectPanel(bpy.types.Panel):
     elif object.glpTypes == "volume":
       layout.prop(object, "glpVolumeTypes")
 
-    if object.glpMaterial != "none":
-      mat = MaterialManager.materials[object.glpMaterial]
 
+    if object.glpMaterial:
       layout.label(text="Material properties", icon='MATERIAL')
 
-      row = layout.row(align=True)
-      row.alignment = 'EXPAND'
-      row.label(text="Name : ")
-      row.label(text=mat['fancyname'])
+      layout.prop(object, "glpMaterial", text="Name ")
 
-      row = layout.row(align=True)
-      row.alignment = 'EXPAND'
-      row.label(text="Portalable : ")
-      if mat['portalable']:
-        row.label(text='Yes')
-      else:
-        row.label(text='No')
+      if object.glpMaterial != "none":
+        mat = MaterialManager.materials[object.glpMaterial]
 
-      row = layout.row(align=True)
-      row.alignment = 'EXPAND'
-      row.label(text="Kind : ")
-      row.label(text=mat['kind'])
+        row = layout.row(align=True)
+        row.alignment = 'EXPAND'
+        row.label(text="Portalable : ")
+        if mat['portalable']:
+          row.label(text='Yes')
+        else:
+          row.label(text='No')
+
+        row = layout.row(align=True)
+        row.alignment = 'EXPAND'
+        row.label(text="Kind : ")
+        row.label(text=mat['kind'])
