@@ -37,17 +37,17 @@ def create(name = "", materialName = "", color = (1, 1, 1)):
     if os.path.isfile(path):
       bpy.ops.import_scene.obj(filepath = path)
 
-      if materialName != "":
-        object = bpy.context.selected_objects[0]
-        if object:
-          object.location = bpy.context.scene.cursor_location
-          object.glpTypes = "model"
-          object.glpModel = name
+      object = bpy.context.selected_objects[0]
+      if object:
+        object.location = bpy.context.scene.cursor_location
+        object.glpTypes = "model"
+        object.glpModel = name
+
+        bpy.context.scene.objects.active = object
+        bpy.ops.object.transform_apply(rotation=True)
+
+        if materialName != "":
           object.glpMaterial = materialName
-
-          bpy.context.scene.objects.active = object
-          bpy.ops.object.transform_apply(rotation=True)
-
           MaterialManager.set(object, color, True)
       return True
     return False
