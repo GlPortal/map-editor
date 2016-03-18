@@ -9,6 +9,9 @@ class SidePanel(bpy.types.Panel):
   def draw(self, context):
     layout = self.layout
 
+    layout.label("Objects:")
+    layout.operator("glp.search_material", icon='MATERIAL')
+
     layout.label("Wall:")
     layout.operator("glp.set_portalable", icon='MESH_PLANE')
     layout.operator("glp.set_wall", icon='META_PLANE')

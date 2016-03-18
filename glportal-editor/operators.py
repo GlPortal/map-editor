@@ -1,7 +1,7 @@
 import bpy
 import os
 
-from .operatorHelpers import resetTriggerSettings
+from .operatorHelpers import resetTriggerSettings, itemsMaterial
 from .managers import MaterialManager, ModelManager
 
 # we are using this for <end> (exit door)
@@ -85,4 +85,22 @@ class addPortalable(bpy.types.Operator):
   def execute(self, context):
     bpy.ops.mesh.primitive_cube_add()
     bpy.ops.glp.set_portalable()
+    return {'FINISHED'}
+
+class searchMaterial(bpy.types.Operator):
+  bl_idname = "glp.search_material"
+  bl_label = "Set material"
+  bl_property = "materials"
+
+  materials = bpy.props.EnumProperty(items=itemsMaterial)
+
+  def execute(self, context):
+    object = bpy.context.active_object
+    if object and object.type == 'MESH' and object.glpTypes:
+      object.glpMaterial = self.materials
+    return {'FINISHED'}
+
+  def invoke(self, context, event):
+    wm = context.window_manager
+    wm.invoke_search_popup(self)
     return {'FINISHED'}

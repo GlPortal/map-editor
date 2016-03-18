@@ -3,6 +3,7 @@ import os
 import bmesh
 
 from .managers import MaterialManager
+from . import types
 
 def resetTriggerSettings(object):
   if object.glpTypes and object.glpTypes == "trigger":
@@ -28,3 +29,6 @@ def clearGlpProperties(object):
   object.glpTypes = "none"
   object.glpVolumeTypes = "none"
   object.glpTriggerTypes = "none"
+
+def itemsMaterial(self, context):
+  return [(name, fancyName, tooltip) for name, fancyName, tooltip in types.glpMaterialTypes]
