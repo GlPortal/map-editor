@@ -2,7 +2,7 @@ import bpy
 import os
 
 from .operatorHelpers import resetTriggerSettings, itemsMaterial
-from .managers import MaterialManager, ModelManager
+from .managers import ModelManager
 
 # we are using this for <end> (exit door)
 class addDoor(bpy.types.Operator):

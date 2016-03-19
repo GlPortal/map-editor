@@ -1,8 +1,6 @@
 import bpy
 import os
 
-from . import MaterialManager
-
 models = {}
 blacklist = [
   "GUIElement.obj",

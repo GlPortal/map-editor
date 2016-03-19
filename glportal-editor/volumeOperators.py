@@ -1,7 +1,6 @@
 import bpy
 
 from .operatorHelpers import resetTriggerSettings
-from .managers import MaterialManager
 
 class setAcid(bpy.types.Operator):
   bl_idname = "glp.set_acid"
