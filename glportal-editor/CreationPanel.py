@@ -9,8 +9,10 @@ class CreationPanel(bpy.types.Panel):
 
   def draw(self, context):
     layout = self.layout
-    layout.label("Object:")
+    layout.label("Objects:")
     layout.operator("glp.add_door", text="Exit", icon='MESH_CUBE')
+    layout.operator("glp.search_model", icon='MESH_CUBE')
+    layout.operator("glp.search_material", icon='MATERIAL')
 
     layout.label("Wall:")
     layout.operator("glp.add_portalable", icon='MESH_PLANE')
