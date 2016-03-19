@@ -2,7 +2,7 @@ import bpy
 import os
 import bmesh
 
-from .managers import MaterialManager
+from .managers import MaterialManager, ModelManager
 from . import types
 
 def resetTriggerSettings(object):
@@ -32,3 +32,6 @@ def clearGlpProperties(object):
 
 def itemsMaterial(self, context):
   return [(name, fancyName, tooltip) for name, fancyName, tooltip in types.glpMaterialTypes]
+
+def itemsModel(self, centext):
+  return [(file, fancyName, fancyName) for file, fancyName in ModelManager.models.items()]

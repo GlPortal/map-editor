@@ -1,7 +1,7 @@
 import bpy
 import os
 
-from .operatorHelpers import resetTriggerSettings, itemsMaterial
+from .operatorHelpers import resetTriggerSettings, itemsMaterial, itemsModel
 from .managers import ModelManager
 
 # we are using this for <end> (exit door)
@@ -98,6 +98,23 @@ class searchMaterial(bpy.types.Operator):
     object = bpy.context.active_object
     if object and object.type == 'MESH' and object.glpTypes:
       object.glpMaterial = self.materials
+    return {'FINISHED'}
+
+  def invoke(self, context, event):
+    wm = context.window_manager
+    wm.invoke_search_popup(self)
+    return {'FINISHED'}
+
+class searchModel(bpy.types.Operator):
+  bl_idname = "glp.search_model"
+  bl_label = "Add model"
+  bl_property = "models"
+
+  models = bpy.props.EnumProperty(items=itemsModel)
+
+  def execute(self, context):
+    if self.models != "none":
+      ModelManager.create(self.models)
     return {'FINISHED'}
 
   def invoke(self, context, event):
