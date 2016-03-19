@@ -14,6 +14,9 @@ colors = {
   "door/door"       : (1, 1, 1),
   "none"            : (1, 0, 0)
 }
+blacklist = [
+  "none"
+]
 
 def extractData(path, dir, name):
   mat = {"data": {"portalable": False}}
@@ -156,6 +159,7 @@ def prepareExport():
 
   for object in objects:
     if object.glpMaterial in materials and object.glpMaterial not in usedMaterials:
-      usedMaterials[object.glpMaterial] = id
-      id += 1
+      if object.glpMaterial not in blacklist:
+        usedMaterials[object.glpMaterial] = id
+        id += 1
   return usedMaterials

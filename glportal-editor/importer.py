@@ -3,7 +3,7 @@ import math
 import os
 import xml.etree.cElementTree as ET
 
-from .managers import MaterialManager, ModelManager
+from .managers import ModelManager
 
 class Importer():
   def __init__(self, filePath, deleteWorld = True):
@@ -79,8 +79,7 @@ class Importer():
         if self.createCube(child):
           object = bpy.context.active_object
           object.glpTypes = "wall"
-
-          MaterialManager.set(object, materials[mid])
+          object.glpMaterial = materials[mid]
       elif child.tag == "acid":
         if self.createCube(child):
           bpy.ops.glp.set_acid()
