@@ -29,11 +29,3 @@ class CreationPanel(bpy.types.Panel):
     layout.label("Light:")
     layout.operator("glp.add_light_common", icon='LAMP_POINT')
     layout.operator("glp.add_light_end", icon='LAMP_POINT')
-
-#    layout.label("Models:")
-#    row = layout.row()
-#    split = layout.split()
-#    col = split.column(align=True)
-#    col.operator("wm.add_door", text="Door", icon='MESH_CUBE')
-#    col.operator("wm.add_lamp", text="Lamp", icon='MESH_CUBE')
-#    col.operator("wm.add_button", text="Button", icon='MESH_CUBE')
