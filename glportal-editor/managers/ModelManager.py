@@ -5,10 +5,10 @@ from . import MaterialManager
 
 models = {}
 blacklist = [
-  "GUIElement",
-  "Plane",
-  "Portal",
-  "PortalStencil"
+  "GUIElement.obj",
+  "Plane.obj",
+  "Portal.obj",
+  "PortalStencil.obj"
 ]
 
 def preload():
@@ -18,21 +18,19 @@ def preload():
   if os.path.isdir(os.path.expanduser(prefs.dataDir)) == True:
     for file in os.listdir(os.path.expanduser(path)):
       if os.path.isfile(os.path.join(os.path.expanduser(path), file)) and file.endswith(".obj"):
-        name = file.rstrip(".obj")
-
-        if name not in blacklist:
-          models[name] = file
+        if file not in blacklist:
+          models[file] = file.rstrip(".obj")
     return True
   return False
 
-def create(name = "", materialName = ""):
-  if name == "":
-    print("Model name is empty.")
+def create(file = "", materialName = ""):
+  if file == "":
+    print("Model file is empty.")
     return False
 
-  if name in models:
+  if file in models:
     prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
-    path = os.path.expanduser(prefs.dataDir + "meshes/" +  models[name])
+    path = os.path.expanduser(prefs.dataDir + "meshes/" + file)
 
     if os.path.isfile(path):
       bpy.ops.import_scene.obj(filepath = path)
@@ -41,7 +39,7 @@ def create(name = "", materialName = ""):
       if object:
         object.location = bpy.context.scene.cursor_location
         object.glpTypes = "model"
-        object.glpModel = name
+        object.glpModel = file
 
         bpy.context.scene.objects.active = object
         bpy.ops.object.transform_apply(rotation=True)
@@ -51,5 +49,5 @@ def create(name = "", materialName = ""):
       return True
     return False
 
-  print("Model '", name, "' does not exist.")
+  print("Model '", file, "' does not exist.")
   return False

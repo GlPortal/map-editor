@@ -15,7 +15,7 @@ class addDoor(bpy.types.Operator):
   def execute(self, context):
     prefs = context.user_preferences.addons[__package__].preferences
 
-    ModelManager.create("Door", "door/door")
+    ModelManager.create("Door.obj", "door/door")
 
     object = bpy.context.selected_objects[0]
     if object:

@@ -137,7 +137,7 @@ class Importer():
             object.delete()
       elif child.tag == "object":
         mid = child.get("mid")
-        mesh = child.get("mesh").rstrip(".obj")
+        mesh = child.get("mesh")
 
         ModelManager.create(mesh, materials[mid])
 

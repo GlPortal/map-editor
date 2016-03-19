@@ -6,7 +6,7 @@ import math
 import re
 
 from .mapHelpers import fixObjects
-from .managers import MaterialManager, ModelManager
+from .managers import MaterialManager
 
 class Exporter():
   def __init__(self, filePath, d_p = 4):
@@ -113,7 +113,7 @@ class Exporter():
         if type == "model":
           boxElement = tree.SubElement(root, "object")
           boxElement.set("mid", str(materials[object.glpMaterial]))
-          boxElement.set("mesh", ModelManager.models[object.glpModel])
+          boxElement.set("mesh", object.glpModel)
         elif type == "trigger":
           boxElement = tree.SubElement(root, "trigger")
           if object.glpTriggerTypes:
