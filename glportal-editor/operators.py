@@ -34,10 +34,13 @@ class setPortalable(bpy.types.Operator):
     if object:
       if object.type == 'MESH':
         if object.glpTypes != "door":
-          resetTriggerSettings(object)
+          if object.glpTypes != "model":
+            resetTriggerSettings(object)
 
-          object.glpTypes = "wall"
-          object.glpMaterial = "concrete/wall00"
+            object.glpTypes = "wall"
+            object.glpMaterial = "concrete/wall00"
+          else:
+            object.glpMaterial = "concrete/wall00"
         else:
           self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
       else:
@@ -55,10 +58,13 @@ class setWall(bpy.types.Operator):
     if object:
       if object.type == 'MESH':
         if object.glpTypes != "door":
-          resetTriggerSettings(object)
+          if object.glpTypes != "model":
+            resetTriggerSettings(object)
 
-          object.glpTypes = "wall"
-          object.glpMaterial = "metal/tiles00x3"
+            object.glpTypes = "wall"
+            object.glpMaterial = "metal/tiles00x3"
+          else:
+            object.glpMaterial = "metal/tiles00x3"
         else:
           self.report({'ERROR'}, "Door can't be converted to the metal wall.")
       else:

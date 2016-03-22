@@ -13,11 +13,14 @@ class setAcid(bpy.types.Operator):
     if object:
       if object.type == 'MESH':
         if object.glpTypes != "door":
-          resetTriggerSettings(object)
+          if object.glpTypes != "model":
+            resetTriggerSettings(object)
 
-          object.glpTypes = "volume"
-          object.glpVolumeTypes = "acid"
-          object.glpMaterial = "fluid/acid00"
+            object.glpTypes = "volume"
+            object.glpVolumeTypes = "acid"
+            object.glpMaterial = "fluid/acid00"
+          else:
+            object.glpMaterial = "fluid/acid00"
         else:
           self.report({'ERROR'}, "Door can't be converted to the volume of acid.")
       else:
