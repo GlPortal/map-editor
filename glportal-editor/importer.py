@@ -63,6 +63,13 @@ class Importer():
       return True
     return False
 
+  def getMaterials(self):
+    realpath = os.path.realpath(os.path.expanduser(self.__filePath))
+    tree = ET.parse(realpath)
+    root = tree.getroot()
+
+    return self.extractMaterials(root)
+
   def execute(self, context):
     if self.__deleteWorld:
       self.deleteWorld()

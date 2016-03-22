@@ -7,6 +7,7 @@ import re
 
 from .mapHelpers import fixObjects
 from .managers import MaterialManager
+from .importer import Importer
 
 class Exporter():
   def __init__(self, filePath, d_p = 4):
@@ -73,11 +74,17 @@ class Exporter():
   def execute(self, context):
     fixObjects()
 
-    materials = MaterialManager.prepareExport()
     dir = os.path.dirname(self.__filePath)
     objects = context.scene.objects
     root = tree.Element("map")
 
+    if os.path.isfile(self.__filePath):
+      oldMap = Importer(self.__filePath)
+      oldMaterials = oldMap.getMaterials()
+    else:
+      oldMaterials = {}
+
+    materials = MaterialManager.prepareExport(oldMaterials)
     self.writeMaterials(root, materials)
 
     for object in reversed(objects):

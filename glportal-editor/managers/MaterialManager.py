@@ -152,10 +152,15 @@ def reset(object):
       bpy.context.scene.objects.active = object
       bpy.ops.object.material_slot_remove()
 
-def prepareExport():
+def prepareExport(oldMaterials = {}):
   id = 1
   usedMaterials = {}
   objects = bpy.context.scene.objects
+
+  if len(oldMaterials) > 0:
+    for key, name in oldMaterials.items():
+      usedMaterials[name] = int(key)
+      id += 1
 
   for object in objects:
     if object.glpMaterial in materials and object.glpMaterial not in usedMaterials:
