@@ -12,6 +12,8 @@ colors = {
   "fluid/acid00"    : (0.2, 1, 0.2),
   "boxes/dev00"     : (0.8, 0.31, 0),
   "door/door"       : (1, 1, 1),
+  "models/light-fixture" : (1, 1, 0),
+  "crate/crate"     : (0, 1, 0),
   "none"            : (1, 0, 0)
 }
 blacklist = [
