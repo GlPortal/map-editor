@@ -12,8 +12,10 @@ class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
   filename_ext = ".xml"
   filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
   deleteWorld = BoolProperty(default=True, name="Erase current scene")
+  withoutMaterial = BoolProperty(default=False, name="Objects without material")
 
   def execute(self, context):
     importer = Importer(self.filepath, self.deleteWorld)
+    importer.withoutMaterial = self.withoutMaterial
     importer.execute(context)
     return {'FINISHED'}

@@ -2,10 +2,13 @@ import bpy
 import math
 import os
 import xml.etree.cElementTree as ET
+from bpy.props import BoolProperty
 
 from .managers import ModelManager
 
 class Importer():
+  withoutMaterial = BoolProperty(default=False, name="Objects without material")
+
   def __init__(self, filePath, deleteWorld = True):
     self.__filePath = filePath
     self.__deleteWorld = deleteWorld
@@ -142,10 +145,17 @@ class Importer():
             object = bpy.context.active_object
             object.delete()
       elif child.tag == "object":
-        mid = child.get("mid")
         mesh = child.get("mesh")
 
-        ModelManager.create(mesh, materials[mid])
+        if "mid" in child.attrib:
+          mid = child.get("mid")
+          ModelManager.create(mesh, materials[mid])
+        elif self.withoutMaterial:
+           ModelManager.create(mesh)
+           print("Model", mesh, " imported without material")
+        else:
+           print("Model", mesh, " without material was ignored")
+           continue
 
         object = bpy.context.selected_objects[0]
         if object:
