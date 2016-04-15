@@ -84,11 +84,21 @@ class Importer():
 
     for child in root:
       if child.tag == "wall":
-        mid = child.get("mid")
-
         if self.createCube(child):
           object = bpy.context.active_object
           object.glpTypes = "wall"
+
+          if "mid" in child.attrib:
+            mid = child.get("mid")
+            object.glpMaterial = materials[mid]
+          elif self.withoutMaterial:
+            print("Wall imported without material")
+            continue
+          else:
+            print("Wall without material was ignored")
+            bpy.ops.object.delete()
+            continue
+
           object.glpMaterial = materials[mid]
       elif child.tag == "acid":
         if self.createCube(child):
