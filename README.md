@@ -6,10 +6,9 @@
 The GlPortal editor allows Blender to import, edit, create and export GlPortal maps.
 
 ## Features
-- Easy import and export GlPortal maps
-- Support for Blender features
+- Easy import and export of GlPortal maps
+- GlPortal specific tool panels
 - Preview with textures
-- Language: English
 
 ## Installation
 - Install [Blender](http://www.blender.org/download/)
@@ -26,4 +25,4 @@ The GlPortal editor allows Blender to import, edit, create and export GlPortal m
 If you are upgrading, you may need to restart Blender.
 
 ## Development
-If you want to use the development version of the map editor you can symlink it to your blender plugin directory with the linkExtension software call the linkExtension script with the h option. Or add this path to your script path in the blender settings.
+If you want to use the development version of the map editor you can symlink it to your blender plugin directory with the linkExtension script for more information call the linkExtension script with the h option. 
