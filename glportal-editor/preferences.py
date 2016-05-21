@@ -1,16 +1,17 @@
 import bpy
 import os
 from bpy.types import AddonPreferences
-from bpy.props import BoolProperty, StringProperty
+from bpy.props import BoolProperty, EnumProperty, StringProperty
 
-from .preferencesHelper import updateTriggerXrays, updateSmartTexturesMapping
+from .operatorHelpers import itemsMaterial
+from .preferencesHelper import updateTriggerXrays, updateSmartTexturesMapping, updateDefaultMaterial
 
 class preferences(AddonPreferences):
   bl_idname = __package__
 
   triggerXrays = BoolProperty (
     name = "Use X-Rays for triggers",
-    description = "Enable / Disable X-rays for triggers",
+    description = "Enable / Disable X-rays for triggers.",
     default = True,
     update = updateTriggerXrays
   )
@@ -30,6 +31,18 @@ class preferences(AddonPreferences):
     default = os.path.expanduser("/usr/bin/glportal"),
     subtype = 'FILE_PATH'
   )
+  useDefaultMaterial = BoolProperty (
+    name = "Assign default material to models",
+    default = True
+  )
+  defaultMaterial = StringProperty (
+    default = "boxes/dev00"
+  )
+  materials = EnumProperty (
+    name = "Default material",
+    items = itemsMaterial,
+    update = updateDefaultMaterial
+  )
 
   def draw(self, context):
     prefs = context.user_preferences.addons[__package__].preferences
@@ -37,6 +50,11 @@ class preferences(AddonPreferences):
 
     layout.prop(self, "triggerXrays")
     layout.prop(self, "smartTexturesMapping")
+
+    layout.prop(self, "useDefaultMaterial")
+    if prefs.useDefaultMaterial:
+      self.materials = self.defaultMaterial
+      layout.prop(self, "materials")
 
     layout.prop(self, "dataDir")
     if os.path.isdir(os.path.expanduser(prefs.dataDir)) == False:

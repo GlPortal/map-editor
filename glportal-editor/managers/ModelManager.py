@@ -44,6 +44,8 @@ def create(file = "", materialName = ""):
 
         if materialName != "":
           object.glpMaterial = materialName
+        elif prefs.useDefaultMaterial:
+          object.glpMaterial = prefs.defaultMaterial
       return True
     return False
 

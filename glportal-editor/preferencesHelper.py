@@ -28,3 +28,8 @@ def updateSmartTexturesMapping(self, context):
       else:
         me.materials[0].texture_slots[0].texture_coords = 'GLOBAL'
         me.materials[0].texture_slots[0].mapping = 'CUBE'
+
+def updateDefaultMaterial(self, context):
+  prefs = context.user_preferences.addons[__package__].preferences
+
+  prefs.defaultMaterial = prefs.materials
