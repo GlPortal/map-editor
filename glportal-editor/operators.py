@@ -30,19 +30,20 @@ class setPortalable(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    object = bpy.context.active_object
-    if object:
-      if object.type == 'MESH':
-        if object.glpTypes != "door":
-          object.glpMaterial = "concrete/wall00"
+    objects = bpy.context.selected_objects
+    for object in objects:
+      if object:
+        if object.type == 'MESH':
+          if object.glpTypes != "door":
+            object.glpMaterial = "concrete/wall00"
 
-          if object.glpTypes != "model":
-            resetTriggerSettings(object)
-            object.glpTypes = "wall"
+            if object.glpTypes != "model":
+              resetTriggerSettings(object)
+              object.glpTypes = "wall"
+          else:
+            self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
         else:
-          self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
-      else:
-        self.report({'ERROR'}, "Object of type '%s' can't be converted to the portalable wall." % (object.type))
+          self.report({'ERROR'}, "Object of type '%s' can't be converted to the portalable wall." % (object.type))
     return {'FINISHED'}
 
 class setWall(bpy.types.Operator):
@@ -52,19 +53,20 @@ class setWall(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    object = bpy.context.active_object
-    if object:
-      if object.type == 'MESH':
-        if object.glpTypes != "door":
-          object.glpMaterial = "metal/tiles00x3"
+    objects = bpy.context.selected_objects
+    for object in objects:
+      if object:
+        if object.type == 'MESH':
+          if object.glpTypes != "door":
+            object.glpMaterial = "metal/tiles00x3"
 
-          if object.glpTypes != "model":
-            resetTriggerSettings(object)
-            object.glpTypes = "wall"
+            if object.glpTypes != "model":
+              resetTriggerSettings(object)
+              object.glpTypes = "wall"
+          else:
+            self.report({'ERROR'}, "Door can't be converted to the metal wall.")
         else:
-          self.report({'ERROR'}, "Door can't be converted to the metal wall.")
-      else:
-        self.report({'ERROR'}, "Object of type '%s' can't be converted to the metal wall." % (object.type))
+          self.report({'ERROR'}, "Object of type '%s' can't be converted to the metal wall." % (object.type))
     return {'FINISHED'}
 
 class addWall(bpy.types.Operator):
