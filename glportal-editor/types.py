@@ -39,8 +39,10 @@ def glpMaterialReset():
   glpMaterialTypes.append(("none", "None", "No material"))
 
 def glpMaterialUpdate(self, context):
-  if context.active_object.glpTypes and context.active_object.glpTypes != "none":
-    MaterialManager.set(context.active_object)
+  objects = bpy.context.selected_objects
+  for object in objects:
+    if object and object.type == 'MESH' and object.glpTypes and object.glpTypes != "none":
+      MaterialManager.set(object)
 
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty (

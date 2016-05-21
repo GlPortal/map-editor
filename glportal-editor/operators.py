@@ -101,9 +101,10 @@ class searchMaterial(bpy.types.Operator):
   materials = bpy.props.EnumProperty(items=itemsMaterial)
 
   def execute(self, context):
-    object = bpy.context.active_object
-    if object and object.type == 'MESH' and object.glpTypes:
-      object.glpMaterial = self.materials
+    objects = bpy.context.selected_objects
+    for object in objects:
+      if object and object.type == 'MESH' and object.glpTypes:
+        object.glpMaterial = self.materials
     return {'FINISHED'}
 
   def invoke(self, context, event):
