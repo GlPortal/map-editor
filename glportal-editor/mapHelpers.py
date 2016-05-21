@@ -50,7 +50,8 @@ def countObjects(objects):
     "acid":         0,
     "triggerDeath": 0,
     "light":        0,
-    "exitDoor":     0
+    "exitDoor":     0,
+    "modelNoMat":   0 # Models Without Material
   }
 
   for object in objects:
@@ -74,6 +75,9 @@ def countObjects(objects):
       elif type == "volume":
         if object.glpVolumeTypes == "acid":
           result["acid"] += 1
+      elif type == "model":
+        if not object.glpMaterial or object.glpMaterial == "none":
+          result["modelNoMat"] += 1
   return result
 
 class checkMapDialog(bpy.types.Operator):
@@ -84,6 +88,7 @@ class checkMapDialog(bpy.types.Operator):
   light = bpy.props.IntProperty (name="Number of lights")
   wall = bpy.props.IntProperty (name="Number of walls")
   exitDoor = bpy.props.IntProperty (name="Number of exit doors")
+  modelsNoMat = bpy.props.IntProperty (name="Number of models without material")
 
   def execute(self, context):
     return {'FINISHED'}
@@ -164,6 +169,13 @@ class checkMapDialog(bpy.types.Operator):
 
         layout.label(text = "Remember, we are using camera as spawn position.", icon='INFO')
         layout.separator()
+    if result["modelNoMat"] != 0:
+      error = True
+      self.modelsNoMat = result["modelNoMat"]
+
+      layout.prop(self, "modelsNoMat")
+      layout.label(text = "There are objects without assigned material.", icon='ERROR')
+      layout.separator()
 
     if not error:
       layout.label(text = "Nice work. There are no errors or warnings.", icon='FILE_TICK')
