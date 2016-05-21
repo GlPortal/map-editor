@@ -94,15 +94,15 @@ class addPortalable(bpy.types.Operator):
 class searchMaterial(bpy.types.Operator):
   bl_idname = "glp.search_material"
   bl_label = "Set material"
-  bl_property = "materials"
+  bl_property = "material"
 
-  materials = bpy.props.EnumProperty(items=itemsMaterial)
+  material = bpy.props.EnumProperty(items=itemsMaterial)
 
   def execute(self, context):
     objects = bpy.context.selected_objects
     for object in objects:
       if object and object.type == 'MESH' and object.glpTypes:
-        object.glpMaterial = self.materials
+        object.glpMaterial = self.material
     return {'FINISHED'}
 
   def invoke(self, context, event):
@@ -113,13 +113,13 @@ class searchMaterial(bpy.types.Operator):
 class searchModel(bpy.types.Operator):
   bl_idname = "glp.search_model"
   bl_label = "Add model"
-  bl_property = "models"
+  bl_property = "model"
 
-  models = bpy.props.EnumProperty(items=itemsModel)
+  model = bpy.props.EnumProperty(items=itemsModel)
 
   def execute(self, context):
-    if self.models != "none":
-      ModelManager.create(self.models)
+    if self.model != "none":
+      ModelManager.create(self.model)
     return {'FINISHED'}
 
   def invoke(self, context, event):
