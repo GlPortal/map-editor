@@ -67,15 +67,15 @@ def countObjects(objects):
     elif object.type == 'MESH':
       if type == "door":
         result["exitDoor"] += 1
-      elif type == "trigger":
+      if type == "trigger":
         if object.glpTriggerTypes == "death":
           result["triggerDeath"] += 1
-      elif type == "wall":
+      if type == "wall":
         result["wall"] += 1
-      elif type == "volume":
+      if type == "volume":
         if object.glpVolumeTypes == "acid":
           result["acid"] += 1
-      elif type == "model":
+      if type == "model" or type == "wall":
         if not object.glpMaterial or object.glpMaterial == "none":
           result["modelNoMat"] += 1
   return result
