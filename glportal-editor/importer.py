@@ -93,13 +93,9 @@ class Importer():
             object.glpMaterial = materials[mid]
           elif self.withoutMaterial:
             print("Wall imported without material")
-            continue
           else:
             print("Wall without material was ignored")
             bpy.ops.object.delete()
-            continue
-
-          object.glpMaterial = materials[mid]
       elif child.tag == "acid":
         if self.createCube(child):
           bpy.ops.glp.set_acid()
