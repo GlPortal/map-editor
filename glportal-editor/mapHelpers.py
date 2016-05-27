@@ -51,7 +51,7 @@ def countObjects(objects):
     "triggerDeath": 0,
     "light":        0,
     "exitDoor":     0,
-    "modelNoMat":   0 # Models Without Material
+    "objectNoMat":   0 # Objects Without Material
   }
 
   for object in objects:
@@ -77,7 +77,7 @@ def countObjects(objects):
           result["acid"] += 1
       if type == "model" or type == "wall":
         if not object.glpMaterial or object.glpMaterial == "none":
-          result["modelNoMat"] += 1
+          result["objectNoMat"] += 1
   return result
 
 class checkMapDialog(bpy.types.Operator):
@@ -169,9 +169,9 @@ class checkMapDialog(bpy.types.Operator):
 
         layout.label(text = "Remember, we are using camera as spawn position.", icon='INFO')
         layout.separator()
-    if result["modelNoMat"] != 0:
+    if result["objectNoMat"] != 0:
       error = True
-      self.modelsNoMat = result["modelNoMat"]
+      self.modelsNoMat = result["objectNoMat"]
 
       layout.prop(self, "modelsNoMat")
       layout.label(text = "There are objects without assigned material.", icon='ERROR')

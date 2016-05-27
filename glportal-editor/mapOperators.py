@@ -34,7 +34,7 @@ class runGame(bpy.types.Operator):
     result = countObjects(objects)
 
     if (result["exitDoor"] == 0 or result["camera"] == 0 or result["light"] == 0 or
-        result["wall"] == 0 or result["modelNoMat"] > 0):
+        result["wall"] == 0 or result["objectNoMat"] > 0):
       bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
     else:
       prefs = bpy.context.user_preferences.addons[__package__].preferences
