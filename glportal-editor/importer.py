@@ -32,19 +32,19 @@ class Importer():
           materials[mid] = name
       return materials
 
-  def extrackPosition(self, param):
+  def extractPosition(self, param):
     x = float(param.get("x"))
     y = float(param.get("y"))
     z = float(param.get("z"))
     return [x, -z, y]
 
-  def extrackDimensions(self, param):
+  def extractDimensions(self, param):
     x = float(param.get("x"))
     y = float(param.get("y"))
     z = float(param.get("z"))
     return [x, z, y]
 
-  def extrackRotation(self, param, o_x = 0, o_y = 0, o_z = 0):
+  def extractRotation(self, param, o_x = 0, o_y = 0, o_z = 0):
     x = math.radians(float(param.get("x")) + o_x)
     y = math.radians(float(param.get("y")) + o_y)
     z = math.radians(-float(param.get("z")) + o_z)
@@ -57,11 +57,11 @@ class Importer():
     if object:
       for param in child:
         if param.tag == "position":
-          object.location = self.extrackPosition(param)
+          object.location = self.extractPosition(param)
         elif param.tag == "rotation":
-          object.rotation_euler = self.extrackRotation(param)
+          object.rotation_euler = self.extractRotation(param)
         elif param.tag == "scale":
-          object.dimensions = self.extrackDimensions(param)
+          object.dimensions = self.extractDimensions(param)
 
       return True
     return False
@@ -106,7 +106,7 @@ class Importer():
         if object:
           for param in child:
             if param.tag == "position":
-              object.location = self.extrackPosition(param)
+              object.location = self.extractPosition(param)
             elif param.tag == "rotation":
               rotation = [math.radians(float(param.get("x")) + 90),
                           math.radians(0),
@@ -119,7 +119,7 @@ class Importer():
         if object:
           lamp = object.data
 
-          object.location = self.extrackPosition(child)
+          object.location = self.extractPosition(child)
 
           lamp.color = [float(child.get("r")), float(child.get("g")), float(child.get("b"))]
           lamp.distance = float(child.get("distance"))
@@ -132,9 +132,9 @@ class Importer():
       elif child.tag == "end":
         for param in child:
           if param.tag == "position":
-            location = self.extrackPosition(param)
+            location = self.extractPosition(param)
           elif param.tag == "rotation":
-            rotation = self.extrackRotation(param)
+            rotation = self.extractRotation(param)
 
         bpy.ops.glp.add_door()
 
@@ -167,9 +167,9 @@ class Importer():
         if object:
           for param in child:
             if param.tag == "position":
-              object.location = self.extrackPosition(param)
+              object.location = self.extractPosition(param)
             elif param.tag == "rotation":
-              object.rotation_euler = self.extrackRotation(param)
+              object.rotation_euler = self.extractRotation(param)
             elif param.tag == "scale":
-              object.dimensions = self.extrackDimensions(param)
+              object.dimensions = self.extractDimensions(param)
     return {'FINISHED'}
