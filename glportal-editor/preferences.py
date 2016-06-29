@@ -5,6 +5,7 @@ from bpy.props import BoolProperty, EnumProperty, StringProperty
 
 from .operatorHelpers import itemsMaterial
 from .preferencesHelper import updateTriggerXrays, updateSmartTexturesMapping, updateDefaultMaterial
+from .managers import MaterialManager as MM
 
 class preferences(AddonPreferences):
   bl_idname = __package__
@@ -31,10 +32,6 @@ class preferences(AddonPreferences):
     default = os.path.expanduser("/usr/bin/glportal"),
     subtype = 'FILE_PATH'
   )
-  useDefaultMaterial = BoolProperty (
-    name = "Assign default material to models",
-    default = True
-  )
   defaultMaterial = StringProperty (
     default = "boxes/dev00"
   )
@@ -45,21 +42,21 @@ class preferences(AddonPreferences):
   )
 
   def draw(self, context):
-    prefs = context.user_preferences.addons[__package__].preferences
     layout = self.layout
 
     layout.prop(self, "triggerXrays")
     layout.prop(self, "smartTexturesMapping")
 
-    layout.prop(self, "useDefaultMaterial")
-    if prefs.useDefaultMaterial:
+    if self.defaultMaterial in MM.materials:
       self.materials = self.defaultMaterial
-      layout.prop(self, "materials")
+    else:
+      layout.label(text="Material list is empty", icon='ERROR')
+    layout.prop(self, "materials")
 
     layout.prop(self, "dataDir")
-    if os.path.isdir(os.path.expanduser(prefs.dataDir)) == False:
+    if os.path.isdir(os.path.expanduser(self.dataDir)) == False:
       layout.label(text="Current data directory does not exist", icon='ERROR')
 
     layout.prop(self, "gameExe")
-    if os.path.isfile(os.path.expanduser(prefs.gameExe)) == False:
+    if os.path.isfile(os.path.expanduser(self.gameExe)) == False:
       layout.label(text="Current GlPortal executable does not exist", icon='ERROR')

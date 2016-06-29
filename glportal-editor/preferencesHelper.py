@@ -32,4 +32,5 @@ def updateSmartTexturesMapping(self, context):
 def updateDefaultMaterial(self, context):
   prefs = context.user_preferences.addons[__package__].preferences
 
-  prefs.defaultMaterial = prefs.materials
+  if prefs.materials != "none":
+    prefs.defaultMaterial = prefs.materials
