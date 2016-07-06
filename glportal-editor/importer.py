@@ -7,8 +7,6 @@ from bpy.props import BoolProperty
 from .managers import ModelManager
 
 class Importer():
-  withoutMaterial = BoolProperty(default=False, name="Objects without material")
-
   def __init__(self, filePath, deleteWorld = True):
     self.__filePath = filePath
     self.__deleteWorld = deleteWorld
@@ -77,6 +75,7 @@ class Importer():
     if self.__deleteWorld:
       self.deleteWorld()
 
+    prefs = bpy.context.user_preferences.addons[__package__].preferences
     realpath = os.path.realpath(os.path.expanduser(self.__filePath))
     tree = ET.parse(realpath)
     root = tree.getroot()
@@ -91,11 +90,8 @@ class Importer():
           if "mid" in child.attrib:
             mid = child.get("mid")
             object.glpMaterial = materials[mid]
-          elif self.withoutMaterial:
-            print("Wall imported without material")
           else:
-            print("Wall without material was ignored")
-            bpy.ops.object.delete()
+            object.glpMaterial = prefs.defaultMaterial
       elif child.tag == "acid":
         if self.createCube(child):
           bpy.ops.glp.set_acid()
@@ -156,12 +152,8 @@ class Importer():
         if "mid" in child.attrib:
           mid = child.get("mid")
           ModelManager.create(mesh, materials[mid])
-        elif self.withoutMaterial:
-           ModelManager.create(mesh)
-           print("Model", mesh, " imported without material")
         else:
-           print("Model", mesh, " without material was ignored")
-           continue
+           ModelManager.create(mesh)
 
         object = bpy.context.selected_objects[0]
         if object:
