@@ -74,6 +74,7 @@ class Exporter():
   def execute(self, context):
     fixObjects()
 
+    prefs = bpy.context.user_preferences.addons[__package__].preferences
     dir = os.path.dirname(self.__filePath)
     objects = context.scene.objects
     root = tree.Element("map")
@@ -119,15 +120,23 @@ class Exporter():
 
         if type == "model":
           boxElement = tree.SubElement(root, "object")
-          boxElement.set("mid", str(materials[object.glpMaterial]))
           boxElement.set("mesh", object.glpModel)
+
+          if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.blacklist:
+            boxElement.set("mid", str(materials[object.glpMaterial]))
+          else:
+            boxElement.set("mid", str(materials[prefs.defaultMaterial]))
         elif type == "trigger":
           boxElement = tree.SubElement(root, "trigger")
           if object.glpTriggerTypes:
             boxElement.set("type", object.glpTriggerTypes)
         elif type == "wall":
           boxElement = tree.SubElement(root, "wall")
-          boxElement.set("mid", str(materials[object.glpMaterial]))
+
+          if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.blacklist:
+            boxElement.set("mid", str(materials[object.glpMaterial]))
+          else:
+            boxElement.set("mid", str(materials[prefs.defaultMaterial]))
         elif type == "volume":
           if object.glpVolumeTypes == "acid":
             boxElement = tree.SubElement(root, "acid")
