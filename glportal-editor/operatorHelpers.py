@@ -1,6 +1,4 @@
 import bpy
-import os
-import bmesh
 
 from .managers import MaterialManager, ModelManager
 from . import types

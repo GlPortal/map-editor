@@ -1,5 +1,4 @@
 import bpy
-import os
 
 from .operatorHelpers import resetTriggerSettings, itemsMaterial, itemsModel
 from .managers import ModelManager
