@@ -37,6 +37,8 @@ def extractData(path, dir, name):
         mat["data"]["portalable"] = True
     elif child.tag == "diffuse":
       mat["data"]["texture"] = dir + "/" + child.attrib["path"]
+    elif child.tag == "normal":
+      mat["data"]["normaltex"] = dir + "/" + child.attrib["path"]
 
   return mat
 
@@ -167,16 +169,15 @@ def prepareExport(oldMaterials = {}):
       id += 1
 
   for object in objects:
-    if (object.glpMaterial in materials and
-        object.glpMaterial not in usedMaterials and
+    if (object.glpMaterial not in usedMaterials and
         object.type == 'MESH' and
         object.glpTypes != "trigger"):
-      if object.glpMaterial not in blacklist:
+      if (object.glpMaterial in materials and
+          object.glpMaterial not in blacklist):
         usedMaterials[object.glpMaterial] = id
         id += 1
       else:
-        if object.glpMaterial in blacklist:
-          addDefault = True
+        addDefault = True
 
   if prefs.defaultMaterial not in usedMaterials and addDefault:
     usedMaterials[prefs.defaultMaterial] = id
