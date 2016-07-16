@@ -159,6 +159,7 @@ def prepareExport(oldMaterials = {}):
   usedMaterials = {}
   objects = bpy.context.scene.objects
   prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
+  addDefault = False
 
   if len(oldMaterials) > 0:
     for key, name in oldMaterials.items():
@@ -166,12 +167,18 @@ def prepareExport(oldMaterials = {}):
       id += 1
 
   for object in objects:
-    if object.glpMaterial in materials and object.glpMaterial not in usedMaterials:
+    if (object.glpMaterial in materials and
+        object.glpMaterial not in usedMaterials and
+        object.type == 'MESH' and
+        object.glpTypes != "trigger"):
       if object.glpMaterial not in blacklist:
         usedMaterials[object.glpMaterial] = id
         id += 1
+      else:
+        if object.glpMaterial in blacklist:
+          addDefault = True
 
-  if prefs.defaultMaterial not in usedMaterials:
+  if prefs.defaultMaterial not in usedMaterials and addDefault:
     usedMaterials[prefs.defaultMaterial] = id
 
   return usedMaterials
