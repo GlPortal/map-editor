@@ -28,7 +28,7 @@ class Importer():
           name = mat.get("name")
 
           materials[mid] = name
-      return materials
+    return materials
 
   def extractPosition(self, param):
     x = float(param.get("x"))
