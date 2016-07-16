@@ -5,6 +5,27 @@ from subprocess import call
 from .mapHelpers import countObjects, fixObjects
 from .Exporter import Exporter
 
+class fixMaterials(bpy.types.Operator):
+  bl_idname = "glp.fix_materials"
+  bl_label = "Fix materials"
+  bl_description = "Assign default material to objects without it."
+  bl_options = {'UNDO'}
+
+  def execute(self, context):
+    prefs = bpy.context.user_preferences.addons[__package__].preferences
+    material = prefs.defaultMaterial
+    objects = context.scene.objects
+
+    for object in reversed(objects):
+      if object.glpTypes and object.type == 'MESH':
+        type = object.glpTypes
+
+        if type == "model" or type == "wall":
+          if not object.glpMaterial or object.glpMaterial == "none":
+            object.glpMaterial = material
+
+    return {'FINISHED'}
+
 class fixMap(bpy.types.Operator):
   bl_idname = "glp.fix_map"
   bl_label = "Fix map"

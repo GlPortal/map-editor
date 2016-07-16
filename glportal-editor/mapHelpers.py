@@ -174,7 +174,11 @@ class checkMapDialog(bpy.types.Operator):
       self.modelsNoMat = result["objectNoMat"]
 
       layout.prop(self, "modelsNoMat")
-      layout.label(text = "There are objects without assigned material.", icon='ERROR')
+
+      row = layout.split(0.75)
+      row.label(text = "There are objects without assigned material.", icon='ERROR')
+      row.operator("glp.fix_materials")
+
       layout.separator()
 
     if not error:
