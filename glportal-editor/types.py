@@ -64,6 +64,10 @@ def setProperties():
     name = "Model",
     default = "none"
   )
+  bpy.types.WindowManager.importedFilepath = StringProperty (
+    name = "Imported filepath",
+    default = "none"
+  )
 
 setProperties()
 glpMaterialSet()

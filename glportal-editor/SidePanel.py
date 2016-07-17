@@ -32,3 +32,4 @@ class SidePanel(bpy.types.Panel):
     layout.operator("glp.fix_map", icon='SCRIPTWIN')
     layout.operator("glp.check_map", icon='QUESTION')
     layout.operator("glp.run_game", icon='GAME')
+    layout.operator("glp.fast_export", icon='GAME')

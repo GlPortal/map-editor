@@ -10,6 +10,7 @@ class Importer():
   def __init__(self, filePath, deleteWorld = True):
     self.__filePath = filePath
     self.__deleteWorld = deleteWorld
+    bpy.context.window_manager.importedFilepath = filePath
 
   def deleteWorld(self):
     scene = bpy.context.scene

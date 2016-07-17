@@ -13,6 +13,7 @@ class Exporter():
   def __init__(self, filePath, d_p = 4):
     self.__filePath = filePath
     self.__d_p = d_p
+    bpy.context.window_manager.importedFilepath = filePath
 
   def writeMaterials(self, root, mats):
     materials = ((k, mats[k]) for k in sorted(mats, key=mats.get))

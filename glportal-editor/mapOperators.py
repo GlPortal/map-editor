@@ -26,6 +26,27 @@ class fixMaterials(bpy.types.Operator):
 
     return {'FINISHED'}
 
+class fastExport(bpy.types.Operator):
+  bl_idname = "glp.fast_export"
+  bl_label = "Fast Export"
+  bl_description = "Export current map to the imported file"
+
+  def execute(self, context):
+    filepath = bpy.context.window_manager.importedFilepath
+
+    if (filepath != "none"):
+      if os.path.isfile(filepath):
+        exporter = Exporter(filepath)
+        exporter.execute(context)
+
+        self.report({'INFO'}, "Map exported")
+      else:
+        self.report({'ERROR'}, "Filepath does not exist")
+    else:
+      self.report({'ERROR'}, "Filepath is empty")
+
+    return {'FINISHED'}
+
 class fixMap(bpy.types.Operator):
   bl_idname = "glp.fix_map"
   bl_label = "Fix map"
