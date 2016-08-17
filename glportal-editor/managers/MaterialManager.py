@@ -149,7 +149,7 @@ def set(object, model = False):
     return False
 
 def reset(object):
-  if object:
+  if object and object.glpTypes != "none" and object.glpMaterial != "none":
     object.glpMaterial = "none"
 
     if (len(object.data.materials) == 1):
