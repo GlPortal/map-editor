@@ -16,7 +16,7 @@ class fixMaterials(bpy.types.Operator):
     material = prefs.defaultMaterial
     objects = context.scene.objects
 
-    for object in reversed(objects):
+    for object in objects:
       if object.glpTypes and object.type == 'MESH':
         type = object.glpTypes
 
