@@ -51,7 +51,7 @@ def countObjects(objects):
     "triggerDeath": 0,
     "light":        0,
     "exitDoor":     0,
-    "objectNoMat":   0 # Objects Without Material
+    "objectNoMat":  0 # Objects Without Material
   }
 
   for object in objects:
@@ -161,7 +161,7 @@ class checkMapDialog(bpy.types.Operator):
           error = True
 
           layout.label(text = "Camera is in the air.", icon='CANCEL')
-        elif isOver == 2:
+        else:
           error = True
 
           layout.label(text = "Camera is very close to the floor.", icon='ERROR')

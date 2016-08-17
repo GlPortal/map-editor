@@ -39,8 +39,7 @@ class Exporter():
 
     if self.prepareRot(x) == "0.0" and self.prepareRot(y) == "0.0" and self.prepareRot(z) == "0.0":
       return False
-    else:
-      return True
+    return True
 
   def storeRotation(self, element, object):
     element.set("x", self.prepareRot(math.degrees(object.rotation_euler[0])))

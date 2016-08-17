@@ -7,13 +7,10 @@ from .managers import ModelManager
 class addDoor(bpy.types.Operator):
   bl_idname = "glp.add_door"
   bl_label = "Add a door"
-  #bl_description = "Add a door." # for the future
   bl_description = "Add an exit door (use only once)"
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    prefs = context.user_preferences.addons[__package__].preferences
-
     ModelManager.create("Door.obj", "door/door")
 
     object = bpy.context.selected_objects[0]

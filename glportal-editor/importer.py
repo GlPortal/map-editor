@@ -2,7 +2,6 @@ import bpy
 import math
 import os
 import xml.etree.cElementTree as ET
-from bpy.props import BoolProperty
 
 from .managers import ModelManager
 
