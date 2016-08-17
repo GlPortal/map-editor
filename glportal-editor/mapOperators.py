@@ -55,6 +55,7 @@ class fixMap(bpy.types.Operator):
 
   def execute(self, context):
     fixObjects()
+    bpy.ops.glp.fix_materials()
     return {'FINISHED'}
 
 class checkMap(bpy.types.Operator):
