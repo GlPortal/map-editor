@@ -42,6 +42,10 @@ def extractData(path, dir, name):
 
   return mat
 
+def reload():
+  materials.clear()
+  preload()
+
 def preload():
   prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
   path = prefs.dataDir + "textures"
