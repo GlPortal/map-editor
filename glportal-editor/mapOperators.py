@@ -4,6 +4,7 @@ from subprocess import call
 
 from .mapHelpers import countObjects, fixObjects
 from .Exporter import Exporter
+from .managers import MaterialManager
 
 class fixMaterials(bpy.types.Operator):
   bl_idname = "glp.fix_materials"
@@ -24,6 +25,15 @@ class fixMaterials(bpy.types.Operator):
           if not object.glpMaterial or object.glpMaterial == "none":
             object.glpMaterial = material
 
+    return {'FINISHED'}
+
+class reloadMaterials(bpy.types.Operator):
+  bl_idname = "glp.reload_materials"
+  bl_label = "Reload materials"
+  bl_description = "Reload GlPortal materials"
+
+  def execute(self, context):
+    MaterialManager.reload()
     return {'FINISHED'}
 
 class fastExport(bpy.types.Operator):
