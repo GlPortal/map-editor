@@ -4,7 +4,7 @@ from .managers import MaterialManager, ModelManager
 from . import types
 
 def resetTriggerSettings(object):
-  if object.glpTypes and object.glpTypes == "trigger":
+  if object.glpTypes == "trigger":
     object.glpTriggerTypes = "none"
     object.draw_type = 'TEXTURED'
     object.show_x_ray = False
