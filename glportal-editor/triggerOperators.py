@@ -12,7 +12,7 @@ class setWin(bpy.types.Operator):
     object = bpy.context.active_object
     if object:
       if object.type == 'MESH':
-        if object.glpTypes != "door" and object.glpTypes != "model":
+        if object.glpTypes not in {"door", "model"}:
           setTrigger(object, "win")
         else:
           self.report({'ERROR'}, "Door and models can't be converted to the win trigger.")
@@ -41,7 +41,7 @@ class setDeath(bpy.types.Operator):
     object = bpy.context.active_object
     if object:
       if object.type == 'MESH':
-        if object.glpTypes != "door" and object.glpTypes != "model":
+        if object.glpTypes not in {"door", "model"}:
           setTrigger(object, "death")
         else:
           self.report({'ERROR'}, "Door and models can't be converted to the death trigger.")
@@ -70,7 +70,7 @@ class setRadiation(bpy.types.Operator):
     object = bpy.context.active_object
     if object:
       if object.type == 'MESH':
-        if object.glpTypes != "door" and object.glpTypes != "model":
+        if object.glpTypes not in {"door", "model"}:
           setTrigger(object, "radiation")
         else:
           self.report({'ERROR'}, "Door and models can't be converted to the radiation trigger.")

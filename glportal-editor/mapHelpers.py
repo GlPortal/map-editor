@@ -10,7 +10,7 @@ def fixObjects():
     if object.type == 'MESH':
       type = object.glpTypes
 
-      if type == "wall" or type == "trigger" or type == "volume":
+      if type in {"wall", "trigger", "volume"}:
         bpy.context.scene.objects.active = object
         bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
 
@@ -75,7 +75,7 @@ def countObjects(objects):
       if type == "volume":
         if object.glpVolumeTypes == "acid":
           result["acid"] += 1
-      if type == "model" or type == "wall":
+      if type in {"model", "wall"}:
         if not object.glpMaterial or object.glpMaterial == "none":
           result["objectNoMat"] += 1
   return result

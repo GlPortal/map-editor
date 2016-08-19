@@ -73,5 +73,5 @@ def sceneUpdater(scene):
   if not isRunning:
     if prefs.smartTexturesMapping:
       if object is not None and object.is_updated:
-        if (object.glpTypes == "wall" or object.glpTypes == "volume"):
+        if object.glpTypes in {"wall", "volume"}:
           updateTexture(object)
