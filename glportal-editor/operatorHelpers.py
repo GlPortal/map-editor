@@ -24,9 +24,14 @@ def setTrigger(object, type):
   object.draw_bounds_type = 'CAPSULE'
 
 def clearGlpProperties(object):
-  object.glpTypes = "none"
-  object.glpVolumeTypes = "none"
-  object.glpTriggerTypes = "none"
+  MaterialManager.reset(object)
+
+  if object.glpTypes != "none":
+    object.glpTypes = "none"
+  if object.glpVolumeTypes != "none":
+    object.glpVolumeTypes = "none"
+  if object.glpTriggerTypes != "none":
+    object.glpTriggerTypes = "none"
 
 def itemsMaterial(self, context):
   return [(name, fancyName, tooltip) for name, fancyName, tooltip in types.glpMaterialTypes]
