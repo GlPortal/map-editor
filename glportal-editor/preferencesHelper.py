@@ -8,7 +8,7 @@ def updateTriggerXrays(self, context):
   objects = context.scene.objects
 
   for object in objects:
-    if object.glpTypes and object.glpTypes == "trigger":
+    if object.glpTypes == "trigger":
       object.show_x_ray = prefs.triggerXrays
 
 def updateSmartTexturesMapping(self, context):
@@ -17,7 +17,7 @@ def updateSmartTexturesMapping(self, context):
   objects = context.scene.objects
 
   for object in objects:
-    if object.glpTypes and (object.glpTypes == "wall" or object.glpTypes == "volume"):
+    if object.glpTypes in {"wall", "volume"}:
       me = object.data
 
       if SmartTextures:
