@@ -18,12 +18,9 @@ class fixMaterials(bpy.types.Operator):
     objects = context.scene.objects
 
     for object in objects:
-      if object.glpTypes and object.type == 'MESH':
-        type = object.glpTypes
-
-        if type == "model" or type == "wall":
-          if not object.glpMaterial or object.glpMaterial == "none":
-            object.glpMaterial = material
+      if object.type == 'MESH' and object.glpTypes in {"model", "wall"}:
+        if not object.glpMaterial or object.glpMaterial == "none":
+          object.glpMaterial = material
 
     return {'FINISHED'}
 
