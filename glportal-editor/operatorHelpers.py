@@ -14,7 +14,6 @@ def resetTriggerSettings(object):
 def setTrigger(object, type):
   prefs = bpy.context.user_preferences.addons[__package__].preferences
   clearGlpProperties(object)
-  MaterialManager.reset(object)
 
   object.glpTypes = "trigger"
   object.glpTriggerTypes = type
