@@ -66,6 +66,7 @@ def extractData(path, dir, name):
 
 def reload():
   materials.clear()
+  glpMaterialReset()
   preload()
 
 def preload():
