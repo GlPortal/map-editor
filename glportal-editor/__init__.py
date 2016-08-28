@@ -72,6 +72,7 @@ def register():
   bpy.types.INFO_MT_add.prepend(glportalMenuAdd.glportal_add_menu)
   bpy.app.handlers.scene_update_post.append(updateTextures.sceneUpdater)
 
+  MaterialManager.glpMaterialSet()
   MaterialManager.preload()
   ModelManager.preload()
 
@@ -82,7 +83,7 @@ def unregister():
   bpy.types.INFO_MT_add.remove(glportalMenuAdd.glportal_add_menu)
   bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
 
-  types.glpMaterialReset()
+  MaterialManager.glpMaterialReset()
   MaterialManager.materials.clear()
   ModelManager.models.clear()
 

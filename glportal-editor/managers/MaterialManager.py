@@ -1,6 +1,7 @@
 import bpy
 import os
 import xml.etree.cElementTree as ET
+from bpy.props import EnumProperty
 
 from ..updateTextures import updateTexture
 from .. import types
@@ -19,6 +20,27 @@ colors = {
 blacklist = [
   "none"
 ]
+
+
+def glpMaterialSet():
+  bpy.types.Object.glpMaterial = EnumProperty (
+    items = types.glpMaterialTypes,
+    name = "Material",
+    description = "Active material",
+    default = "none",
+    update = glpMaterialUpdate
+  )
+
+def glpMaterialReset():
+  del types.glpMaterialTypes[:]
+  types.glpMaterialTypes.append(("none", "None", "No material"))
+
+def glpMaterialUpdate(self, context):
+  objects = bpy.context.selected_objects
+  for object in objects:
+    if object and object.type == 'MESH' and object.glpTypes and object.glpTypes != "none":
+      setMaterial(object)
+
 
 def extractData(path, dir, name):
   mat = {"data": {"portalable": False}}
@@ -62,7 +84,7 @@ def preload():
         mat = extractData(path + "/", dir, file)
         materials[mat["name"]] = mat["data"]
         types.glpMaterialTypes.append((mat["name"], mat["data"]["fancyname"], mat["data"]["fancyname"]))
-    types.glpMaterialSet()
+    glpMaterialSet()
 
     return True
   return False
@@ -137,7 +159,7 @@ def create(name = "", model = False):
     print("Material '", name, "' does not exist.")
     return False
 
-def set(object, model = False):
+def setMaterial(object, model = False):
   if object:
     mat = create(object.glpMaterial, model)
     data = object.data
