@@ -1,6 +1,8 @@
 import bpy
+import os
 
 from .updateTextures import updateTexture
+from .managers import MaterialManager, ModelManager
 
 def updateTriggerXrays(self, context):
   prefs = context.user_preferences.addons[__package__].preferences
@@ -34,3 +36,10 @@ def updateDefaultMaterial(self, context):
 
   if prefs.materials != "none":
     prefs.defaultMaterial = prefs.materials
+
+def updateDataDir(self, context):
+  prefs = context.user_preferences.addons[__package__].preferences
+
+  if os.path.isdir(os.path.expanduser(prefs.dataDir)):
+    MaterialManager.reload()
+    ModelManager.reload()

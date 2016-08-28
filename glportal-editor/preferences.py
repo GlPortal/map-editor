@@ -4,7 +4,8 @@ from bpy.types import AddonPreferences
 from bpy.props import BoolProperty, EnumProperty, StringProperty
 
 from .operatorHelpers import itemsMaterial
-from .preferencesHelper import updateTriggerXrays, updateSmartTexturesMapping, updateDefaultMaterial
+from .preferencesHelper import updateTriggerXrays, updateSmartTexturesMapping, \
+updateDefaultMaterial, updateDataDir
 from .managers import MaterialManager as MM
 
 class preferences(AddonPreferences):
@@ -25,7 +26,8 @@ class preferences(AddonPreferences):
   dataDir = StringProperty (
     name = "Set up GlPortal data directory",
     default = os.path.expanduser("~/.glportal/data/"),
-    subtype = 'DIR_PATH'
+    subtype = 'DIR_PATH',
+    update = updateDataDir
   )
   gameExe = StringProperty (
     name = "Set up GlPortal executable",
