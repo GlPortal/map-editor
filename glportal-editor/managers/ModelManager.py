@@ -15,11 +15,12 @@ def reload():
 
 def preload():
   prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
-  path = prefs.dataDir + "meshes"
+  dataDir = os.path.expanduser(prefs.dataDir)
+  path = os.path.join(dataDir, "meshes")
 
-  if os.path.isdir(os.path.expanduser(prefs.dataDir)) == True:
-    for file in os.listdir(os.path.expanduser(path)):
-      if os.path.isfile(os.path.join(os.path.expanduser(path), file)) and file.endswith(".obj"):
+  if os.path.isdir(dataDir):
+    for file in os.listdir(path):
+      if os.path.isfile(os.path.join(path, file)) and file.endswith(".obj"):
         if file not in blacklist:
           models[file] = file.rstrip(".obj")
     return True
@@ -32,7 +33,8 @@ def create(file = "", materialName = ""):
 
   if file in models:
     prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
-    path = os.path.expanduser(prefs.dataDir + "meshes/" + file)
+    dataDir = os.path.expanduser(prefs.dataDir)
+    path = os.path.join(dataDir, "meshes", file)
 
     if os.path.isfile(path):
       bpy.ops.import_scene.obj(filepath = path)
