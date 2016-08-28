@@ -45,7 +45,8 @@ def glpMaterialUpdate(self, context):
 def extractData(path, dir, name):
   mat = {"data": {"portalable": False}}
 
-  tree = ET.parse(os.path.expanduser(path + dir + "/" + name))
+  filepath = os.path.join(path, dir, name)
+  tree = ET.parse(filepath)
   root = tree.getroot()
 
   mat["name"] = root.attrib["name"]
@@ -71,18 +72,19 @@ def reload():
 
 def preload():
   prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
-  path = prefs.dataDir + "textures"
+  dataDir = os.path.expanduser(prefs.dataDir)
+  path = os.path.join(dataDir, "textures")
 
   materials["none"] = {"portalable": False, "kind": "None", "fancyname": "None"}
 
-  if os.path.isdir(os.path.expanduser(prefs.dataDir)) == True:
-    dirs = [ name for name in os.listdir(os.path.expanduser(path)) if os.path.isdir(os.path.join(os.path.expanduser(path), name)) ]
+  if os.path.isdir(dataDir):
+    dirs = [ name for name in os.listdir(path) if os.path.isdir(os.path.join(path, name)) ]
 
     for dir in dirs:
-      files = [ name for name in os.listdir(os.path.expanduser(path + "/" + dir)) if os.path.isfile(os.path.join(os.path.expanduser(path + "/" + dir), name)) and name.endswith(".gmd") ]
+      files = [ name for name in os.listdir(os.path.join(path, dir)) if os.path.isfile(os.path.join(path, dir, name)) and name.endswith(".gmd") ]
 
       for file in files:
-        mat = extractData(path + "/", dir, file)
+        mat = extractData(path, dir, file)
         materials[mat["name"]] = mat["data"]
         types.glpMaterialTypes.append((mat["name"], mat["data"]["fancyname"], mat["data"]["fancyname"]))
     glpMaterialSet()
@@ -113,9 +115,10 @@ def create(name = "", model = False):
     return mat
   elif name in materials:
     prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
+    dataDir = os.path.expanduser(prefs.dataDir)
     material = materials[name]
     fancyname = material["fancyname"]
-    path = os.path.expanduser(prefs.dataDir + "textures/" +  material["texture"])
+    path = os.path.join(dataDir, "textures",  material["texture"])
 
     try:
       image = bpy.data.images.load(path)
