@@ -1,0 +1,11 @@
+* Manual for GlPortal Map Editor
+
+* Introduction
+
+The GlPortal Map Editor is a plugin for Blender which allows it to import, edit, create and export GlPortal maps.
+
+** Features
+
+- Easy import and export of GlPortal maps
+- GlPortal specific tool panels
+- Preview with textures
