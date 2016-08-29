@@ -59,9 +59,9 @@ def extractData(path, dir, name):
       if child.attrib["portalable"] == "true":
         mat["data"]["portalable"] = True
     elif child.tag == "diffuse":
-      mat["data"]["texture"] = dir + "/" + child.attrib["path"]
+      mat["data"]["texture"] = os.path.join(dir, child.attrib["path"])
     elif child.tag == "normal":
-      mat["data"]["normaltex"] = dir + "/" + child.attrib["path"]
+      mat["data"]["normaltex"] = os.path.join(dir, child.attrib["path"])
 
   return mat
 
