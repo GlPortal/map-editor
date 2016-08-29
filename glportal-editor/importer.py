@@ -159,10 +159,13 @@ class Importer():
         object.rotation_euler = rotation
       elif child.tag == "trigger":
         if self.createCube(child):
-          if child.get("type") == "death":
+          type = child.get("type")
+          if type == "death":
             bpy.ops.glp.set_death()
-          elif child.get("type") == "radiation":
+          elif type == "radiation":
             bpy.ops.glp.set_radiation()
+          elif type == "win":
+            bpy.ops.glp.set_win()
           else:
             object = bpy.context.active_object
             object.delete()
