@@ -38,7 +38,7 @@ def glpMaterialReset():
 def glpMaterialUpdate(self, context):
   objects = bpy.context.selected_objects
   for object in objects:
-    if object and object.type == 'MESH' and object.glpTypes and object.glpTypes != "none":
+    if object.type == 'MESH' and object.glpTypes != "none":
       setMaterial(object)
 
 
@@ -173,13 +173,13 @@ def setMaterial(object, model = False):
     else:
       data.materials[0] = mat
 
-    if (object.glpTypes == "wall" or object.glpTypes == "volume"):
+    if object.glpTypes in {"wall", "volume"}:
       updateTexture(object)
   else:
     return False
 
 def reset(object):
-  if object and object.glpTypes != "none" and object.glpMaterial != "none":
+  if object.glpTypes != "none" and object.glpMaterial != "none":
     object.glpMaterial = "none"
 
     if (len(object.data.materials) == 1):
