@@ -93,6 +93,7 @@ class runGame(bpy.types.Operator):
       if os.path.isdir(prefs.dataDir):
         if os.path.isfile(prefs.gameExe):
           exporter = Exporter(filepath)
+          exporter.mapFormatRadix = prefs.mapFormatRadix
           exporter.execute(context)
 
           call([prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath])
