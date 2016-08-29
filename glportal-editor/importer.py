@@ -6,6 +6,8 @@ import xml.etree.cElementTree as ET
 from .managers import ModelManager
 
 class Importer():
+  mapFormatRadix = False
+
   def __init__(self, filePath, deleteWorld = True):
     self.__filePath = filePath
     self.__deleteWorld = deleteWorld
@@ -24,7 +26,10 @@ class Importer():
     for child in root:
       if child.tag == "materials":
         for mat in child:
-          mid = mat.get("mid")
+          if self.mapFormatRadix:
+            mid = mat.get("id")
+          else:
+            mid = mat.get("mid")
           name = mat.get("name")
 
           materials[mid] = name
@@ -47,6 +52,12 @@ class Importer():
     y = math.radians(float(param.get("y")))
     z = math.radians(-float(param.get("z")))
     return [x, z, y]
+
+  def extrackColor(self, param):
+    r = float(param.get("r"))
+    g = float(param.get("g"))
+    b = float(param.get("b"))
+    return [r, g, b]
 
   def createCube(self, child):
     bpy.ops.mesh.primitive_cube_add()
@@ -87,8 +98,10 @@ class Importer():
           object = bpy.context.active_object
           object.glpTypes = "wall"
 
-          if "mid" in child.attrib:
-            mid = child.get("mid")
+          matAttr = "material" if self.mapFormatRadix else "mid"
+
+          if matAttr in child.attrib:
+            mid = child.get(matAttr)
             object.glpMaterial = materials[mid]
           else:
             object.glpMaterial = prefs.defaultMaterial
@@ -115,9 +128,16 @@ class Importer():
         if object:
           lamp = object.data
 
-          object.location = self.extractPosition(child)
+          if self.mapFormatRadix:
+            for param in child:
+              if param.tag == "position":
+                object.location = self.extractPosition(param)
+              elif param.tag == "color":
+                lamp.color = self.extrackColor(param)
+          else:
+            object.location = self.extractPosition(child)
+            lamp.color = self.extrackColor(child)
 
-          lamp.color = [float(child.get("r")), float(child.get("g")), float(child.get("b"))]
           lamp.distance = float(child.get("distance"))
           lamp.energy = float(child.get("energy"))
 
@@ -146,11 +166,12 @@ class Importer():
           else:
             object = bpy.context.active_object
             object.delete()
-      elif child.tag == "object":
+      elif child.tag == "object" or child.tag == "model":
         mesh = child.get("mesh")
+        matAttr = "material" if self.mapFormatRadix else "mid"
 
-        if "mid" in child.attrib:
-          mid = child.get("mid")
+        if matAttr in child.attrib:
+          mid = child.get(matAttr)
           ModelManager.create(mesh, materials[mid])
         else:
            ModelManager.create(mesh)

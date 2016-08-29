@@ -10,6 +10,8 @@ from .managers import MaterialManager
 from .importer import Importer
 
 class Exporter():
+  mapFormatRadix = False
+
   def __init__(self, filePath, d_p = 4):
     self.__filePath = filePath
     self.__d_p = d_p
@@ -20,8 +22,12 @@ class Exporter():
     materialElement = tree.SubElement(root, "materials")
 
     for name, index in materials:
-      element = tree.SubElement(materialElement, "mat")
-      element.set("mid", str(index))
+      if self.mapFormatRadix:
+        element = tree.SubElement(materialElement, "material")
+        element.set("id", str(index))
+      else:
+        element = tree.SubElement(materialElement, "mat")
+        element.set("mid", str(index))
       element.set("name", name)
 
   def storePosition(self, element, object):
@@ -51,6 +57,11 @@ class Exporter():
     element.set("y", str(round(object.dimensions[2], self.__d_p)))
     element.set("z", str(round(object.dimensions[1], self.__d_p)))
 
+  def storeColor(self, element, color):
+    element.set("r", str(round(color[0], self.__d_p)))
+    element.set("g", str(round(color[1], self.__d_p)))
+    element.set("b", str(round(color[2], self.__d_p)))
+
   def writeLampToTree(self, object, targetTree):
     lamp = object.data
 
@@ -59,11 +70,16 @@ class Exporter():
     lightEnergy = lamp.energy
 
     lightElement = tree.SubElement(targetTree, "light")
-    self.storePosition(lightElement, object)
 
-    lightElement.set("r", str(round(colorArray[0], self.__d_p)))
-    lightElement.set("g", str(round(colorArray[1], self.__d_p)))
-    lightElement.set("b", str(round(colorArray[2], self.__d_p)))
+    if self.mapFormatRadix:
+      positionElement = tree.SubElement(lightElement, "position")
+      self.storePosition(positionElement, object)
+
+      colorElement = tree.SubElement(lightElement, "color")
+      self.storeColor(colorElement, colorArray)
+    else:
+      self.storePosition(lightElement, object)
+      self.storeColor(lightElement, colorArray)
 
     lightElement.set("distance", str(round(lightDistance, self.__d_p)))
     lightElement.set("energy", str(round(lightEnergy, self.__d_p)))
@@ -79,8 +95,14 @@ class Exporter():
     objects = context.scene.objects
     root = tree.Element("map")
 
+    if self.mapFormatRadix:
+      matAttr = "material"
+    else:
+      matAttr = "mid"
+
     if os.path.isfile(self.__filePath):
       oldMap = Importer(self.__filePath)
+      oldMap.mapFormatRadix = self.mapFormatRadix
       oldMaterials = oldMap.getMaterials()
     else:
       oldMaterials = {}
@@ -119,13 +141,16 @@ class Exporter():
         boxElement = None
 
         if type == "model":
-          boxElement = tree.SubElement(root, "object")
+          if self.mapFormatRadix:
+            boxElement = tree.SubElement(root, "model")
+          else:
+            boxElement = tree.SubElement(root, "object")
           boxElement.set("mesh", object.glpModel)
 
           if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.blacklist:
-            boxElement.set("mid", str(materials[object.glpMaterial]))
+            boxElement.set(matAttr, str(materials[object.glpMaterial]))
           else:
-            boxElement.set("mid", str(materials[prefs.defaultMaterial]))
+            boxElement.set(matAttr, str(materials[prefs.defaultMaterial]))
         elif type == "trigger":
           boxElement = tree.SubElement(root, "trigger")
           if object.glpTriggerTypes:
@@ -134,9 +159,9 @@ class Exporter():
           boxElement = tree.SubElement(root, "wall")
 
           if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.blacklist:
-            boxElement.set("mid", str(materials[object.glpMaterial]))
+            boxElement.set(matAttr, str(materials[object.glpMaterial]))
           else:
-            boxElement.set("mid", str(materials[prefs.defaultMaterial]))
+            boxElement.set(matAttr, str(materials[prefs.defaultMaterial]))
         elif type == "volume":
           if object.glpVolumeTypes == "acid":
             boxElement = tree.SubElement(root, "acid")
