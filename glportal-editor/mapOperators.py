@@ -43,7 +43,10 @@ class fastExport(bpy.types.Operator):
 
     if (filepath != "none"):
       if os.path.isfile(filepath):
+        prefs = bpy.context.user_preferences.addons[__package__].preferences
+
         exporter = Exporter(filepath)
+        exporter.mapFormatRadix = prefs.mapFormatRadix
         exporter.execute(context)
 
         self.report({'INFO'}, "Map exported")
