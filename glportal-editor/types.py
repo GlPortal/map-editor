@@ -49,4 +49,10 @@ def setProperties():
     default = "none"
   )
 
-setProperties()
+def delProperties():
+  del bpy.types.Object.glpTypes
+  del bpy.types.Object.glpVolumeTypes
+  del bpy.types.Object.glpTriggerTypes
+  del bpy.types.Object.glpModel
+  del bpy.types.WindowManager.importedFilepath
+  del bpy.types.Object.glpMaterial

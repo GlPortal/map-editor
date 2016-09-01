@@ -67,25 +67,29 @@ def menu_func_import(self, context):
 
 def register():
   bpy.utils.register_module(__name__)
+
+  types.setProperties()
+  MaterialManager.glpMaterialSet()
+  MaterialManager.preload()
+  ModelManager.preload()
+
   bpy.types.INFO_MT_file_export.append(menu_func_export)
   bpy.types.INFO_MT_file_import.append(menu_func_import)
   bpy.types.INFO_MT_add.prepend(glportalMenuAdd.glportal_add_menu)
   bpy.app.handlers.scene_update_post.append(updateTextures.sceneUpdater)
 
-  MaterialManager.glpMaterialSet()
-  MaterialManager.preload()
-  ModelManager.preload()
-
 def unregister():
   bpy.utils.unregister_module(__name__)
-  bpy.types.INFO_MT_file_export.remove(menu_func_import)
-  bpy.types.INFO_MT_file_export.remove(menu_func_export)
-  bpy.types.INFO_MT_add.remove(glportalMenuAdd.glportal_add_menu)
-  bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
 
   MaterialManager.glpMaterialReset()
   MaterialManager.materials.clear()
   ModelManager.models.clear()
+  types.delProperties()
+
+  bpy.types.INFO_MT_file_export.remove(menu_func_import)
+  bpy.types.INFO_MT_file_export.remove(menu_func_export)
+  bpy.types.INFO_MT_add.remove(glportalMenuAdd.glportal_add_menu)
+  bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
 
 if __name__ == "__main__":
   register()
