@@ -91,7 +91,6 @@ class Exporter():
     fixObjects()
 
     prefs = bpy.context.user_preferences.addons[__package__].preferences
-    dir = os.path.dirname(self.__filePath)
     objects = context.scene.objects
     root = tree.Element("map")
 
