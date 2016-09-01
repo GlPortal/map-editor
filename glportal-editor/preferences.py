@@ -55,8 +55,11 @@ class preferences(AddonPreferences):
     layout.prop(self, "smartTexturesMapping")
     layout.prop(self, "mapFormatRadix")
 
-    if self.defaultMaterial in MM.materials:
-      self.materials = self.defaultMaterial
+    if len(MM.materials) > 1:
+      if self.defaultMaterial not in MM.materials:
+        self.materials = self.defaultMaterial
+
+        layout.label(text="Default material is not on the list.", icon='ERROR')
     else:
       layout.label(text="Material list is empty", icon='ERROR')
     layout.prop(self, "materials")
