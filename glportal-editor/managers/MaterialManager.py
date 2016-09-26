@@ -92,7 +92,7 @@ def preload():
     return True
   return False
 
-def create(name = "", model = False):
+def create(name = ""):
   global colors, materials
 
   if name == "":
@@ -150,22 +150,17 @@ def create(name = "", model = False):
       mtex.use_map_density = True
       mtex.use_map_emit = True
       mtex.emit_factor = 0.3
-
-    if prefs.smartTexturesMapping or model:
       mtex.texture_coords = 'UV'
       mtex.mapping = 'FLAT'
-    else:
-      mtex.texture_coords = 'GLOBAL'
-      mtex.mapping = 'CUBE'
 
     return mat
   else:
     print("Material '", name, "' does not exist.")
     return False
 
-def setMaterial(object, model = False):
+def setMaterial(object):
   if object:
-    mat = create(object.glpMaterial, model)
+    mat = create(object.glpMaterial)
     data = object.data
 
     if (len(data.materials) == 0):

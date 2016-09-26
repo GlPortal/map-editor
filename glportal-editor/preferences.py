@@ -4,8 +4,7 @@ from bpy.types import AddonPreferences
 from bpy.props import BoolProperty, EnumProperty, StringProperty
 
 from .operatorHelpers import itemsMaterial
-from .preferencesHelper import updateTriggerXrays, updateSmartTexturesMapping, \
-updateDefaultMaterial, updateDataDir
+from .preferencesHelper import updateTriggerXrays, updateDefaultMaterial, updateDataDir
 from .managers import MaterialManager as MM
 
 class preferences(AddonPreferences):
@@ -16,12 +15,6 @@ class preferences(AddonPreferences):
     description = "Enable / Disable X-rays for triggers.",
     default = True,
     update = updateTriggerXrays
-  )
-  smartTexturesMapping = BoolProperty (
-    name = "Smart textures mapping",
-    description = "Calculate position of each texture.",
-    default = True,
-    update = updateSmartTexturesMapping
   )
   dataDir = StringProperty (
     name = "Set up GlPortal data directory",
@@ -52,7 +45,6 @@ class preferences(AddonPreferences):
     layout = self.layout
 
     layout.prop(self, "triggerXrays")
-    layout.prop(self, "smartTexturesMapping")
     layout.prop(self, "mapFormatRadix")
 
     if len(MM.materials) > 1:
