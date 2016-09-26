@@ -22,7 +22,7 @@ class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
     importer = Importer(self.filepath, self.deleteWorld)
     importer.mapFormatRadix = self.mapFormatRadix
     importer.execute(context)
-    bpy.context.window_manager.importedFilepath = self.filePath
+    bpy.context.window_manager.importedFilepath = self.filepath
     return {'FINISHED'}
 
   def invoke(self, context, event):

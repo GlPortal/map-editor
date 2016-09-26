@@ -21,7 +21,7 @@ class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
     exporter = Exporter(self.filepath)
     exporter.mapFormatRadix = self.mapFormatRadix
     exporter.execute(context)
-    bpy.context.window_manager.importedFilepath = self.filePath
+    bpy.context.window_manager.importedFilepath = self.filepath
     return {'FINISHED'}
 
   def invoke(self, context, event):
