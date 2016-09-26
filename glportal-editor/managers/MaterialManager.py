@@ -92,6 +92,20 @@ def preload():
     return True
   return False
 
+def createTexture(imagePath, textureName):
+  if textureName in bpy.data.textures:
+    texture = bpy.data.textures[textureName]
+  else:
+    try:
+      image = bpy.data.images.load(imagePath)
+    except:
+      return False
+
+    texture = bpy.data.textures.new(name=textureName, type='IMAGE')
+    texture.image = image
+
+  return texture
+
 def create(name = ""):
   global colors, materials
 
@@ -120,17 +134,6 @@ def create(name = ""):
     fancyname = material["fancyname"]
     path = os.path.join(dataDir, "textures",  material["texture"])
 
-    try:
-      image = bpy.data.images.load(path)
-    except:
-      raise NameError("Cannot load image %s" % path)
-
-    if fancyname in bpy.data.textures:
-      texture = bpy.data.textures[fancyname]
-    else:
-      texture = bpy.data.textures.new(name=fancyname, type='IMAGE')
-      texture.image = image
-
     if fancyname in bpy.data.materials:
       mat = bpy.data.materials[fancyname]
       mtex = mat.texture_slots[0]
@@ -141,6 +144,10 @@ def create(name = ""):
         mat.diffuse_color = colors[name]
       else:
         mat.diffuse_color = colors["none"]
+
+      texture = createTexture(path, fancyname)
+      if not texture:
+        return False
 
       mtex = mat.texture_slots.add()
       mtex.texture = texture
