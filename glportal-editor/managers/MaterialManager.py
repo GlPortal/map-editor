@@ -149,6 +149,22 @@ def create(name = ""):
       if not texture:
         return False
 
+      if "normaltex" in material:
+        pathn = os.path.join(dataDir, "textures",  material["normaltex"])
+        textureNormal = createTexture(pathn, fancyname + "_normal")
+        if not textureNormal:
+          return False
+        else:
+          mtex = mat.texture_slots.add()
+          mtex.texture = texture
+          mtex.use_map_normal = True
+          mtex.normal_factor = 0.2
+          mtex.use_map_color_diffuse = False
+          mtex.use_map_color_emission = False
+          mtex.use_map_density = False
+          mtex.texture_coords = 'UV'
+          mtex.mapping = 'FLAT'
+
       mtex = mat.texture_slots.add()
       mtex.texture = texture
       mtex.use_map_color_diffuse = True
