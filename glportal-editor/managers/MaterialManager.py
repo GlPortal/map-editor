@@ -156,7 +156,7 @@ def create(name = ""):
           return False
         else:
           mtex = mat.texture_slots.add()
-          mtex.texture = texture
+          mtex.texture = textureNormal
           mtex.use_map_normal = True
           mtex.normal_factor = 0.2
           mtex.use_map_color_diffuse = False
