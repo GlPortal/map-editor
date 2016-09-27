@@ -62,6 +62,9 @@ def extractData(path, dir, name):
       mat["data"]["texture"] = os.path.join(dir, child.attrib["path"])
     elif child.tag == "normal":
       mat["data"]["normaltex"] = os.path.join(dir, child.attrib["path"])
+    elif child.tag == "specular":
+      mat["data"]["speculartex"] = os.path.join(dir, child.attrib["path"])
+      mat["data"]["shininess"] = float(child.attrib["shininess"]) / 6
 
   return mat
 
@@ -145,18 +148,14 @@ def create(name = ""):
       else:
         mat.diffuse_color = colors["none"]
 
-      texture = createTexture(path, fancyname)
-      if not texture:
-        return False
-
       if "normaltex" in material:
         pathn = os.path.join(dataDir, "textures",  material["normaltex"])
-        textureNormal = createTexture(pathn, fancyname + "_normal")
-        if not textureNormal:
+        texture = createTexture(pathn, fancyname + "_normal")
+        if not texture:
           return False
         else:
           mtex = mat.texture_slots.add()
-          mtex.texture = textureNormal
+          mtex.texture = texture
           mtex.use_map_normal = True
           mtex.normal_factor = 0.2
           mtex.use_map_color_diffuse = False
@@ -164,6 +163,28 @@ def create(name = ""):
           mtex.use_map_density = False
           mtex.texture_coords = 'UV'
           mtex.mapping = 'FLAT'
+
+      if "speculartex" in material:
+        pathn = os.path.join(dataDir, "textures",  material["speculartex"])
+        texture = createTexture(pathn, fancyname + "_specular")
+        if not texture:
+          return False
+        else:
+          mtex = mat.texture_slots.add()
+          mtex.texture = texture
+          mtex.use_map_specular = True
+          mtex.specular_factor = material["shininess"]
+          mtex.use_map_color_spec = True
+          mtex.use_map_hardness = True
+          mtex.use_map_color_diffuse = False
+          mtex.use_map_color_emission = False
+          mtex.use_map_density = False
+          mtex.texture_coords = 'UV'
+          mtex.mapping = 'FLAT'
+
+      texture = createTexture(path, fancyname)
+      if not texture:
+        return False
 
       mtex = mat.texture_slots.add()
       mtex.texture = texture
