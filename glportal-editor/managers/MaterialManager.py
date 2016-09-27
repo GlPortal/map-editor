@@ -109,6 +109,40 @@ def createTexture(imagePath, textureName):
 
   return texture
 
+def addTexture(mat, texture):
+  mtex = mat.texture_slots.add()
+  mtex.texture = texture
+  mtex.texture_coords = 'UV'
+  mtex.mapping = 'FLAT'
+
+  return mtex
+
+def setDiffuseTexture(mtex):
+  mtex.use_map_color_diffuse = True
+  mtex.use_map_color_emission = True
+  mtex.emission_color_factor = 0.5
+  mtex.use_map_density = True
+  mtex.use_map_emit = True
+  mtex.emit_factor = 0.3
+
+def setNormalTexture(mtex):
+  mtex.use_map_normal = True
+  mtex.normal_factor = 0.2
+  mtex.use_map_color_diffuse = False
+  mtex.use_map_color_emission = False
+  mtex.use_map_density = False
+  mtex.use_map_emit = False
+
+def setSpecularTexture(mtex, shininess):
+  mtex.use_map_specular = True
+  mtex.specular_factor = shininess
+  mtex.use_map_color_spec = True
+  mtex.use_map_hardness = True
+  mtex.use_map_color_diffuse = False
+  mtex.use_map_color_emission = False
+  mtex.use_map_density = False
+  mtex.use_map_emit = False
+
 def create(name = ""):
   global colors, materials
 
@@ -135,7 +169,6 @@ def create(name = ""):
     dataDir = os.path.expanduser(prefs.dataDir)
     material = materials[name]
     fancyname = material["fancyname"]
-    path = os.path.join(dataDir, "textures",  material["texture"])
 
     if fancyname in bpy.data.materials:
       mat = bpy.data.materials[fancyname]
@@ -148,54 +181,28 @@ def create(name = ""):
       else:
         mat.diffuse_color = colors["none"]
 
-      if "normaltex" in material:
-        pathn = os.path.join(dataDir, "textures",  material["normaltex"])
-        texture = createTexture(pathn, fancyname + "_normal")
-        if not texture:
-          return False
+      if "texture" in material:
+        path = os.path.join(dataDir, "textures",  material["texture"])
+        texture = createTexture(path, fancyname)
+        if texture:
+          mtex = addTexture(mat, texture)
+          setDiffuseTexture(mtex)
         else:
-          mtex = mat.texture_slots.add()
-          mtex.texture = texture
-          mtex.use_map_normal = True
-          mtex.normal_factor = 0.2
-          mtex.use_map_color_diffuse = False
-          mtex.use_map_color_emission = False
-          mtex.use_map_density = False
-          mtex.texture_coords = 'UV'
-          mtex.mapping = 'FLAT'
+          return False
+
+      if "normaltex" in material:
+        path = os.path.join(dataDir, "textures",  material["normaltex"])
+        texture = createTexture(path, fancyname + "_normal")
+        if texture:
+          mtex = addTexture(mat, texture)
+          setNormalTexture(mtex)
 
       if "speculartex" in material:
-        pathn = os.path.join(dataDir, "textures",  material["speculartex"])
-        texture = createTexture(pathn, fancyname + "_specular")
-        if not texture:
-          return False
-        else:
-          mtex = mat.texture_slots.add()
-          mtex.texture = texture
-          mtex.use_map_specular = True
-          mtex.specular_factor = material["shininess"]
-          mtex.use_map_color_spec = True
-          mtex.use_map_hardness = True
-          mtex.use_map_color_diffuse = False
-          mtex.use_map_color_emission = False
-          mtex.use_map_density = False
-          mtex.texture_coords = 'UV'
-          mtex.mapping = 'FLAT'
-
-      texture = createTexture(path, fancyname)
-      if not texture:
-        return False
-
-      mtex = mat.texture_slots.add()
-      mtex.texture = texture
-      mtex.use_map_color_diffuse = True
-      mtex.use_map_color_emission = True
-      mtex.emission_color_factor = 0.5
-      mtex.use_map_density = True
-      mtex.use_map_emit = True
-      mtex.emit_factor = 0.3
-      mtex.texture_coords = 'UV'
-      mtex.mapping = 'FLAT'
+        path = os.path.join(dataDir, "textures",  material["speculartex"])
+        texture = createTexture(path, fancyname + "_specular")
+        if texture:
+          mtex = addTexture(mat, texture)
+          setSpecularTexture(mtex, material["shininess"])
 
     return mat
   else:
