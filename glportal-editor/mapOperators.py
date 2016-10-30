@@ -99,7 +99,7 @@ class runGame(bpy.types.Operator):
           exporter.mapFormatRadix = prefs.mapFormatRadix
           exporter.execute(context)
 
-          call([prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath])
+          call([prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath], env=os.environ)
 
           os.remove(filepath)
         else:
