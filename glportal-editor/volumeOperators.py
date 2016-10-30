@@ -9,8 +9,8 @@ class setAcid(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    object = bpy.context.active_object
-    if object:
+    objects = bpy.context.selected_objects
+    for object in objects:
       if object.type == 'MESH':
         if object.glpTypes != "door":
           if object.glpTypes != "model":
