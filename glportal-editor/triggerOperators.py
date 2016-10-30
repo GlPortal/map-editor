@@ -9,8 +9,8 @@ class setWin(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    object = bpy.context.active_object
-    if object:
+    objects = bpy.context.selected_objects
+    for object in objects:
       if object.type == 'MESH':
         if object.glpTypes not in {"door", "model"}:
           setTrigger(object, "win")
@@ -38,8 +38,8 @@ class setDeath(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    object = bpy.context.active_object
-    if object:
+    objects = bpy.context.selected_objects
+    for object in objects:
       if object.type == 'MESH':
         if object.glpTypes not in {"door", "model"}:
           setTrigger(object, "death")
@@ -67,8 +67,8 @@ class setRadiation(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    object = bpy.context.active_object
-    if object:
+    objects = bpy.context.selected_objects
+    for object in objects:
       if object.type == 'MESH':
         if object.glpTypes not in {"door", "model"}:
           setTrigger(object, "radiation")
