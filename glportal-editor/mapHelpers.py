@@ -109,9 +109,9 @@ class checkMapDialog(bpy.types.Operator):
       layout.prop(self, "exitDoor")
 
       if result["exitDoor"] == 0:
-        layout.label(text = "There is no exit door, use it exactly once.", icon='CANCEL')
+        layout.label(text="There is no exit door, use it exactly once.", icon='CANCEL')
       else:
-        layout.label(text = "There are too many exit doors, use it exactly once.", icon='ERROR')
+        layout.label(text="There are too many exit doors, use it exactly once.", icon='ERROR')
       layout.separator()
     if result["camera"] != 1:
       self.camera = result["camera"]
@@ -120,38 +120,39 @@ class checkMapDialog(bpy.types.Operator):
       layout.prop(self, "camera")
 
       if result["camera"] == 0:
-        layout.label(text = "There is no camera.", icon='CANCEL')
+        layout.label(text="There is no camera.", icon='CANCEL')
       else:
-        layout.label(text = "There are too many cameras.", icon='ERROR')
+        layout.label(text="There are too many cameras.", icon='ERROR')
 
-      layout.label(text = "The camera object is used for determining the spawn position.",icon='INFO')
-      layout.label(text = "Use it exactly once.",icon='INFO')
+      layout.label(text="The camera object is used for determining the spawn position.",
+                   icon='INFO')
+      layout.label(text="Use it exactly once.", icon='INFO')
       layout.separator()
     if result["light"] == 0:
       error = True
 
-      layout.label(text = "There is no light in the map you need at least one light.", icon='CANCEL')
+      layout.label(text="There is no light in the map you need at least one light.", icon='CANCEL')
       layout.separator()
     elif result["light"] > 5:
       self.light = result["light"]
       error = True
 
       layout.prop(self, "light")
-      layout.label(text = "There are too many lights.", icon='INFO')
-      layout.label(text = "This is a performance issue and has to be fixed..", icon='INFO')
+      layout.label(text="There are too many lights.", icon='INFO')
+      layout.label(text="This is a performance issue and has to be fixed..", icon='INFO')
       layout.separator()
     if result["wall"] == 0:
       self.wall = result["wall"]
       error = True
 
       layout.prop(self, "wall")
-      layout.label(text = "There isn't a wall.", icon='ERROR')
+      layout.label(text="There isn't a wall.", icon='ERROR')
       layout.separator()
     if result['triggerDeath'] < result['acid']:
       error = True
 
-      layout.label(text = "Acid without death trigger.", icon='ERROR')
-      layout.label(text = "Use death trigger for each volume of acid.", icon='INFO')
+      layout.label(text="Acid without death trigger.", icon='ERROR')
+      layout.label(text="Use death trigger for each volume of acid.", icon='INFO')
       layout.separator()
     if result["camera"] == 1:
       isOver = checkSpawnPosition(objects)
@@ -160,14 +161,15 @@ class checkMapDialog(bpy.types.Operator):
         if isOver == 0:
           error = True
 
-          layout.label(text = "Camera is in the air.", icon='CANCEL')
+          layout.label(text="Camera is in the air.", icon='CANCEL')
         else:
           error = True
 
-          layout.label(text = "Camera is very close to the floor.", icon='ERROR')
-          layout.label(text = "Player can get stuck in the floor or unable to go through portal.", icon='INFO')
+          layout.label(text="Camera is very close to the floor.", icon='ERROR')
+          layout.label(text="Player can get stuck in the floor or unable to go through portal.",
+                       icon='INFO')
 
-        layout.label(text = "Remember, we are using camera as spawn position.", icon='INFO')
+        layout.label(text="Remember, we are using camera as spawn position.", icon='INFO')
         layout.separator()
     if result["objectNoMat"] != 0:
       error = True
@@ -176,10 +178,10 @@ class checkMapDialog(bpy.types.Operator):
       layout.prop(self, "modelsNoMat")
 
       row = layout.split(0.75)
-      row.label(text = "There are objects without assigned material.", icon='ERROR')
+      row.label(text="There are objects without assigned material.", icon='ERROR')
       row.operator("glp.fix_materials")
 
       layout.separator()
 
     if not error:
-      layout.label(text = "Nice work. There are no errors or warnings.", icon='FILE_TICK')
+      layout.label(text="Nice work. There are no errors or warnings.", icon='FILE_TICK')
