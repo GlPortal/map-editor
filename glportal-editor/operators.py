@@ -28,18 +28,17 @@ class setPortalable(bpy.types.Operator):
   def execute(self, context):
     objects = bpy.context.selected_objects
     for object in objects:
-      if object:
-        if object.type == 'MESH':
-          if object.glpTypes != "door":
-            if object.glpTypes != "model":
-              resetTriggerSettings(object)
-              object.glpTypes = "wall"
+      if object.type == 'MESH':
+        if object.glpTypes != "door":
+          if object.glpTypes != "model":
+            resetTriggerSettings(object)
+            object.glpTypes = "wall"
 
-            object.glpMaterial = "concrete/wall00"
-          else:
-            self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
+          object.glpMaterial = "concrete/wall00"
         else:
-          self.report({'ERROR'}, "Object of type '%s' can't be converted to the portalable wall." % (object.type))
+          self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
+      else:
+        self.report({'ERROR'}, "Object of type '%s' can't be converted to the portalable wall." % (object.type))
     return {'FINISHED'}
 
 class setWall(bpy.types.Operator):
@@ -51,18 +50,17 @@ class setWall(bpy.types.Operator):
   def execute(self, context):
     objects = bpy.context.selected_objects
     for object in objects:
-      if object:
-        if object.type == 'MESH':
-          if object.glpTypes != "door":
-            if object.glpTypes != "model":
-              resetTriggerSettings(object)
-              object.glpTypes = "wall"
+      if object.type == 'MESH':
+        if object.glpTypes != "door":
+          if object.glpTypes != "model":
+            resetTriggerSettings(object)
+            object.glpTypes = "wall"
 
-            object.glpMaterial = "metal/tiles00x3"
-          else:
-            self.report({'ERROR'}, "Door can't be converted to the metal wall.")
+          object.glpMaterial = "metal/tiles00x3"
         else:
-          self.report({'ERROR'}, "Object of type '%s' can't be converted to the metal wall." % (object.type))
+          self.report({'ERROR'}, "Door can't be converted to the metal wall.")
+      else:
+        self.report({'ERROR'}, "Object of type '%s' can't be converted to the metal wall." % (object.type))
     return {'FINISHED'}
 
 class addWall(bpy.types.Operator):
@@ -97,7 +95,7 @@ class searchMaterial(bpy.types.Operator):
   def execute(self, context):
     objects = bpy.context.selected_objects
     for object in objects:
-      if object and object.type == 'MESH' and object.glpTypes:
+      if object.type == 'MESH' and object.glpTypes:
         object.glpMaterial = self.material
     return {'FINISHED'}
 
