@@ -4,6 +4,7 @@ import os
 import xml.etree.cElementTree as ET
 
 from .managers import ModelManager
+from .operatorHelpers import simpleCube
 
 class Importer():
   mapFormatRadix = False
@@ -59,9 +60,9 @@ class Importer():
     return [r, g, b]
 
   def createCube(self, child):
-    bpy.ops.mesh.primitive_cube_add()
+    simpleCube()
 
-    object = bpy.context.active_object
+    object = bpy.context.selected_objects[0]
     if object:
       for param in child:
         if param.tag == "position":
@@ -71,7 +72,7 @@ class Importer():
         elif param.tag == "scale":
           object.dimensions = self.extractDimensions(param)
 
-      return True
+      return object
     return False
 
   def getMaterials(self):
@@ -93,8 +94,8 @@ class Importer():
 
     for child in root:
       if child.tag == "wall":
-        if self.createCube(child):
-          object = bpy.context.active_object
+        object = self.createCube(child)
+        if object:
           object.glpTypes = "wall"
 
           matAttr = "material" if self.mapFormatRadix else "mid"
@@ -105,7 +106,8 @@ class Importer():
           else:
             object.glpMaterial = prefs.defaultMaterial
       elif child.tag == "acid":
-        if self.createCube(child):
+        object = self.createCube(child)
+        if object:
           bpy.ops.glp.set_acid()
       elif child.tag == "spawn":
         bpy.ops.object.camera_add()
@@ -157,7 +159,8 @@ class Importer():
         object.location = location
         object.rotation_euler = rotation
       elif child.tag == "trigger":
-        if self.createCube(child):
+        object = self.createCube(child)
+        if object:
           type = child.get("type")
           if type == "death":
             bpy.ops.glp.set_death()
@@ -166,7 +169,6 @@ class Importer():
           elif type == "win":
             bpy.ops.glp.set_win()
           else:
-            object = bpy.context.active_object
             object.delete()
       elif child.tag == "object" or child.tag == "model":
         mesh = child.get("mesh")
@@ -176,7 +178,7 @@ class Importer():
           mid = child.get(matAttr)
           ModelManager.create(mesh, materials[mid])
         else:
-           ModelManager.create(mesh)
+          ModelManager.create(mesh)
 
         object = bpy.context.selected_objects[0]
         if object:

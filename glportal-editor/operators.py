@@ -1,6 +1,6 @@
 import bpy
 
-from .operatorHelpers import resetTriggerSettings, itemsMaterial, itemsModel
+from .operatorHelpers import resetTriggerSettings, itemsMaterial, itemsModel, simpleCube
 from .managers import ModelManager
 
 # we are using this for <end> (exit door)
@@ -70,7 +70,7 @@ class addWall(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    bpy.ops.mesh.primitive_cube_add()
+    simpleCube()
     bpy.ops.glp.set_wall()
     return {'FINISHED'}
 
@@ -81,7 +81,7 @@ class addPortalable(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    bpy.ops.mesh.primitive_cube_add()
+    simpleCube()
     bpy.ops.glp.set_portalable()
     return {'FINISHED'}
 

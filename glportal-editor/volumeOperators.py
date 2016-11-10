@@ -1,6 +1,6 @@
 import bpy
 
-from .operatorHelpers import resetTriggerSettings
+from .operatorHelpers import resetTriggerSettings, simpleCube
 
 class setAcid(bpy.types.Operator):
   bl_idname = "glp.set_acid"
@@ -33,6 +33,6 @@ class addAcid(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    bpy.ops.mesh.primitive_cube_add()
+    simpleCube()
     bpy.ops.glp.set_acid()
     return {'FINISHED'}

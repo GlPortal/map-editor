@@ -1,6 +1,6 @@
 import bpy
 
-from .operatorHelpers import setTrigger
+from .operatorHelpers import setTrigger, simpleCube
 
 class setWin(bpy.types.Operator):
   bl_idname = "glp.set_win"
@@ -27,7 +27,7 @@ class addWin(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    bpy.ops.mesh.primitive_cube_add()
+    simpleCube()
     bpy.ops.glp.set_win()
     return {'FINISHED'}
 
@@ -56,7 +56,7 @@ class addDeath(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    bpy.ops.mesh.primitive_cube_add()
+    simpleCube()
     bpy.ops.glp.set_death()
     return {'FINISHED'}
 
@@ -85,6 +85,6 @@ class addRadiation(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    bpy.ops.mesh.primitive_cube_add()
+    simpleCube()
     bpy.ops.glp.set_radiation()
     return {'FINISHED'}
