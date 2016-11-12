@@ -58,7 +58,7 @@ def setProperties():
   )
   bpy.types.WindowManager.MPItemId = IntProperty (
     default = 0,
-    update = MaterialPanel.MPItemIdUpdate
+#    update = MaterialPanel.MPItemIdUpdate
   )
 
 def delProperties():
