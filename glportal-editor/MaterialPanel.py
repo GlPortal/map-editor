@@ -3,6 +3,24 @@ import os
 
 from .managers import MaterialManager as MM
 
+class SetMaterial(bpy.types.Operator):
+  bl_idname = "glp.mp_set_material"
+  bl_label = "Set"
+  bl_description = "Set material to selected objects"
+  bl_options = {'UNDO'}
+
+  def execute(self, context):
+    wm = bpy.context.window_manager
+
+    material = wm.MPMaterials[wm.MPItemId].matName
+
+    if material != "none":
+      objects = bpy.context.selected_objects
+      for object in objects:
+        if object.type == 'MESH' and object.glpTypes != "none":
+          object.glpMaterial = material
+    return {'FINISHED'}
+
 class COLL_MP_search(bpy.types.UIList):
   def draw_item(self, context, layout, data, item, icon, active_data, active_propname):
     if self.layout_type in {'DEFAULT', 'COMPACT'}:
@@ -45,6 +63,9 @@ class MaterialPanel(bpy.types.Panel):
 
     layout.template_list("COLL_MP_search", "", wm, "MPMaterials", wm, "MPItemId")
 
+    row = layout.row(align=True)
+    row.alignment = 'EXPAND'
+    row.operator("glp.mp_set_material")
 
     layout.label(text="Material properties", icon='MATERIAL')
 
