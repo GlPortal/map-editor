@@ -34,6 +34,7 @@ if "bpy" in locals():
   importlib.reload(preferencesHelper)
   importlib.reload(MaterialManager)
   importlib.reload(ModelManager)
+  importlib.reload(MaterialPanel)
 else:
   from . import types
   from . import CreationPanel
@@ -54,6 +55,7 @@ else:
   from . import importer
   from . import operatorHelpers
   from . import preferencesHelper
+  from . import MaterialPanel
   from .managers import MaterialManager
   from .managers import ModelManager
 
@@ -77,6 +79,9 @@ def register():
   bpy.types.INFO_MT_file_import.append(menu_func_import)
   bpy.types.INFO_MT_add.prepend(glportalMenuAdd.glportal_add_menu)
   bpy.app.handlers.scene_update_post.append(updateTextures.sceneUpdater)
+  bpy.types.WindowManager.MPMaterials = bpy.props.CollectionProperty(type=types.MPColl)
+
+  MaterialPanel.initCols()
 
 def unregister():
   bpy.utils.unregister_module(__name__)
@@ -90,6 +95,8 @@ def unregister():
   bpy.types.INFO_MT_file_export.remove(menu_func_export)
   bpy.types.INFO_MT_add.remove(glportalMenuAdd.glportal_add_menu)
   bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
+
+  del bpy.types.WindowManager.MPMaterials
 
 if __name__ == "__main__":
   register()

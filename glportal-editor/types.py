@@ -1,5 +1,7 @@
 import bpy
-from bpy.props import EnumProperty, StringProperty
+from bpy.props import EnumProperty, StringProperty, CollectionProperty, IntProperty
+
+from . import MaterialPanel
 
 glpTypes = [
   ("none",    "None",    "No special property"),
@@ -23,6 +25,12 @@ glpMaterialTypes = [
   ("none", "None", "No material")
 ]
 
+
+class MPColl(bpy.types.PropertyGroup):
+  name = bpy.props.StringProperty()
+  label = bpy.props.StringProperty()
+  description = bpy.props.StringProperty()
+  matName = bpy.props.StringProperty()
 
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty (
@@ -48,6 +56,10 @@ def setProperties():
     name = "Imported filepath",
     default = "none"
   )
+  bpy.types.WindowManager.MPItemId = IntProperty (
+    default = 0,
+    update = MaterialPanel.MPItemIdUpdate
+  )
 
 def delProperties():
   del bpy.types.Object.glpTypes
@@ -56,3 +68,4 @@ def delProperties():
   del bpy.types.Object.glpModel
   del bpy.types.WindowManager.importedFilepath
   del bpy.types.Object.glpMaterial
+  del bpy.types.WindowManager.MPItemId
