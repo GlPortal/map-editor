@@ -1,5 +1,5 @@
 import bpy
-from bpy.props import EnumProperty, StringProperty, CollectionProperty, IntProperty
+from bpy.props import EnumProperty, StringProperty, CollectionProperty, IntProperty, BoolProperty
 
 from . import MaterialPanel
 
@@ -58,7 +58,27 @@ def setProperties():
   )
   bpy.types.WindowManager.MPItemId = IntProperty (
     default = 0,
-#    update = MaterialPanel.MPItemIdUpdate
+    update = MaterialPanel.MPItemIdUpdate
+  )
+  bpy.types.WindowManager.glpMatName = StringProperty (
+    name = "Name",
+    default = ""
+  )
+  bpy.types.WindowManager.glpMatFancyName = StringProperty (
+    name = "FancyName",
+    default = ""
+  )
+  bpy.types.WindowManager.glpMatPortalable = BoolProperty (
+    name = "Portalable",
+    default = False
+  )
+  bpy.types.WindowManager.glpMatKind = StringProperty (
+    name = "Kind",
+    default = ""
+  )
+  bpy.types.WindowManager.glpMatEdit = BoolProperty (
+    name = "Edit",
+    default = False
   )
 
 def delProperties():
@@ -69,3 +89,8 @@ def delProperties():
   del bpy.types.WindowManager.importedFilepath
   del bpy.types.Object.glpMaterial
   del bpy.types.WindowManager.MPItemId
+  del bpy.types.WindowManager.glpMatName
+  del bpy.types.WindowManager.glpMatFancyName
+  del bpy.types.WindowManager.glpMatPortalable
+  del bpy.types.WindowManager.glpMatKind
+  del bpy.types.WindowManager.glpMatEdit
