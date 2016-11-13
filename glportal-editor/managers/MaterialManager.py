@@ -42,6 +42,35 @@ def glpMaterialUpdate(self, context):
       setMaterial(object)
 
 
+def saveMaterial(matName = ""):
+  if len(matName) == 0:
+    return
+
+  prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
+  dataDir = os.path.expanduser(prefs.dataDir)
+  name = matName.split("/")
+  directory = name[0]
+  gmdFile = name[1] + ".gmd"
+
+  filepath = os.path.join(dataDir, "textures", directory, gmdFile)
+  tree = ET.parse(filepath)
+  root = tree.getroot()
+
+  if len(materials[matName]["fancyname"]) > 0:
+    root.set("fancyname", materials[matName]["fancyname"])
+
+  for child in root:
+    if child.tag == "kind":
+      if len(materials[matName]["kind"]) > 0:
+        child.text = materials[matName]["kind"]
+    elif child.tag == "surface":
+      if materials[matName]["portalable"]:
+        child.set("portalable", "true")
+      else:
+        child.set("portalable", "false")
+
+  tree.write(filepath, "UTF-8")
+
 def extractData(path, dir, name):
   mat = {"data": {"portalable": False}}
 
