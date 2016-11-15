@@ -1,7 +1,16 @@
 import bpy
 import os
 
+from bpy.props import IntProperty
+
 from .managers import MaterialManager as MM
+
+def MPItemIdSet():
+  bpy.types.WindowManager.MPItemId = IntProperty (
+    default = 0,
+    update = MPItemIdUpdate
+  )
+
 
 class SaveMaterial(bpy.types.Operator):
   bl_idname = "glp.mp_save_material"

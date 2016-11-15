@@ -1,7 +1,6 @@
 import bpy
-from bpy.props import EnumProperty, StringProperty, CollectionProperty, IntProperty, BoolProperty
+from bpy.props import EnumProperty, StringProperty, CollectionProperty, BoolProperty
 
-from . import MaterialPanel
 
 glpTypes = [
   ("none",    "None",    "No special property"),
@@ -55,10 +54,6 @@ def setProperties():
   bpy.types.WindowManager.importedFilepath = StringProperty (
     name = "Imported filepath",
     default = "none"
-  )
-  bpy.types.WindowManager.MPItemId = IntProperty (
-    default = 0,
-    update = MaterialPanel.MPItemIdUpdate
   )
   bpy.types.WindowManager.glpMatName = StringProperty (
     name = "Name",

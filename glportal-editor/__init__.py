@@ -74,6 +74,7 @@ def register():
   MaterialManager.glpMaterialSet()
   MaterialManager.preload()
   ModelManager.preload()
+  MaterialPanel.MPItemIdSet()
 
   bpy.types.INFO_MT_file_export.append(menu_func_export)
   bpy.types.INFO_MT_file_import.append(menu_func_import)
