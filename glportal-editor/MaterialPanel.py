@@ -1,15 +1,8 @@
 import bpy
 import os
 
-from bpy.props import IntProperty
-
+from . import MPTypes
 from .managers import MaterialManager as MM
-
-def MPItemIdSet():
-  bpy.types.WindowManager.MPItemId = IntProperty (
-    default = 0,
-    update = MPItemIdUpdate
-  )
 
 
 class SaveMaterial(bpy.types.Operator):
@@ -27,7 +20,7 @@ class SaveMaterial(bpy.types.Operator):
     material["portalable"] = wm.glpMatPortalable
 
     MM.saveMaterial(name)
-    initColl(wm.MPMaterials[wm.MPItemId], wm.MPItemId, name, material)
+    initRow(wm.MPMaterials[wm.MPItemId], wm.MPItemId, name, material)
 
     return {'FINISHED'}
 
@@ -40,7 +33,7 @@ class EditMaterial(bpy.types.Operator):
     wm = bpy.context.window_manager
 
     wm.glpMatEdit = not wm.glpMatEdit
-    MPItemIdUpdate(self, context)
+    MPTypes.MPItemIdUpdate(self, context)
 
     return {'FINISHED'}
 
@@ -62,7 +55,7 @@ class SetMaterial(bpy.types.Operator):
           object.glpMaterial = material
     return {'FINISHED'}
 
-class COLL_MP_search(bpy.types.UIList):
+class UIList(bpy.types.UIList):
   def draw_item(self, context, layout, data, item, icon, active_data, active_propname):
     if self.layout_type in {'DEFAULT', 'COMPACT'}:
       split = layout.split(0.3)
@@ -87,21 +80,17 @@ class MaterialPanel(bpy.types.Panel):
     return True
 
   def draw(self, context):
-    prefs = bpy.context.user_preferences.addons[__package__].preferences
     wm = bpy.context.window_manager
 
     layout = self.layout
 
-    Materials = wm.MPMaterials
-    MPItemId = wm.MPItemId
-
-    name = Materials[MPItemId].matName
+    name = wm.MPMaterials[wm.MPItemId].matName
     material = MM.materials[name]
 
 #    if name != "none":
 #      layout.template_preview(bpy.data.textures[material["fancyname"]], show_buttons=True)
 
-    layout.template_list("COLL_MP_search", "", wm, "MPMaterials", wm, "MPItemId")
+    layout.template_list("UIList", "", wm, "MPMaterials", wm, "MPItemId")
 
     row = layout.row(align=True)
     row.alignment = 'EXPAND'
@@ -157,13 +146,14 @@ class MaterialPanel(bpy.types.Panel):
 #    MPItemIdUpdate(self, context)
     return True
 
-def initColl(item, i, name, data):
+
+def initRow(item, i, name, data):
   item.name = "".join((data["fancyname"], str(i), name, data["kind"]))
   item.label = data["fancyname"]
   item.description = data["kind"]
   item.matName = name
 
-def initCols():
+def initRows():
   wm = bpy.context.window_manager
 
   Materials = wm.MPMaterials
@@ -175,25 +165,4 @@ def initCols():
 
   for i, (name, data) in enumerate(MM.materials.items(), 1):
     item = Materials.add()
-    initColl(item, i, name, data)
-
-def MPItemIdUpdate(self, context):
-  wm = bpy.context.window_manager
-
-  name = wm.MPMaterials[wm.MPItemId].matName
-  material = MM.materials[name]
-
-  if name != "none":
-    if wm.glpMatEdit:
-      wm.glpMatName = name
-      wm.glpMatFancyName = material["fancyname"]
-      wm.glpMatKind = material["kind"]
-      wm.glpMatPortalable = material["portalable"]
-
-    #prefs = bpy.context.user_preferences.addons[__package__].preferences
-    #path = os.path.expanduser(prefs.dataDir + "textures/" +  material["texture"])
-    #MM.createTexture(path, material["fancyname"])
-
-  #for area in bpy.context.screen.areas:
-  #  if area.type in ['PROPERTIES']:
-  #    area.tag_redraw()
+    initRow(item, i, name, data)

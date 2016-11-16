@@ -1,5 +1,5 @@
 import bpy
-from bpy.props import EnumProperty, StringProperty, CollectionProperty, BoolProperty
+from bpy.props import EnumProperty, StringProperty
 
 
 glpTypes = [
@@ -25,12 +25,6 @@ glpMaterialTypes = [
 ]
 
 
-class MPColl(bpy.types.PropertyGroup):
-  name = bpy.props.StringProperty()
-  label = bpy.props.StringProperty()
-  description = bpy.props.StringProperty()
-  matName = bpy.props.StringProperty()
-
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty (
     items = glpTypes,
@@ -55,26 +49,6 @@ def setProperties():
     name = "Imported filepath",
     default = "none"
   )
-  bpy.types.WindowManager.glpMatName = StringProperty (
-    name = "Name",
-    default = ""
-  )
-  bpy.types.WindowManager.glpMatFancyName = StringProperty (
-    name = "FancyName",
-    default = ""
-  )
-  bpy.types.WindowManager.glpMatPortalable = BoolProperty (
-    name = "Portalable",
-    default = False
-  )
-  bpy.types.WindowManager.glpMatKind = StringProperty (
-    name = "Kind",
-    default = ""
-  )
-  bpy.types.WindowManager.glpMatEdit = BoolProperty (
-    name = "Edit",
-    default = False
-  )
 
 def delProperties():
   del bpy.types.Object.glpTypes
@@ -83,9 +57,3 @@ def delProperties():
   del bpy.types.Object.glpModel
   del bpy.types.WindowManager.importedFilepath
   del bpy.types.Object.glpMaterial
-  del bpy.types.WindowManager.MPItemId
-  del bpy.types.WindowManager.glpMatName
-  del bpy.types.WindowManager.glpMatFancyName
-  del bpy.types.WindowManager.glpMatPortalable
-  del bpy.types.WindowManager.glpMatKind
-  del bpy.types.WindowManager.glpMatEdit
