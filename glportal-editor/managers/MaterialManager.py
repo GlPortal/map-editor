@@ -48,6 +48,10 @@ def saveMaterial(matName = ""):
 
   prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
   dataDir = os.path.expanduser(prefs.dataDir)
+
+  if not os.path.isdir(dataDir):
+    return
+
   name = matName.split("/")
   directory = name[0]
   gmdFile = name[1] + ".gmd"
