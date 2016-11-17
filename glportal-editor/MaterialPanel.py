@@ -33,7 +33,9 @@ class EditMaterial(bpy.types.Operator):
     wm = bpy.context.window_manager
 
     wm.glpMatEdit = not wm.glpMatEdit
-    MPTypes.MPItemIdUpdate(self, context)
+
+    if wm.glpMatEdit:
+      MPTypes.MPItemIdUpdate(self, context)
 
     return {'FINISHED'}
 
