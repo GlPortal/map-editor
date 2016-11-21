@@ -171,13 +171,11 @@ def initRow(item, i, name, data):
 def initRows():
   wm = bpy.context.window_manager
 
-  Materials = wm.MPMaterials
-
   try:
-    Materials.clear()
+    wm.MPMaterials.clear()
   except:
     pass
 
   for i, (name, data) in enumerate(MM.materials.items(), 1):
-    item = Materials.add()
+    item = wm.MPMaterials.add()
     initRow(item, i, name, data)
