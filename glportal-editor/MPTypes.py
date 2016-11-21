@@ -62,8 +62,10 @@ def MPItemIdUpdate(self, context):
       wm.glpMatName = name
       wm.glpMatFancyName = material["fancyname"]
       wm.glpMatKind = material["kind"]
-      wm.glpMatTags = material["tags"]
       wm.glpMatPortalable = material["portalable"]
+
+      if "tags" in material:
+        wm.glpMatTags = material["tags"]
 
     #prefs = bpy.context.user_preferences.addons[__package__].preferences
     #path = os.path.expanduser(prefs.dataDir + "textures/" +  material["texture"])
