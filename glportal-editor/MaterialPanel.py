@@ -147,10 +147,11 @@ class MaterialPanel(bpy.types.Panel):
         row.label(text="Kind : ")
         row.label(text=material['kind'])
 
-        row = layout.row(align=True)
-        row.alignment = 'EXPAND'
-        row.label(text="Tags : ")
-        row.label(text=material['tags'])
+        if "tags" in material:
+          row = layout.row(align=True)
+          row.alignment = 'EXPAND'
+          row.label(text="Tags : ")
+          row.label(text=material['tags'])
     else:
       layout.label(text="Nothing is here")
 
