@@ -67,6 +67,9 @@ def saveMaterial(matName = ""):
     if child.tag == "kind":
       if len(materials[matName]["kind"]) > 0:
         child.text = materials[matName]["kind"]
+    elif child.tag == "tags":
+      if len(materials[matName]["tags"]) > 0:
+        child.text = materials[matName]["tags"]
     elif child.tag == "surface":
       if materials[matName]["portalable"]:
         child.set("portalable", "true")
@@ -88,6 +91,8 @@ def extractData(path, dir, name):
   for child in root:
     if child.tag == "kind":
       mat["data"]["kind"] = child.text
+    elif child.tag == "tags":
+      mat["data"]["tags"] = child.text
     elif child.tag == "surface":
       if child.attrib["portalable"] == "true":
         mat["data"]["portalable"] = True
