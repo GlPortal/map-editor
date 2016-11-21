@@ -26,6 +26,10 @@ def initProperties():
     name = "Kind",
     default = ""
   )
+  bpy.types.WindowManager.glpMatTags = StringProperty (
+    name = "Tags",
+    default = ""
+  )
   bpy.types.WindowManager.glpMatEdit = BoolProperty (
     default = False
   )
@@ -36,6 +40,7 @@ def delProperties():
   del bpy.types.WindowManager.glpMatFancyName
   del bpy.types.WindowManager.glpMatPortalable
   del bpy.types.WindowManager.glpMatKind
+  del bpy.types.WindowManager.glpMatTags
   del bpy.types.WindowManager.glpMatEdit
 
 
@@ -57,6 +62,7 @@ def MPItemIdUpdate(self, context):
       wm.glpMatName = name
       wm.glpMatFancyName = material["fancyname"]
       wm.glpMatKind = material["kind"]
+      wm.glpMatTags = material["tags"]
       wm.glpMatPortalable = material["portalable"]
 
     #prefs = bpy.context.user_preferences.addons[__package__].preferences

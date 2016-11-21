@@ -17,6 +17,7 @@ class SaveMaterial(bpy.types.Operator):
 
     material["fancyname"] = wm.glpMatFancyName
     material["kind"] = wm.glpMatKind
+    material["tags"] = wm.glpMatTags
     material["portalable"] = wm.glpMatPortalable
 
     MM.saveMaterial(name)
@@ -122,6 +123,10 @@ class MaterialPanel(bpy.types.Panel):
 
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
+        row.prop(wm, "glpMatTags")
+
+        row = layout.row(align=True)
+        row.alignment = 'EXPAND'
         row.operator("glp.mp_save_material")
       else:
         row = layout.row(align=True)
@@ -141,6 +146,11 @@ class MaterialPanel(bpy.types.Panel):
         row.alignment = 'EXPAND'
         row.label(text="Kind : ")
         row.label(text=material['kind'])
+
+        row = layout.row(align=True)
+        row.alignment = 'EXPAND'
+        row.label(text="Tags : ")
+        row.label(text=material['tags'])
     else:
       layout.label(text="Nothing is here")
 
@@ -150,10 +160,13 @@ class MaterialPanel(bpy.types.Panel):
 
 
 def initRow(item, i, name, data):
-  item.name = "".join((data["fancyname"], str(i), name, data["kind"]))
+  item.name = "".join((data["fancyname"], str(i), name, data["kind"], data["tags"] if "tags" in data else ""))
   item.label = data["fancyname"]
   item.description = data["kind"]
   item.matName = name
+
+  if "tags" in data:
+    item.description += " - " + data["tags"]
 
 def initRows():
   wm = bpy.context.window_manager
