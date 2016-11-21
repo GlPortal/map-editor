@@ -27,7 +27,6 @@ def initProperties():
     default = ""
   )
   bpy.types.WindowManager.glpMatEdit = BoolProperty (
-    name = "Edit",
     default = False
   )
 
