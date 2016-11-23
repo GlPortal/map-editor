@@ -37,11 +37,11 @@ class ObjectPanel(bpy.types.Panel):
         row.alignment = 'EXPAND'
         row.label(text="Portalable : ")
         if mat['portalable']:
-          row.label(text='Yes')
+          row.label(text="Yes")
         else:
-          row.label(text='No')
+          row.label(text="No")
 
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
         row.label(text="Kind : ")
-        row.label(text=mat['kind'])
+        row.label(text=mat["kind"])

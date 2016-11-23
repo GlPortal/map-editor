@@ -137,21 +137,21 @@ class MaterialPanel(bpy.types.Panel):
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
         row.label(text="Portalable : ")
-        if material['portalable']:
-          row.label(text='Yes')
+        if material["portalable"]:
+          row.label(text="Yes")
         else:
-          row.label(text='No')
+          row.label(text="No")
 
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
         row.label(text="Kind : ")
-        row.label(text=material['kind'])
+        row.label(text=material["kind"])
 
         if "tags" in material:
           row = layout.row(align=True)
           row.alignment = 'EXPAND'
           row.label(text="Tags : ")
-          row.label(text=material['tags'])
+          row.label(text=material["tags"])
     else:
       layout.label(text="Nothing is here")
 
