@@ -3,6 +3,7 @@ import os
 
 from .updateTextures import updateTexture
 from .managers import MaterialManager, ModelManager
+from . import MaterialPanel
 
 def updateTriggerXrays(self, context):
   prefs = context.user_preferences.addons[__package__].preferences
@@ -25,3 +26,4 @@ def updateDataDir(self, context):
   if os.path.isdir(os.path.expanduser(prefs.dataDir)):
     MaterialManager.reload()
     ModelManager.reload()
+    MaterialPanel.initRows()
