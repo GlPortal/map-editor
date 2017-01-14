@@ -39,8 +39,10 @@ def itemsModel(self, centext):
   return [(file, fancyName, fancyName) for file, fancyName in ModelManager.models.items()]
 
 def simpleCube():
-  ModelManager.create("Cube.obj")
-  object = bpy.context.selected_objects[0]
-  object.glpTypes = "none"
-  object.dimensions = [2.0, 2.0, 2.0]
-  bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+  if ModelManager.create("Cube.obj"):
+    object = bpy.context.selected_objects[0]
+    object.glpTypes = "none"
+    object.dimensions = [2.0, 2.0, 2.0]
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+    return True
+  return False

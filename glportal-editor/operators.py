@@ -11,11 +11,11 @@ class addDoor(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    ModelManager.create("Door.obj", "door/door")
+    if ModelManager.create("Door.obj", "door/door"):
+      object = bpy.context.selected_objects[0]
 
-    object = bpy.context.selected_objects[0]
-    if object:
-      object.glpTypes = "door"
+      if object:
+        object.glpTypes = "door"
 
     return {'FINISHED'}
 
@@ -70,8 +70,8 @@ class addWall(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    simpleCube()
-    bpy.ops.glp.set_wall()
+    if simpleCube():
+      bpy.ops.glp.set_wall()
     return {'FINISHED'}
 
 class addPortalable(bpy.types.Operator):
@@ -81,8 +81,8 @@ class addPortalable(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    simpleCube()
-    bpy.ops.glp.set_portalable()
+    if simpleCube():
+      bpy.ops.glp.set_portalable()
     return {'FINISHED'}
 
 class searchMaterial(bpy.types.Operator):

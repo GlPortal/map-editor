@@ -27,8 +27,8 @@ class addWin(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    simpleCube()
-    bpy.ops.glp.set_win()
+    if simpleCube():
+      bpy.ops.glp.set_win()
     return {'FINISHED'}
 
 class setDeath(bpy.types.Operator):
@@ -56,8 +56,8 @@ class addDeath(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    simpleCube()
-    bpy.ops.glp.set_death()
+    if simpleCube():
+      bpy.ops.glp.set_death()
     return {'FINISHED'}
 
 class setRadiation(bpy.types.Operator):
@@ -85,6 +85,6 @@ class addRadiation(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    simpleCube()
-    bpy.ops.glp.set_radiation()
+    if simpleCube():
+      bpy.ops.glp.set_radiation()
     return {'FINISHED'}

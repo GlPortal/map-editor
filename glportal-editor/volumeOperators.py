@@ -33,6 +33,6 @@ class addAcid(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    simpleCube()
-    bpy.ops.glp.set_acid()
+    if simpleCube():
+      bpy.ops.glp.set_acid()
     return {'FINISHED'}

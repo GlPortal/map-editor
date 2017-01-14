@@ -60,19 +60,19 @@ class Importer():
     return [r, g, b]
 
   def createCube(self, child):
-    simpleCube()
+    if simpleCube():
+      object = bpy.context.selected_objects[0]
 
-    object = bpy.context.selected_objects[0]
-    if object:
-      for param in child:
-        if param.tag == "position":
-          object.location = self.extractPosition(param)
-        elif param.tag == "rotation":
-          object.rotation_euler = self.extractRotation(param)
-        elif param.tag == "scale":
-          object.dimensions = self.extractDimensions(param)
+      if object:
+        for param in child:
+          if param.tag == "position":
+            object.location = self.extractPosition(param)
+          elif param.tag == "rotation":
+            object.rotation_euler = self.extractRotation(param)
+          elif param.tag == "scale":
+            object.dimensions = self.extractDimensions(param)
 
-      return object
+        return object
     return False
 
   def getMaterials(self):
@@ -176,9 +176,10 @@ class Importer():
 
         if matAttr in child.attrib:
           mid = child.get(matAttr)
-          ModelManager.create(mesh, materials[mid])
-        else:
-          ModelManager.create(mesh)
+          if not ModelManager.create(mesh, materials[mid]):
+            continue
+        elif not ModelManager.create(mesh):
+            continue
 
         object = bpy.context.selected_objects[0]
         if object:
