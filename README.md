@@ -1,3 +1,4 @@
+[![Download](https://api.bintray.com/packages/glportal/generic/glportal-editor/images/download.svg?version=1.9.0) ](https://bintray.com/glportal/generic/glportal-editor/1.9.0/link)
 [![Join the chat at https://gitter.im/GlPortal/glPortal](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GlPortal/glPortal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Join Chat](https://img.shields.io/badge/irc-join_chat-brightgreen.svg)](http://webchat.freenode.net/?channels=%23%23glportal&uio=d4)
 [![Report a bug](https://img.shields.io/badge/bugs-report_now-brightgreen.svg)](https://bugs.glportal.de/index.php?project=5)
