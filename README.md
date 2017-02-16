@@ -12,7 +12,7 @@ The GlPortal editor allows Blender to import, edit, create and export GlPortal m
 
 ## Installation
 - Install [Blender](http://www.blender.org/download/)
-- [Download GlPortal editor.](https://bintray.com/artifact/download/glportal/generic/1.0.0/glportal-editor.zip) *Don’t unzip*.
+- [Download latest version](https://bintray.com/glportal/generic/glportal-editor/_latestVersion) of GlPortal editor. *Don’t unzip* !
 - Run Blender:
   - Select `File > User Preferences...`
   - Move to the Addons tab.
