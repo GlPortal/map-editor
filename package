@@ -1,0 +1,13 @@
+#!/bin/bash
+
+version=`git describe --tags | grep -Eo "^([^-]*)*"`
+name="glportal-editor"
+dir="glportal-editor"
+
+cp LICENCE.md $dir/LICENCE.md
+
+zip -R $name-$version.zip *.py *.xsd $dir/*/*.md $dir/*.md
+
+rm $dir/LICENCE.md
+
+exit 0
