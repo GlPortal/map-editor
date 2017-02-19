@@ -32,6 +32,7 @@ if "bpy" in locals():
   importlib.reload(importer)
   importlib.reload(operatorHelpers)
   importlib.reload(preferencesHelper)
+  importlib.reload(validator)
   importlib.reload(MaterialManager)
   importlib.reload(ModelManager)
   importlib.reload(MPTypes)
@@ -58,6 +59,7 @@ else:
   from . import preferencesHelper
   from . import MPTypes
   from . import MaterialPanel
+  from . import validator
   from .managers import MaterialManager
   from .managers import ModelManager
 
