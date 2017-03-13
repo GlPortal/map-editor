@@ -86,7 +86,11 @@ def extractData(path, dir, name):
   root = tree.getroot()
 
   mat["name"] = root.attrib["name"]
-  mat["data"]["fancyname"] = root.attrib["fancyname"]
+
+  if "fancyname" in root.attrib:
+    mat["data"]["fancyname"] = root.attrib["fancyname"]
+  else:
+    mat["data"]["fancyname"] = mat["name"]
 
   for child in root:
     if child.tag == "kind":
