@@ -168,6 +168,10 @@ class Importer():
             bpy.ops.glp.set_radiation()
           elif type == "win":
             bpy.ops.glp.set_win()
+          elif type == "map":
+            bpy.ops.glp.set_map()
+          elif type == "audio":
+            bpy.ops.glp.set_audio()
           else:
             object.delete()
       elif child.tag == "object" or child.tag == "model":

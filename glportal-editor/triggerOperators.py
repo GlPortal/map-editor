@@ -2,6 +2,42 @@ import bpy
 
 from .operatorHelpers import setTrigger, simpleCube
 
+class setMap(bpy.types.Operator):
+  bl_idname = "glp.set_map"
+  bl_label = "Map"
+  bl_description = "Mark the selection as map trigger."
+  bl_options = {'UNDO'}
+
+  def execute(self, context):
+    objects = bpy.context.selected_objects
+    for object in objects:
+      if object.type == 'MESH':
+        if object.glpTypes not in {"door", "model"}:
+          setTrigger(object, "map")
+        else:
+          self.report({'ERROR'}, "Door and models can't be converted to the map trigger.")
+      else:
+        self.report({'ERROR'}, "Object of type '%s' can't be converted to the map trigger." % (object.type))
+    return {'FINISHED'}
+
+class setAudio(bpy.types.Operator):
+  bl_idname = "glp.set_audio"
+  bl_label = "Audio"
+  bl_description = "Mark the selection as audio trigger."
+  bl_options = {'UNDO'}
+
+  def execute(self, context):
+    objects = bpy.context.selected_objects
+    for object in objects:
+      if object.type == 'MESH':
+        if object.glpTypes not in {"door", "model"}:
+          setTrigger(object, "audio")
+        else:
+          self.report({'ERROR'}, "Door and models can't be converted to the audio trigger.")
+      else:
+        self.report({'ERROR'}, "Object of type '%s' can't be converted to the audio trigger." % (object.type))
+    return {'FINISHED'}
+
 class setWin(bpy.types.Operator):
   bl_idname = "glp.set_win"
   bl_label = "Win"
