@@ -153,6 +153,10 @@ class Exporter():
           boxElement = tree.SubElement(root, "trigger")
           if object.glpTriggerTypes:
             boxElement.set("type", object.glpTriggerTypes)
+            if object.glpTriggerTypes == "map":
+              boxElement.set("file", "n2.xml")
+            if object.glpTriggerTypes == "audio":
+              boxElement.set("file", "music/track1.ogg")
         elif type == "wall":
           boxElement = tree.SubElement(root, "wall")
 

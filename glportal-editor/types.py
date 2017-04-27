@@ -17,6 +17,8 @@ glpVolumeTypes = [
 glpTriggerTypes = [
   ("none",      "None",      "No special property"),
   ("win",       "Win",       "Area triggers win"),
+  ("map",       "Map",       "Area triggers new map"),
+  ("audio",     "Audio",     "Area triggers new audio"),
   ("death",     "Death",     "Area triggers death"),
   ("radiation", "Radiation", "Area triggers radiation")
 ]
