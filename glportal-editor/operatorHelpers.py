@@ -10,8 +10,10 @@ def resetTriggerSettings(object):
     object.show_x_ray = False
     object.show_bounds = False
     object.draw_bounds_type = 'BOX'
+    object.glpTriggerFilepath = 'none'
+    object.glpTriggerAudioLoop = False
 
-def setTrigger(object, type):
+def setTrigger(object, type, filePath='', loop=False):
   prefs = bpy.context.user_preferences.addons[__package__].preferences
   clearGlpProperties(object)
 
@@ -21,6 +23,10 @@ def setTrigger(object, type):
   object.show_x_ray = prefs.triggerXrays
   object.show_bounds = True
   object.draw_bounds_type = 'CAPSULE'
+  object.glpTriggerAudioLoop = loop
+
+  if filePath != None:
+    object.glpTriggerFilepath = filePath
 
 def clearGlpProperties(object):
   MaterialManager.reset(object)
@@ -31,6 +37,10 @@ def clearGlpProperties(object):
     object.glpVolumeTypes = "none"
   if object.glpTriggerTypes != "none":
     object.glpTriggerTypes = "none"
+  if object.glpTriggerFilepath != "none":
+    object.glpTriggerFilepath = "none"
+  if object.glpTriggerAudioLoop != False:
+    object.glpTriggerAudioLoop = False
 
 def itemsMaterial(self, context):
   return [(name, fancyName, tooltip) for name, fancyName, tooltip in types.glpMaterialTypes]

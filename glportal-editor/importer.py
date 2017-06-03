@@ -82,6 +82,11 @@ class Importer():
 
     return self.extractMaterials(root)
 
+  def getBool(self, value):
+    trueValues = ('true', 'yes')
+
+    return value.lower() in trueValues
+
   def execute(self, context):
     if self.__deleteWorld:
       self.deleteWorld()
@@ -118,9 +123,11 @@ class Importer():
             if param.tag == "position":
               object.location = self.extractPosition(param)
             elif param.tag == "rotation":
-              rotation = [math.radians(float(param.get("x")) + 90),
-                          math.radians(0),
-                          math.radians(float(param.get("y")))]
+              rotation = [
+                math.radians(float(param.get("x")) + 90),
+                math.radians(0),
+                math.radians(float(param.get("y")))
+              ]
               object.rotation_euler = rotation
       elif child.tag == "light":
         bpy.ops.object.lamp_add(type='POINT')
@@ -169,9 +176,19 @@ class Importer():
           elif type == "win":
             bpy.ops.glp.set_win()
           elif type == "map":
-            bpy.ops.glp.set_map()
+            if 'file' in child.attrib:
+              bpy.ops.glp.set_map(filePath=child.get('file'))
+            else:
+              object.delete()
           elif type == "audio":
-            bpy.ops.glp.set_audio()
+            loop = False
+            if 'loop' in child.attrib:
+              loop = self.getBool(child.get('loop'))
+
+            if 'file' in child.attrib:
+              bpy.ops.glp.set_audio(filePath=child.get('file'), loop=loop)
+            else:
+              object.delete()
           else:
             object.delete()
       elif child.tag == "object" or child.tag == "model":

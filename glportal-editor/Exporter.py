@@ -86,6 +86,12 @@ class Exporter():
     if lamp.use_specular:
       lightElement.set("specular", "1")
 
+  def setBool(self, value):
+    if value:
+      return "true"
+    else:
+      return "false"
+
   def execute(self, context):
     fixObjects()
 
@@ -154,9 +160,10 @@ class Exporter():
           if object.glpTriggerTypes:
             boxElement.set("type", object.glpTriggerTypes)
             if object.glpTriggerTypes == "map":
-              boxElement.set("file", "n2.xml")
+              boxElement.set("file", object.glpTriggerFilepath)
             if object.glpTriggerTypes == "audio":
-              boxElement.set("file", "music/track1.ogg")
+              boxElement.set("file", object.glpTriggerFilepath)
+              boxElement.set("loop", self.setBool(object.glpTriggerAudioLoop))
         elif type == "wall":
           boxElement = tree.SubElement(root, "wall")
 

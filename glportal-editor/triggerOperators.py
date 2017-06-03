@@ -1,4 +1,5 @@
 import bpy
+from bpy.props import StringProperty, BoolProperty
 
 from .operatorHelpers import setTrigger, simpleCube
 
@@ -7,13 +8,14 @@ class setMap(bpy.types.Operator):
   bl_label = "Map"
   bl_description = "Mark the selection as map trigger."
   bl_options = {'UNDO'}
+  filePath = StringProperty(default="")
 
   def execute(self, context):
     objects = bpy.context.selected_objects
     for object in objects:
       if object.type == 'MESH':
         if object.glpTypes not in {"door", "model"}:
-          setTrigger(object, "map")
+          setTrigger(object, "map", self.filePath)
         else:
           self.report({'ERROR'}, "Door and models can't be converted to the map trigger.")
       else:
@@ -25,13 +27,15 @@ class setAudio(bpy.types.Operator):
   bl_label = "Audio"
   bl_description = "Mark the selection as audio trigger."
   bl_options = {'UNDO'}
+  filePath = StringProperty(default="")
+  loop = BoolProperty(default=False)
 
   def execute(self, context):
     objects = bpy.context.selected_objects
     for object in objects:
       if object.type == 'MESH':
         if object.glpTypes not in {"door", "model"}:
-          setTrigger(object, "audio")
+          setTrigger(object, "audio", self.filePath, self.loop)
         else:
           self.report({'ERROR'}, "Door and models can't be converted to the audio trigger.")
       else:

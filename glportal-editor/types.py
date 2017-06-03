@@ -1,5 +1,5 @@
 import bpy
-from bpy.props import EnumProperty, StringProperty
+from bpy.props import EnumProperty, StringProperty, BoolProperty
 
 
 glpTypes = [
@@ -43,6 +43,14 @@ def setProperties():
     name = "Trigger Type",
     default = "none"
   )
+  bpy.types.Object.glpTriggerFilepath = StringProperty (
+    name = "Filepath",
+    default = "none"
+  )
+  bpy.types.Object.glpTriggerAudioLoop = BoolProperty (
+    name = "AudioLoop",
+    default = False
+  )
   bpy.types.Object.glpModel = StringProperty (
     name = "Model",
     default = "none"
@@ -56,6 +64,8 @@ def delProperties():
   del bpy.types.Object.glpTypes
   del bpy.types.Object.glpVolumeTypes
   del bpy.types.Object.glpTriggerTypes
+  del bpy.types.Object.glpTriggerFilepath
+  del bpy.types.Object.glpTriggerAudioLoop
   del bpy.types.Object.glpModel
   del bpy.types.WindowManager.importedFilepath
   del bpy.types.Object.glpMaterial
