@@ -1,6 +1,8 @@
 import bpy
 import os
 
+from ..utils import directory
+
 models = {}
 blacklist = [
   "GUIElement.obj",
@@ -14,20 +16,17 @@ def reload():
   preload()
 
 def preload():
-  prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
-  dataDir = os.path.expanduser(prefs.dataDir)
-  path = os.path.join(dataDir, "meshes")
+  global models
+  meshes = directory.browse("meshes", "obj", blacklist)
 
-  if os.path.isdir(dataDir):
-    for file in os.listdir(path):
-      if os.path.isfile(os.path.join(path, file)) and file.endswith(".obj"):
-        if file not in blacklist:
-          models[file] = file.rstrip(".obj")
+  if meshes:
+    models = meshes
     return True
+
   return False
 
 def create(file = "", materialName = ""):
-  if file == "":
+  if not file:
     print("Model file is empty.")
     return False
 
@@ -48,7 +47,7 @@ def create(file = "", materialName = ""):
         bpy.context.scene.objects.active = object
         bpy.ops.object.transform_apply(rotation=True)
 
-        if materialName != "":
+        if materialName:
           object.glpMaterial = materialName
         else:
           object.glpMaterial = prefs.defaultMaterial

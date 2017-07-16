@@ -37,6 +37,7 @@ if "bpy" in locals():
   importlib.reload(ModelManager)
   importlib.reload(MPTypes)
   importlib.reload(MaterialPanel)
+  importlib.reload(directory)
 else:
   from . import types
   from . import CreationPanel
@@ -62,6 +63,7 @@ else:
   from . import validator
   from .managers import MaterialManager
   from .managers import ModelManager
+  from .utils import directory
 
 import bpy
 

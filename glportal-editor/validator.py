@@ -10,7 +10,7 @@ schemas = {
 
 
 def validate(filePath="" , type='map'):
-  if len(filePath) == 0 or not os.path.isfile(filePath):
+  if not filePath or not os.path.isfile(filePath):
     print("File '" + filePath + "' does not exist !")
     return False;
 

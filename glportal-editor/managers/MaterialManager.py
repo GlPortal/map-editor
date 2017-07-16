@@ -4,7 +4,10 @@ import xml.etree.cElementTree as ET
 from bpy.props import EnumProperty
 
 from ..updateTextures import updateTexture
+from ..utils import directory
 from .. import types
+
+from pprint import pprint
 
 materials = {}
 colors = {
@@ -122,16 +125,16 @@ def preload():
 
   materials["none"] = {"portalable": False, "kind": "None", "fancyname": "None"}
 
-  if os.path.isdir(dataDir):
-    dirs = [ name for name in os.listdir(path) if os.path.isdir(os.path.join(path, name)) ]
+  files = directory.browse("textures", "gmd", blacklist, True)
 
-    for dir in dirs:
-      files = [ name for name in os.listdir(os.path.join(path, dir)) if os.path.isfile(os.path.join(path, dir, name)) and name.endswith(".gmd") ]
-
-      for file in files:
-        mat = extractData(path, dir, file)
+  if files:
+    for dir, entries in files.items():
+      for fileName, name in entries.items():
+        mat = extractData(path, dir, fileName)
         materials[mat["name"]] = mat["data"]
-        types.glpMaterialTypes.append((mat["name"], mat["data"]["fancyname"], mat["data"]["fancyname"]))
+        types.glpMaterialTypes.append(
+          (mat["name"], mat["data"]["fancyname"], mat["data"]["fancyname"])
+        )
     glpMaterialSet()
 
     return True
@@ -188,7 +191,7 @@ def setSpecularTexture(mtex, shininess):
 def create(name = ""):
   global colors, materials
 
-  if name == "":
+  if not name:
     print("Material name is empty.")
     return False
   elif name == "none":
@@ -281,7 +284,7 @@ def prepareExport(oldMaterials = {}):
   prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
   addDefault = False
 
-  if len(oldMaterials) > 0:
+  if oldMaterials:
     for key, name in oldMaterials.items():
       usedMaterials[name] = int(key)
       id += 1
