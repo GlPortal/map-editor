@@ -1,5 +1,6 @@
 import bpy
 import math
+import os
 from bpy.props import IntProperty
 
 def fixObjects():
@@ -44,11 +45,18 @@ def checkSpawnPosition(objects):
   return 0
 
 def countObjects(objects):
+  prefs = bpy.context.user_preferences.addons[__package__].preferences
+  dataDir = os.path.expanduser(prefs.dataDir)
+
   result = {
     "camera":       0,
     "wall":         0,
     "acid":         0,
     "triggerDeath": 0,
+    "triggerMapEmpty": 0,
+    "triggerMapWrong": 0,
+    "triggerAudioEmpty": 0,
+    "triggerAudioWrong": 0,
     "light":        0,
     "exitDoor":     0,
     "objectNoMat":  0 # Objects Without Material
@@ -68,8 +76,21 @@ def countObjects(objects):
       if type == "door":
         result["exitDoor"] += 1
       if type == "trigger":
-        if object.glpTriggerTypes == "death":
+        triggerType = object.glpTriggerTypes
+        filepath = object.glpTriggerFilepath
+
+        if triggerType == "death":
           result["triggerDeath"] += 1
+        elif triggerType == "map":
+          if not filepath:
+            result["triggerMapEmpty"] += 1
+          elif not os.path.isfile(os.path.join(dataDir, "maps", filepath)):
+            result["triggerMapWrong"] += 1
+        elif triggerType == "audio":
+          if not filepath:
+            result["triggerAudioEmpty"] += 1
+          elif not os.path.isfile(os.path.join(dataDir, "audio", filepath)):
+            result["triggerAudioWrong"] += 1
       if type == "wall":
         result["wall"] += 1
       if type == "volume":
@@ -89,6 +110,10 @@ class checkMapDialog(bpy.types.Operator):
   wall = bpy.props.IntProperty (name="Number of walls")
   exitDoor = bpy.props.IntProperty (name="Number of exit doors")
   modelsNoMat = bpy.props.IntProperty (name="Number of models without material")
+  triggerMapEmpty = bpy.props.IntProperty (name="Number of map triggers without file path")
+  triggerMapWrong = bpy.props.IntProperty (name="Number of map triggers with wrong file path")
+  triggerAudioEmpty = bpy.props.IntProperty (name="Number of audio triggers without file path")
+  triggerAudioWrong = bpy.props.IntProperty (name="Number of audio triggers with wrong file path")
 
   def execute(self, context):
     return {'FINISHED'}
@@ -181,6 +206,30 @@ class checkMapDialog(bpy.types.Operator):
       row.label(text="There are objects without assigned material.", icon='ERROR')
       row.operator("glp.fix_materials")
 
+      layout.separator()
+    if result["triggerMapEmpty"] > 0:
+      error = True
+      self.triggerMapEmpty = result["triggerMapEmpty"]
+
+      layout.prop(self, "triggerMapEmpty")
+      layout.separator()
+    if result["triggerMapWrong"] > 0:
+      error = True
+      self.triggerMapWrong = result["triggerMapWrong"]
+
+      layout.prop(self, "triggerMapWrong")
+      layout.separator()
+    if result["triggerAudioEmpty"] > 0:
+      error = True
+      self.triggerAudioEmpty = result["triggerAudioEmpty"]
+
+      layout.prop(self, "triggerAudioEmpty")
+      layout.separator()
+    if result["triggerAudioWrong"] > 0:
+      error = True
+      self.triggerAudioWrong = result["triggerAudioWrong"]
+
+      layout.prop(self, "triggerAudioWrong")
       layout.separator()
 
     if not error:
