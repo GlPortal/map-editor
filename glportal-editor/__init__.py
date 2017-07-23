@@ -7,7 +7,7 @@ bl_info = {
   "location":     "File > Import-Export",
   "description":  "Module for loading, editing and saving GlPortal maps.",
   "category":     "Import-Export",
-  "tracker_url":  "https://bugs.glportal.de/index.php?project=5"
+  "tracker_url":  "https://github.com/GlPortal/map-editor/issues"
 }
 
 if "bpy" in locals():
@@ -66,6 +66,7 @@ else:
   from .utils import directory
 
 import bpy
+import os
 
 def menu_func_export(self, context):
   self.layout.operator("glp.export", text="GlPortal Map (.xml)")
@@ -78,8 +79,6 @@ def register():
 
   types.setProperties()
   MaterialManager.glpMaterialSet()
-  MaterialManager.preload()
-  ModelManager.preload()
   MPTypes.initProperties()
 
   bpy.types.INFO_MT_file_export.append(menu_func_export)
@@ -88,6 +87,15 @@ def register():
   bpy.app.handlers.scene_update_post.append(updateTextures.sceneUpdater)
   bpy.types.WindowManager.MPMaterials = bpy.props.CollectionProperty(type=MPTypes.Row)
 
+  bpy.types.Scene.countObjects = mapHelpers.countObjects
+  bpy.types.Scene.fixObjects = mapHelpers.fixObjects
+  bpy.types.Object.isOverObject = mapHelpers.isOverObject
+  bpy.types.Object.updateTexture = updateTextures.updateTexture
+
+  os.path.browse = directory.browse
+
+  MaterialManager.preload()
+  ModelManager.preload()
   MaterialPanel.initRows()
 
 def unregister():
@@ -103,6 +111,13 @@ def unregister():
   bpy.types.INFO_MT_file_export.remove(menu_func_export)
   bpy.types.INFO_MT_add.remove(glportalMenuAdd.glportal_add_menu)
   bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
+
+  del bpy.types.Scene.countObjects
+  del bpy.types.Scene.fixObjects
+  del bpy.types.Object.isOverObject
+  del bpy.types.Object.updateTexture
+
+  del os.path.browse
 
   del bpy.types.WindowManager.MPMaterials
 

@@ -1,7 +1,6 @@
 import bpy
 import os
 
-from .updateTextures import updateTexture
 from .managers import MaterialManager, ModelManager
 from . import MaterialPanel
 

@@ -5,7 +5,6 @@ import xml.dom.minidom as minidom
 import math
 import re
 
-from .mapHelpers import fixObjects
 from .managers import MaterialManager
 from .importer import Importer
 
@@ -93,7 +92,7 @@ class Exporter():
       return "false"
 
   def execute(self, context):
-    fixObjects()
+    bpy.context.scene.fixObjects()
 
     prefs = bpy.context.user_preferences.addons[__package__].preferences
     objects = context.scene.objects

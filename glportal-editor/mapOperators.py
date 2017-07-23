@@ -2,7 +2,6 @@ import bpy
 import os
 from subprocess import call
 
-from .mapHelpers import countObjects, fixObjects
 from .Exporter import Exporter
 from .managers import MaterialManager
 
@@ -64,7 +63,7 @@ class fixMap(bpy.types.Operator):
   bl_options = {'UNDO'}
 
   def execute(self, context):
-    fixObjects()
+    bpy.context.scene.fixObjects()
     bpy.ops.glp.fix_materials()
     return {'FINISHED'}
 
@@ -83,8 +82,7 @@ class runGame(bpy.types.Operator):
   bl_description = "Run game with this map"
 
   def execute(self, context):
-    objects = context.scene.objects
-    result = countObjects(objects)
+    result = context.scene.countObjects()
 
     if (result["exitDoor"] == 0 or result["camera"] == 0 or result["light"] == 0 or
         result["wall"] == 0):

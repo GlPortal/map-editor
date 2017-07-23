@@ -3,11 +3,7 @@ import os
 import xml.etree.cElementTree as ET
 from bpy.props import EnumProperty
 
-from ..updateTextures import updateTexture
-from ..utils import directory
 from .. import types
-
-from pprint import pprint
 
 materials = {}
 colors = {
@@ -125,7 +121,9 @@ def preload():
 
   materials["none"] = {"portalable": False, "kind": "None", "fancyname": "None"}
 
-  files = directory.browse("textures", "gmd", blacklist, True)
+  files = os.path.browse(
+    directory="textures", extension="gmd", blacklist=blacklist, recursive=True
+  )
 
   if files:
     for dir, entries in files.items():
@@ -265,7 +263,7 @@ def setMaterial(object):
       data.materials[0] = mat
 
     if object.glpTypes in {"wall", "volume"}:
-      updateTexture(object)
+      object.updateTexture()
   else:
     return False
 

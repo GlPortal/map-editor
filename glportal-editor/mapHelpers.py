@@ -3,7 +3,7 @@ import math
 import os
 from bpy.props import IntProperty
 
-def fixObjects():
+def fixObjects(self):
   objects = bpy.context.scene.objects
   bpy.ops.object.select_all(action='DESELECT')
 
@@ -15,38 +15,45 @@ def fixObjects():
         bpy.context.scene.objects.active = object
         bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
 
-def isOverObject(position, object):
+def isOverObject(self, object):
   pMin = object.location[0] - abs(object.dimensions[0]) / 2
   pMax = object.location[0] + abs(object.dimensions[0]) / 2
 
-  if position[0] > pMin and position[0] < pMax:
+  if self.location[0] > pMin and self.location[0] < pMax:
     pMin = object.location[1] - abs(object.dimensions[1]) / 2
     pMax = object.location[1] + abs(object.dimensions[1]) / 2
 
-    if position[1] > pMin and position[1] < pMax:
+    if self.location[1] > pMin and self.location[1] < pMax:
       pMax = object.location[2] + abs(object.dimensions[2]) / 2
 
-      if position[2] >= pMax + 1:
+      if self.location[2] >= pMax + 1:
         return 1
-      elif position[2] >= pMax:
+      elif self.location[2] >= pMax:
         return 2
   return 0
 
 def checkSpawnPosition(objects):
   for object in objects:
     if object.type == 'CAMERA':
-      cameraPosition = object.location
+      camera = object
       break
+
+  if not camera:
+    return 0
+
   for object in objects:
     if object.type == 'MESH' and object.glpTypes == "wall":
-      isOver = isOverObject(cameraPosition, object)
+      isOver = camera.isOverObject(object)
       if isOver != 0:
         return isOver
   return 0
 
-def countObjects(objects):
+def countObjects(self, objects = None):
   prefs = bpy.context.user_preferences.addons[__package__].preferences
   dataDir = os.path.expanduser(prefs.dataDir)
+
+  if not objects:
+    objects = self.objects
 
   result = {
     "camera":       0,
@@ -123,7 +130,7 @@ class checkMapDialog(bpy.types.Operator):
 
   def draw(self, context):
     objects = context.scene.objects
-    result = countObjects(objects)
+    result = context.scene.countObjects(objects)
     layout = self.layout
     error = False
 

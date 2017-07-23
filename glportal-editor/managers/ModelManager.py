@@ -1,7 +1,6 @@
 import bpy
 import os
 
-from ..utils import directory
 
 models = {}
 blacklist = [
@@ -17,7 +16,7 @@ def reload():
 
 def preload():
   global models
-  meshes = directory.browse("meshes", "obj", blacklist)
+  meshes = os.path.browse(directory="meshes", extension="obj", blacklist=blacklist)
 
   if meshes:
     models = meshes

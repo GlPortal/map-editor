@@ -4,20 +4,20 @@ from bpy.app.handlers import persistent
 
 isRunning = False
 
-def updateTexture(object):
+def updateTexture(self):
   global isRunning
 
   isRunning = True
 
-  bpy.context.scene.objects.active = object
+  bpy.context.scene.objects.active = self
   bpy.ops.object.mode_set(mode='EDIT')
-  me = object.data
+  me = self.data
   bm = bmesh.from_edit_mesh(me)
   scale = [0.0, 0.0, 0.0]
 
-  scale[0] = abs(object.scale[0]) # X
-  scale[1] = abs(object.scale[1]) # Y
-  scale[2] = abs(object.scale[2]) # Z
+  scale[0] = abs(self.scale[0]) # X
+  scale[1] = abs(self.scale[1]) # Y
+  scale[2] = abs(self.scale[2]) # Z
 
   if hasattr(bm.faces, "ensure_lookup_table"):
     bm.faces.ensure_lookup_table()
@@ -88,4 +88,4 @@ def sceneUpdater(scene):
   if not isRunning:
     if object is not None and object.is_updated:
       if object.glpTypes in {"wall", "volume"}:
-        updateTexture(object)
+        object.updateTexture()

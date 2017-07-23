@@ -1,6 +1,6 @@
 import bpy
 import os
-from pprint import pprint
+
 
 def browse(directory, extension = '', blacklist = [], recursive = False, files = True):
   prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
