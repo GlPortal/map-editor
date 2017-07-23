@@ -26,12 +26,18 @@ glpMaterialTypes = [
   ("none", "None", "No material")
 ]
 
+def onUpdateGlpTypes(self, context):
+  objects = bpy.context.selected_objects
+  for object in objects:
+    if object.glpTypes != "none" and not object.name.lower().startswith(object.glpTypes):
+      object.name = object.glpTypes
 
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty (
     items = glpTypes,
     name = "Type",
-    default = "none"
+    default = "none",
+    update = onUpdateGlpTypes
   )
   bpy.types.Object.glpVolumeTypes = EnumProperty (
     items = glpVolumeTypes,
