@@ -1,0 +1,11 @@
+os: linux
+language: python
+services: docker
+before_install:
+  - docker pull sgorava/arch-blender
+  - git clone --depth 1 https://github.com/GlPortal/glportal-data.git
+script:
+  - set -e
+  - docker run -it -v $(pwd)/tests:/data -v $(pwd)/glportal-editor:/usr/share/blender/2.78/scripts/addons/toGlPortalXml -v $(pwd)/glportal-data:/root/.glportal/data sgorava/arch-blender
+notifications:
+  irc: "chat.freenode.net#glportal"
