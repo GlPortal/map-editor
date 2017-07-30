@@ -39,6 +39,7 @@ def glpMaterialUpdate(self, context):
   for object in objects:
     if object.type == 'MESH' and object.glpTypes != "none":
       setMaterial(object)
+      types.onUpdateGlpTypes(self, context)
 
 
 def saveMaterial(matName = ""):
@@ -115,11 +116,11 @@ def reload():
   preload()
 
 def preload():
+  materials["none"] = {"portalable": False, "kind": "None", "fancyname": "None"}
+
   prefs = bpy.context.user_preferences.addons[__package__.rpartition('.')[0]].preferences
   dataDir = os.path.expanduser(prefs.dataDir)
   path = os.path.join(dataDir, "textures")
-
-  materials["none"] = {"portalable": False, "kind": "None", "fancyname": "None"}
 
   files = os.path.browse(
     directory="textures", extension="gmd", blacklist=blacklist, recursive=True

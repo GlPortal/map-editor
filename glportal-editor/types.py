@@ -27,10 +27,22 @@ glpMaterialTypes = [
 ]
 
 def onUpdateGlpTypes(self, context):
-  objects = bpy.context.selected_objects
+  objects = context.selected_objects
   for object in objects:
-    if object.glpTypes != "none" and not object.name.lower().startswith(object.glpTypes):
-      object.name = object.glpTypes
+    type = object.glpTypes
+    name = type
+
+    if type == "trigger":
+      name = type + "." + object.glpTriggerTypes
+    elif type == "volume":
+      name = type + "." + object.glpVolumeTypes
+    elif type == "model":
+      name = type + "." + object.glpModel
+    else:
+      name = type + "." + object.glpMaterial
+
+    if object.glpTypes != "none":
+      object.name = name
 
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty (
@@ -42,12 +54,14 @@ def setProperties():
   bpy.types.Object.glpVolumeTypes = EnumProperty (
     items = glpVolumeTypes,
     name = "Volume Type",
-    default = "none"
+    default = "none",
+    update = onUpdateGlpTypes
   )
   bpy.types.Object.glpTriggerTypes = EnumProperty (
     items = glpTriggerTypes,
     name = "Trigger Type",
-    default = "none"
+    default = "none",
+    update = onUpdateGlpTypes
   )
   bpy.types.Object.glpTriggerFilepath = StringProperty (
     name = "Filepath",
@@ -59,7 +73,8 @@ def setProperties():
   )
   bpy.types.Object.glpModel = StringProperty (
     name = "Model",
-    default = "none"
+    default = "none",
+    update = onUpdateGlpTypes
   )
   bpy.types.WindowManager.importedFilepath = StringProperty (
     name = "Imported filepath",
