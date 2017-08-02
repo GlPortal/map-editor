@@ -7,8 +7,6 @@ from .managers import ModelManager
 from .operatorHelpers import simpleCube
 
 class Importer():
-  mapFormatRadix = False
-
   def __init__(self, filePath, deleteWorld=True):
     self.__filePath = filePath
     self.__deleteWorld = deleteWorld
@@ -26,10 +24,7 @@ class Importer():
     for child in root:
       if child.tag == "materials":
         for mat in child:
-          if self.mapFormatRadix:
-            mid = mat.get("id")
-          else:
-            mid = mat.get("mid")
+          mid = mat.get("id")
           name = mat.get("name")
 
           materials[mid] = name
@@ -103,7 +98,7 @@ class Importer():
         if object:
           object.glpTypes = "wall"
 
-          matAttr = "material" if self.mapFormatRadix else "mid"
+          matAttr = "material"
 
           if matAttr in child.attrib:
             mid = child.get(matAttr)
@@ -136,15 +131,11 @@ class Importer():
         if object:
           lamp = object.data
 
-          if self.mapFormatRadix:
-            for param in child:
-              if param.tag == "position":
-                object.location = self.extractPosition(param)
-              elif param.tag == "color":
-                lamp.color = self.extrackColor(param)
-          else:
-            object.location = self.extractPosition(child)
-            lamp.color = self.extrackColor(child)
+          for param in child:
+            if param.tag == "position":
+              object.location = self.extractPosition(param)
+            elif param.tag == "color":
+              lamp.color = self.extrackColor(param)
 
           lamp.distance = float(child.get("distance"))
           lamp.energy = float(child.get("energy"))
@@ -193,7 +184,7 @@ class Importer():
             object.delete()
       elif child.tag == "object" or child.tag == "model":
         mesh = child.get("mesh")
-        matAttr = "material" if self.mapFormatRadix else "mid"
+        matAttr = "material"
 
         if matAttr in child.attrib:
           mid = child.get(matAttr)

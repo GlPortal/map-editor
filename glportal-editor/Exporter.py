@@ -9,8 +9,6 @@ from .managers import MaterialManager
 from .importer import Importer
 
 class Exporter():
-  mapFormatRadix = False
-
   def __init__(self, filePath, d_p=4):
     self.__filePath = filePath
     self.__d_p = d_p
@@ -20,12 +18,8 @@ class Exporter():
     materialElement = tree.SubElement(root, "materials")
 
     for name, index in materials:
-      if self.mapFormatRadix:
-        element = tree.SubElement(materialElement, "material")
-        element.set("id", str(index))
-      else:
-        element = tree.SubElement(materialElement, "mat")
-        element.set("mid", str(index))
+      element = tree.SubElement(materialElement, "material")
+      element.set("id", str(index))
       element.set("name", name)
 
   def storePosition(self, element, object):
@@ -69,15 +63,11 @@ class Exporter():
 
     lightElement = tree.SubElement(targetTree, "light")
 
-    if self.mapFormatRadix:
-      positionElement = tree.SubElement(lightElement, "position")
-      self.storePosition(positionElement, object)
+    positionElement = tree.SubElement(lightElement, "position")
+    self.storePosition(positionElement, object)
 
-      colorElement = tree.SubElement(lightElement, "color")
-      self.storeColor(colorElement, colorArray)
-    else:
-      self.storePosition(lightElement, object)
-      self.storeColor(lightElement, colorArray)
+    colorElement = tree.SubElement(lightElement, "color")
+    self.storeColor(colorElement, colorArray)
 
     lightElement.set("distance", str(round(lightDistance, self.__d_p)))
     lightElement.set("energy", str(round(lightEnergy, self.__d_p)))
@@ -98,14 +88,10 @@ class Exporter():
     objects = context.scene.objects
     root = tree.Element("map")
 
-    if self.mapFormatRadix:
-      matAttr = "material"
-    else:
-      matAttr = "mid"
+    matAttr = "material"
 
     if os.path.isfile(self.__filePath):
       oldMap = Importer(self.__filePath)
-      oldMap.mapFormatRadix = self.mapFormatRadix
       oldMaterials = oldMap.getMaterials()
     else:
       oldMaterials = {}
@@ -144,10 +130,7 @@ class Exporter():
         boxElement = None
 
         if type == "model":
-          if self.mapFormatRadix:
-            boxElement = tree.SubElement(root, "model")
-          else:
-            boxElement = tree.SubElement(root, "object")
+          boxElement = tree.SubElement(root, "model")
           boxElement.set("mesh", object.glpModel)
 
           if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.BLACKLIST:

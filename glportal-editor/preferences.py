@@ -34,17 +34,11 @@ class Preferences(AddonPreferences):
     items=itemsMaterial,
     update=updateDefaultMaterial
   )
-  mapFormatRadix = BoolProperty(
-    name="Map format for Radix",
-    description="Export map in format supported by RadixEngine",
-    default=False
-  )
 
   def draw(self, context):
     layout = self.layout
 
     layout.prop(self, "triggerXrays")
-    layout.prop(self, "mapFormatRadix")
 
     if MM.MATERIALS:
       if self.defaultMaterial not in MM.MATERIALS:

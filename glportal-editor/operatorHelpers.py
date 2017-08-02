@@ -25,7 +25,7 @@ def setTrigger(object, type, filePath='', loop=False):
   object.draw_bounds_type = 'CAPSULE'
   object.glpTriggerAudioLoop = loop
 
-  if filePath != '':
+  if filePath:
     object.glpTriggerFilepath = filePath
 
 def clearGlpProperties(object):
@@ -39,7 +39,7 @@ def clearGlpProperties(object):
     object.glpTriggerTypes = "none"
   if object.glpTriggerFilepath != "none":
     object.glpTriggerFilepath = "none"
-  if object.glpTriggerAudioLoop != False:
+  if object.glpTriggerAudioLoop:
     object.glpTriggerAudioLoop = False
 
 def itemsMaterial(self, context):
