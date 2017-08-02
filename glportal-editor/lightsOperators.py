@@ -1,6 +1,6 @@
 import bpy
 
-class setLightCommon(bpy.types.Operator):
+class SetLightCommon(bpy.types.Operator):
   bl_idname = "glp.set_light_common"
   bl_label = "Common"
   bl_description = "Set a light with predefined color for common lights"
@@ -15,10 +15,13 @@ class setLightCommon(bpy.types.Operator):
         lamp.color = [1.0, 0.95, 0.9]
         lamp.use_specular = False
       else:
-        self.report({'ERROR'}, "Object of type '%s' can't be converted to the common light." % (object.type))
+        self.report(
+          {'ERROR'},
+          "Object of type '%s' can't be converted to the common light." % (object.type)
+        )
     return {'FINISHED'}
 
-class addLightCommon(bpy.types.Operator):
+class AddLightCommon(bpy.types.Operator):
   bl_idname = "glp.add_light_common"
   bl_label = "Common"
   bl_description = "Add a light with predefined color for common lights"
@@ -29,7 +32,7 @@ class addLightCommon(bpy.types.Operator):
     bpy.ops.glp.set_light_common()
     return {'FINISHED'}
 
-class setLightEnd(bpy.types.Operator):
+class SetLightEnd(bpy.types.Operator):
   bl_idname = "glp.set_light_end"
   bl_label = "End"
   bl_description = "Set a light with predefined color for end lights"
@@ -46,10 +49,13 @@ class setLightEnd(bpy.types.Operator):
         lamp.energy = 5
         lamp.use_specular = False
       else:
-        self.report({'ERROR'}, "Object of type '%s' can't be converted to the end light." % (object.type))
+        self.report(
+          {'ERROR'},
+          "Object of type '%s' can't be converted to the end light." % (object.type)
+        )
     return {'FINISHED'}
 
-class addLightEnd(bpy.types.Operator):
+class AddLightEnd(bpy.types.Operator):
   bl_idname = "glp.add_light_end"
   bl_label = "End"
   bl_description = "Add a light with predefined color for end lights"

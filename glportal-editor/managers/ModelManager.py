@@ -2,8 +2,8 @@ import bpy
 import os
 
 
-models = {}
-blacklist = [
+MODELS = {}
+BLACKLIST = [
   "GUIElement.obj",
   "Plane.obj",
   "Portal.obj",
@@ -11,31 +11,31 @@ blacklist = [
 ]
 
 def reload():
-  models.clear()
+  MODELS.clear()
   preload()
 
 def preload():
-  global models
-  meshes = os.path.browse(directory="meshes", extension="obj", blacklist=blacklist)
+  global MODELS
+  meshes = os.path.browse(directory="meshes", extension="obj", blacklist=BLACKLIST)
 
   if meshes:
-    models = meshes
+    MODELS = meshes
     return True
 
   return False
 
-def create(file = "", materialName = ""):
+def create(file="", materialName=""):
   if not file:
     print("Model file is empty.")
     return False
 
-  if file in models:
+  if file in MODELS:
     prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
     dataDir = os.path.expanduser(prefs.dataDir)
     path = os.path.join(dataDir, "meshes", file)
 
     if os.path.isfile(path):
-      bpy.ops.import_scene.obj(filepath = path)
+      bpy.ops.import_scene.obj(filepath=path)
 
       object = bpy.context.selected_objects[0]
       if object:

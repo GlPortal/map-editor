@@ -2,7 +2,7 @@ import bpy
 
 from .operatorHelpers import resetTriggerSettings, simpleCube
 
-class setAcid(bpy.types.Operator):
+class SetAcid(bpy.types.Operator):
   bl_idname = "glp.set_acid"
   bl_label = "Acid"
   bl_description = "Mark the selection as a volume of acid."
@@ -23,10 +23,13 @@ class setAcid(bpy.types.Operator):
         else:
           self.report({'ERROR'}, "Door can't be converted to the volume of acid.")
       else:
-        self.report({'ERROR'}, "Object of type '%s' can't be converted to the volume of acid." % (object.type))
+        self.report(
+          {'ERROR'},
+          "Object of type '%s' can't be converted to the volume of acid." % (object.type)
+        )
     return {'FINISHED'}
 
-class addAcid(bpy.types.Operator):
+class AddAcid(bpy.types.Operator):
   bl_idname = "glp.add_acid"
   bl_label = "Acid"
   bl_description = "Add a volume of acid."

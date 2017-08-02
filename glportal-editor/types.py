@@ -2,27 +2,27 @@ import bpy
 from bpy.props import EnumProperty, StringProperty, BoolProperty
 
 
-glpTypes = [
-  ("none",    "None",    "No special property"),
-  ("wall",    "Wall",    "Wall"),
-  ("door",    "Door",    "Door"),# REMOVE this
-  ("volume",  "Volume",  "Volume"),
+GLP_TYPES = [
+  ("none", "None", "No special property"),
+  ("wall", "Wall", "Wall"),
+  ("door", "Door", "Door"),# REMOVE this
+  ("volume", "Volume", "Volume"),
   ("trigger", "Trigger", "Trigger"),
-  ("model",   "Model",   "Model")
+  ("model", "Model", "Model")
 ]
-glpVolumeTypes = [
-  ("none", "None",      "No special property"),
+GLP_VOLUME_TYPES = [
+  ("none", "None", "No special property"),
   ("acid", "Acid Pool", "A pool full of acid, hurts..")
 ]
-glpTriggerTypes = [
-  ("none",      "None",      "No special property"),
-  ("win",       "Win",       "Area triggers win"),
-  ("map",       "Map",       "Area triggers new map"),
-  ("audio",     "Audio",     "Area triggers new audio"),
-  ("death",     "Death",     "Area triggers death"),
+GLP_TRIGGER_TYPES = [
+  ("none", "None", "No special property"),
+  ("win", "Win", "Area triggers win"),
+  ("map", "Map", "Area triggers new map"),
+  ("audio", "Audio", "Area triggers new audio"),
+  ("death", "Death", "Area triggers death"),
   ("radiation", "Radiation", "Area triggers radiation")
 ]
-glpMaterialTypes = [
+GLP_MATERIAL_TYPES = [
   ("none", "None", "No material")
 ]
 
@@ -45,40 +45,40 @@ def onUpdateGlpTypes(self, context):
       object.name = name
 
 def setProperties():
-  bpy.types.Object.glpTypes = EnumProperty (
-    items = glpTypes,
-    name = "Type",
-    default = "none",
-    update = onUpdateGlpTypes
+  bpy.types.Object.glpTypes = EnumProperty(
+    items=GLP_TYPES,
+    name="Type",
+    default="none",
+    update=onUpdateGlpTypes
   )
-  bpy.types.Object.glpVolumeTypes = EnumProperty (
-    items = glpVolumeTypes,
-    name = "Volume Type",
-    default = "none",
-    update = onUpdateGlpTypes
+  bpy.types.Object.glpVolumeTypes = EnumProperty(
+    items=GLP_VOLUME_TYPES,
+    name="Volume Type",
+    default="none",
+    update=onUpdateGlpTypes
   )
-  bpy.types.Object.glpTriggerTypes = EnumProperty (
-    items = glpTriggerTypes,
-    name = "Trigger Type",
-    default = "none",
-    update = onUpdateGlpTypes
+  bpy.types.Object.glpTriggerTypes = EnumProperty(
+    items=GLP_TRIGGER_TYPES,
+    name="Trigger Type",
+    default="none",
+    update=onUpdateGlpTypes
   )
-  bpy.types.Object.glpTriggerFilepath = StringProperty (
-    name = "Filepath",
-    default = "none"
+  bpy.types.Object.glpTriggerFilepath = StringProperty(
+    name="Filepath",
+    default="none"
   )
-  bpy.types.Object.glpTriggerAudioLoop = BoolProperty (
-    name = "AudioLoop",
-    default = False
+  bpy.types.Object.glpTriggerAudioLoop = BoolProperty(
+    name="AudioLoop",
+    default=False
   )
-  bpy.types.Object.glpModel = StringProperty (
-    name = "Model",
-    default = "none",
-    update = onUpdateGlpTypes
+  bpy.types.Object.glpModel = StringProperty(
+    name="Model",
+    default="none",
+    update=onUpdateGlpTypes
   )
-  bpy.types.WindowManager.importedFilepath = StringProperty (
-    name = "Imported filepath",
-    default = "none"
+  bpy.types.WindowManager.importedFilepath = StringProperty(
+    name="Imported filepath",
+    default="none"
   )
 
 def delProperties():

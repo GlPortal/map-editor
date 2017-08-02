@@ -9,7 +9,7 @@ from .operatorHelpers import simpleCube
 class Importer():
   mapFormatRadix = False
 
-  def __init__(self, filePath, deleteWorld = True):
+  def __init__(self, filePath, deleteWorld=True):
     self.__filePath = filePath
     self.__deleteWorld = deleteWorld
 
@@ -200,7 +200,7 @@ class Importer():
           if not ModelManager.create(mesh, materials[mid]):
             continue
         elif not ModelManager.create(mesh):
-            continue
+          continue
 
         object = bpy.context.selected_objects[0]
         if object:

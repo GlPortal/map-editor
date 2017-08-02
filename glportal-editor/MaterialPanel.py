@@ -13,7 +13,7 @@ class SaveMaterial(bpy.types.Operator):
     wm = bpy.context.window_manager
 
     name = wm.MPMaterials[wm.MPItemId].matName
-    material = MM.materials[name]
+    material = MM.MATERIALS[name]
 
     material["fancyname"] = wm.glpMatFancyName
     material["kind"] = wm.glpMatKind
@@ -78,7 +78,7 @@ class MaterialPanel(bpy.types.Panel):
   bl_context = "material"
 
   @classmethod
-  def poll(self, context):
+  def poll(cls, context):
 #    MPItemIdUpdate(self, context)
     return True
 
@@ -88,7 +88,7 @@ class MaterialPanel(bpy.types.Panel):
     layout = self.layout
 
     name = wm.MPMaterials[wm.MPItemId].matName
-    material = MM.materials[name]
+    material = MM.MATERIALS[name]
 
 #    if name != "none":
 #      layout.template_preview(bpy.data.textures[material["fancyname"]], show_buttons=True)
@@ -161,7 +161,9 @@ class MaterialPanel(bpy.types.Panel):
 
 
 def initRow(item, i, name, data):
-  item.name = "".join((data["fancyname"], str(i), name, data["kind"], data["tags"] if "tags" in data else ""))
+  item.name = "".join(
+    (data["fancyname"], str(i), name, data["kind"], data["tags"] if "tags" in data else "")
+  )
   item.label = data["fancyname"]
   item.description = data["kind"]
   item.matName = name
@@ -177,6 +179,6 @@ def initRows():
   except:
     pass
 
-  for i, (name, data) in enumerate(MM.materials.items(), 1):
+  for i, (name, data) in enumerate(MM.MATERIALS.items(), 1):
     item = wm.MPMaterials.add()
     initRow(item, i, name, data)

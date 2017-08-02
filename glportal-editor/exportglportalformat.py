@@ -12,9 +12,9 @@ class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
   filename_ext = ".xml"
   filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
   mapFormatRadix = BoolProperty(
-    name = "Map format for Radix",
-    description = "Export map in format supported by RadixEngine",
-    default = False
+    name="Map format for Radix",
+    description="Export map in format supported by RadixEngine",
+    default=False
   )
 
   def execute(self, context):

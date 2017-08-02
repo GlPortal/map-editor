@@ -5,7 +5,7 @@ from subprocess import call
 from .Exporter import Exporter
 from .managers import MaterialManager
 
-class fixMaterials(bpy.types.Operator):
+class FixMaterials(bpy.types.Operator):
   bl_idname = "glp.fix_materials"
   bl_label = "Fix materials"
   bl_description = "Assign default material to objects without it."
@@ -23,7 +23,7 @@ class fixMaterials(bpy.types.Operator):
 
     return {'FINISHED'}
 
-class reloadMaterials(bpy.types.Operator):
+class ReloadMaterials(bpy.types.Operator):
   bl_idname = "glp.reload_materials"
   bl_label = "Reload materials"
   bl_description = "Reload GlPortal materials"
@@ -32,7 +32,7 @@ class reloadMaterials(bpy.types.Operator):
     MaterialManager.reload()
     return {'FINISHED'}
 
-class fastExport(bpy.types.Operator):
+class FastExport(bpy.types.Operator):
   bl_idname = "glp.fast_export"
   bl_label = "Fast Export"
   bl_description = "Export current map to the imported file"
@@ -40,7 +40,7 @@ class fastExport(bpy.types.Operator):
   def execute(self, context):
     filepath = bpy.context.window_manager.importedFilepath
 
-    if (filepath != "none"):
+    if filepath != "none":
       if os.path.isfile(filepath):
         prefs = bpy.context.user_preferences.addons[__package__].preferences
 
@@ -56,7 +56,7 @@ class fastExport(bpy.types.Operator):
 
     return {'FINISHED'}
 
-class fixMap(bpy.types.Operator):
+class FixMap(bpy.types.Operator):
   bl_idname = "glp.fix_map"
   bl_label = "Fix map"
   bl_description = "Fix the map before exporting."
@@ -67,7 +67,7 @@ class fixMap(bpy.types.Operator):
     bpy.ops.glp.fix_materials()
     return {'FINISHED'}
 
-class checkMap(bpy.types.Operator):
+class CheckMap(bpy.types.Operator):
   bl_idname = "glp.check_map"
   bl_label = "Check map"
   bl_description = "Check the map for problems."
@@ -76,7 +76,7 @@ class checkMap(bpy.types.Operator):
     bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
     return {'FINISHED'}
 
-class runGame(bpy.types.Operator):
+class RunGame(bpy.types.Operator):
   bl_idname = "glp.run_game"
   bl_label = "Run game"
   bl_description = "Run game with this map"
@@ -97,7 +97,10 @@ class runGame(bpy.types.Operator):
           exporter.mapFormatRadix = prefs.mapFormatRadix
           exporter.execute(context)
 
-          call([prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath], env=os.environ)
+          call(
+            [prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath],
+            env=os.environ
+          )
 
           os.remove(filepath)
         else:

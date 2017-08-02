@@ -42,9 +42,9 @@ def updateTexture(self):
     bm.faces[7].loops[1][uv_layer].uv = (scale[0], 0)
     bm.faces[7].loops[2][uv_layer].uv = (0, -scale[1])
     # Front - 1
-    bm.faces[2].loops[0][uv_layer].uv =  (scale[1], -scale[2])
-    bm.faces[2].loops[1][uv_layer].uv =  (scale[1], 0)
-    bm.faces[2].loops[2][uv_layer].uv =  (0, -scale[2])
+    bm.faces[2].loops[0][uv_layer].uv = (scale[1], -scale[2])
+    bm.faces[2].loops[1][uv_layer].uv = (scale[1], 0)
+    bm.faces[2].loops[2][uv_layer].uv = (0, -scale[2])
     # Front - 2
     bm.faces[8].loops[0][uv_layer].uv = (scale[1], 0)
     bm.faces[8].loops[1][uv_layer].uv = (0, 0)

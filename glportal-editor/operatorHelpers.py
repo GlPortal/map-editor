@@ -43,10 +43,10 @@ def clearGlpProperties(object):
     object.glpTriggerAudioLoop = False
 
 def itemsMaterial(self, context):
-  return [(name, fancyName, tooltip) for name, fancyName, tooltip in types.glpMaterialTypes]
+  return [(name, fancyName, tooltip) for name, fancyName, tooltip in types.GLP_MATERIAL_TYPES]
 
 def itemsModel(self, centext):
-  return [(file, fancyName, fancyName) for file, fancyName in ModelManager.models.items()]
+  return [(file, fancyName, fancyName) for file, fancyName in ModelManager.MODELS.items()]
 
 def simpleCube():
   if ModelManager.create("Cube.obj"):

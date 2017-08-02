@@ -1,5 +1,4 @@
 import bpy
-import math
 import os
 from bpy.props import IntProperty
 
@@ -48,7 +47,7 @@ def checkSpawnPosition(objects):
         return isOver
   return 0
 
-def countObjects(self, objects = None):
+def countObjects(self, objects=None):
   prefs = bpy.context.user_preferences.addons[__package__].preferences
   dataDir = os.path.expanduser(prefs.dataDir)
 
@@ -108,19 +107,19 @@ def countObjects(self, objects = None):
           result["objectNoMat"] += 1
   return result
 
-class checkMapDialog(bpy.types.Operator):
+class CheckMapDialog(bpy.types.Operator):
   bl_idname = "object.map_check_dialog"
   bl_label = "Check map results"
 
-  camera = bpy.props.IntProperty (name="Number of cameras")
-  light = bpy.props.IntProperty (name="Number of lights")
-  wall = bpy.props.IntProperty (name="Number of walls")
-  exitDoor = bpy.props.IntProperty (name="Number of exit doors")
-  modelsNoMat = bpy.props.IntProperty (name="Number of models without material")
-  triggerMapEmpty = bpy.props.IntProperty (name="Number of map triggers without file path")
-  triggerMapWrong = bpy.props.IntProperty (name="Number of map triggers with wrong file path")
-  triggerAudioEmpty = bpy.props.IntProperty (name="Number of audio triggers without file path")
-  triggerAudioWrong = bpy.props.IntProperty (name="Number of audio triggers with wrong file path")
+  camera = IntProperty(name="Number of cameras")
+  light = IntProperty(name="Number of lights")
+  wall = IntProperty(name="Number of walls")
+  exitDoor = IntProperty(name="Number of exit doors")
+  modelsNoMat = IntProperty(name="Number of models without material")
+  triggerMapEmpty = IntProperty(name="Number of map triggers without file path")
+  triggerMapWrong = IntProperty(name="Number of map triggers with wrong file path")
+  triggerAudioEmpty = IntProperty(name="Number of audio triggers without file path")
+  triggerAudioWrong = IntProperty(name="Number of audio triggers with wrong file path")
 
   def execute(self, context):
     return {'FINISHED'}

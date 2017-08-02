@@ -1,4 +1,3 @@
-import bpy
 import os
 
 from .managers import MaterialManager, ModelManager
@@ -11,7 +10,7 @@ def updateTriggerXrays(self, context):
 
   for object in objects:
     if object.glpTypes == "trigger":
-      object.show_x_ray = prefs.triggerXrays
+      object.show_x_ray = triggerXrays
 
 def updateDefaultMaterial(self, context):
   prefs = context.user_preferences.addons[__package__].preferences

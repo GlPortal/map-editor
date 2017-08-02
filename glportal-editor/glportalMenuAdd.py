@@ -1,4 +1,5 @@
-import bpy
+from bpy.types import Menu
+
 
 def glportal_add_menu(self, context):
   layout = self.layout
@@ -6,7 +7,7 @@ def glportal_add_menu(self, context):
   layout.menu("glpMenu.main", icon='WORLD')
   layout.separator()
 
-class MenuMain(bpy.types.Menu):
+class MenuMain(Menu):
   bl_idname = "glpMenu.main"
   bl_label = "GlPortal"
 
@@ -21,7 +22,7 @@ class MenuMain(bpy.types.Menu):
     layout.operator("object.camera_add", text="Spawn (Camera)", icon='OUTLINER_OB_CAMERA')
     layout.operator("glp.add_door", text="Exit", icon='MESH_CUBE')
 
-class MenuWalls(bpy.types.Menu):
+class MenuWalls(Menu):
   bl_idname = "glpMenu.walls"
   bl_label = "Walls"
 
@@ -31,7 +32,7 @@ class MenuWalls(bpy.types.Menu):
     layout.operator("glp.add_portalable", icon='MESH_PLANE')
     layout.operator("glp.add_wall", icon='META_PLANE')
 
-class MenuTriggers(bpy.types.Menu):
+class MenuTriggers(Menu):
   bl_idname = "glpMenu.triggers"
   bl_label = "Triggers"
 
@@ -42,7 +43,7 @@ class MenuTriggers(bpy.types.Menu):
     layout.operator("glp.add_radiation", icon='RADIO')
     layout.operator("glp.add_win", icon='MESH_CUBE')
 
-class MenuVolumes(bpy.types.Menu):
+class MenuVolumes(Menu):
   bl_idname = "glpMenu.volumes"
   bl_label = "Volumes"
 
@@ -51,7 +52,7 @@ class MenuVolumes(bpy.types.Menu):
 
     layout.operator("glp.add_acid", icon='MESH_CUBE')
 
-class MenuLights(bpy.types.Menu):
+class MenuLights(Menu):
   bl_idname = "glpMenu.lights"
   bl_label = "Lights"
 

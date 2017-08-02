@@ -6,32 +6,32 @@ from .managers import MaterialManager as MM
 
 
 def initProperties():
-  bpy.types.WindowManager.MPItemId = IntProperty (
-    default = 0,
-    update = MPItemIdUpdate
+  bpy.types.WindowManager.MPItemId = IntProperty(
+    default=0,
+    update=MPItemIdUpdate
   )
-  bpy.types.WindowManager.glpMatName = StringProperty (
-    name = "Name",
-    default = ""
+  bpy.types.WindowManager.glpMatName = StringProperty(
+    name="Name",
+    default=""
   )
-  bpy.types.WindowManager.glpMatFancyName = StringProperty (
-    name = "FancyName",
-    default = ""
+  bpy.types.WindowManager.glpMatFancyName = StringProperty(
+    name="FancyName",
+    default=""
   )
-  bpy.types.WindowManager.glpMatPortalable = BoolProperty (
-    name = "Portalable",
-    default = False
+  bpy.types.WindowManager.glpMatPortalable = BoolProperty(
+    name="Portalable",
+    default=False
   )
-  bpy.types.WindowManager.glpMatKind = StringProperty (
-    name = "Kind",
-    default = ""
+  bpy.types.WindowManager.glpMatKind = StringProperty(
+    name="Kind",
+    default=""
   )
-  bpy.types.WindowManager.glpMatTags = StringProperty (
-    name = "Tags",
-    default = ""
+  bpy.types.WindowManager.glpMatTags = StringProperty(
+    name="Tags",
+    default=""
   )
-  bpy.types.WindowManager.glpMatEdit = BoolProperty (
-    default = False
+  bpy.types.WindowManager.glpMatEdit = BoolProperty(
+    default=False
   )
 
 def delProperties():
@@ -45,17 +45,17 @@ def delProperties():
 
 
 class Row(bpy.types.PropertyGroup):
-  name = bpy.props.StringProperty()
-  label = bpy.props.StringProperty()
-  description = bpy.props.StringProperty()
-  matName = bpy.props.StringProperty()
+  name = StringProperty()
+  label = StringProperty()
+  description = StringProperty()
+  matName = StringProperty()
 
 
 def MPItemIdUpdate(self, context):
   wm = bpy.context.window_manager
 
   name = wm.MPMaterials[wm.MPItemId].matName
-  material = MM.materials[name]
+  material = MM.MATERIALS[name]
 
   if name != "none":
     if wm.glpMatEdit:

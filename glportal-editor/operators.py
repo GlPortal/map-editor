@@ -4,7 +4,7 @@ from .operatorHelpers import resetTriggerSettings, itemsMaterial, itemsModel, si
 from .managers import ModelManager
 
 # we are using this for <end> (exit door)
-class addDoor(bpy.types.Operator):
+class AddDoor(bpy.types.Operator):
   bl_idname = "glp.add_door"
   bl_label = "Add a door"
   bl_description = "Add an exit door (use only once)"
@@ -19,7 +19,7 @@ class addDoor(bpy.types.Operator):
 
     return {'FINISHED'}
 
-class setPortalable(bpy.types.Operator):
+class SetPortalable(bpy.types.Operator):
   bl_idname = "glp.set_portalable"
   bl_label = "Portalable"
   bl_description = "Mark the selection as portalable wall."
@@ -38,10 +38,13 @@ class setPortalable(bpy.types.Operator):
         else:
           self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
       else:
-        self.report({'ERROR'}, "Object of type '%s' can't be converted to the portalable wall." % (object.type))
+        self.report(
+          {'ERROR'},
+          "Object of type '%s' can't be converted to the portalable wall." % (object.type)
+        )
     return {'FINISHED'}
 
-class setWall(bpy.types.Operator):
+class SetWall(bpy.types.Operator):
   bl_idname = "glp.set_wall"
   bl_label = "Metal tiles"
   bl_description = "Mark the selection as metal wall."
@@ -60,10 +63,13 @@ class setWall(bpy.types.Operator):
         else:
           self.report({'ERROR'}, "Door can't be converted to the metal wall.")
       else:
-        self.report({'ERROR'}, "Object of type '%s' can't be converted to the metal wall." % (object.type))
+        self.report(
+          {'ERROR'},
+          "Object of type '%s' can't be converted to the metal wall." % (object.type)
+        )
     return {'FINISHED'}
 
-class addWall(bpy.types.Operator):
+class AddWall(bpy.types.Operator):
   bl_idname = "glp.add_wall"
   bl_label = "Metal tiles"
   bl_description = "Add a metal wall."
@@ -74,7 +80,7 @@ class addWall(bpy.types.Operator):
       bpy.ops.glp.set_wall()
     return {'FINISHED'}
 
-class addPortalable(bpy.types.Operator):
+class AddPortalable(bpy.types.Operator):
   bl_idname = "glp.add_portalable"
   bl_label = "Portalable"
   bl_description = "Add a portalable wall."
@@ -85,7 +91,7 @@ class addPortalable(bpy.types.Operator):
       bpy.ops.glp.set_portalable()
     return {'FINISHED'}
 
-class searchMaterial(bpy.types.Operator):
+class SearchMaterial(bpy.types.Operator):
   bl_idname = "glp.search_material"
   bl_label = "Set material"
   bl_property = "material"
@@ -104,7 +110,7 @@ class searchMaterial(bpy.types.Operator):
     wm.invoke_search_popup(self)
     return {'FINISHED'}
 
-class searchModel(bpy.types.Operator):
+class SearchModel(bpy.types.Operator):
   bl_idname = "glp.search_model"
   bl_label = "Add model"
   bl_property = "model"

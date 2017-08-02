@@ -9,7 +9,7 @@ class ObjectPanel(bpy.types.Panel):
   bl_context = "object"
 
   @classmethod
-  def poll(self, context):
+  def poll(cls, context):
     if context.object.glpTypes != "none":
       return True
     return False
@@ -31,7 +31,7 @@ class ObjectPanel(bpy.types.Panel):
       layout.prop(object, "glpMaterial", text="Name ")
 
       if object.glpMaterial != "none":
-        mat = MaterialManager.materials[object.glpMaterial]
+        mat = MaterialManager.MATERIALS[object.glpMaterial]
 
         row = layout.row(align=True)
         row.alignment = 'EXPAND'

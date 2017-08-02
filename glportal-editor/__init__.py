@@ -10,7 +10,33 @@ bl_info = {
   "tracker_url":  "https://github.com/GlPortal/map-editor/issues"
 }
 
-if "bpy" in locals():
+if "bpy" not in locals():
+  from . import types
+  from . import CreationPanel
+  from . import SidePanel
+  from . import ObjectPanel
+  from . import exportglportalformat
+  from . import importglportalformat
+  from . import operators
+  from . import triggerOperators
+  from . import volumeOperators
+  from . import mapOperators
+  from . import preferences
+  from . import mapHelpers
+  from . import glportalMenuAdd
+  from . import updateTextures
+  from . import lightsOperators
+  from . import Exporter
+  from . import importer
+  from . import operatorHelpers
+  from . import preferencesHelper
+  from . import MPTypes
+  from . import MaterialPanel
+  from . import validator
+  from .managers import MaterialManager
+  from .managers import ModelManager
+  from .utils import directory
+else:
   import importlib
 
   importlib.reload(types)
@@ -38,32 +64,6 @@ if "bpy" in locals():
   importlib.reload(MPTypes)
   importlib.reload(MaterialPanel)
   importlib.reload(directory)
-else:
-  from . import types
-  from . import CreationPanel
-  from . import SidePanel
-  from . import ObjectPanel
-  from . import exportglportalformat
-  from . import importglportalformat
-  from . import operators
-  from . import triggerOperators
-  from . import volumeOperators
-  from . import mapOperators
-  from . import preferences
-  from . import mapHelpers
-  from . import glportalMenuAdd
-  from . import updateTextures
-  from . import lightsOperators
-  from . import Exporter
-  from . import importer
-  from . import operatorHelpers
-  from . import preferencesHelper
-  from . import MPTypes
-  from . import MaterialPanel
-  from . import validator
-  from .managers import MaterialManager
-  from .managers import ModelManager
-  from .utils import directory
 
 import bpy
 import os
@@ -102,8 +102,8 @@ def unregister():
   bpy.utils.unregister_module(__name__)
 
   MaterialManager.glpMaterialReset()
-  MaterialManager.materials.clear()
-  ModelManager.models.clear()
+  MaterialManager.MATERIALS.clear()
+  ModelManager.MODELS.clear()
   types.delProperties()
   MPTypes.delProperties()
 

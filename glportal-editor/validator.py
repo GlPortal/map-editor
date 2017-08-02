@@ -1,4 +1,5 @@
 import os
+
 from lxml import etree
 
 schemaPath = "xml-schema"
@@ -9,22 +10,22 @@ schemas = {
 }
 
 
-def validate(filePath="" , type='map'):
+def validate(filePath="", type="map"):
   if not filePath or not os.path.isfile(filePath):
     print("File '" + filePath + "' does not exist !")
-    return False;
+    return False
 
-  if not type in schemas:
+  if type not in schemas:
     print("Schema '" + type + "' does not exist !")
-    return False;
+    return False
 
   try:
     xsdFile = os.path.join(schemaPath, schemas[type])
     schema = etree.XMLSchema(file=xsdFile)
     xmlparser = etree.XMLParser(schema=schema)
 
-    with open(filePath, 'r') as f:
-      etree.fromstring(f.read(), xmlparser)
+    with open(filePath, 'r') as file:
+      etree.fromstring(file.read(), xmlparser)
 
     return True
   except etree.XMLSchemaError:

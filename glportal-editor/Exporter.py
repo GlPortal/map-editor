@@ -11,7 +11,7 @@ from .importer import Importer
 class Exporter():
   mapFormatRadix = False
 
-  def __init__(self, filePath, d_p = 4):
+  def __init__(self, filePath, d_p=4):
     self.__filePath = filePath
     self.__d_p = d_p
 
@@ -150,7 +150,7 @@ class Exporter():
             boxElement = tree.SubElement(root, "object")
           boxElement.set("mesh", object.glpModel)
 
-          if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.blacklist:
+          if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.BLACKLIST:
             boxElement.set(matAttr, str(materials[object.glpMaterial]))
           else:
             boxElement.set(matAttr, str(materials[prefs.defaultMaterial]))
@@ -166,7 +166,7 @@ class Exporter():
         elif type == "wall":
           boxElement = tree.SubElement(root, "wall")
 
-          if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.blacklist:
+          if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.BLACKLIST:
             boxElement.set(matAttr, str(materials[object.glpMaterial]))
           else:
             boxElement.set(matAttr, str(materials[prefs.defaultMaterial]))

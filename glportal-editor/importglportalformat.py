@@ -13,9 +13,9 @@ class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
   filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
   deleteWorld = BoolProperty(default=True, name="Erase current scene")
   mapFormatRadix = BoolProperty(
-    name = "Map format for Radix",
-    description = "Export map in format supported by RadixEngine",
-    default = False
+    name="Map format for Radix",
+    description="Export map in format supported by RadixEngine",
+    default=False
   )
 
   def execute(self, context):
