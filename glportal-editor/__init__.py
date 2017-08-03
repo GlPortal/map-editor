@@ -68,11 +68,14 @@ else:
 import bpy
 import os
 
+
 def menu_func_export(self, context):
   self.layout.operator("glp.export", text="GlPortal Map (.xml)")
 
+
 def menu_func_import(self, context):
   self.layout.operator("glp.import", text="GlPortal Map (.xml)")
+
 
 def register():
   bpy.utils.register_module(__name__)
@@ -98,6 +101,7 @@ def register():
   ModelManager.preload()
   MaterialPanel.initRows()
 
+
 def unregister():
   bpy.utils.unregister_module(__name__)
 
@@ -120,6 +124,7 @@ def unregister():
   del os.path.browse
 
   del bpy.types.WindowManager.MPMaterials
+
 
 if __name__ == "__main__":
   register()

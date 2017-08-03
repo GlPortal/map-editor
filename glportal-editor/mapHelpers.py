@@ -2,6 +2,7 @@ import bpy
 import os
 from bpy.props import IntProperty
 
+
 def fixObjects(self):
   objects = bpy.context.scene.objects
   bpy.ops.object.select_all(action='DESELECT')
@@ -13,6 +14,7 @@ def fixObjects(self):
       if type in {"wall", "trigger", "volume"}:
         bpy.context.scene.objects.active = object
         bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
+
 
 def isOverObject(self, object):
   pMin = object.location[0] - abs(object.dimensions[0]) / 2
@@ -31,6 +33,7 @@ def isOverObject(self, object):
         return 2
   return 0
 
+
 def checkSpawnPosition(objects):
   for object in objects:
     if object.type == 'CAMERA':
@@ -46,6 +49,7 @@ def checkSpawnPosition(objects):
       if isOver != 0:
         return isOver
   return 0
+
 
 def countObjects(self, objects=None):
   prefs = bpy.context.user_preferences.addons[__package__].preferences
@@ -65,7 +69,7 @@ def countObjects(self, objects=None):
     "triggerAudioWrong": 0,
     "light":        0,
     "exitDoor":     0,
-    "objectNoMat":  0 # Objects Without Material
+    "objectNoMat":  0  # Objects Without Material
   }
 
   for object in objects:
@@ -106,6 +110,7 @@ def countObjects(self, objects=None):
         if not object.glpMaterial or object.glpMaterial == "none":
           result["objectNoMat"] += 1
   return result
+
 
 class CheckMapDialog(bpy.types.Operator):
   bl_idname = "object.map_check_dialog"

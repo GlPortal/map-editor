@@ -1,5 +1,6 @@
 import bpy
 
+
 class SetLightCommon(bpy.types.Operator):
   bl_idname = "glp.set_light_common"
   bl_label = "Common"
@@ -21,6 +22,7 @@ class SetLightCommon(bpy.types.Operator):
         )
     return {'FINISHED'}
 
+
 class AddLightCommon(bpy.types.Operator):
   bl_idname = "glp.add_light_common"
   bl_label = "Common"
@@ -31,6 +33,7 @@ class AddLightCommon(bpy.types.Operator):
     bpy.ops.object.lamp_add(type='POINT')
     bpy.ops.glp.set_light_common()
     return {'FINISHED'}
+
 
 class SetLightEnd(bpy.types.Operator):
   bl_idname = "glp.set_light_end"
@@ -54,6 +57,7 @@ class SetLightEnd(bpy.types.Operator):
           "Object of type '%s' can't be converted to the end light." % (object.type)
         )
     return {'FINISHED'}
+
 
 class AddLightEnd(bpy.types.Operator):
   bl_idname = "glp.add_light_end"

@@ -4,6 +4,7 @@ from bpy_extras.io_utils import ExportHelper
 
 from .Exporter import Exporter
 
+
 class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
   bl_idname = "glp.export"
   bl_label = "Export GlPortal XML"

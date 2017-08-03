@@ -1,5 +1,6 @@
 import bpy
 
+
 class SidePanel(bpy.types.Panel):
   bl_label = "Set Type"
   bl_space_type = 'VIEW_3D'

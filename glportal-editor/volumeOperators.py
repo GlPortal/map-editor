@@ -2,6 +2,7 @@ import bpy
 
 from .operatorHelpers import resetTriggerSettings, simpleCube
 
+
 class SetAcid(bpy.types.Operator):
   bl_idname = "glp.set_acid"
   bl_label = "Acid"
@@ -28,6 +29,7 @@ class SetAcid(bpy.types.Operator):
           "Object of type '%s' can't be converted to the volume of acid." % (object.type)
         )
     return {'FINISHED'}
+
 
 class AddAcid(bpy.types.Operator):
   bl_idname = "glp.add_acid"

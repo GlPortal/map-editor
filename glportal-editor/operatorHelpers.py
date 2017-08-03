@@ -3,6 +3,7 @@ import bpy
 from .managers import MaterialManager, ModelManager
 from . import types
 
+
 def resetTriggerSettings(object):
   if object.glpTypes == "trigger":
     object.glpTriggerTypes = "none"
@@ -12,6 +13,7 @@ def resetTriggerSettings(object):
     object.draw_bounds_type = 'BOX'
     object.glpTriggerFilepath = 'none'
     object.glpTriggerAudioLoop = False
+
 
 def setTrigger(object, type, filePath='', loop=False):
   prefs = bpy.context.user_preferences.addons[__package__].preferences
@@ -28,6 +30,7 @@ def setTrigger(object, type, filePath='', loop=False):
   if filePath:
     object.glpTriggerFilepath = filePath
 
+
 def clearGlpProperties(object):
   MaterialManager.reset(object)
 
@@ -42,11 +45,14 @@ def clearGlpProperties(object):
   if object.glpTriggerAudioLoop:
     object.glpTriggerAudioLoop = False
 
+
 def itemsMaterial(self, context):
   return [(name, fancyName, tooltip) for name, fancyName, tooltip in types.GLP_MATERIAL_TYPES]
 
+
 def itemsModel(self, centext):
   return [(file, fancyName, fancyName) for file, fancyName in ModelManager.MODELS.items()]
+
 
 def simpleCube():
   if ModelManager.create("Cube.obj"):

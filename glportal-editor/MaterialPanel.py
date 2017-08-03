@@ -25,6 +25,7 @@ class SaveMaterial(bpy.types.Operator):
 
     return {'FINISHED'}
 
+
 class EditMaterial(bpy.types.Operator):
   bl_idname = "glp.mp_edit_material"
   bl_label = "Toogle Edit"
@@ -39,6 +40,7 @@ class EditMaterial(bpy.types.Operator):
       MPTypes.MPItemIdUpdate(self, context)
 
     return {'FINISHED'}
+
 
 class SetMaterial(bpy.types.Operator):
   bl_idname = "glp.mp_set_material"
@@ -58,6 +60,7 @@ class SetMaterial(bpy.types.Operator):
           object.glpMaterial = material
     return {'FINISHED'}
 
+
 class UIList(bpy.types.UIList):
   def draw_item(self, context, layout, data, item, icon, active_data, active_propname):
     if self.layout_type in {'DEFAULT', 'COMPACT'}:
@@ -68,8 +71,10 @@ class UIList(bpy.types.UIList):
       pass
 
     self.use_filter_show = True
+
   def check(self, context):
     return True
+
 
 class MaterialPanel(bpy.types.Panel):
   bl_label = "GlPortal Material UI"
@@ -79,7 +84,7 @@ class MaterialPanel(bpy.types.Panel):
 
   @classmethod
   def poll(cls, context):
-#    MPItemIdUpdate(self, context)
+    # MPItemIdUpdate(self, context)
     return True
 
   def draw(self, context):
@@ -156,7 +161,7 @@ class MaterialPanel(bpy.types.Panel):
       layout.label(text="Nothing is here")
 
   def check(self, context):
-#    MPItemIdUpdate(self, context)
+    # MPItemIdUpdate(self, context)
     return True
 
 
@@ -170,6 +175,7 @@ def initRow(item, i, name, data):
 
   if "tags" in data:
     item.description += " - " + data["tags"]
+
 
 def initRows():
   wm = bpy.context.window_manager

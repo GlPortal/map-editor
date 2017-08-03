@@ -3,6 +3,7 @@ import bpy
 from .operatorHelpers import resetTriggerSettings, itemsMaterial, itemsModel, simpleCube
 from .managers import ModelManager
 
+
 # we are using this for <end> (exit door)
 class AddDoor(bpy.types.Operator):
   bl_idname = "glp.add_door"
@@ -18,6 +19,7 @@ class AddDoor(bpy.types.Operator):
         object.glpTypes = "door"
 
     return {'FINISHED'}
+
 
 class SetPortalable(bpy.types.Operator):
   bl_idname = "glp.set_portalable"
@@ -44,6 +46,7 @@ class SetPortalable(bpy.types.Operator):
         )
     return {'FINISHED'}
 
+
 class SetWall(bpy.types.Operator):
   bl_idname = "glp.set_wall"
   bl_label = "Metal tiles"
@@ -69,6 +72,7 @@ class SetWall(bpy.types.Operator):
         )
     return {'FINISHED'}
 
+
 class AddWall(bpy.types.Operator):
   bl_idname = "glp.add_wall"
   bl_label = "Metal tiles"
@@ -80,6 +84,7 @@ class AddWall(bpy.types.Operator):
       bpy.ops.glp.set_wall()
     return {'FINISHED'}
 
+
 class AddPortalable(bpy.types.Operator):
   bl_idname = "glp.add_portalable"
   bl_label = "Portalable"
@@ -90,6 +95,7 @@ class AddPortalable(bpy.types.Operator):
     if simpleCube():
       bpy.ops.glp.set_portalable()
     return {'FINISHED'}
+
 
 class SearchMaterial(bpy.types.Operator):
   bl_idname = "glp.search_material"
@@ -109,6 +115,7 @@ class SearchMaterial(bpy.types.Operator):
     wm = context.window_manager
     wm.invoke_search_popup(self)
     return {'FINISHED'}
+
 
 class SearchModel(bpy.types.Operator):
   bl_idname = "glp.search_model"

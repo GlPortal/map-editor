@@ -8,6 +8,7 @@ import re
 from .managers import MaterialManager
 from .importer import Importer
 
+
 class Exporter():
   def __init__(self, filePath, d_p=4):
     self.__filePath = filePath
@@ -156,7 +157,7 @@ class Exporter():
         elif type == "volume":
           if object.glpVolumeTypes == "acid":
             boxElement = tree.SubElement(root, "acid")
-        if boxElement != None:
+        if boxElement is not None:
           positionElement = tree.SubElement(boxElement, "position")
           self.storePosition(positionElement, object)
 

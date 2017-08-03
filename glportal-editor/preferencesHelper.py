@@ -3,6 +3,7 @@ import os
 from .managers import MaterialManager, ModelManager
 from . import MaterialPanel
 
+
 def updateTriggerXrays(self, context):
   prefs = context.user_preferences.addons[__package__].preferences
   triggerXrays = prefs.triggerXrays
@@ -12,11 +13,13 @@ def updateTriggerXrays(self, context):
     if object.glpTypes == "trigger":
       object.show_x_ray = triggerXrays
 
+
 def updateDefaultMaterial(self, context):
   prefs = context.user_preferences.addons[__package__].preferences
 
   if prefs.materials != "none":
     prefs.defaultMaterial = prefs.materials
+
 
 def updateDataDir(self, context):
   prefs = context.user_preferences.addons[__package__].preferences

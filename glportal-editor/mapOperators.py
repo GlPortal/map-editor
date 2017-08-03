@@ -5,6 +5,7 @@ from subprocess import call
 from .Exporter import Exporter
 from .managers import MaterialManager
 
+
 class FixMaterials(bpy.types.Operator):
   bl_idname = "glp.fix_materials"
   bl_label = "Fix materials"
@@ -23,6 +24,7 @@ class FixMaterials(bpy.types.Operator):
 
     return {'FINISHED'}
 
+
 class ReloadMaterials(bpy.types.Operator):
   bl_idname = "glp.reload_materials"
   bl_label = "Reload materials"
@@ -31,6 +33,7 @@ class ReloadMaterials(bpy.types.Operator):
   def execute(self, context):
     MaterialManager.reload()
     return {'FINISHED'}
+
 
 class FastExport(bpy.types.Operator):
   bl_idname = "glp.fast_export"
@@ -53,6 +56,7 @@ class FastExport(bpy.types.Operator):
 
     return {'FINISHED'}
 
+
 class FixMap(bpy.types.Operator):
   bl_idname = "glp.fix_map"
   bl_label = "Fix map"
@@ -64,6 +68,7 @@ class FixMap(bpy.types.Operator):
     bpy.ops.glp.fix_materials()
     return {'FINISHED'}
 
+
 class CheckMap(bpy.types.Operator):
   bl_idname = "glp.check_map"
   bl_label = "Check map"
@@ -73,6 +78,7 @@ class CheckMap(bpy.types.Operator):
     bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
     return {'FINISHED'}
 
+
 class RunGame(bpy.types.Operator):
   bl_idname = "glp.run_game"
   bl_label = "Run game"
@@ -81,8 +87,12 @@ class RunGame(bpy.types.Operator):
   def execute(self, context):
     result = context.scene.countObjects()
 
-    if (result["exitDoor"] == 0 or result["camera"] == 0 or result["light"] == 0 or
-        result["wall"] == 0):
+    if (
+      result["exitDoor"] == 0 or
+      result["camera"] == 0 or
+      result["light"] == 0 or
+      result["wall"] == 0
+    ):
       bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
     else:
       prefs = bpy.context.user_preferences.addons[__package__].preferences

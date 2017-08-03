@@ -7,6 +7,7 @@ def glportal_add_menu(self, context):
   layout.menu("glpMenu.main", icon='WORLD')
   layout.separator()
 
+
 class MenuMain(Menu):
   bl_idname = "glpMenu.main"
   bl_label = "GlPortal"
@@ -22,6 +23,7 @@ class MenuMain(Menu):
     layout.operator("object.camera_add", text="Spawn (Camera)", icon='OUTLINER_OB_CAMERA')
     layout.operator("glp.add_door", text="Exit", icon='MESH_CUBE')
 
+
 class MenuWalls(Menu):
   bl_idname = "glpMenu.walls"
   bl_label = "Walls"
@@ -31,6 +33,7 @@ class MenuWalls(Menu):
 
     layout.operator("glp.add_portalable", icon='MESH_PLANE')
     layout.operator("glp.add_wall", icon='META_PLANE')
+
 
 class MenuTriggers(Menu):
   bl_idname = "glpMenu.triggers"
@@ -43,6 +46,7 @@ class MenuTriggers(Menu):
     layout.operator("glp.add_radiation", icon='RADIO')
     layout.operator("glp.add_win", icon='MESH_CUBE')
 
+
 class MenuVolumes(Menu):
   bl_idname = "glpMenu.volumes"
   bl_label = "Volumes"
@@ -51,6 +55,7 @@ class MenuVolumes(Menu):
     layout = self.layout
 
     layout.operator("glp.add_acid", icon='MESH_CUBE')
+
 
 class MenuLights(Menu):
   bl_idname = "glpMenu.lights"

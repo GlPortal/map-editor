@@ -6,6 +6,7 @@ import xml.etree.cElementTree as ET
 from .managers import ModelManager
 from .operatorHelpers import simpleCube
 
+
 class Importer():
   def __init__(self, filePath, deleteWorld=True):
     self.__filePath = filePath

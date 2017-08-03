@@ -6,6 +6,7 @@ from .operatorHelpers import itemsMaterial
 from .preferencesHelper import updateTriggerXrays, updateDefaultMaterial, updateDataDir
 from .managers import MaterialManager as MM
 
+
 class Preferences(AddonPreferences):
   bl_idname = __package__
 

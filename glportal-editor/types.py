@@ -5,7 +5,7 @@ from bpy.props import EnumProperty, StringProperty, BoolProperty
 GLP_TYPES = [
   ("none", "None", "No special property"),
   ("wall", "Wall", "Wall"),
-  ("door", "Door", "Door"),# REMOVE this
+  ("door", "Door", "Door"),  # REMOVE this
   ("volume", "Volume", "Volume"),
   ("trigger", "Trigger", "Trigger"),
   ("model", "Model", "Model")
@@ -26,6 +26,7 @@ GLP_MATERIAL_TYPES = [
   ("none", "None", "No material")
 ]
 
+
 def onUpdateGlpTypes(self, context):
   objects = context.selected_objects
   for object in objects:
@@ -43,6 +44,7 @@ def onUpdateGlpTypes(self, context):
 
     if object.glpTypes != "none":
       object.name = name
+
 
 def setProperties():
   bpy.types.Object.glpTypes = EnumProperty(
@@ -80,6 +82,7 @@ def setProperties():
     name="Imported filepath",
     default="none"
   )
+
 
 def delProperties():
   del bpy.types.Object.glpTypes

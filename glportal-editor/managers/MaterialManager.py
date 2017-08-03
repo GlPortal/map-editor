@@ -30,9 +30,11 @@ def glpMaterialSet():
     update=glpMaterialUpdate
   )
 
+
 def glpMaterialReset():
   del types.GLP_MATERIAL_TYPES[:]
   types.GLP_MATERIAL_TYPES.append(("none", "None", "No material"))
+
 
 def glpMaterialUpdate(self, context):
   objects = bpy.context.selected_objects
@@ -78,6 +80,7 @@ def saveMaterial(matName=""):
 
   tree.write(filepath, "UTF-8")
 
+
 def extractData(path, dir, name):
   mat = {"data": {"portalable": False}}
 
@@ -110,10 +113,12 @@ def extractData(path, dir, name):
 
   return mat
 
+
 def reload():
   MATERIALS.clear()
   glpMaterialReset()
   preload()
+
 
 def preload():
   MATERIALS["none"] = {"portalable": False, "kind": "None", "fancyname": "None"}
@@ -139,6 +144,7 @@ def preload():
     return True
   return False
 
+
 def createTexture(imagePath, textureName):
   if textureName in bpy.data.textures:
     texture = bpy.data.textures[textureName]
@@ -153,6 +159,7 @@ def createTexture(imagePath, textureName):
 
   return texture
 
+
 def addTexture(mat, texture):
   mtex = mat.texture_slots.add()
   mtex.texture = texture
@@ -160,6 +167,7 @@ def addTexture(mat, texture):
   mtex.mapping = 'FLAT'
 
   return mtex
+
 
 def setDiffuseTexture(mtex):
   mtex.use_map_color_diffuse = True
@@ -169,6 +177,7 @@ def setDiffuseTexture(mtex):
   mtex.use_map_emit = True
   mtex.emit_factor = 0.3
 
+
 def setNormalTexture(mtex):
   mtex.use_map_normal = True
   mtex.normal_factor = 0.2
@@ -176,6 +185,7 @@ def setNormalTexture(mtex):
   mtex.use_map_color_emission = False
   mtex.use_map_density = False
   mtex.use_map_emit = False
+
 
 def setSpecularTexture(mtex, shininess):
   mtex.use_map_specular = True
@@ -186,6 +196,7 @@ def setSpecularTexture(mtex, shininess):
   mtex.use_map_color_emission = False
   mtex.use_map_density = False
   mtex.use_map_emit = False
+
 
 def create(name=""):
   global COLORS, MATERIALS
@@ -253,6 +264,7 @@ def create(name=""):
     print("Material '", name, "' does not exist.")
     return False
 
+
 def setMaterial(object):
   if object:
     mat = create(object.glpMaterial)
@@ -268,6 +280,7 @@ def setMaterial(object):
   else:
     return False
 
+
 def reset(object):
   if object.glpTypes != "none" and object.glpMaterial != "none":
     object.glpMaterial = "none"
@@ -275,6 +288,7 @@ def reset(object):
     if len(object.data.materials) == 1:
       bpy.context.scene.objects.active = object
       bpy.ops.object.material_slot_remove()
+
 
 def prepareExport(oldMaterials={}):
   id = 1
@@ -289,11 +303,15 @@ def prepareExport(oldMaterials={}):
       id += 1
 
   for object in objects:
-    if (object.glpMaterial not in usedMaterials and
-        object.type == 'MESH' and
-        object.glpTypes != "trigger"):
-      if (object.glpMaterial in MATERIALS and
-          object.glpMaterial not in BLACKLIST):
+    if (
+      object.glpMaterial not in usedMaterials and
+      object.type == 'MESH' and
+      object.glpTypes not in {"door", "trigger", "volume"}
+    ):
+      if (
+        object.glpMaterial in MATERIALS and
+        object.glpMaterial not in BLACKLIST
+      ):
         usedMaterials[object.glpMaterial] = id
         id += 1
       else:

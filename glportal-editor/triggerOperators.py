@@ -3,6 +3,7 @@ from bpy.props import StringProperty, BoolProperty
 
 from .operatorHelpers import setTrigger, simpleCube
 
+
 class SetMap(bpy.types.Operator):
   bl_idname = "glp.set_map"
   bl_label = "Map"
@@ -24,6 +25,7 @@ class SetMap(bpy.types.Operator):
           "Object of type '%s' can't be converted to the map trigger." % (object.type)
         )
     return {'FINISHED'}
+
 
 class SetAudio(bpy.types.Operator):
   bl_idname = "glp.set_audio"
@@ -48,6 +50,7 @@ class SetAudio(bpy.types.Operator):
         )
     return {'FINISHED'}
 
+
 class SetWin(bpy.types.Operator):
   bl_idname = "glp.set_win"
   bl_label = "Win"
@@ -69,6 +72,7 @@ class SetWin(bpy.types.Operator):
         )
     return {'FINISHED'}
 
+
 class AddWin(bpy.types.Operator):
   bl_idname = "glp.add_win"
   bl_label = "Win"
@@ -79,6 +83,7 @@ class AddWin(bpy.types.Operator):
     if simpleCube():
       bpy.ops.glp.set_win()
     return {'FINISHED'}
+
 
 class SetDeath(bpy.types.Operator):
   bl_idname = "glp.set_death"
@@ -101,6 +106,7 @@ class SetDeath(bpy.types.Operator):
         )
     return {'FINISHED'}
 
+
 class AddDeath(bpy.types.Operator):
   bl_idname = "glp.add_death"
   bl_label = "Death"
@@ -111,6 +117,7 @@ class AddDeath(bpy.types.Operator):
     if simpleCube():
       bpy.ops.glp.set_death()
     return {'FINISHED'}
+
 
 class SetRadiation(bpy.types.Operator):
   bl_idname = "glp.set_radiation"
@@ -132,6 +139,7 @@ class SetRadiation(bpy.types.Operator):
           "Object of type '%s' can't be converted to the radiation trigger." % (object.type)
         )
     return {'FINISHED'}
+
 
 class AddRadiation(bpy.types.Operator):
   bl_idname = "glp.add_radiation"

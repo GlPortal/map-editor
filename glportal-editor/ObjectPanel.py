@@ -2,6 +2,7 @@ import bpy
 
 from .managers import MaterialManager
 
+
 class ObjectPanel(bpy.types.Panel):
   bl_label = "GlPortal"
   bl_space_type = 'PROPERTIES'
@@ -23,7 +24,6 @@ class ObjectPanel(bpy.types.Panel):
       layout.prop(object, "glpTriggerTypes")
     elif object.glpTypes == "volume":
       layout.prop(object, "glpVolumeTypes")
-
 
     if object.glpMaterial:
       layout.label(text="Material properties", icon='MATERIAL')

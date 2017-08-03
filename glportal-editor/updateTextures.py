@@ -4,6 +4,7 @@ from bpy.app.handlers import persistent
 
 isRunning = False
 
+
 def updateTexture(self):
   global isRunning
 
@@ -15,9 +16,9 @@ def updateTexture(self):
   bm = bmesh.from_edit_mesh(me)
   scale = [0.0, 0.0, 0.0]
 
-  scale[0] = abs(self.scale[0]) # X
-  scale[1] = abs(self.scale[1]) # Y
-  scale[2] = abs(self.scale[2]) # Z
+  scale[0] = abs(self.scale[0])  # X
+  scale[1] = abs(self.scale[1])  # Y
+  scale[2] = abs(self.scale[2])  # Z
 
   if hasattr(bm.faces, "ensure_lookup_table"):
     bm.faces.ensure_lookup_table()
@@ -79,6 +80,7 @@ def updateTexture(self):
   bpy.ops.object.mode_set(mode='OBJECT')
 
   isRunning = False
+
 
 @persistent
 def sceneUpdater(scene):

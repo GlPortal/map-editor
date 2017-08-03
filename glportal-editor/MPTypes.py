@@ -34,6 +34,7 @@ def initProperties():
     default=False
   )
 
+
 def delProperties():
   del bpy.types.WindowManager.MPItemId
   del bpy.types.WindowManager.glpMatName
