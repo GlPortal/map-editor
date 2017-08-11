@@ -1,6 +1,6 @@
 import bpy
 
-from .managers import MaterialManager, ModelManager
+from .managers import MapManager, MaterialManager, ModelManager
 from . import types
 
 
@@ -52,6 +52,10 @@ def itemsMaterial(self, context):
 
 def itemsModel(self, centext):
   return [(file, fancyName, fancyName) for file, fancyName in ModelManager.MODELS.items()]
+
+
+def itemsMap(self, centext):
+  return [(key, name, name) for key, name in MapManager.MAPS.items()]
 
 
 def simpleCube():

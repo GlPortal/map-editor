@@ -24,6 +24,7 @@ class SidePanel(bpy.types.Panel):
     layout.operator("glp.set_death", icon='MESH_CUBE')
     layout.operator("glp.set_radiation", icon='RADIO')
     layout.operator("glp.set_win", icon='MESH_CUBE')
+    layout.operator("glp.search_map_trigger", icon='MESH_CUBE')
 
     layout.label("Light:")
     layout.operator("glp.set_light_common", icon='LAMP_POINT')

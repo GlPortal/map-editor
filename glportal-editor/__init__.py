@@ -35,6 +35,7 @@ if "bpy" not in locals():
   from . import validator
   from .managers import MaterialManager
   from .managers import ModelManager
+  from .managers import MapManager
   from .utils import directory
 else:
   import importlib
@@ -64,6 +65,7 @@ else:
   importlib.reload(MPTypes)
   importlib.reload(MaterialPanel)
   importlib.reload(directory)
+  importlib.reload(MapManager)
 
 import bpy
 import os
@@ -99,6 +101,7 @@ def register():
 
   MaterialManager.preload()
   ModelManager.preload()
+  MapManager.preload()
   MaterialPanel.initRows()
 
 

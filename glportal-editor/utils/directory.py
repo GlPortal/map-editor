@@ -2,7 +2,8 @@ import bpy
 import os
 
 
-def browse(directory, extension='', blacklist=[], recursive=False, files=True):
+def browse(directory, extension='', blacklist=None, recursive=False, files=True):
+  blacklist = blacklist or []
   prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
   dataDir = os.path.expanduser(prefs.dataDir)
   entries = {}

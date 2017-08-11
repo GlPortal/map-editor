@@ -290,7 +290,8 @@ def reset(object):
       bpy.ops.object.material_slot_remove()
 
 
-def prepareExport(oldMaterials={}):
+def prepareExport(oldMaterials=None):
+  oldMaterials = oldMaterials or {}
   id = 1
   usedMaterials = {}
   objects = bpy.context.scene.objects

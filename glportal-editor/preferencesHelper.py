@@ -1,6 +1,6 @@
 import os
 
-from .managers import MaterialManager, ModelManager
+from .managers import MapManager, MaterialManager, ModelManager
 from . import MaterialPanel
 
 
@@ -27,4 +27,5 @@ def updateDataDir(self, context):
   if os.path.isdir(os.path.expanduser(prefs.dataDir)):
     MaterialManager.reload()
     ModelManager.reload()
+    MapManager.reload()
     MaterialPanel.initRows()

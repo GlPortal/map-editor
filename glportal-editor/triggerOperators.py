@@ -1,7 +1,26 @@
 import bpy
 from bpy.props import StringProperty, BoolProperty
 
-from .operatorHelpers import setTrigger, simpleCube
+from .operatorHelpers import itemsMap, setTrigger, simpleCube
+
+
+class SearchMap(bpy.types.Operator):
+  bl_idname = "glp.search_map_trigger"
+  bl_label = "Set map trigger"
+  bl_property = "map"
+
+  map = bpy.props.EnumProperty(items=itemsMap)
+
+  def execute(self, context):
+    objects = bpy.context.selected_objects
+    for object in objects:
+      bpy.ops.glp.set_map(filePath=self.map)
+    return {'FINISHED'}
+
+  def invoke(self, context, event):
+    wm = context.window_manager
+    wm.invoke_search_popup(self)
+    return {'FINISHED'}
 
 
 class SetMap(bpy.types.Operator):
@@ -24,6 +43,18 @@ class SetMap(bpy.types.Operator):
           {'ERROR'},
           "Object of type '%s' can't be converted to the map trigger." % (object.type)
         )
+    return {'FINISHED'}
+
+
+class AddMap(bpy.types.Operator):
+  bl_idname = "glp.add_map_trigger"
+  bl_label = "Map"
+  bl_description = "Add a map trigger"
+  bl_options = {'UNDO'}
+
+  def execute(self, context):
+    if simpleCube():
+      bpy.ops.glp.search_map_trigger('INVOKE_DEFAULT')
     return {'FINISHED'}
 
 
