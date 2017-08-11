@@ -1,6 +1,5 @@
 import bpy
 import os
-import re
 import subprocess
 import sys
 import unittest
@@ -13,8 +12,7 @@ from testfixtures import TempDirectory
 class ImportEportTest(unittest.TestCase):
   referenceMapPath = 'data/maps/importExportTest.xml'
   referenceData = ""
-  d = None
-
+  directory = None
 
   def readFile(self, filePath):
     file = open(filePath)
@@ -30,18 +28,18 @@ class ImportEportTest(unittest.TestCase):
 
   def setUp(self):
     print(self.id())
-    self.d = TempDirectory()
+    self.directory = TempDirectory()
 
   def tearDown(self):
-    self.d.cleanup()
+    self.directory.cleanup()
 
-  def test_import_export(self):
+  def testImportExport(self):
     self.referenceData = self.readFile(self.referenceMapPath)
 
     importer = toGlPortalXml.importer.Importer(self.referenceMapPath, True)
     importer.execute(bpy.context)
 
-    filepath = os.path.join(self.d.path, "importExportTest.xml")
+    filepath = os.path.join(self.directory.path, "importExportTest.xml")
     self.copyMaterials(filepath)
 
     exporter = toGlPortalXml.Exporter.Exporter(filepath)
@@ -51,8 +49,8 @@ class ImportEportTest(unittest.TestCase):
 
     self.assertEqual(testData, self.referenceData, "Files are not equal.\n")
 
+
 if __name__ == '__main__':
-  import xmlrunner
   unittest.main(
     argv=[sys.argv[0]]
   )
