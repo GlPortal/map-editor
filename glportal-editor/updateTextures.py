@@ -6,6 +6,7 @@ isRunning = False
 
 
 def updateTexture(self):
+  """Remap texture to match actual scale of the object on the Cube.obj"""
   global isRunning
 
   isRunning = True

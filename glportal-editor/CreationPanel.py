@@ -28,6 +28,7 @@ class CreationPanel(bpy.types.Panel):
     layout.operator("glp.add_radiation", icon='RADIO')
     layout.operator("glp.add_win", icon='MESH_CUBE')
     layout.operator("glp.add_map_trigger", icon='MESH_CUBE')
+    layout.operator("glp.add_audio_trigger", icon='MESH_CUBE')
 
     layout.label("Lights:")
     layout.operator("glp.add_light_common", icon='LAMP_POINT')

@@ -28,6 +28,7 @@ GLP_MATERIAL_TYPES = [
 
 
 def onUpdateGlpTypes(self, context):
+  """Update object name based on object's game function"""
   objects = context.selected_objects
   for object in objects:
     type = object.glpTypes
@@ -47,9 +48,11 @@ def onUpdateGlpTypes(self, context):
 
 
 def setProperties():
+  """Register properties for Blender"""
   bpy.types.Object.glpTypes = EnumProperty(
     items=GLP_TYPES,
     name="Type",
+    description="GlPortal type",
     default="none",
     update=onUpdateGlpTypes
   )
@@ -67,14 +70,17 @@ def setProperties():
   )
   bpy.types.Object.glpTriggerFilepath = StringProperty(
     name="Filepath",
+    description="Relative path to the file for trigger",
     default="none"
   )
   bpy.types.Object.glpTriggerAudioLoop = BoolProperty(
-    name="AudioLoop",
+    name="Enable loop",
+    description="Play audio file in loop",
     default=False
   )
   bpy.types.Object.glpModel = StringProperty(
     name="Model",
+    description="Relative path to the model",
     default="none",
     update=onUpdateGlpTypes
   )
@@ -85,6 +91,7 @@ def setProperties():
 
 
 def delProperties():
+  """Unregister properties from Blender"""
   del bpy.types.Object.glpTypes
   del bpy.types.Object.glpVolumeTypes
   del bpy.types.Object.glpTriggerTypes

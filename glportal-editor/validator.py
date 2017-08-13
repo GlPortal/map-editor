@@ -11,6 +11,7 @@ schemas = {
 
 
 def validate(filePath="", type="map"):
+  """Validate given file against xsd"""
   if not filePath or not os.path.isfile(filePath):
     print("File '" + filePath + "' does not exist !")
     return False

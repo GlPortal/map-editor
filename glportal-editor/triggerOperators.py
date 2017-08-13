@@ -1,12 +1,13 @@
 import bpy
 from bpy.props import StringProperty, BoolProperty
 
-from .operatorHelpers import itemsMap, setTrigger, simpleCube
+from .operatorHelpers import itemsAudio, itemsMap, setTrigger, simpleCube
 
 
 class SearchMap(bpy.types.Operator):
   bl_idname = "glp.search_map_trigger"
-  bl_label = "Set map trigger"
+  bl_label = "Map"
+  bl_description = "Set map trigger"
   bl_property = "map"
 
   map = bpy.props.EnumProperty(items=itemsMap)
@@ -49,12 +50,32 @@ class SetMap(bpy.types.Operator):
 class AddMap(bpy.types.Operator):
   bl_idname = "glp.add_map_trigger"
   bl_label = "Map"
-  bl_description = "Add a map trigger"
+  bl_description = "Add map trigger"
   bl_options = {'UNDO'}
 
   def execute(self, context):
     if simpleCube():
       bpy.ops.glp.search_map_trigger('INVOKE_DEFAULT')
+    return {'FINISHED'}
+
+
+class SearchAudio(bpy.types.Operator):
+  bl_idname = "glp.search_audio_trigger"
+  bl_label = "Audio"
+  bl_description = "Set audio trigger"
+  bl_property = "audio"
+
+  audio = bpy.props.EnumProperty(items=itemsAudio)
+
+  def execute(self, context):
+    objects = bpy.context.selected_objects
+    for object in objects:
+      bpy.ops.glp.set_audio(filePath=self.audio)
+    return {'FINISHED'}
+
+  def invoke(self, context, event):
+    wm = context.window_manager
+    wm.invoke_search_popup(self)
     return {'FINISHED'}
 
 
@@ -79,6 +100,18 @@ class SetAudio(bpy.types.Operator):
           {'ERROR'},
           "Object of type '%s' can't be converted to the audio trigger." % (object.type)
         )
+    return {'FINISHED'}
+
+
+class AddAudio(bpy.types.Operator):
+  bl_idname = "glp.add_audio_trigger"
+  bl_label = "Audio"
+  bl_description = "Add audio trigger"
+  bl_options = {'UNDO'}
+
+  def execute(self, context):
+    if simpleCube():
+      bpy.ops.glp.search_audio_trigger('INVOKE_DEFAULT')
     return {'FINISHED'}
 
 

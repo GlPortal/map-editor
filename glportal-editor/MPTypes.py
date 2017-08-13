@@ -6,6 +6,7 @@ from .managers import MaterialManager as MM
 
 
 def initProperties():
+  """Register material panel properties for Blender"""
   bpy.types.WindowManager.MPItemId = IntProperty(
     default=0,
     update=MPItemIdUpdate
@@ -36,6 +37,7 @@ def initProperties():
 
 
 def delProperties():
+  """Unregister material panel properties from Blender"""
   del bpy.types.WindowManager.MPItemId
   del bpy.types.WindowManager.glpMatName
   del bpy.types.WindowManager.glpMatFancyName

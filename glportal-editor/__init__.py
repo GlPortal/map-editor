@@ -33,10 +33,11 @@ if "bpy" not in locals():
   from . import MPTypes
   from . import MaterialPanel
   from . import validator
+  from .utils import directory
   from .managers import MaterialManager
   from .managers import ModelManager
   from .managers import MapManager
-  from .utils import directory
+  from .managers import AudioManager
 else:
   import importlib
 
@@ -60,12 +61,13 @@ else:
   importlib.reload(operatorHelpers)
   importlib.reload(preferencesHelper)
   importlib.reload(validator)
+  importlib.reload(directory)
   importlib.reload(MaterialManager)
   importlib.reload(ModelManager)
   importlib.reload(MPTypes)
   importlib.reload(MaterialPanel)
-  importlib.reload(directory)
   importlib.reload(MapManager)
+  importlib.reload(AudioManager)
 
 import bpy
 import os
@@ -102,6 +104,7 @@ def register():
   MaterialManager.preload()
   ModelManager.preload()
   MapManager.preload()
+  AudioManager.preload()
   MaterialPanel.initRows()
 
 

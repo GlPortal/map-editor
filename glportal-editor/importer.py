@@ -13,6 +13,7 @@ class Importer():
     self.__deleteWorld = deleteWorld
 
   def deleteWorld(self):
+    """Clean current scene"""
     scene = bpy.context.scene
 
     for ob in scene.objects:

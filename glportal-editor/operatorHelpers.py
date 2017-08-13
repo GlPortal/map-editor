@@ -1,6 +1,6 @@
 import bpy
 
-from .managers import MapManager, MaterialManager, ModelManager
+from .managers import AudioManager, MapManager, MaterialManager, ModelManager
 from . import types
 
 
@@ -56,6 +56,10 @@ def itemsModel(self, centext):
 
 def itemsMap(self, centext):
   return [(key, name, name) for key, name in MapManager.MAPS.items()]
+
+
+def itemsAudio(self, centext):
+  return [(key, name, name) for key, name in AudioManager.AUDIO.items()]
 
 
 def simpleCube():

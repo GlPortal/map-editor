@@ -22,6 +22,12 @@ class ObjectPanel(bpy.types.Panel):
     layout.prop(object, "glpTypes")
     if object.glpTypes == "trigger":
       layout.prop(object, "glpTriggerTypes")
+
+      if object.glpTriggerTypes in {"map", "audio"}:
+        layout.prop(object, "glpTriggerFilepath")
+
+        if object.glpTriggerTypes == "audio":
+          layout.prop(object, "glpTriggerAudioLoop")
     elif object.glpTypes == "volume":
       layout.prop(object, "glpVolumeTypes")
 
