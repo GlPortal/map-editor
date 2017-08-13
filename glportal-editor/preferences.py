@@ -28,7 +28,7 @@ class Preferences(AddonPreferences):
     subtype='FILE_PATH'
   )
   defaultMaterial = StringProperty(
-    default="boxes/dev00"
+    default="metal/tiles00x3"
   )
   materials = EnumProperty(
     name="Default material",
