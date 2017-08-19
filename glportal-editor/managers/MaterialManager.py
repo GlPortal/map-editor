@@ -275,7 +275,7 @@ def setMaterial(object):
     else:
       data.materials[0] = mat
 
-    if object.glpTypes in {"wall", "volume"}:
+    if object.glpTypes in {"wall", "volume"} and object.glpModel == "Cube.obj":
       object.updateTexture()
   else:
     return False

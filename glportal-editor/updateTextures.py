@@ -90,5 +90,5 @@ def sceneUpdater(scene):
 
   if not isRunning:
     if object is not None and object.is_updated:
-      if object.glpTypes in {"wall", "volume"}:
+      if object.glpTypes in {"wall", "volume"} and object.glpModel == "Cube.obj":
         object.updateTexture()
