@@ -41,11 +41,11 @@ class Preferences(AddonPreferences):
 
     layout.prop(self, "triggerXrays")
 
-    if MM.MATERIALS:
+    if len(MM.MATERIALS) > 1:
       if self.defaultMaterial not in MM.MATERIALS:
-        self.materials = self.defaultMaterial
-
         layout.label(text="Default material is not on the list.", icon='ERROR')
+      else:
+        self.materials = self.defaultMaterial
     else:
       layout.label(text="Material list is empty", icon='ERROR')
     layout.prop(self, "materials")
