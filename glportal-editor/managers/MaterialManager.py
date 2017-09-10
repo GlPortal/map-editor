@@ -132,14 +132,18 @@ def preload():
   )
 
   if files:
-    for dir, entries in files.items():
-      for fileName, name in entries.items():
-        mat = extractData(path, dir, fileName)
-        MATERIALS[mat["name"]] = mat["data"]
-        types.GLP_MATERIAL_TYPES.append(
-          (mat["name"], mat["data"]["fancyname"], mat["data"]["fancyname"])
-        )
-    glpMaterialSet()
+    def recurse(dir, mapping):
+      for name, value in mapping.items():
+        if isinstance(value, dict):
+          recurse(os.path.join(dir, name), value)
+        else:
+          mat = extractData(path, dir, name)
+          MATERIALS[mat["name"]] = mat["data"]
+          types.GLP_MATERIAL_TYPES.append(
+            (mat["name"], mat["data"]["fancyname"], mat["data"]["fancyname"])
+          )
+      glpMaterialSet()
+    recurse("", files)
 
     return True
   return False
