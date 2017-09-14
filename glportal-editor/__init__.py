@@ -85,7 +85,6 @@ def register():
   bpy.utils.register_module(__name__)
 
   types.setProperties()
-  MaterialManager.glpMaterialSet()
   MPTypes.initProperties()
 
   bpy.types.INFO_MT_file_export.append(menu_func_export)

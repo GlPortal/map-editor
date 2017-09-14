@@ -142,8 +142,9 @@ def preload():
           types.GLP_MATERIAL_TYPES.append(
             (mat["name"], mat["data"]["fancyname"], mat["data"]["fancyname"])
           )
-      glpMaterialSet()
+
     recurse("", files)
+    glpMaterialSet()
 
     return True
   return False
