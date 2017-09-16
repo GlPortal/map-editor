@@ -1,4 +1,5 @@
 os: linux
+sudo: false
 language: python
 services: docker
 before_install:
