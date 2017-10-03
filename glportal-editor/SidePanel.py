@@ -11,21 +11,21 @@ class SidePanel(bpy.types.Panel):
     layout = self.layout
 
     layout.label("Objects:")
-    layout.operator("glp.search_material", icon='MATERIAL')
+    layout.operator("glp.manager_search_set_material", icon='MATERIAL')
 
     layout.label("Wall:")
-    layout.operator("glp.set_portalable", icon='MESH_PLANE')
-    layout.operator("glp.set_wall", icon='META_PLANE')
+    layout.operator("glp.wall_set_portalable", icon='MESH_PLANE', text="Portalable")
+    layout.operator("glp.wall_set_metal", icon='META_PLANE', text="Metal")
 
     layout.label("Volume:")
-    layout.operator("glp.set_acid", icon='MESH_CUBE')
+    layout.operator("glp.volume_set_acid", icon='MESH_CUBE', text="Acid")
 
     layout.label("Trigger:")
-    layout.operator("glp.set_death", icon='MESH_CUBE')
-    layout.operator("glp.set_radiation", icon='RADIO')
-    layout.operator("glp.set_win", icon='MESH_CUBE')
-    layout.operator("glp.search_map_trigger", icon='MESH_CUBE')
-    layout.operator("glp.search_audio_trigger", icon='MESH_CUBE')
+    layout.operator("glp.trigger_set_death", icon='MESH_CUBE', text="Death")
+    layout.operator("glp.trigger_set_radiation", icon='RADIO')
+    layout.operator("glp.trigger_set_win", icon='MESH_CUBE', text="Win")
+    layout.operator("glp.trigger_search_map", icon='MESH_CUBE', text="Map")
+    layout.operator("glp.trigger_search_audio", icon='MESH_CUBE', text="Audio")
 
     layout.label("Light:")
     layout.operator("glp.set_light_common", icon='LAMP_POINT')

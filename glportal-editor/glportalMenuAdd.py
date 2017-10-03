@@ -31,8 +31,8 @@ class MenuWalls(Menu):
   def draw(self, context):
     layout = self.layout
 
-    layout.operator("glp.add_portalable", icon='MESH_PLANE')
-    layout.operator("glp.add_wall", icon='META_PLANE')
+    layout.operator("glp.wall_add_portalable", icon='MESH_PLANE', text="Portalable")
+    layout.operator("glp.wall_add_metal", icon='META_PLANE', text="Metal")
 
 
 class MenuTriggers(Menu):
@@ -42,11 +42,11 @@ class MenuTriggers(Menu):
   def draw(self, context):
     layout = self.layout
 
-    layout.operator("glp.add_death", icon='MESH_CUBE')
-    layout.operator("glp.add_radiation", icon='RADIO')
-    layout.operator("glp.add_win", icon='MESH_CUBE')
-    layout.operator("glp.add_map_trigger", icon='MESH_CUBE')
-    layout.operator("glp.add_audio_trigger", icon='MESH_CUBE')
+    layout.operator("glp.trigger_add_death", icon='MESH_CUBE', text="Death")
+    layout.operator("glp.trigger_add_radiation", icon='RADIO', text="Radiation")
+    layout.operator("glp.trigger_add_win", icon='MESH_CUBE', text="Win")
+    layout.operator("glp.trigger_add_map", icon='MESH_CUBE', text="Map")
+    layout.operator("glp.trigger_add_audio", icon='MESH_CUBE', text="Audio")
 
 
 class MenuVolumes(Menu):
@@ -56,7 +56,7 @@ class MenuVolumes(Menu):
   def draw(self, context):
     layout = self.layout
 
-    layout.operator("glp.add_acid", icon='MESH_CUBE')
+    layout.operator("glp.volume_add_acid", icon='MESH_CUBE', text="Acid")
 
 
 class MenuLights(Menu):

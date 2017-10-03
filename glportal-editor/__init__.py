@@ -12,14 +12,10 @@ bl_info = {
 
 if "bpy" not in locals():
   from . import types
-  from . import CreationPanel
-  from . import SidePanel
-  from . import ObjectPanel
   from . import exportglportalformat
   from . import importglportalformat
+  from . import operatorsList
   from . import operators
-  from . import triggerOperators
-  from . import volumeOperators
   from . import mapOperators
   from . import preferences
   from . import mapHelpers
@@ -38,18 +34,17 @@ if "bpy" not in locals():
   from .managers import ModelManager
   from .managers import MapManager
   from .managers import AudioManager
+  from . import CreationPanel
+  from . import SidePanel
+  from . import ObjectPanel
 else:
   import importlib
 
   importlib.reload(types)
-  importlib.reload(CreationPanel)
-  importlib.reload(SidePanel)
-  importlib.reload(ObjectPanel)
   importlib.reload(exportglportalformat)
   importlib.reload(importglportalformat)
+  importlib.reload(operatorsList)
   importlib.reload(operators)
-  importlib.reload(triggerOperators)
-  importlib.reload(volumeOperators)
   importlib.reload(mapOperators)
   importlib.reload(preferences)
   importlib.reload(mapHelpers)
@@ -68,6 +63,9 @@ else:
   importlib.reload(MaterialPanel)
   importlib.reload(MapManager)
   importlib.reload(AudioManager)
+  importlib.reload(CreationPanel)
+  importlib.reload(SidePanel)
+  importlib.reload(ObjectPanel)
 
 import bpy
 import os
@@ -106,9 +104,13 @@ def register():
   AudioManager.preload()
   MaterialPanel.initRows()
 
+  operators.addOperators()
+
 
 def unregister():
   bpy.utils.unregister_module(__name__)
+
+  operators.removeOperators()
 
   MaterialManager.glpMaterialReset()
   MaterialManager.MATERIALS.clear()

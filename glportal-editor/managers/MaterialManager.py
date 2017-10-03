@@ -270,7 +270,18 @@ def create(name=""):
     return False
 
 
-def setMaterial(object):
+def setGlpMaterial(material):
+  if material:
+    objects = bpy.context.selected_objects
+
+    if objects:
+      for obj in objects:
+        obj.glpMaterial = material
+      return True
+    return False
+
+
+def setMaterial(object, material=""):
   if object:
     mat = create(object.glpMaterial)
     data = object.data

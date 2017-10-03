@@ -110,7 +110,7 @@ class Importer():
       elif child.tag == "acid":
         object = self.createCube(child)
         if object:
-          bpy.ops.glp.set_acid()
+          bpy.ops.glp.volume_set_acid()
       elif child.tag == "spawn":
         bpy.ops.object.camera_add()
 
@@ -163,14 +163,14 @@ class Importer():
         if object:
           type = child.get("type")
           if type == "death":
-            bpy.ops.glp.set_death()
+            bpy.ops.glp.trigger_set_death()
           elif type == "radiation":
-            bpy.ops.glp.set_radiation()
+            bpy.ops.glp.trigger_set_radiation()
           elif type == "win":
-            bpy.ops.glp.set_win()
+            bpy.ops.glp.trigger_set_win()
           elif type == "map":
             if 'file' in child.attrib:
-              bpy.ops.glp.set_map(filePath=child.get('file'))
+              bpy.ops.glp.trigger_set_map(filePath=child.get('file'))
             else:
               object.delete()
           elif type == "audio":
@@ -179,7 +179,7 @@ class Importer():
               loop = self.getBool(child.get('loop'))
 
             if 'file' in child.attrib:
-              bpy.ops.glp.set_audio(filePath=child.get('file'), loop=loop)
+              bpy.ops.glp.trigger_set_audio(filePath=child.get('file'), loop=loop)
             else:
               object.delete()
           else:

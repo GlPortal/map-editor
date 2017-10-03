@@ -11,11 +11,14 @@ def resetTriggerSettings(object):
     object.show_x_ray = False
     object.show_bounds = False
     object.draw_bounds_type = 'BOX'
-    object.glpTriggerFilepath = 'none'
-    object.glpTriggerAudioLoop = False
+
+    if object.glpTriggerFilepath:
+      object.glpTriggerFilepath = ""
+    if object.glpTriggerAudioLoop:
+      object.glpTriggerAudioLoop = False
 
 
-def setTrigger(object, type, filePath='', loop=False):
+def setTrigger(object, type, filePath="", loop=False):
   prefs = bpy.context.user_preferences.addons[__package__].preferences
   clearGlpProperties(object)
 
@@ -25,7 +28,9 @@ def setTrigger(object, type, filePath='', loop=False):
   object.show_x_ray = prefs.triggerXrays
   object.show_bounds = True
   object.draw_bounds_type = 'CAPSULE'
-  object.glpTriggerAudioLoop = loop
+
+  if loop:
+    object.glpTriggerAudioLoop = loop
 
   if filePath:
     object.glpTriggerFilepath = filePath

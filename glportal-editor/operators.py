@@ -1,7 +1,14 @@
 import bpy
+import sys
+from bpy.props import StringProperty, BoolProperty, EnumProperty
 
-from .operatorHelpers import resetTriggerSettings, itemsMaterial, itemsModel, simpleCube
+from .operatorsList import operatorList
+from .operatorHelpers import resetTriggerSettings, simpleCube, setTrigger
 from .managers import ModelManager
+
+
+operators = []
+idnamePrefix = "glp"
 
 
 # we are using this for <end> (exit door)
@@ -21,14 +28,87 @@ class AddDoor(bpy.types.Operator):
     return {'FINISHED'}
 
 
-class SetPortalable(bpy.types.Operator):
-  bl_idname = "glp.set_portalable"
-  bl_label = "Portalable"
-  bl_description = "Mark the selection as portalable wall."
-  bl_options = {'UNDO'}
+class SearchBase(bpy.types.Operator):
+  bl_idname = "glp.search"
+  bl_label = "Add search"
+  bl_description = 'Base for search operator'
+  bl_property = "items"
+  bl_options = {'INTERNAL'}
+
+  action = None
+  kwargs = None
+  items = EnumProperty(items=[("none", "none", "none")])
+
+  def execute(self, context):
+    if self.items and self.items != "none":
+      if self.action:
+        if isinstance(self.action, str):
+          self.action = getattr(getattr(bpy.ops, idnamePrefix), self.action)
+
+        if self.kwargs and isinstance(self.kwargs, dict):
+          args = self.kwargs.copy()
+          args[self.kwargs["items"]] = self.items
+          del args["items"]
+
+          self.action(**args)
+        else:
+          self.action(self.items)
+        return {'FINISHED'}
+    return {'CANCELLED'}
+
+  def invoke(self, context, event):
+    context.window_manager.invoke_search_popup(self)
+    return {'FINISHED'}
+
+
+class TriggerSetBase(bpy.types.Operator):
+  """Base for trigger set operators"""
+  bl_idname = 'gpl.trigger_set'
+  bl_label = 'Trigger'
+  bl_description = 'Base for set trigger operator'
+  bl_options = {'INTERNAL'}
+
+  type = StringProperty(default="")
+  filePath = StringProperty(default="")
+  loop = BoolProperty(default=False)
 
   def execute(self, context):
     objects = bpy.context.selected_objects
+
+    if not (objects and self.type):
+      return {'CANCELLED'}
+
+    for object in objects:
+      if object.type == 'MESH':
+        if object.glpTypes not in {"door", "model"}:
+          setTrigger(object, self.type, self.filePath, self.loop)
+        else:
+          self.report(
+            {'ERROR'}, "Door and models can't be converted to the %s trigger." % (self.type)
+          )
+      else:
+        self.report(
+          {'ERROR'},
+          "Object of type '%s' can't be converted to the %s trigger." % (object.type, self.type)
+        )
+    return {'FINISHED'}
+
+
+class WallSetBase(bpy.types.Operator):
+  """Base for wall set operators"""
+  bl_idname = "glp.wall"
+  bl_label = "Wall"
+  bl_description = "Mark the selection as wall."
+  bl_options = {'INTERNAL'}
+
+  material = StringProperty(default="")
+
+  def execute(self, context):
+    objects = bpy.context.selected_objects
+
+    if not (objects and self.material):
+      return {'CANCELLED'}
+
     for object in objects:
       if object.type == 'MESH':
         if object.glpTypes != "door":
@@ -36,100 +116,99 @@ class SetPortalable(bpy.types.Operator):
             resetTriggerSettings(object)
             object.glpTypes = "wall"
 
-          object.glpMaterial = "concrete/wall00"
+          object.glpMaterial = self.material
         else:
-          self.report({'ERROR'}, "Door can't be converted to the portalable wall.")
+          self.report({'ERROR'}, "Door can't be converted to the wall.")
       else:
         self.report(
-          {'ERROR'},
-          "Object of type '%s' can't be converted to the portalable wall." % (object.type)
+          {'ERROR'}, "Object of type '%s' can't be converted to the wall." % (object.type)
         )
     return {'FINISHED'}
 
 
-class SetWall(bpy.types.Operator):
-  bl_idname = "glp.set_wall"
-  bl_label = "Metal tiles"
-  bl_description = "Mark the selection as metal wall."
-  bl_options = {'UNDO'}
+class VolumeSetBase(bpy.types.Operator):
+  """Base for volume set operators"""
+  bl_idname = "glp.volume"
+  bl_label = "Volume"
+  bl_description = "Mark the selection as volume."
+  bl_options = {'INTERNAL'}
+
+  material = StringProperty(default="")
+  volumeType = StringProperty(default="")
 
   def execute(self, context):
     objects = bpy.context.selected_objects
+
+    if not (objects and self.material and self.volumeType):
+      return {'CANCELLED'}
+
     for object in objects:
       if object.type == 'MESH':
         if object.glpTypes != "door":
           if object.glpTypes != "model":
             resetTriggerSettings(object)
-            object.glpTypes = "wall"
+            object.glpTypes = "volume"
+            object.glpVolumeTypes = self.volumeType
 
-          object.glpMaterial = "metal/tiles00x3"
+          object.glpMaterial = self.material
         else:
-          self.report({'ERROR'}, "Door can't be converted to the metal wall.")
+          self.report({'ERROR'}, "Door can't be converted to the volume.")
       else:
         self.report(
-          {'ERROR'},
-          "Object of type '%s' can't be converted to the metal wall." % (object.type)
+          {'ERROR'}, "Object of type '%s' can't be converted to the volume." % (object.type)
         )
     return {'FINISHED'}
 
 
-class AddWall(bpy.types.Operator):
-  bl_idname = "glp.add_wall"
-  bl_label = "Metal tiles"
-  bl_description = "Add a metal wall."
-  bl_options = {'UNDO'}
+class AddBase(bpy.types.Operator):
+  """Base for add operator"""
+  bl_idname = 'gpl.add'
+  bl_label = 'Add'
+  bl_description = 'Base for add operator'
+  bl_options = {'INTERNAL'}
+
+  action = None
+  kwargs = None
 
   def execute(self, context):
-    if simpleCube():
-      bpy.ops.glp.set_wall()
-    return {'FINISHED'}
+    if self.action:
+      if isinstance(self.action, str):
+        self.action = getattr(getattr(bpy.ops, idnamePrefix), self.action)
+
+      if simpleCube():
+        if self.kwargs:
+          if isinstance(self.kwargs, dict):
+            self.action(**self.kwargs)
+          elif isinstance(self.kwargs, list):
+            self.action(*self.kwargs)
+        else:
+          self.action()
+        return {'FINISHED'}
+    return {'CANCELLED'}
 
 
-class AddPortalable(bpy.types.Operator):
-  bl_idname = "glp.add_portalable"
-  bl_label = "Portalable"
-  bl_description = "Add a portalable wall."
-  bl_options = {'UNDO'}
+def addOperators():
+  for opData in operatorList:
+    if "action" in opData["properties"] and not isinstance(opData["properties"]["action"], str):
+      opData["properties"]["action"] = staticmethod(opData["properties"]["action"])
 
-  def execute(self, context):
-    if simpleCube():
-      bpy.ops.glp.set_portalable()
-    return {'FINISHED'}
+    if "bl_idname" in opData["properties"] \
+       and not opData["properties"]["bl_idname"].startswith(idnamePrefix):
+      opData["properties"]["bl_idname"] = idnamePrefix + "." + opData["properties"]["bl_idname"]
 
+    base = getattr(sys.modules[__name__], opData["base"])
 
-class SearchMaterial(bpy.types.Operator):
-  bl_idname = "glp.search_material"
-  bl_label = "Set material"
-  bl_property = "material"
-
-  material = bpy.props.EnumProperty(items=itemsMaterial)
-
-  def execute(self, context):
-    objects = bpy.context.selected_objects
-    for object in objects:
-      if object.type == 'MESH' and object.glpTypes:
-        object.glpMaterial = self.material
-    return {'FINISHED'}
-
-  def invoke(self, context, event):
-    wm = context.window_manager
-    wm.invoke_search_popup(self)
-    return {'FINISHED'}
+    operator = type(
+      opData["className"],
+      (base, ),
+      opData["properties"]
+    )
+    operators.append(operator)
+    bpy.utils.register_class(operator)
 
 
-class SearchModel(bpy.types.Operator):
-  bl_idname = "glp.search_model"
-  bl_label = "Add model"
-  bl_property = "model"
+def removeOperators():
+  for operator in operators:
+    bpy.utils.unregister_class(operator)
 
-  model = bpy.props.EnumProperty(items=itemsModel)
-
-  def execute(self, context):
-    if self.model != "none":
-      ModelManager.create(self.model)
-    return {'FINISHED'}
-
-  def invoke(self, context, event):
-    wm = context.window_manager
-    wm.invoke_search_popup(self)
-    return {'FINISHED'}
+  del operators[:]
