@@ -56,9 +56,9 @@ def saveMaterial(matName=""):
 
   name = matName.split("/")
   directory = name[0]
-  gmdFile = name[1] + ".gmd"
+  baseName = name[1] + ".rmdx"
 
-  filepath = os.path.join(dataDir, "textures", directory, gmdFile)
+  filepath = os.path.join(dataDir, "textures", directory, baseName)
   tree = ET.parse(filepath)
   root = tree.getroot()
 
@@ -128,7 +128,7 @@ def preload():
   path = os.path.join(dataDir, "textures")
 
   files = os.path.browse(
-    directory="textures", extension="gmd", blacklist=BLACKLIST, recursive=True
+    directory="textures", extension="rmdx", blacklist=BLACKLIST, recursive=True
   )
 
   if files:
