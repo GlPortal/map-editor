@@ -7,6 +7,6 @@ before_install:
 before_script:
   - docker run -it sgorava/arch-blender blender --version
 script:
-  - docker run -it -v $(pwd)/tests:/data -v $(pwd)/glportal-editor:/usr/share/blender/2.78/scripts/addons/toGlPortalXml -v $(pwd)/glportal-data:/root/.glportal/data sgorava/arch-blender
+  - docker run -it -v $(pwd)/tests:/data -v $(pwd)/glportal-editor:/usr/share/blender/2.79/scripts/addons/toGlPortalXml -v $(pwd)/glportal-data:/root/.glportal/data sgorava/arch-blender
 notifications:
   irc: "chat.freenode.net#glportal"
