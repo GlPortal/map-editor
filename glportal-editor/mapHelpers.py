@@ -138,17 +138,6 @@ class CheckMapDialog(bpy.types.Operator):
     layout = self.layout
     error = False
 
-    if result["exitDoor"] != 1:
-      self.exitDoor = result["exitDoor"]
-      error = True
-
-      layout.prop(self, "exitDoor")
-
-      if result["exitDoor"] == 0:
-        layout.label(text="There is no exit door, use it exactly once.", icon='CANCEL')
-      else:
-        layout.label(text="There are too many exit doors, use it exactly once.", icon='ERROR')
-      layout.separator()
     if result["camera"] != 1:
       self.camera = result["camera"]
       error = True
