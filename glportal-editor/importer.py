@@ -2,15 +2,29 @@ import bpy
 import math
 import os
 import xml.etree.cElementTree as ET
+from bpy.props import StringProperty, BoolProperty
 
 from .managers import ModelManager
 from .operatorHelpers import simpleCube
 
 
 class Importer():
-  def __init__(self, filePath, deleteWorld=True):
-    self.__filePath = filePath
-    self.__deleteWorld = deleteWorld
+  filePath = StringProperty(
+    name="Filepath",
+    description="Relative path to the map file",
+    default=""
+  )
+  clearScene = BoolProperty(
+    name="Clear scene",
+    description="Clear current scene",
+    default=True
+  )
+  asGroup = BoolProperty(
+    name="Import as group",
+    description="Create group from all objects in imported map",
+    default=False
+  )
+  objects = []
 
   def deleteWorld(self):
     """Clean current scene"""
@@ -73,7 +87,7 @@ class Importer():
     return False
 
   def getMaterials(self):
-    realpath = os.path.realpath(os.path.expanduser(self.__filePath))
+    realpath = os.path.realpath(os.path.expanduser(self.filePath))
     tree = ET.parse(realpath)
     root = tree.getroot()
 
@@ -85,14 +99,18 @@ class Importer():
     return value.lower() in trueValues
 
   def execute(self, context):
-    if self.__deleteWorld:
+    if self.objects:
+      del self.objects[:]
+
+    if self.clearScene:
       self.deleteWorld()
 
     prefs = bpy.context.user_preferences.addons[__package__].preferences
-    realpath = os.path.realpath(os.path.expanduser(self.__filePath))
+    realpath = os.path.realpath(os.path.expanduser(self.filePath))
     tree = ET.parse(realpath)
     root = tree.getroot()
     materials = self.extractMaterials(root)
+    object = None
 
     for child in root:
       if child.tag == "wall":
@@ -172,7 +190,7 @@ class Importer():
             if 'file' in child.attrib:
               bpy.ops.glp.set_map(filePath=child.get('file'))
             else:
-              object.delete()
+              bpy.data.objects.remove(object)
           elif type == "audio":
             loop = False
             if 'loop' in child.attrib:
@@ -181,9 +199,9 @@ class Importer():
             if 'file' in child.attrib:
               bpy.ops.glp.set_audio(filePath=child.get('file'), loop=loop)
             else:
-              object.delete()
+              bpy.data.objects.remove(object)
           else:
-            object.delete()
+            bpy.data.objects.remove(object)
       elif child.tag == "object" or child.tag == "model":
         mesh = child.get("mesh")
         matAttr = "material"
@@ -204,4 +222,14 @@ class Importer():
               object.rotation_euler = self.extractRotation(param)
             elif param.tag == "scale":
               object.dimensions = self.extractDimensions(param)
+
+      if self.asGroup and object:
+        self.objects.append(object)
+
+    if self.asGroup:
+      group = bpy.data.groups.new(name="MapGroup")
+      for obj in self.objects:
+        group.objects.link(obj)
+      bpy.ops.object.select_same_group(group=group.name)
+
     return {'FINISHED'}

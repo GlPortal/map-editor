@@ -12,10 +12,22 @@ class ImportGlPortalFormat(bpy.types.Operator, ImportHelper):
   bl_options = {'PRESET'}
   filename_ext = ".xml"
   filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
-  deleteWorld = BoolProperty(default=True, name="Erase current scene")
+  deleteWorld = BoolProperty(
+    name="Clear scene",
+    description="Clear current scene",
+    default=True
+  )
+  asGroup = BoolProperty(
+    name="Import as group",
+    description="Create group from all objects in imported map",
+    default=False
+  )
 
   def execute(self, context):
-    importer = Importer(self.filepath, self.deleteWorld)
+    importer = Importer()
+    importer.filePath = self.filepath
+    importer.clearScene = self.deleteWorld
+    importer.asGroup = self.asGroup
     importer.execute(context)
     bpy.context.window_manager.importedFilepath = self.filepath
     return {'FINISHED'}
