@@ -92,7 +92,8 @@ class Exporter():
     matAttr = "material"
 
     if os.path.isfile(self.__filePath):
-      oldMap = Importer(self.__filePath)
+      oldMap = Importer()
+      oldMap.filePath = self.__filePath
       oldMaterials = oldMap.getMaterials()
     else:
       oldMaterials = {}

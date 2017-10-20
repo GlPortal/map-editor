@@ -36,7 +36,9 @@ class ImportEportTest(unittest.TestCase):
   def testImportExport(self):
     self.referenceData = self.readFile(self.referenceMapPath)
 
-    importer = toGlPortalXml.importer.Importer(self.referenceMapPath, True)
+    importer = toGlPortalXml.importer.Importer()
+    importer.filePath = self.referenceMapPath
+    importer.clearScene = True
     importer.execute(bpy.context)
 
     filepath = os.path.join(self.directory.path, "importExportTest.xml")
