@@ -68,7 +68,6 @@ def countObjects(self, objects=None):
     "triggerAudioEmpty": 0,
     "triggerAudioWrong": 0,
     "light":        0,
-    "exitDoor":     0,
     "objectNoMat":  0  # Objects Without Material
   }
 
@@ -83,8 +82,6 @@ def countObjects(self, objects=None):
     elif object.type == 'CAMERA':
       result["camera"] += 1
     elif object.type == 'MESH':
-      if type == "door":
-        result["exitDoor"] += 1
       if type == "trigger":
         triggerType = object.glpTriggerTypes
         filepath = object.glpTriggerFilepath
@@ -119,7 +116,6 @@ class CheckMapDialog(bpy.types.Operator):
   camera = IntProperty(name="Number of cameras")
   light = IntProperty(name="Number of lights")
   wall = IntProperty(name="Number of walls")
-  exitDoor = IntProperty(name="Number of exit doors")
   modelsNoMat = IntProperty(name="Number of models without material")
   triggerMapEmpty = IntProperty(name="Number of map triggers without file path")
   triggerMapWrong = IntProperty(name="Number of map triggers with wrong file path")
