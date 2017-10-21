@@ -68,7 +68,6 @@ def countObjects(self, objects=None):
     "triggerAudioEmpty": 0,
     "triggerAudioWrong": 0,
     "light":        0,
-    "exitDoor":     0,
     "objectNoMat":  0  # Objects Without Material
   }
 
@@ -83,8 +82,6 @@ def countObjects(self, objects=None):
     elif object.type == 'CAMERA':
       result["camera"] += 1
     elif object.type == 'MESH':
-      if type == "door":
-        result["exitDoor"] += 1
       if type == "trigger":
         triggerType = object.glpTriggerTypes
         filepath = object.glpTriggerFilepath
@@ -119,7 +116,6 @@ class CheckMapDialog(bpy.types.Operator):
   camera = IntProperty(name="Number of cameras")
   light = IntProperty(name="Number of lights")
   wall = IntProperty(name="Number of walls")
-  exitDoor = IntProperty(name="Number of exit doors")
   modelsNoMat = IntProperty(name="Number of models without material")
   triggerMapEmpty = IntProperty(name="Number of map triggers without file path")
   triggerMapWrong = IntProperty(name="Number of map triggers with wrong file path")
@@ -138,17 +134,6 @@ class CheckMapDialog(bpy.types.Operator):
     layout = self.layout
     error = False
 
-    if result["exitDoor"] != 1:
-      self.exitDoor = result["exitDoor"]
-      error = True
-
-      layout.prop(self, "exitDoor")
-
-      if result["exitDoor"] == 0:
-        layout.label(text="There is no exit door, use it exactly once.", icon='CANCEL')
-      else:
-        layout.label(text="There are too many exit doors, use it exactly once.", icon='ERROR')
-      layout.separator()
     if result["camera"] != 1:
       self.camera = result["camera"]
       error = True

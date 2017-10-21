@@ -88,7 +88,6 @@ class RunGame(bpy.types.Operator):
     result = context.scene.countObjects()
 
     if (
-      result["exitDoor"] == 0 or
       result["camera"] == 0 or
       result["light"] == 0 or
       result["wall"] == 0
