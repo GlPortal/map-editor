@@ -12,23 +12,23 @@ class CreationPanel(bpy.types.Panel):
     layout = self.layout
 
     layout.label("Objects:")
-    layout.operator("glp.add_door", text="Exit", icon='MESH_CUBE')
-    layout.operator("glp.search_model", icon='MESH_CUBE')
-    layout.operator("glp.search_material", icon='MATERIAL')
+    layout.operator("glp.add_door", icon='MESH_CUBE', text="Exit")
+    layout.operator("glp.manager_search_add_model", icon='MESH_CUBE')
+    layout.operator("glp.manager_search_set_material", icon='MATERIAL')
 
     layout.label("Walls:")
-    layout.operator("glp.add_portalable", icon='MESH_PLANE')
-    layout.operator("glp.add_wall", icon='META_PLANE')
+    layout.operator("glp.wall_add_portalable", icon='MESH_PLANE', text="Portalable")
+    layout.operator("glp.wall_add_metal", icon='META_PLANE', text="Wall")
 
     layout.label("Volumes:")
-    layout.operator("glp.add_acid", icon='MESH_CUBE')
+    layout.operator("glp.volume_add_acid", icon='MESH_CUBE', text="Acid")
 
     layout.label("Triggers:")
-    layout.operator("glp.add_death", icon='MESH_CUBE')
-    layout.operator("glp.add_radiation", icon='RADIO')
-    layout.operator("glp.add_win", icon='MESH_CUBE')
-    layout.operator("glp.add_map_trigger", icon='MESH_CUBE')
-    layout.operator("glp.add_audio_trigger", icon='MESH_CUBE')
+    layout.operator("glp.trigger_add_death", icon='MESH_CUBE', text="Death")
+    layout.operator("glp.trigger_add_radiation", icon='RADIO', text="Radiation")
+    layout.operator("glp.trigger_add_win", icon='MESH_CUBE', text="Win")
+    layout.operator("glp.trigger_add_map", icon='MESH_CUBE', text="Map")
+    layout.operator("glp.trigger_add_audio", icon='MESH_CUBE', text="Audio")
 
     layout.label("Lights:")
     layout.operator("glp.add_light_common", icon='LAMP_POINT')
