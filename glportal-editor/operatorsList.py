@@ -10,7 +10,7 @@ operatorList = [
     "className": "TriggerSetAudio",
     "properties": {
       "bl_idname": "trigger_set_audio",
-      "bl_label": "Set Audio",
+      "bl_label": "Set Audio Trigger",
       "bl_description": "Mark the selection as audio trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "type": StringProperty(default="audio", options={'HIDDEN'}),
@@ -23,7 +23,7 @@ operatorList = [
     "className": "TriggerSetMap",
     "properties": {
       "bl_idname": "trigger_set_map",
-      "bl_label": "Set Map",
+      "bl_label": "Set Map Trigger",
       "bl_description": "Mark the selection as map trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "type": StringProperty(default="map", options={'HIDDEN'}),
@@ -36,7 +36,7 @@ operatorList = [
     "className": "TriggerSetWin",
     "properties": {
       "bl_idname": "trigger_set_win",
-      "bl_label": "Set Win",
+      "bl_label": "Set Win Trigger",
       "bl_description": "Mark the selection as win trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "type": StringProperty(default="win", options={'HIDDEN'}),
@@ -49,7 +49,7 @@ operatorList = [
     "className": "TriggerSetDeath",
     "properties": {
       "bl_idname": "trigger_set_death",
-      "bl_label": "Set Death",
+      "bl_label": "Set Death Trigger",
       "bl_description": "Mark the selection as death trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "type": StringProperty(default="death", options={'HIDDEN'}),
@@ -62,7 +62,7 @@ operatorList = [
     "className": "TriggerSetRadiation",
     "properties": {
       "bl_idname": "trigger_set_radiation",
-      "bl_label": "Set Radiation",
+      "bl_label": "Set Radiation Trigger",
       "bl_description": "Mark the selection as radiation trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "type": StringProperty(default="radiation", options={'HIDDEN'}),
@@ -75,7 +75,7 @@ operatorList = [
     "className": "TriggerSearchAudio",
     "properties": {
       "bl_idname": "trigger_search_audio",
-      "bl_label": "Search Audio",
+      "bl_label": "Search Audio Trigger",
       "bl_description": "Set audio trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "bl_property": "items",
@@ -91,7 +91,7 @@ operatorList = [
     "className": "TriggerSearchMap",
     "properties": {
       "bl_idname": "trigger_search_map",
-      "bl_label": "Search Map",
+      "bl_label": "Search Map Trigger",
       "bl_description": "Set map trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "bl_property": "items",
@@ -107,7 +107,7 @@ operatorList = [
     "className": "TriggerAddAudio",
     "properties": {
       "bl_idname": "trigger_add_audio",
-      "bl_label": "Add Audio",
+      "bl_label": "Add Audio Trigger",
       "bl_description": "Add audio trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "action": "trigger_search_audio",
@@ -119,7 +119,7 @@ operatorList = [
     "className": "TriggerAddMap",
     "properties": {
       "bl_idname": "trigger_add_map",
-      "bl_label": "Add Map",
+      "bl_label": "Add Map Trigger",
       "bl_description": "Add map trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "action": "trigger_search_map",
@@ -131,7 +131,7 @@ operatorList = [
     "className": "TriggerAddWin",
     "properties": {
       "bl_idname": "trigger_add_win",
-      "bl_label": "Add Win",
+      "bl_label": "Add Win Trigger",
       "bl_description": "Add win trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "action": "trigger_set_win",
@@ -143,7 +143,7 @@ operatorList = [
     "className": "TriggerAddDeath",
     "properties": {
       "bl_idname": "trigger_add_death",
-      "bl_label": "Add Death",
+      "bl_label": "Add Death Trigger",
       "bl_description": "Add death trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "action": "trigger_set_death",
@@ -155,7 +155,7 @@ operatorList = [
     "className": "TriggerAddRadiation",
     "properties": {
       "bl_idname": "trigger_add_radiation",
-      "bl_label": "Add Radiation",
+      "bl_label": "Add Radiation Trigger",
       "bl_description": "Add radiation trigger.",
       "bl_options": {'REGISTER', 'UNDO'},
       "action": "trigger_set_radiation",
@@ -215,7 +215,7 @@ operatorList = [
     "className": "VolumeSetAcid",
     "properties": {
       "bl_idname": "volume_set_acid",
-      "bl_label": "Set Acid",
+      "bl_label": "Set Volume of Acid",
       "bl_description": "Mark the selection as volume of acid.",
       "bl_options": {'REGISTER', 'UNDO'},
       "material": StringProperty(default="fluid/acid00", options={'HIDDEN'}),
@@ -227,7 +227,7 @@ operatorList = [
     "className": "VolumeAddAcid",
     "properties": {
       "bl_idname": "volume_add_acid",
-      "bl_label": "Add Acid",
+      "bl_label": "Add Volume of Acid",
       "bl_description": "Add volume of acid.",
       "bl_options": {'REGISTER', 'UNDO'},
       "action": "volume_set_acid",

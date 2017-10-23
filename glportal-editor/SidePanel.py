@@ -22,7 +22,7 @@ class SidePanel(bpy.types.Panel):
 
     layout.label("Trigger:")
     layout.operator("glp.trigger_set_death", icon='MESH_CUBE', text="Death")
-    layout.operator("glp.trigger_set_radiation", icon='RADIO')
+    layout.operator("glp.trigger_set_radiation", icon='RADIO', text="Radiation")
     layout.operator("glp.trigger_set_win", icon='MESH_CUBE', text="Win")
     layout.operator("glp.trigger_search_map", icon='MESH_CUBE', text="Map")
     layout.operator("glp.trigger_search_audio", icon='MESH_CUBE', text="Audio")
