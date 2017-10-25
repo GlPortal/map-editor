@@ -17,13 +17,13 @@ class Preferences(AddonPreferences):
     update=updateTriggerXrays
   )
   dataDir = StringProperty(
-    name="Set up GlPortal data directory",
+    name="Set up Radix data directory",
     default=os.path.expanduser("~/.glportal/data/"),
     subtype='DIR_PATH',
     update=updateDataDir
   )
   gameExe = StringProperty(
-    name="Set up GlPortal executable",
+    name="Set up game executable",
     default=os.path.expanduser("/usr/bin/glportal"),
     subtype='FILE_PATH'
   )
@@ -56,4 +56,4 @@ class Preferences(AddonPreferences):
 
     layout.prop(self, "gameExe")
     if not os.path.isfile(os.path.expanduser(self.gameExe)):
-      layout.label(text="Current GlPortal executable does not exist", icon='ERROR')
+      layout.label(text="Current game executable does not exist", icon='ERROR')

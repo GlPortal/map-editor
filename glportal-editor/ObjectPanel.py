@@ -4,14 +4,14 @@ from .managers import MaterialManager
 
 
 class ObjectPanel(bpy.types.Panel):
-  bl_label = "GlPortal"
+  bl_label = "Radix"
   bl_space_type = 'PROPERTIES'
   bl_region_type = 'WINDOW'
   bl_context = "object"
 
   @classmethod
   def poll(cls, context):
-    if context.object.glpTypes != "none":
+    if context.object.radixTypes != "none":
       return True
     return False
 
@@ -19,25 +19,25 @@ class ObjectPanel(bpy.types.Panel):
     object = context.active_object
     layout = self.layout
 
-    layout.prop(object, "glpTypes")
-    if object.glpTypes == "trigger":
-      layout.prop(object, "glpTriggerTypes")
+    layout.prop(object, "radixTypes")
+    if object.radixTypes == "trigger":
+      layout.prop(object, "radixTriggerTypes")
 
-      if object.glpTriggerTypes in {"map", "audio"}:
-        layout.prop(object, "glpTriggerFilepath")
+      if object.radixTriggerTypes in {"map", "audio"}:
+        layout.prop(object, "radixTriggerFilepath")
 
-        if object.glpTriggerTypes == "audio":
-          layout.prop(object, "glpTriggerAudioLoop")
-    elif object.glpTypes == "volume":
-      layout.prop(object, "glpVolumeTypes")
+        if object.radixTriggerTypes == "audio":
+          layout.prop(object, "radixTriggerAudioLoop")
+    elif object.radixTypes == "volume":
+      layout.prop(object, "radixVolumeTypes")
 
-    if object.glpMaterial:
+    if object.radixMaterial:
       layout.label(text="Material properties", icon='MATERIAL')
 
-      layout.prop(object, "glpMaterial", text="Name ")
+      layout.prop(object, "radixMaterial", text="Name ")
 
-      if object.glpMaterial != "none":
-        mat = MaterialManager.MATERIALS[object.glpMaterial]
+      if object.radixMaterial != "none":
+        mat = MaterialManager.MATERIALS[object.radixMaterial]
 
         row = layout.row(align=True)
         row.alignment = 'EXPAND'

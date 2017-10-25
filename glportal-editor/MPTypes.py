@@ -11,27 +11,27 @@ def initProperties():
     default=0,
     update=MPItemIdUpdate
   )
-  bpy.types.WindowManager.glpMatName = StringProperty(
+  bpy.types.WindowManager.radixMatName = StringProperty(
     name="Name",
     default=""
   )
-  bpy.types.WindowManager.glpMatFancyName = StringProperty(
+  bpy.types.WindowManager.radixMatFancyName = StringProperty(
     name="FancyName",
     default=""
   )
-  bpy.types.WindowManager.glpMatPortalable = BoolProperty(
+  bpy.types.WindowManager.radixMatPortalable = BoolProperty(
     name="Portalable",
     default=False
   )
-  bpy.types.WindowManager.glpMatKind = StringProperty(
+  bpy.types.WindowManager.radixMatKind = StringProperty(
     name="Kind",
     default=""
   )
-  bpy.types.WindowManager.glpMatTags = StringProperty(
+  bpy.types.WindowManager.radixMatTags = StringProperty(
     name="Tags",
     default=""
   )
-  bpy.types.WindowManager.glpMatEdit = BoolProperty(
+  bpy.types.WindowManager.radixMatEdit = BoolProperty(
     default=False
   )
 
@@ -39,12 +39,12 @@ def initProperties():
 def delProperties():
   """Unregister material panel properties from Blender"""
   del bpy.types.WindowManager.MPItemId
-  del bpy.types.WindowManager.glpMatName
-  del bpy.types.WindowManager.glpMatFancyName
-  del bpy.types.WindowManager.glpMatPortalable
-  del bpy.types.WindowManager.glpMatKind
-  del bpy.types.WindowManager.glpMatTags
-  del bpy.types.WindowManager.glpMatEdit
+  del bpy.types.WindowManager.radixMatName
+  del bpy.types.WindowManager.radixMatFancyName
+  del bpy.types.WindowManager.radixMatPortalable
+  del bpy.types.WindowManager.radixMatKind
+  del bpy.types.WindowManager.radixMatTags
+  del bpy.types.WindowManager.radixMatEdit
 
 
 class Row(bpy.types.PropertyGroup):
@@ -61,14 +61,14 @@ def MPItemIdUpdate(self, context):
   material = MM.MATERIALS[name]
 
   if name != "none":
-    if wm.glpMatEdit:
-      wm.glpMatName = name
-      wm.glpMatFancyName = material["fancyname"]
-      wm.glpMatKind = material["kind"]
-      wm.glpMatPortalable = material["portalable"]
+    if wm.radixMatEdit:
+      wm.radixMatName = name
+      wm.radixMatFancyName = material["fancyname"]
+      wm.radixMatKind = material["kind"]
+      wm.radixMatPortalable = material["portalable"]
 
       if "tags" in material:
-        wm.glpMatTags = material["tags"]
+        wm.radixMatTags = material["tags"]
 
     #prefs = bpy.context.user_preferences.addons[__package__].preferences
     #path = os.path.expanduser(prefs.dataDir + "textures/" +  material["texture"])

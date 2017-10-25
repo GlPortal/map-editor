@@ -43,16 +43,16 @@ def create(file="", materialName=""):
       object = bpy.context.selected_objects[0]
       if object:
         object.location = bpy.context.scene.cursor_location
-        object.glpTypes = "model"
-        object.glpModel = file
+        object.radixTypes = "model"
+        object.radixModel = file
 
         bpy.context.scene.objects.active = object
         bpy.ops.object.transform_apply(rotation=True)
 
         if materialName:
-          object.glpMaterial = materialName
+          object.radixMaterial = materialName
         else:
-          object.glpMaterial = prefs.defaultMaterial
+          object.radixMaterial = prefs.defaultMaterial
       return True
     return False
 

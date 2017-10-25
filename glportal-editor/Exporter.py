@@ -101,8 +101,8 @@ class Exporter():
     self.writeMaterials(root, materials)
 
     for object in reversed(objects):
-      if object.glpTypes:
-        type = object.glpTypes
+      if object.radixTypes:
+        type = object.radixTypes
       else:
         type = "None"
 
@@ -132,30 +132,30 @@ class Exporter():
 
         if type == "model":
           boxElement = tree.SubElement(root, "model")
-          boxElement.set("mesh", object.glpModel)
+          boxElement.set("mesh", object.radixModel)
 
-          if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.BLACKLIST:
-            boxElement.set(matAttr, str(materials[object.glpMaterial]))
+          if object.radixMaterial in materials and object.radixMaterial not in MaterialManager.BLACKLIST:
+            boxElement.set(matAttr, str(materials[object.radixMaterial]))
           else:
             boxElement.set(matAttr, str(materials[prefs.defaultMaterial]))
         elif type == "trigger":
           boxElement = tree.SubElement(root, "trigger")
-          if object.glpTriggerTypes:
-            boxElement.set("type", object.glpTriggerTypes)
-            if object.glpTriggerTypes == "map":
-              boxElement.set("file", object.glpTriggerFilepath)
-            if object.glpTriggerTypes == "audio":
-              boxElement.set("file", object.glpTriggerFilepath)
-              boxElement.set("loop", self.setBool(object.glpTriggerAudioLoop))
+          if object.radixTriggerTypes:
+            boxElement.set("type", object.radixTriggerTypes)
+            if object.radixTriggerTypes == "map":
+              boxElement.set("file", object.radixTriggerFilepath)
+            if object.radixTriggerTypes == "audio":
+              boxElement.set("file", object.radixTriggerFilepath)
+              boxElement.set("loop", self.setBool(object.radixTriggerAudioLoop))
         elif type == "wall":
           boxElement = tree.SubElement(root, "wall")
 
-          if object.glpMaterial in materials and object.glpMaterial not in MaterialManager.BLACKLIST:
-            boxElement.set(matAttr, str(materials[object.glpMaterial]))
+          if object.radixMaterial in materials and object.radixMaterial not in MaterialManager.BLACKLIST:
+            boxElement.set(matAttr, str(materials[object.radixMaterial]))
           else:
             boxElement.set(matAttr, str(materials[prefs.defaultMaterial]))
         elif type == "volume":
-          if object.glpVolumeTypes == "acid":
+          if object.radixVolumeTypes == "acid":
             boxElement = tree.SubElement(root, "acid")
         if boxElement is not None:
           positionElement = tree.SubElement(boxElement, "position")

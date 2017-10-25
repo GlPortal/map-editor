@@ -1,25 +1,25 @@
 #!BPY
 bl_info = {
-  "name":         "GlPortal XML Format",
+  "name":         "Radix XML Format",
   "author":       "Henry Hirsch, Julian Thijssen, Juraj Oravec",
   "blender":      (2, 6, 3),
   "version":      (1, 0, 0),
   "location":     "File > Import-Export",
-  "description":  "Module for loading, editing and saving GlPortal maps.",
+  "description":  "Module for loading, editing and saving Radix maps.",
   "category":     "Import-Export",
   "tracker_url":  "https://github.com/GlPortal/map-editor/issues"
 }
 
 if "bpy" not in locals():
   from . import types
-  from . import exportglportalformat
-  from . import importglportalformat
+  from . import exportRadixFormat
+  from . import importRadixFormat
   from . import operatorsList
   from . import operators
   from . import mapOperators
   from . import preferences
   from . import mapHelpers
-  from . import glportalMenuAdd
+  from . import radixMenuAdd
   from . import updateTextures
   from . import lightsOperators
   from . import Exporter
@@ -41,14 +41,14 @@ else:
   import importlib
 
   importlib.reload(types)
-  importlib.reload(exportglportalformat)
-  importlib.reload(importglportalformat)
+  importlib.reload(exportRadixFormat)
+  importlib.reload(importRadixFormat)
   importlib.reload(operatorsList)
   importlib.reload(operators)
   importlib.reload(mapOperators)
   importlib.reload(preferences)
   importlib.reload(mapHelpers)
-  importlib.reload(glportalMenuAdd)
+  importlib.reload(radixMenuAdd)
   importlib.reload(updateTextures)
   importlib.reload(lightsOperators)
   importlib.reload(Exporter)
@@ -72,11 +72,11 @@ import os
 
 
 def menu_func_export(self, context):
-  self.layout.operator("glp.export", text="GlPortal Map (.xml)")
+  self.layout.operator("radix.export", text="Radix Map (.xml)")
 
 
 def menu_func_import(self, context):
-  self.layout.operator("glp.import", text="GlPortal Map (.xml)")
+  self.layout.operator("radix.import", text="Radix Map (.xml)")
 
 
 def register():
@@ -87,7 +87,7 @@ def register():
 
   bpy.types.INFO_MT_file_export.append(menu_func_export)
   bpy.types.INFO_MT_file_import.append(menu_func_import)
-  bpy.types.INFO_MT_add.prepend(glportalMenuAdd.glportal_add_menu)
+  bpy.types.INFO_MT_add.prepend(radixMenuAdd.radix_add_menu)
   bpy.app.handlers.scene_update_post.append(updateTextures.sceneUpdater)
   bpy.types.WindowManager.MPMaterials = bpy.props.CollectionProperty(type=MPTypes.Row)
 
@@ -112,7 +112,7 @@ def unregister():
 
   operators.removeOperators()
 
-  MaterialManager.glpMaterialReset()
+  MaterialManager.radixMaterialReset()
   MaterialManager.MATERIALS.clear()
   ModelManager.MODELS.clear()
   types.delProperties()
@@ -120,7 +120,7 @@ def unregister():
 
   bpy.types.INFO_MT_file_export.remove(menu_func_import)
   bpy.types.INFO_MT_file_export.remove(menu_func_export)
-  bpy.types.INFO_MT_add.remove(glportalMenuAdd.glportal_add_menu)
+  bpy.types.INFO_MT_add.remove(radixMenuAdd.radix_add_menu)
   bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
 
   del bpy.types.Scene.countObjects

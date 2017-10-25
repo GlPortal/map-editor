@@ -9,7 +9,7 @@ def fixObjects(self):
 
   for object in objects:
     if object.type == 'MESH':
-      type = object.glpTypes
+      type = object.radixTypes
 
       if type in {"wall", "trigger", "volume"}:
         bpy.context.scene.objects.active = object
@@ -44,7 +44,7 @@ def checkSpawnPosition(objects):
     return 0
 
   for object in objects:
-    if object.type == 'MESH' and object.glpTypes == "wall":
+    if object.type == 'MESH' and object.radixTypes == "wall":
       isOver = camera.isOverObject(object)
       if isOver != 0:
         return isOver
@@ -72,8 +72,8 @@ def countObjects(self, objects=None):
   }
 
   for object in objects:
-    if object.glpTypes:
-      type = object.glpTypes
+    if object.radixTypes:
+      type = object.radixTypes
     else:
       type = "None"
 
@@ -83,8 +83,8 @@ def countObjects(self, objects=None):
       result["camera"] += 1
     elif object.type == 'MESH':
       if type == "trigger":
-        triggerType = object.glpTriggerTypes
-        filepath = object.glpTriggerFilepath
+        triggerType = object.radixTriggerTypes
+        filepath = object.radixTriggerFilepath
 
         if triggerType == "death":
           result["triggerDeath"] += 1
@@ -101,10 +101,10 @@ def countObjects(self, objects=None):
       if type == "wall":
         result["wall"] += 1
       if type == "volume":
-        if object.glpVolumeTypes == "acid":
+        if object.radixVolumeTypes == "acid":
           result["acid"] += 1
       if type in {"model", "wall"}:
-        if not object.glpMaterial or object.glpMaterial == "none":
+        if not object.radixMaterial or object.radixMaterial == "none":
           result["objectNoMat"] += 1
   return result
 
@@ -200,7 +200,7 @@ class CheckMapDialog(bpy.types.Operator):
 
       row = layout.split(0.75)
       row.label(text="There are objects without assigned material.", icon='ERROR')
-      row.operator("glp.fix_materials")
+      row.operator("radix.fix_materials")
 
       layout.separator()
     if result["triggerMapEmpty"] > 0:

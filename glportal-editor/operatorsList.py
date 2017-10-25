@@ -261,7 +261,7 @@ operatorList = [
       "bl_options": {'REGISTER', 'UNDO'},
       "bl_property": "items",
       "items": EnumProperty(items=itemsMaterial, options={'HIDDEN'}),
-      "action": MaterialManager.setGlpMaterial,
+      "action": MaterialManager.setRadixMaterial,
       "kwargs": {
         "items": "material"
       }

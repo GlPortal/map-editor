@@ -5,10 +5,10 @@ from bpy_extras.io_utils import ExportHelper
 from .Exporter import Exporter
 
 
-class ExportGlPortalFormat(bpy.types.Operator, ExportHelper):
-  bl_idname = "glp.export"
-  bl_label = "Export GlPortal XML"
-  bl_description = "Export to GlPortal XML file (.xml)"
+class ExportRadixFormat(bpy.types.Operator, ExportHelper):
+  bl_idname = "radix.export"
+  bl_label = "Export Radix XML"
+  bl_description = "Export to Radix XML file (.xml)"
   bl_options = {'PRESET'}
   filename_ext = ".xml"
   filter_glob = StringProperty(default="*.xml", options={'HIDDEN'})
