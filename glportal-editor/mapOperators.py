@@ -7,7 +7,7 @@ from .managers import MaterialManager
 
 
 class FixMaterials(bpy.types.Operator):
-  bl_idname = "glp.fix_materials"
+  bl_idname = "radix.fix_materials"
   bl_label = "Fix materials"
   bl_description = "Assign default material to objects without it."
   bl_options = {'UNDO'}
@@ -18,17 +18,17 @@ class FixMaterials(bpy.types.Operator):
     objects = context.scene.objects
 
     for object in objects:
-      if object.type == 'MESH' and object.glpTypes in {"model", "wall"}:
-        if not object.glpMaterial or object.glpMaterial == "none":
-          object.glpMaterial = material
+      if object.type == 'MESH' and object.radixTypes in {"model", "wall"}:
+        if not object.radixMaterial or object.radixMaterial == "none":
+          object.radixMaterial = material
 
     return {'FINISHED'}
 
 
 class ReloadMaterials(bpy.types.Operator):
-  bl_idname = "glp.reload_materials"
+  bl_idname = "radix.reload_materials"
   bl_label = "Reload materials"
-  bl_description = "Reload GlPortal materials"
+  bl_description = "Reload Radix materials"
 
   def execute(self, context):
     MaterialManager.reload()
@@ -36,7 +36,7 @@ class ReloadMaterials(bpy.types.Operator):
 
 
 class FastExport(bpy.types.Operator):
-  bl_idname = "glp.fast_export"
+  bl_idname = "radix.fast_export"
   bl_label = "Fast Export"
   bl_description = "Export current map to the imported file"
 
@@ -58,19 +58,19 @@ class FastExport(bpy.types.Operator):
 
 
 class FixMap(bpy.types.Operator):
-  bl_idname = "glp.fix_map"
+  bl_idname = "radix.fix_map"
   bl_label = "Fix map"
   bl_description = "Fix the map before exporting."
   bl_options = {'UNDO'}
 
   def execute(self, context):
     bpy.context.scene.fixObjects()
-    bpy.ops.glp.fix_materials()
+    bpy.ops.radix.fix_materials()
     return {'FINISHED'}
 
 
 class CheckMap(bpy.types.Operator):
-  bl_idname = "glp.check_map"
+  bl_idname = "radix.check_map"
   bl_label = "Check map"
   bl_description = "Check the map for problems."
 
@@ -80,7 +80,7 @@ class CheckMap(bpy.types.Operator):
 
 
 class RunGame(bpy.types.Operator):
-  bl_idname = "glp.run_game"
+  bl_idname = "radix.run_game"
   bl_label = "Run game"
   bl_description = "Run game with this map"
 
@@ -111,5 +111,5 @@ class RunGame(bpy.types.Operator):
         else:
           self.report({'ERROR'}, "GlPortal executable does not exist.")
       else:
-        self.report({'ERROR'}, "GlPortal data directory does not exist.")
+        self.report({'ERROR'}, "Radix data directory does not exist.")
     return {'FINISHED'}
