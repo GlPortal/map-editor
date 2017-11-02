@@ -4,7 +4,10 @@ import subprocess
 import sys
 import unittest
 
-import toGlPortalXml
+try:
+  import RadixMapEditor
+except ImportError:
+  import toGlPortalXml as RadixMapEditor
 
 
 class OperatorsTest(unittest.TestCase):
@@ -115,14 +118,14 @@ class OperatorsTest(unittest.TestCase):
 
     self.clearScene()
 
-    toGlPortalXml.operatorHelpers.simpleCube()
+    RadixMapEditor.operatorHelpers.simpleCube()
     for operator in self.operatorsSet:
       operator["action"]()
       self.checkObject(operator)
 
   def testDynamicOperatorsRegistered(self):
     """ Test if operators are registered """
-    for operator in toGlPortalXml.operators.operatorList:
+    for operator in RadixMapEditor.operators.operatorList:
       print("Checking:", operator["properties"]["bl_idname"])
       self.assertTrue(
         hasattr(bpy.types, "RADIX_OT_" + operator["properties"]["bl_idname"].lstrip("radix.")),
