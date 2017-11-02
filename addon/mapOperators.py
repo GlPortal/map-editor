@@ -95,7 +95,7 @@ class RunGame(bpy.types.Operator):
       bpy.ops.object.map_check_dialog('INVOKE_DEFAULT')
     else:
       prefs = bpy.context.user_preferences.addons[__package__].preferences
-      filepath = os.path.join(bpy.app.tempdir, "glportal_testmap.xml")
+      filepath = os.path.join(bpy.app.tempdir, "radix_testmap.xml")
 
       if os.path.isdir(prefs.dataDir):
         if os.path.isfile(prefs.gameExe):
@@ -106,10 +106,11 @@ class RunGame(bpy.types.Operator):
             [prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath],
             env=os.environ
           )
+          print(prefs.gameExe, "--datadir", prefs.dataDir, "--mapfrompath", filepath)
 
           os.remove(filepath)
         else:
-          self.report({'ERROR'}, "GlPortal executable does not exist.")
+          self.report({'ERROR'}, "Game executable does not exist.")
       else:
         self.report({'ERROR'}, "Radix data directory does not exist.")
     return {'FINISHED'}

@@ -1,6 +1,6 @@
 #!BPY
 bl_info = {
-  "name":         "Radix XML Format",
+  "name":         "Radix Map Editor",
   "author":       "Henry Hirsch, Julian Thijssen, Juraj Oravec",
   "blender":      (2, 6, 3),
   "version":      (1, 0, 0),
