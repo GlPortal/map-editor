@@ -1,7 +1,7 @@
 #!/bin/bash
 
 version=`git describe --tags | grep -Eo "^([^-]*)*"`
-name="radix-map-editor"
+name="RadixMapEditor"
 dir="addon"
 
 cp LICENCE.md $dir/LICENCE.md
