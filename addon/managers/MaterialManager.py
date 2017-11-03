@@ -21,27 +21,27 @@ BLACKLIST = [
 ]
 
 
-def glpMaterialSet():
-  bpy.types.Object.glpMaterial = EnumProperty(
-    items=types.GLP_MATERIAL_TYPES,
+def radixMaterialSet():
+  bpy.types.Object.radixMaterial = EnumProperty(
+    items=types.RADIX_MATERIAL_TYPES,
     name="Material",
     description="Active material",
     default="none",
-    update=glpMaterialUpdate
+    update=radixMaterialUpdate
   )
 
 
-def glpMaterialReset():
-  del types.GLP_MATERIAL_TYPES[:]
-  types.GLP_MATERIAL_TYPES.append(("none", "None", "No material"))
+def radixMaterialReset():
+  del types.RADIX_MATERIAL_TYPES[:]
+  types.RADIX_MATERIAL_TYPES.append(("none", "None", "No material"))
 
 
-def glpMaterialUpdate(self, context):
+def radixMaterialUpdate(self, context):
   objects = bpy.context.selected_objects
   for object in objects:
-    if object.type == 'MESH' and object.glpTypes != "none":
+    if object.type == 'MESH' and object.radixTypes != "none":
       setMaterial(object)
-      types.onUpdateGlpTypes(self, context)
+      types.onUpdateRadixTypes(self, context)
 
 
 def saveMaterial(matName=""):
@@ -116,7 +116,7 @@ def extractData(path, dir, name):
 
 def reload():
   MATERIALS.clear()
-  glpMaterialReset()
+  radixMaterialReset()
   preload()
 
 
@@ -139,12 +139,12 @@ def preload():
         else:
           mat = extractData(path, dir, name)
           MATERIALS[mat["name"]] = mat["data"]
-          types.GLP_MATERIAL_TYPES.append(
+          types.RADIX_MATERIAL_TYPES.append(
             (mat["name"], mat["data"]["fancyname"], mat["data"]["fancyname"])
           )
 
     recurse("", files)
-    glpMaterialSet()
+    radixMaterialSet()
 
     return True
   return False
@@ -270,20 +270,20 @@ def create(name=""):
     return False
 
 
-def setGlpMaterial(material):
+def setRadixMaterial(material):
   if material:
     objects = bpy.context.selected_objects
 
     if objects:
       for obj in objects:
-        obj.glpMaterial = material
+        obj.radixMaterial = material
       return True
     return False
 
 
 def setMaterial(object, material=""):
   if object:
-    mat = create(object.glpMaterial)
+    mat = create(object.radixMaterial)
     data = object.data
 
     if not data.materials:
@@ -291,15 +291,15 @@ def setMaterial(object, material=""):
     else:
       data.materials[0] = mat
 
-    if object.glpTypes in {"wall", "volume"} and object.glpModel == "Cube.obj":
+    if object.radixTypes in {"wall", "volume"} and object.radixModel == "Cube.obj":
       object.updateTexture()
   else:
     return False
 
 
 def reset(object):
-  if object.glpTypes != "none" and object.glpMaterial != "none":
-    object.glpMaterial = "none"
+  if object.radixTypes != "none" and object.radixMaterial != "none":
+    object.radixMaterial = "none"
 
     if len(object.data.materials) == 1:
       bpy.context.scene.objects.active = object
@@ -321,15 +321,15 @@ def prepareExport(oldMaterials=None):
 
   for object in objects:
     if (
-      object.glpMaterial not in usedMaterials and
+      object.radixMaterial not in usedMaterials and
       object.type == 'MESH' and
-      object.glpTypes not in {"door", "trigger", "volume"}
+      object.radixTypes not in {"door", "trigger", "volume"}
     ):
       if (
-        object.glpMaterial in MATERIALS and
-        object.glpMaterial not in BLACKLIST
+        object.radixMaterial in MATERIALS and
+        object.radixMaterial not in BLACKLIST
       ):
-        usedMaterials[object.glpMaterial] = id
+        usedMaterials[object.radixMaterial] = id
         id += 1
       else:
         addDefault = True

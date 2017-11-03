@@ -7,10 +7,10 @@ else
 fi
 
 help() {
-    echo "GlPortal Blender Linker"
+    echo "Radix Map Editor Blender Linker"
     echo ""
     echo ""
-    echo "Links GlPortal module to blender for development."
+    echo "Links Radix Map Editor module to blender for development."
     echo ""
     echo "Don't forget to activate the module in Blender"
     echo ""
@@ -31,7 +31,7 @@ getopts "h?vb:" opt
             ADDONSPATH="$BLENDERVERPATH/$OPTARG/scripts/addons"
             mkdir -p "$ADDONSPATH"
             DIR=$(CDPATH= cd "$(dirname "$0")" && pwd)
-            ln -fs "$DIR/glportal-editor/" "$ADDONSPATH/toGlPortalXml"
+            ln -fs "$DIR/addon/" "$ADDONSPATH/RadixMapEditor"
         else
             echo "No blender installation found."
             exit 0

@@ -98,19 +98,19 @@ class Importer():
       if child.tag == "wall":
         object = self.createCube(child)
         if object:
-          object.glpTypes = "wall"
+          object.radixTypes = "wall"
 
           matAttr = "material"
 
           if matAttr in child.attrib:
             mid = child.get(matAttr)
-            object.glpMaterial = materials[mid]
+            object.radixMaterial = materials[mid]
           else:
-            object.glpMaterial = prefs.defaultMaterial
+            object.radixMaterial = prefs.defaultMaterial
       elif child.tag == "acid":
         object = self.createCube(child)
         if object:
-          bpy.ops.glp.volume_set_acid()
+          bpy.ops.radix.volume_set_acid()
       elif child.tag == "spawn":
         bpy.ops.object.camera_add()
 
@@ -153,7 +153,7 @@ class Importer():
           elif param.tag == "rotation":
             rotation = self.extractRotation(param)
 
-        bpy.ops.glp.add_door()
+        bpy.ops.radix.add_door()
 
         object = bpy.context.active_object
         object.location = location
@@ -163,14 +163,14 @@ class Importer():
         if object:
           type = child.get("type")
           if type == "death":
-            bpy.ops.glp.trigger_set_death()
+            bpy.ops.radix.trigger_set_death()
           elif type == "radiation":
-            bpy.ops.glp.trigger_set_radiation()
+            bpy.ops.radix.trigger_set_radiation()
           elif type == "win":
-            bpy.ops.glp.trigger_set_win()
+            bpy.ops.radix.trigger_set_win()
           elif type == "map":
             if 'file' in child.attrib:
-              bpy.ops.glp.trigger_set_map(filePath=child.get('file'))
+              bpy.ops.radix.trigger_set_map(filePath=child.get('file'))
             else:
               object.delete()
           elif type == "audio":
@@ -179,7 +179,7 @@ class Importer():
               loop = self.getBool(child.get('loop'))
 
             if 'file' in child.attrib:
-              bpy.ops.glp.trigger_set_audio(filePath=child.get('file'), loop=loop)
+              bpy.ops.radix.trigger_set_audio(filePath=child.get('file'), loop=loop)
             else:
               object.delete()
           else:

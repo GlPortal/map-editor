@@ -10,7 +10,7 @@ def updateTriggerXrays(self, context):
   objects = context.scene.objects
 
   for object in objects:
-    if object.glpTypes == "trigger":
+    if object.radixTypes == "trigger":
       object.show_x_ray = triggerXrays
 
 

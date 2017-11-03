@@ -1,8 +1,8 @@
 #!/bin/bash
 
 version=`git describe --tags | grep -Eo "^([^-]*)*"`
-name="glportal-editor"
-dir="glportal-editor"
+name="RadixMapEditor"
+dir="addon"
 
 cp LICENCE.md $dir/LICENCE.md
 

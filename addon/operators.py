@@ -8,12 +8,12 @@ from .managers import ModelManager
 
 
 operators = []
-idnamePrefix = "glp"
+idnamePrefix = "radix"
 
 
 # we are using this for <end> (exit door)
 class AddDoor(bpy.types.Operator):
-  bl_idname = "glp.add_door"
+  bl_idname = "radix.add_door"
   bl_label = "Add a door"
   bl_description = "Add an exit door (use only once)"
   bl_options = {'UNDO'}
@@ -23,13 +23,13 @@ class AddDoor(bpy.types.Operator):
       object = bpy.context.selected_objects[0]
 
       if object:
-        object.glpTypes = "door"
+        object.radixTypes = "door"
 
     return {'FINISHED'}
 
 
 class SearchBase(bpy.types.Operator):
-  bl_idname = "glp.search"
+  bl_idname = "radix.search"
   bl_label = "Add search"
   bl_description = 'Base for search operator'
   bl_property = "items"
@@ -80,7 +80,7 @@ class TriggerSetBase(bpy.types.Operator):
 
     for object in objects:
       if object.type == 'MESH':
-        if object.glpTypes not in {"door", "model"}:
+        if object.radixTypes not in {"door", "model"}:
           setTrigger(object, self.type, self.filePath, self.loop)
         else:
           self.report(
@@ -96,7 +96,7 @@ class TriggerSetBase(bpy.types.Operator):
 
 class WallSetBase(bpy.types.Operator):
   """Base for wall set operators"""
-  bl_idname = "glp.wall"
+  bl_idname = "radix.wall"
   bl_label = "Wall"
   bl_description = "Mark the selection as wall."
   bl_options = {'INTERNAL'}
@@ -111,12 +111,12 @@ class WallSetBase(bpy.types.Operator):
 
     for object in objects:
       if object.type == 'MESH':
-        if object.glpTypes != "door":
-          if object.glpTypes != "model":
+        if object.radixTypes != "door":
+          if object.radixTypes != "model":
             resetTriggerSettings(object)
-            object.glpTypes = "wall"
+            object.radixTypes = "wall"
 
-          object.glpMaterial = self.material
+          object.radixMaterial = self.material
         else:
           self.report({'ERROR'}, "Door can't be converted to the wall.")
       else:
@@ -128,7 +128,7 @@ class WallSetBase(bpy.types.Operator):
 
 class VolumeSetBase(bpy.types.Operator):
   """Base for volume set operators"""
-  bl_idname = "glp.volume"
+  bl_idname = "radix.volume"
   bl_label = "Volume"
   bl_description = "Mark the selection as volume."
   bl_options = {'INTERNAL'}
@@ -144,13 +144,13 @@ class VolumeSetBase(bpy.types.Operator):
 
     for object in objects:
       if object.type == 'MESH':
-        if object.glpTypes != "door":
-          if object.glpTypes != "model":
+        if object.radixTypes != "door":
+          if object.radixTypes != "model":
             resetTriggerSettings(object)
-            object.glpTypes = "volume"
-            object.glpVolumeTypes = self.volumeType
+            object.radixTypes = "volume"
+            object.radixVolumeTypes = self.volumeType
 
-          object.glpMaterial = self.material
+          object.radixMaterial = self.material
         else:
           self.report({'ERROR'}, "Door can't be converted to the volume.")
       else:

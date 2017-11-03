@@ -2,7 +2,7 @@ import bpy
 
 
 class SetLightCommon(bpy.types.Operator):
-  bl_idname = "glp.set_light_common"
+  bl_idname = "radix.set_light_common"
   bl_label = "Common"
   bl_description = "Set a light with predefined color for common lights"
   bl_options = {'UNDO'}
@@ -24,19 +24,19 @@ class SetLightCommon(bpy.types.Operator):
 
 
 class AddLightCommon(bpy.types.Operator):
-  bl_idname = "glp.add_light_common"
+  bl_idname = "radix.add_light_common"
   bl_label = "Common"
   bl_description = "Add a light with predefined color for common lights"
   bl_options = {'UNDO'}
 
   def execute(self, context):
     bpy.ops.object.lamp_add(type='POINT')
-    bpy.ops.glp.set_light_common()
+    bpy.ops.radix.set_light_common()
     return {'FINISHED'}
 
 
 class SetLightEnd(bpy.types.Operator):
-  bl_idname = "glp.set_light_end"
+  bl_idname = "radix.set_light_end"
   bl_label = "End"
   bl_description = "Set a light with predefined color for end lights"
   bl_options = {'UNDO'}
@@ -60,12 +60,12 @@ class SetLightEnd(bpy.types.Operator):
 
 
 class AddLightEnd(bpy.types.Operator):
-  bl_idname = "glp.add_light_end"
+  bl_idname = "radix.add_light_end"
   bl_label = "End"
   bl_description = "Add a light with predefined color for end lights"
   bl_options = {'UNDO'}
 
   def execute(self, context):
     bpy.ops.object.lamp_add(type='POINT')
-    bpy.ops.glp.set_light_end()
+    bpy.ops.radix.set_light_end()
     return {'FINISHED'}

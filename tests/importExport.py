@@ -4,7 +4,10 @@ import subprocess
 import sys
 import unittest
 
-import toGlPortalXml
+try:
+  import RadixMapEditor
+except ImportError:
+  import toGlPortalXml as RadixMapEditor
 
 from testfixtures import TempDirectory
 
@@ -36,13 +39,13 @@ class ImportEportTest(unittest.TestCase):
   def testImportExport(self):
     self.referenceData = self.readFile(self.referenceMapPath)
 
-    importer = toGlPortalXml.importer.Importer(self.referenceMapPath, True)
+    importer = RadixMapEditor.importer.Importer(self.referenceMapPath, True)
     importer.execute(bpy.context)
 
     filepath = os.path.join(self.directory.path, "importExportTest.xml")
     self.copyMaterials(filepath)
 
-    exporter = toGlPortalXml.Exporter.Exporter(filepath)
+    exporter = RadixMapEditor.Exporter.Exporter(filepath)
     exporter.execute(bpy.context)
 
     testData = self.readFile(filepath)

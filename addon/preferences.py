@@ -17,13 +17,13 @@ class Preferences(AddonPreferences):
     update=updateTriggerXrays
   )
   dataDir = StringProperty(
-    name="Set up GlPortal data directory",
+    name="Set up Radix data directory",
     default=os.path.expanduser("~/.glportal/data/"),
     subtype='DIR_PATH',
     update=updateDataDir
   )
   gameExe = StringProperty(
-    name="Set up GlPortal executable",
+    name="Set up game executable",
     default=os.path.expanduser("/usr/bin/glportal"),
     subtype='FILE_PATH'
   )
@@ -42,10 +42,10 @@ class Preferences(AddonPreferences):
     layout.prop(self, "triggerXrays")
 
     if len(MM.MATERIALS) > 1:
-      if self.defaultMaterial not in MM.MATERIALS:
-        layout.label(text="Default material is not on the list.", icon='ERROR')
-      else:
+      if self.defaultMaterial in MM.MATERIALS:
         self.materials = self.defaultMaterial
+      else:
+        layout.label(text="Default material is not on the list.", icon='ERROR')
     else:
       layout.label(text="Material list is empty", icon='ERROR')
     layout.prop(self, "materials")
@@ -56,4 +56,4 @@ class Preferences(AddonPreferences):
 
     layout.prop(self, "gameExe")
     if not os.path.isfile(os.path.expanduser(self.gameExe)):
-      layout.label(text="Current GlPortal executable does not exist", icon='ERROR')
+      layout.label(text="Current game executable does not exist", icon='ERROR')

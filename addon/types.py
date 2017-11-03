@@ -2,7 +2,7 @@ import bpy
 from bpy.props import EnumProperty, StringProperty, BoolProperty
 
 
-GLP_TYPES = [
+RADIX_TYPES = [
   ("none", "None", "No special property"),
   ("wall", "Wall", "Wall"),
   ("door", "Door", "Door"),  # REMOVE this
@@ -10,11 +10,11 @@ GLP_TYPES = [
   ("trigger", "Trigger", "Trigger"),
   ("model", "Model", "Model")
 ]
-GLP_VOLUME_TYPES = [
+RADIX_VOLUME_TYPES = [
   ("none", "None", "No special property"),
   ("acid", "Acid Pool", "A pool full of acid, hurts..")
 ]
-GLP_TRIGGER_TYPES = [
+RADIX_TRIGGER_TYPES = [
   ("none", "None", "No special property"),
   ("win", "Win", "Area triggers win"),
   ("map", "Map", "Area triggers new map"),
@@ -22,67 +22,67 @@ GLP_TRIGGER_TYPES = [
   ("death", "Death", "Area triggers death"),
   ("radiation", "Radiation", "Area triggers radiation")
 ]
-GLP_MATERIAL_TYPES = [
+RADIX_MATERIAL_TYPES = [
   ("none", "None", "No material")
 ]
 
 
-def onUpdateGlpTypes(self, context):
+def onUpdateRadixTypes(self, context):
   """Update object name based on object's game function"""
   objects = context.selected_objects
   for object in objects:
-    type = object.glpTypes
+    type = object.radixTypes
     name = type
 
     if type == "trigger":
-      name = type + "." + object.glpTriggerTypes
+      name = type + "." + object.radixTriggerTypes
     elif type == "volume":
-      name = type + "." + object.glpVolumeTypes
+      name = type + "." + object.radixVolumeTypes
     elif type == "model":
-      name = type + "." + object.glpModel
+      name = type + "." + object.radixModel
     else:
-      name = type + "." + object.glpMaterial
+      name = type + "." + object.radixMaterial
 
-    if object.glpTypes != "none":
+    if object.radixTypes != "none":
       object.name = name
 
 
 def setProperties():
   """Register properties for Blender"""
-  bpy.types.Object.glpTypes = EnumProperty(
-    items=GLP_TYPES,
+  bpy.types.Object.radixTypes = EnumProperty(
+    items=RADIX_TYPES,
     name="Type",
-    description="GlPortal type",
+    description="Radix type",
     default="none",
-    update=onUpdateGlpTypes
+    update=onUpdateRadixTypes
   )
-  bpy.types.Object.glpVolumeTypes = EnumProperty(
-    items=GLP_VOLUME_TYPES,
+  bpy.types.Object.radixVolumeTypes = EnumProperty(
+    items=RADIX_VOLUME_TYPES,
     name="Volume Type",
     default="none",
-    update=onUpdateGlpTypes
+    update=onUpdateRadixTypes
   )
-  bpy.types.Object.glpTriggerTypes = EnumProperty(
-    items=GLP_TRIGGER_TYPES,
+  bpy.types.Object.radixTriggerTypes = EnumProperty(
+    items=RADIX_TRIGGER_TYPES,
     name="Trigger Type",
     default="none",
-    update=onUpdateGlpTypes
+    update=onUpdateRadixTypes
   )
-  bpy.types.Object.glpTriggerFilepath = StringProperty(
+  bpy.types.Object.radixTriggerFilepath = StringProperty(
     name="Filepath",
     description="Relative path to the file for trigger",
     default="none"
   )
-  bpy.types.Object.glpTriggerAudioLoop = BoolProperty(
+  bpy.types.Object.radixTriggerAudioLoop = BoolProperty(
     name="Enable loop",
     description="Play audio file in loop",
     default=False
   )
-  bpy.types.Object.glpModel = StringProperty(
+  bpy.types.Object.radixModel = StringProperty(
     name="Model",
     description="Relative path to the model",
     default="none",
-    update=onUpdateGlpTypes
+    update=onUpdateRadixTypes
   )
   bpy.types.WindowManager.importedFilepath = StringProperty(
     name="Imported filepath",
@@ -92,11 +92,11 @@ def setProperties():
 
 def delProperties():
   """Unregister properties from Blender"""
-  del bpy.types.Object.glpTypes
-  del bpy.types.Object.glpVolumeTypes
-  del bpy.types.Object.glpTriggerTypes
-  del bpy.types.Object.glpTriggerFilepath
-  del bpy.types.Object.glpTriggerAudioLoop
-  del bpy.types.Object.glpModel
+  del bpy.types.Object.radixTypes
+  del bpy.types.Object.radixVolumeTypes
+  del bpy.types.Object.radixTriggerTypes
+  del bpy.types.Object.radixTriggerFilepath
+  del bpy.types.Object.radixTriggerAudioLoop
+  del bpy.types.Object.radixModel
   del bpy.types.WindowManager.importedFilepath
-  del bpy.types.Object.glpMaterial
+  del bpy.types.Object.radixMaterial

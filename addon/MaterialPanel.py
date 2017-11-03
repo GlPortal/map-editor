@@ -6,7 +6,7 @@ from .managers import MaterialManager as MM
 
 
 class SaveMaterial(bpy.types.Operator):
-  bl_idname = "glp.mp_save_material"
+  bl_idname = "radix.mp_save_material"
   bl_label = "Save"
 
   def execute(self, context):
@@ -15,10 +15,10 @@ class SaveMaterial(bpy.types.Operator):
     name = wm.MPMaterials[wm.MPItemId].matName
     material = MM.MATERIALS[name]
 
-    material["fancyname"] = wm.glpMatFancyName
-    material["kind"] = wm.glpMatKind
-    material["tags"] = wm.glpMatTags
-    material["portalable"] = wm.glpMatPortalable
+    material["fancyname"] = wm.radixMatFancyName
+    material["kind"] = wm.radixMatKind
+    material["tags"] = wm.radixMatTags
+    material["portalable"] = wm.radixMatPortalable
 
     MM.saveMaterial(name)
     initRow(wm.MPMaterials[wm.MPItemId], wm.MPItemId, name, material)
@@ -27,23 +27,23 @@ class SaveMaterial(bpy.types.Operator):
 
 
 class EditMaterial(bpy.types.Operator):
-  bl_idname = "glp.mp_edit_material"
+  bl_idname = "radix.mp_edit_material"
   bl_label = "Toogle Edit"
   bl_description = "Edit selected material"
 
   def execute(self, context):
     wm = bpy.context.window_manager
 
-    wm.glpMatEdit = not wm.glpMatEdit
+    wm.radixMatEdit = not wm.radixMatEdit
 
-    if wm.glpMatEdit:
+    if wm.radixMatEdit:
       MPTypes.MPItemIdUpdate(self, context)
 
     return {'FINISHED'}
 
 
 class SetMaterial(bpy.types.Operator):
-  bl_idname = "glp.mp_set_material"
+  bl_idname = "radix.mp_set_material"
   bl_label = "Set"
   bl_description = "Set material to selected objects"
   bl_options = {'UNDO'}
@@ -56,8 +56,8 @@ class SetMaterial(bpy.types.Operator):
     if material != "none":
       objects = bpy.context.selected_objects
       for object in objects:
-        if object.type == 'MESH' and object.glpTypes != "none":
-          object.glpMaterial = material
+        if object.type == 'MESH' and object.radixTypes != "none":
+          object.radixMaterial = material
     return {'FINISHED'}
 
 
@@ -77,7 +77,7 @@ class UIList(bpy.types.UIList):
 
 
 class MaterialPanel(bpy.types.Panel):
-  bl_label = "GlPortal Material UI"
+  bl_label = "Radix Material UI"
   bl_space_type = 'PROPERTIES'
   bl_region_type = 'WINDOW'
   bl_context = "material"
@@ -102,8 +102,8 @@ class MaterialPanel(bpy.types.Panel):
 
     row = layout.row(align=True)
     row.alignment = 'EXPAND'
-    row.operator("glp.mp_set_material")
-    row.operator("glp.mp_edit_material")
+    row.operator("radix.mp_set_material")
+    row.operator("radix.mp_edit_material")
 
     layout.label(text="Material properties", icon='MATERIAL')
 
@@ -113,26 +113,26 @@ class MaterialPanel(bpy.types.Panel):
       row.label(text="Name : ")
       row.label(text=name)
 
-      if wm.glpMatEdit:
+      if wm.radixMatEdit:
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
-        row.prop(wm, "glpMatFancyName")
+        row.prop(wm, "radixMatFancyName")
 
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
-        row.prop(wm, "glpMatPortalable")
+        row.prop(wm, "radixMatPortalable")
 
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
-        row.prop(wm, "glpMatKind")
+        row.prop(wm, "radixMatKind")
 
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
-        row.prop(wm, "glpMatTags")
+        row.prop(wm, "radixMatTags")
 
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
-        row.operator("glp.mp_save_material")
+        row.operator("radix.mp_save_material")
       else:
         row = layout.row(align=True)
         row.alignment = 'EXPAND'
