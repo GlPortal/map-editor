@@ -172,7 +172,7 @@ class Importer():
             if 'file' in child.attrib:
               bpy.ops.radix.trigger_set_map(filePath=child.get('file'))
             else:
-              object.delete()
+              bpy.data.objects.remove(object)
           elif type == "audio":
             loop = False
             if 'loop' in child.attrib:
@@ -181,9 +181,9 @@ class Importer():
             if 'file' in child.attrib:
               bpy.ops.radix.trigger_set_audio(filePath=child.get('file'), loop=loop)
             else:
-              object.delete()
+              bpy.data.objects.remove(object)
           else:
-            object.delete()
+            bpy.data.objects.remove(object)
       elif child.tag == "object" or child.tag == "model":
         mesh = child.get("mesh")
         matAttr = "material"
