@@ -13,7 +13,7 @@ from testfixtures import TempDirectory
 
 
 class ImportEportTest(unittest.TestCase):
-  referenceMapPath = 'data/maps/importExportTest.xml'
+  referenceMapPath = ""
   referenceData = ""
   directory = None
 
@@ -34,9 +34,11 @@ class ImportEportTest(unittest.TestCase):
     self.directory = TempDirectory()
 
   def tearDown(self):
+    self.referenceMapPath = ""
     self.directory.cleanup()
 
   def testImportExport(self):
+    self.referenceMapPath = "data/maps/importExportTest.xml"
     self.referenceData = self.readFile(self.referenceMapPath)
 
     importer = RadixMapEditor.importer.Importer(self.referenceMapPath, True)
