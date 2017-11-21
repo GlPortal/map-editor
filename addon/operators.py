@@ -208,6 +208,8 @@ def addOperators():
 
 
 def removeOperators():
+  global operators
+
   for operator in operators:
     bpy.utils.unregister_class(operator)
 

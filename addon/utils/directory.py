@@ -2,7 +2,15 @@ import bpy
 import os
 
 
-def browse(directory, extension='', blacklist=None, recursive=False, files=True, nested=True):
+def browse(
+    directory,
+    extension='',
+    blacklist=None,
+    recursive=False,
+    files=True,
+    nested=True,
+    hideExtension=False
+  ):
   blacklist = blacklist or []
   prefs = bpy.context.user_preferences.addons[__package__.rpartition(".")[0]].preferences
   dataDir = os.path.expanduser(prefs.dataDir)
@@ -17,18 +25,31 @@ def browse(directory, extension='', blacklist=None, recursive=False, files=True,
     for entry in os.listdir(path):
       if entry not in blacklist:
         if os.path.isfile(os.path.join(path, entry)) and files:
+          if hideExtension:
+            key = os.path.splitext(entry)[0]
+          else:
+            key = entry
+
           if extension:
             if entry.endswith("." + extension):
-              entries[entry] = entry.rstrip("." + extension)
+              entries[key] = entry.rstrip("." + extension)
           else:
-            entries[entry] = entry
+            entries[key] = entry
         elif os.path.isdir(path):
           if not files:
             entries[entry] = entry
 
           if recursive:
             recrsiveDir = os.path.join(directory, entry)
-            entries[entry] = browse(recrsiveDir, extension, blacklist, recursive, files)
+            entries[entry] = browse(
+              directory=recrsiveDir,
+              extension=extension,
+              blacklist=blacklist,
+              recursive=recursive,
+              files=files,
+              nested=True,
+              hideExtension=hideExtension
+            )
 
   if nested:
     return entries
