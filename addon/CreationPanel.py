@@ -12,7 +12,6 @@ class CreationPanel(bpy.types.Panel):
     layout = self.layout
 
     layout.label("Objects:")
-    layout.operator("radix.add_door", icon='MESH_CUBE', text="Exit")
     layout.operator("radix.manager_search_add_model", icon='MESH_CUBE')
     layout.operator("radix.manager_search_set_material", icon='MATERIAL')
 

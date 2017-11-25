@@ -145,19 +145,6 @@ class Importer():
           lamp.use_specular = False
           if "specular" in child.attrib and child.get("specular") == "1":
             lamp.use_specular = True
-      # REMOVE this
-      elif child.tag == "end":
-        for param in child:
-          if param.tag == "position":
-            location = self.extractPosition(param)
-          elif param.tag == "rotation":
-            rotation = self.extractRotation(param)
-
-        bpy.ops.radix.add_door()
-
-        object = bpy.context.active_object
-        object.location = location
-        object.rotation_euler = rotation
       elif child.tag == "trigger":
         object = self.createCube(child)
         if object:

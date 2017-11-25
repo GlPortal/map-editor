@@ -5,7 +5,6 @@ from bpy.props import EnumProperty, StringProperty, BoolProperty
 RADIX_TYPES = [
   ("none", "None", "No special property"),
   ("wall", "Wall", "Wall"),
-  ("door", "Door", "Door"),  # REMOVE this
   ("volume", "Volume", "Volume"),
   ("trigger", "Trigger", "Trigger"),
   ("model", "Model", "Model")

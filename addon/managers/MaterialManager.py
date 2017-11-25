@@ -323,7 +323,7 @@ def prepareExport(oldMaterials=None):
     if (
       object.radixMaterial not in usedMaterials and
       object.type == 'MESH' and
-      object.radixTypes not in {"door", "trigger", "volume"}
+      object.radixTypes not in {"trigger", "volume"}
     ):
       if (
         object.radixMaterial in MATERIALS and

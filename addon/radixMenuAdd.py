@@ -21,7 +21,6 @@ class MenuMain(Menu):
     layout.menu("radixMenu.lights", icon='LAMP_POINT')
 
     layout.operator("object.camera_add", text="Spawn (Camera)", icon='OUTLINER_OB_CAMERA')
-    layout.operator("radix.add_door", text="Exit", icon='MESH_CUBE')
 
 
 class MenuWalls(Menu):

@@ -5,6 +5,7 @@
 		<material id="2" name="concrete/wall00"/>
 		<material id="3" name="metal/tiles00x3"/>
 		<material id="4" name="boxes/dev00"/>
+		<material id="5" name="door/door"/>
 	</materials>
 	<model material="1" mesh="barrel.obj">
 		<position x="4.0" y="0.5" z="9.0"/>
@@ -102,10 +103,10 @@
 		<position x="0.0" y="3.0" z="-10.5"/>
 		<scale x="20.0" y="5.0" z="1.0"/>
 	</wall>
-	<end>
+	<model material="5" mesh="Door.obj">
 		<position x="0.0" y="0.5" z="10.0"/>
-		<rotation x="0.0" y="0.0" z="0.0"/>
-	</end>
+		<scale x="1.0" y="2.0" z="0.1"/>
+	</model>
 	<model material="1" mesh="barrel.obj">
 		<position x="8.0" y="0.5" z="9.0"/>
 		<scale x="0.6592" y="1.0081" z="0.6427"/>

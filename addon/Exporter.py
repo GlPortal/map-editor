@@ -5,7 +5,7 @@ import xml.dom.minidom as minidom
 import math
 import re
 
-from .managers import MaterialManager
+from .managers import MaterialManager as MM
 from .importer import Importer
 
 
@@ -97,7 +97,7 @@ class Exporter():
     else:
       oldMaterials = {}
 
-    materials = MaterialManager.prepareExport(oldMaterials)
+    materials = MM.prepareExport(oldMaterials)
     self.writeMaterials(root, materials)
 
     for object in reversed(objects):
@@ -118,15 +118,6 @@ class Exporter():
         rotationElement.set("x", self.prepareRot(math.degrees(object.rotation_euler[0]) - 90))
         rotationElement.set("y", self.prepareRot(math.degrees(object.rotation_euler[2])))
         rotationElement.set("z", "0")
-      elif object.type == 'MESH' and type == "door":
-        # tempotary add <end> instead of <door>
-        boxElement = tree.SubElement(root, "end")
-
-        positionElement = tree.SubElement(boxElement, "position")
-        self.storePosition(positionElement, object)
-
-        rotationElement = tree.SubElement(boxElement, "rotation")
-        self.storeRotation(rotationElement, object)
       elif object.type == 'MESH':
         boxElement = None
 
@@ -134,29 +125,33 @@ class Exporter():
           boxElement = tree.SubElement(root, "model")
           boxElement.set("mesh", object.radixModel)
 
-          if object.radixMaterial in materials and object.radixMaterial not in MaterialManager.BLACKLIST:
+          if object.radixMaterial in materials and object.radixMaterial not in MM.BLACKLIST:
             boxElement.set(matAttr, str(materials[object.radixMaterial]))
           else:
             boxElement.set(matAttr, str(materials[prefs.defaultMaterial]))
         elif type == "trigger":
           boxElement = tree.SubElement(root, "trigger")
+
           if object.radixTriggerTypes:
             boxElement.set("type", object.radixTriggerTypes)
+
             if object.radixTriggerTypes == "map":
               boxElement.set("file", object.radixTriggerFilepath)
+
             if object.radixTriggerTypes == "audio":
               boxElement.set("file", object.radixTriggerFilepath)
               boxElement.set("loop", self.setBool(object.radixTriggerAudioLoop))
         elif type == "wall":
           boxElement = tree.SubElement(root, "wall")
 
-          if object.radixMaterial in materials and object.radixMaterial not in MaterialManager.BLACKLIST:
+          if object.radixMaterial in materials and object.radixMaterial not in MM.BLACKLIST:
             boxElement.set(matAttr, str(materials[object.radixMaterial]))
           else:
             boxElement.set(matAttr, str(materials[prefs.defaultMaterial]))
         elif type == "volume":
           if object.radixVolumeTypes == "acid":
             boxElement = tree.SubElement(root, "acid")
+
         if boxElement is not None:
           positionElement = tree.SubElement(boxElement, "position")
           self.storePosition(positionElement, object)

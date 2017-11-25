@@ -11,23 +11,6 @@ operators = []
 idnamePrefix = "radix"
 
 
-# we are using this for <end> (exit door)
-class AddDoor(bpy.types.Operator):
-  bl_idname = "radix.add_door"
-  bl_label = "Add a door"
-  bl_description = "Add an exit door (use only once)"
-  bl_options = {'UNDO'}
-
-  def execute(self, context):
-    if ModelManager.create("Door.obj", "door/door"):
-      object = bpy.context.selected_objects[0]
-
-      if object:
-        object.radixTypes = "door"
-
-    return {'FINISHED'}
-
-
 class SearchBase(bpy.types.Operator):
   bl_idname = "radix.search"
   bl_label = "Add search"
@@ -80,11 +63,11 @@ class TriggerSetBase(bpy.types.Operator):
 
     for object in objects:
       if object.type == 'MESH':
-        if object.radixTypes not in {"door", "model"}:
+        if object.radixTypes != "model":
           setTrigger(object, self.type, self.filePath, self.loop)
         else:
           self.report(
-            {'ERROR'}, "Door and models can't be converted to the %s trigger." % (self.type)
+            {'ERROR'}, "Models can't be converted to the %s trigger." % (self.type)
           )
       else:
         self.report(
@@ -111,14 +94,11 @@ class WallSetBase(bpy.types.Operator):
 
     for object in objects:
       if object.type == 'MESH':
-        if object.radixTypes != "door":
-          if object.radixTypes != "model":
-            resetTriggerSettings(object)
-            object.radixTypes = "wall"
+        if object.radixTypes != "model":
+          resetTriggerSettings(object)
+          object.radixTypes = "wall"
 
-          object.radixMaterial = self.material
-        else:
-          self.report({'ERROR'}, "Door can't be converted to the wall.")
+        object.radixMaterial = self.material
       else:
         self.report(
           {'ERROR'}, "Object of type '%s' can't be converted to the wall." % (object.type)
@@ -144,15 +124,12 @@ class VolumeSetBase(bpy.types.Operator):
 
     for object in objects:
       if object.type == 'MESH':
-        if object.radixTypes != "door":
-          if object.radixTypes != "model":
-            resetTriggerSettings(object)
-            object.radixTypes = "volume"
-            object.radixVolumeTypes = self.volumeType
+        if object.radixTypes != "model":
+          resetTriggerSettings(object)
+          object.radixTypes = "volume"
+          object.radixVolumeTypes = self.volumeType
 
-          object.radixMaterial = self.material
-        else:
-          self.report({'ERROR'}, "Door can't be converted to the volume.")
+        object.radixMaterial = self.material
       else:
         self.report(
           {'ERROR'}, "Object of type '%s' can't be converted to the volume." % (object.type)
