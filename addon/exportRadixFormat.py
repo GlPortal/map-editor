@@ -16,5 +16,6 @@ class ExportRadixFormat(bpy.types.Operator, ExportHelper):
   def execute(self, context):
     exporter = Exporter(self.filepath)
     exporter.execute(context)
+
     bpy.context.window_manager.importedFilepath = self.filepath
     return {'FINISHED'}

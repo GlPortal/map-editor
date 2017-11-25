@@ -43,7 +43,7 @@ class FastExport(bpy.types.Operator):
   def execute(self, context):
     filepath = bpy.context.window_manager.importedFilepath
 
-    if filepath != "none":
+    if filepath:
       if os.path.isfile(filepath):
         exporter = Exporter(filepath)
         exporter.execute(context)

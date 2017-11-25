@@ -45,8 +45,8 @@ def clearRadixProperties(object):
     object.radixVolumeTypes = "none"
   if object.radixTriggerTypes != "none":
     object.radixTriggerTypes = "none"
-  if object.radixTriggerFilepath != "none":
-    object.radixTriggerFilepath = "none"
+  if object.radixTriggerFilepath:
+    object.radixTriggerFilepath = ""
   if object.radixTriggerAudioLoop:
     object.radixTriggerAudioLoop = False
 

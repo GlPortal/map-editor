@@ -70,7 +70,7 @@ def setProperties():
   bpy.types.Object.radixTriggerFilepath = StringProperty(
     name="Filepath",
     description="Relative path to the file for trigger",
-    default="none"
+    default=""
   )
   bpy.types.Object.radixTriggerAudioLoop = BoolProperty(
     name="Enable loop",
@@ -80,12 +80,16 @@ def setProperties():
   bpy.types.Object.radixModel = StringProperty(
     name="Model",
     description="Relative path to the model",
-    default="none",
+    default="",
     update=onUpdateRadixTypes
   )
   bpy.types.WindowManager.importedFilepath = StringProperty(
     name="Imported filepath",
-    default="none"
+    default=""
+  )
+  bpy.types.Object.radixName = StringProperty(
+    name="Object name",
+    default=""
   )
 
 
@@ -98,4 +102,5 @@ def delProperties():
   del bpy.types.Object.radixTriggerAudioLoop
   del bpy.types.Object.radixModel
   del bpy.types.WindowManager.importedFilepath
-  del bpy.types.Object.radixMaterial
+  del bpy.types.Object.radixMaterial  # Defined in managers/MaterialManager.py
+  del bpy.types.Object.radixName

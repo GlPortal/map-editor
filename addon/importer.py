@@ -8,11 +8,14 @@ from .operatorHelpers import simpleCube
 
 
 class Importer():
-  def __init__(self, filePath, deleteWorld=True):
-    self.__filePath = filePath
-    self.__deleteWorld = deleteWorld
+  filePath = ""
+  cleanScene = True
 
-  def deleteWorld(self):
+  def __init__(self, filePath, cleanScene=True):
+    self.filePath = filePath
+    self.cleanScene = cleanScene
+
+  def clearScene(self):
     """Clean current scene"""
     scene = bpy.context.scene
 
@@ -56,11 +59,19 @@ class Importer():
     b = float(param.get("b"))
     return [r, g, b]
 
+  def extractName(self, element):
+    if "name" in element.attrib:
+      return element.get("name")
+    else:
+      return ""
+
   def createCube(self, child):
     if simpleCube():
       object = bpy.context.selected_objects[0]
 
       if object:
+        object.radixName = self.extractName(child)
+
         for param in child:
           if param.tag == "position":
             object.location = self.extractPosition(param)
@@ -73,7 +84,7 @@ class Importer():
     return False
 
   def getMaterials(self):
-    realpath = os.path.realpath(os.path.expanduser(self.__filePath))
+    realpath = os.path.realpath(os.path.expanduser(self.filePath))
     tree = ET.parse(realpath)
     root = tree.getroot()
 
@@ -85,11 +96,11 @@ class Importer():
     return value.lower() in trueValues
 
   def execute(self, context):
-    if self.__deleteWorld:
-      self.deleteWorld()
+    if self.cleanScene:
+      self.clearScene()
 
     prefs = bpy.context.user_preferences.addons[__package__].preferences
-    realpath = os.path.realpath(os.path.expanduser(self.__filePath))
+    realpath = os.path.realpath(os.path.expanduser(self.filePath))
     tree = ET.parse(realpath)
     root = tree.getroot()
     materials = self.extractMaterials(root)
@@ -100,10 +111,8 @@ class Importer():
         if object:
           object.radixTypes = "wall"
 
-          matAttr = "material"
-
-          if matAttr in child.attrib:
-            mid = child.get(matAttr)
+          if "material" in child.attrib:
+            mid = child.get("material")
             object.radixMaterial = materials[mid]
           else:
             object.radixMaterial = prefs.defaultMaterial
@@ -116,6 +125,8 @@ class Importer():
 
         object = bpy.context.active_object
         if object:
+          object.radixName = self.extractName(child)
+
           for param in child:
             if param.tag == "position":
               object.location = self.extractPosition(param)
@@ -132,6 +143,7 @@ class Importer():
         object = bpy.context.active_object
         if object:
           lamp = object.data
+          object.radixName = self.extractName(child)
 
           for param in child:
             if param.tag == "position":
@@ -184,6 +196,8 @@ class Importer():
 
         object = bpy.context.selected_objects[0]
         if object:
+          object.radixName = self.extractName(child)
+
           for param in child:
             if param.tag == "position":
               object.location = self.extractPosition(param)

@@ -10,9 +10,12 @@ from .importer import Importer
 
 
 class Exporter():
-  def __init__(self, filePath, d_p=4):
-    self.__filePath = filePath
-    self.__d_p = d_p
+  filePath = ""
+  decimalPoints = 4
+
+  def __init__(self, filePath, decimalPoints=4):
+    self.filePath = filePath
+    self.decimalPoints = decimalPoints
 
   def writeMaterials(self, root, mats):
     materials = ((k, mats[k]) for k in sorted(mats, key=mats.get))
@@ -24,12 +27,12 @@ class Exporter():
       element.set("name", name)
 
   def storePosition(self, element, object):
-    element.set("x", str(round(object.location[0], self.__d_p)))
-    element.set("y", str(round(object.location[2], self.__d_p)))
-    element.set("z", str(-round(object.location[1], self.__d_p)))
+    element.set("x", str(round(object.location[0], self.decimalPoints)))
+    element.set("y", str(round(object.location[2], self.decimalPoints)))
+    element.set("z", str(-round(object.location[1], self.decimalPoints)))
 
   def prepareRot(self, degree):
-    return str(round(degree % 360, self.__d_p))
+    return str(round(degree % 360, self.decimalPoints))
 
   def checkRotation(self, object):
     x = math.degrees(object.rotation_euler[0])
@@ -46,14 +49,18 @@ class Exporter():
     element.set("z", self.prepareRot(math.degrees(-object.rotation_euler[1])))
 
   def storeScale(self, element, object):
-    element.set("x", str(round(object.dimensions[0], self.__d_p)))
-    element.set("y", str(round(object.dimensions[2], self.__d_p)))
-    element.set("z", str(round(object.dimensions[1], self.__d_p)))
+    element.set("x", str(round(object.dimensions[0], self.decimalPoints)))
+    element.set("y", str(round(object.dimensions[2], self.decimalPoints)))
+    element.set("z", str(round(object.dimensions[1], self.decimalPoints)))
 
   def storeColor(self, element, color):
-    element.set("r", str(round(color[0], self.__d_p)))
-    element.set("g", str(round(color[1], self.__d_p)))
-    element.set("b", str(round(color[2], self.__d_p)))
+    element.set("r", str(round(color[0], self.decimalPoints)))
+    element.set("g", str(round(color[1], self.decimalPoints)))
+    element.set("b", str(round(color[2], self.decimalPoints)))
+
+  def storeName(self, element, name):
+    if name:
+      element.set("name", name)
 
   def writeLampToTree(self, object, targetTree):
     lamp = object.data
@@ -63,6 +70,7 @@ class Exporter():
     lightEnergy = lamp.energy
 
     lightElement = tree.SubElement(targetTree, "light")
+    self.storeName(lightElement, object.radixName)
 
     positionElement = tree.SubElement(lightElement, "position")
     self.storePosition(positionElement, object)
@@ -70,8 +78,8 @@ class Exporter():
     colorElement = tree.SubElement(lightElement, "color")
     self.storeColor(colorElement, colorArray)
 
-    lightElement.set("distance", str(round(lightDistance, self.__d_p)))
-    lightElement.set("energy", str(round(lightEnergy, self.__d_p)))
+    lightElement.set("distance", str(round(lightDistance, self.decimalPoints)))
+    lightElement.set("energy", str(round(lightEnergy, self.decimalPoints)))
 
     if lamp.use_specular:
       lightElement.set("specular", "1")
@@ -91,8 +99,8 @@ class Exporter():
 
     matAttr = "material"
 
-    if os.path.isfile(self.__filePath):
-      oldMap = Importer(self.__filePath)
+    if os.path.isfile(self.filePath):
+      oldMap = Importer(self.filePath)
       oldMaterials = oldMap.getMaterials()
     else:
       oldMaterials = {}
@@ -110,6 +118,7 @@ class Exporter():
         self.writeLampToTree(object, root)
       elif object.type == 'CAMERA':
         boxElement = tree.SubElement(root, "spawn")
+        self.storeName(boxElement, object.radixName)
 
         positionElement = tree.SubElement(boxElement, "position")
         self.storePosition(positionElement, object)
@@ -153,6 +162,7 @@ class Exporter():
             boxElement = tree.SubElement(root, "acid")
 
         if boxElement is not None:
+          self.storeName(boxElement, object.radixName)
           positionElement = tree.SubElement(boxElement, "position")
           self.storePosition(positionElement, object)
 
@@ -165,7 +175,7 @@ class Exporter():
 
     xml = minidom.parseString(tree.tostring(root))
 
-    file = open(self.__filePath, "w")
+    file = open(self.filePath, "w")
     fix = re.compile(r"((?<=>)(\n[\t]*)(?=[^<\t]))|(?<=[^>\t])(\n[\t]*)(?=<)")
     fixed_output = re.sub(fix, "", xml.toprettyxml())
     file.write(fixed_output)
