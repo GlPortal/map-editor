@@ -1,5 +1,5 @@
-Copyright (c) 2015 GlPortal Team: Juraj Oravec, Henry Hirsch
-Contributors: Julian Thijssen
+Copyright (c) 2017 Henry Hirsch
+Contributors: Julian Thijssen, Juraj Oravec
 Please drop me a message if you are missing on this list.
 
 This software is provided 'as-is', without any express or implied
