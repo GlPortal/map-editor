@@ -3,12 +3,12 @@
 [![Join the chat at https://gitter.im/GlPortal/glPortal](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GlPortal/glPortal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Join Chat](https://img.shields.io/badge/irc-join_chat-brightgreen.svg)](http://webchat.freenode.net/?channels=%23%23glportal&uio=d4)
 
-# GlPortal editor
-The GlPortal editor allows Blender to import, edit, create and export GlPortal maps.
+# Radix Map Editor Blender Extension
+The Radix Map Editor Extension allows Blender to import, edit, create and export Radix maps.
 
 ## Features
-- Easy import and export of GlPortal maps
-- GlPortal specific tool panels
+- Easy import and export of Radix maps
+- Radix specific tool panels
 - Preview with textures
 
 ## Installation
