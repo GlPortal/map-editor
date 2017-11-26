@@ -2,11 +2,11 @@ os: linux
 sudo: required
 services: docker
 before_install:
-  - docker pull sgorava/arch-blender
+  - docker pull glportal/whale-blender
   - git clone --depth 1 https://github.com/GlPortal/glportal-data.git
 before_script:
-  - docker run -it sgorava/arch-blender blender --version
+  - docker run -it glportal/whale-blender blender --version
 script:
-  - docker run -it -v $(pwd)/tests:/data -v $(pwd)/addon:/usr/share/blender/2.79/scripts/addons/toGlPortalXml -v $(pwd)/glportal-data:/root/.glportal/data sgorava/arch-blender
+  - docker run -it -v $(pwd)/tests:/data -v $(pwd)/addon:/usr/share/blender/2.79/scripts/addons/toGlPortalXml -v $(pwd)/glportal-data:/root/.glportal/data glportal/whale-blender
 notifications:
   irc: "chat.freenode.net#glportal"
