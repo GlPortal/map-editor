@@ -1,19 +1,7 @@
 # Installation
 
 ## Stable version
-
--   Install Blender
--   Download GlPortal editor. *Don’t unzip*.
--   Run Blender:
-    -   Select `File > User Preferences...`
-    -   Move to the `Addons` tab.
-    -   Click `Install From File...` in the bottom of the window.
-    -   Find the downloaded zip file and select it.
-    -   Find and check the `GlPortal XML Format` box. Wait a moment for activation to complete.
-    -   Find and click on right arrow to display details and preferences.
-    -   Go to `Set up GlPortal data directory` and find GlPortal data directory.
-    -   Go to `Set up GlPortal executable` and find GlPortal executable.
-    -   Click `Save User Settings` and close the window. If you are upgrading, you may need to restart Blender.
+See README.md in main directory.
 
 
 ## Development version
