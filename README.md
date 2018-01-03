@@ -1,4 +1,4 @@
-[![Download](https://api.bintray.com/packages/glportal/generic/glportal-editor/images/download.svg) ](https://bintray.com/glportal/generic/glportal-editor/_latestVersion)
+[![Download](https://img.shields.io/badge/download-brightgreen.svg)](https://github.com/GlPortal/map-editor/releases/)
 [![Build Status](https://travis-ci.org/GlPortal/map-editor.svg?branch=master)](https://travis-ci.org/GlPortal/map-editor)
 [![Join the chat at https://gitter.im/GlPortal/glPortal](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GlPortal/glPortal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Join Chat](https://img.shields.io/badge/irc-join_chat-brightgreen.svg)](http://webchat.freenode.net/?channels=%23%23glportal&uio=d4)
@@ -13,7 +13,7 @@ The Radix Map Editor Extension allows Blender to import, edit, create and export
 
 ## Installation
 - Install [Blender](http://www.blender.org/download/)
-- [Download latest version](https://bintray.com/glportal/generic/glportal-editor/_latestVersion) of GlPortal editor. *Don’t unzip* !
+- [Download latest version](https://github.com/GlPortal/map-editor/releases/) of GlPortal editor. *Don’t unzip* !
 - Run Blender:
   - Select `File > User Preferences...`
   - Move to the Addons tab.
