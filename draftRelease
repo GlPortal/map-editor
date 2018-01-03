@@ -1,0 +1,4 @@
+#!/bin/sh
+cp -r addon RadixMapEditor
+zip -r release.zip RadixMapEditor
+rm -rf RadixMapEditor
