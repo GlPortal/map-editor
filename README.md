@@ -13,7 +13,7 @@ The Radix Map Editor Extension allows Blender to import, edit, create and export
 
 ## Installation
 - Install [Blender](http://www.blender.org/download/)
-- [Download the latest version](https://github.com/GlPortal/map-editor/releases/) of the Radix editor. *Don’t unzip* !
+- [Download the latest version](https://github.com/GlPortal/map-editor/releases/) of the Radix editor. *Don’t extract the file* !
 - Run Blender:
   - Select `File > User Preferences...`
   - Move to the Addons tab.
