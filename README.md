@@ -18,9 +18,9 @@ The Radix Map Editor Extension allows Blender to import, edit, create and export
   - Select `File > User Preferences...`
   - Move to the Addons tab.
   - Click `Install From File...` in the bottom of the window.
-  - Find the downloaded zip file and select it.
-  - Find and check the `GlPortal XML Format` box. Wait a moment for activation to complete.
-  - Find and click on right Arrow to display details and preferences.
+  - Select the downloaded zip file.
+  - Check the `GlPortal XML Format` box. Wait a moment for activation to complete.
+  - Click on the arrow to display details and preferences.
   - Go to `Set up GlPortal data directory` and find GlPortal data directory.
   - Click `Save User Settings` and close the window.
 If you are upgrading, you may need to restart Blender.
