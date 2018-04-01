@@ -52,5 +52,5 @@ Where the `blender_version` is replaced with your installed Blender version.
 
 ### Example
 ```
-./linkExtension -b 2.77
+./linkExtension -b 2.79
 ```
