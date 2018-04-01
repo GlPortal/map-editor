@@ -66,34 +66,37 @@ else:
   importlib.reload(ObjectPanel)
 
 import bpy
+blender = bpy
 import os
 
 
-def menu_func_export(self, context):
+def exportMenuOperator(self, context):
   self.layout.operator("radix.export", text="Radix Map (.xml)")
 
 
-def menu_func_import(self, context):
+def importMenuOperator(self, context):
   self.layout.operator("radix.import", text="Radix Map (.xml)")
 
+def addMenuItems():
+  types = blender.types
+  types.INFO_MT_file_export.append(exportMenuOperator)
+  types.INFO_MT_file_import.append(importMenuOperator)
+  types.INFO_MT_add.prepend(radixMenuAdd.radix_add_menu)
 
 def register():
-  bpy.utils.register_module(__name__)
+  blender.utils.register_module(__name__)
 
   types.setProperties()
   MPTypes.initProperties()
-
-  bpy.types.INFO_MT_file_export.append(menu_func_export)
-  bpy.types.INFO_MT_file_import.append(menu_func_import)
-  bpy.types.INFO_MT_add.prepend(radixMenuAdd.radix_add_menu)
-  bpy.app.handlers.scene_update_post.append(updateTextures.sceneUpdater)
-  bpy.types.WindowManager.MPMaterials = bpy.props.CollectionProperty(type=MPTypes.Row)
-
-  bpy.types.Scene.countObjects = mapHelpers.countObjects
-  bpy.types.Scene.fixObjects = mapHelpers.fixObjects
-  bpy.types.Object.isOverObject = mapHelpers.isOverObject
-  bpy.types.Object.updateTexture = updateTextures.updateTexture
-
+  addMenuItems()
+  blender.app.handlers.scene_update_post.append(updateTextures.sceneUpdater)
+  blender.types.WindowManager.MPMaterials = bpy.props.CollectionProperty(type=MPTypes.Row)
+  blenderScene = blender.types.Scene
+  blenderScene.countObjects = mapHelpers.countObjects
+  blenderScene.fixObjects = mapHelpers.fixObjects
+  blenderObject = blender.types.Object
+  blenderObject.isOverObject = mapHelpers.isOverObject
+  blenderObject.updateTexture = updateTextures.updateTexture
   os.path.browse = directory.browse
 
   MaterialManager.preload()
@@ -106,7 +109,7 @@ def register():
 
 
 def unregister():
-  bpy.utils.unregister_module(__name__)
+  blender.utils.unregister_module(__name__)
 
   operators.removeOperators()
 
@@ -116,19 +119,19 @@ def unregister():
   types.delProperties()
   MPTypes.delProperties()
 
-  bpy.types.INFO_MT_file_export.remove(menu_func_import)
-  bpy.types.INFO_MT_file_export.remove(menu_func_export)
-  bpy.types.INFO_MT_add.remove(radixMenuAdd.radix_add_menu)
-  bpy.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
+  blender.types.INFO_MT_file_export.remove(importMenuOperator)
+  blender.types.INFO_MT_file_export.remove(exportMenuOperator)
+  blender.types.INFO_MT_add.remove(radixMenuAdd.radix_add_menu)
+  blender.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
 
-  del bpy.types.Scene.countObjects
-  del bpy.types.Scene.fixObjects
-  del bpy.types.Object.isOverObject
-  del bpy.types.Object.updateTexture
+  del blender.types.Scene.countObjects
+  del blender.types.Scene.fixObjects
+  del blender.types.Object.isOverObject
+  del blender.types.Object.updateTexture
 
   del os.path.browse
 
-  del bpy.types.WindowManager.MPMaterials
+  del blender.types.WindowManager.MPMaterials
 
 
 if __name__ == "__main__":
