@@ -83,6 +83,13 @@ def addMenuItems():
   types.INFO_MT_file_import.append(importMenuOperator)
   types.INFO_MT_add.prepend(radixMenuAdd.radix_add_menu)
 
+def removeMenuItems():
+  types = blender.types
+  types.INFO_MT_file_import.remove(importMenuOperator)
+  types.INFO_MT_file_export.remove(exportMenuOperator)
+  types.INFO_MT_add.remove(radixMenuAdd.radix_add_menu)
+
+
 def register():
   blender.utils.register_module(__name__)
 
@@ -119,9 +126,7 @@ def unregister():
   types.delProperties()
   MPTypes.delProperties()
 
-  blender.types.INFO_MT_file_export.remove(importMenuOperator)
-  blender.types.INFO_MT_file_export.remove(exportMenuOperator)
-  blender.types.INFO_MT_add.remove(radixMenuAdd.radix_add_menu)
+  removeMenuItems()
   blender.app.handlers.scene_update_post.remove(updateTextures.sceneUpdater)
 
   del blender.types.Scene.countObjects
