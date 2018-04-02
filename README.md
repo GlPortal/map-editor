@@ -7,7 +7,7 @@
 The Radix Map Editor Extension allows Blender to import, edit, create and export Radix maps.
 
 ## Features
-- Easy import and export of Radix maps
+- Import and export of Radix maps
 - Radix specific tool panels
 - Preview with textures
 
@@ -28,15 +28,16 @@ If you are upgrading, you may need to restart Blender.
 ## Development
 -   Install Blender
 -   Clone or download this repository
--   Install the plugin
-    -   Copy directory `glportal-editor` into Blender configuration folder `/home/user/.config/blender/VERSION/scripts/addons`
-    -   use our script `linkExtension` which will create soft link of glportal-editor directory to blender configuration folder
+-   To install the plugin either
+    -   Copy directory `RadixMapEditor` into Blender configuration folder `/home/user/.config/blender/VERSION/scripts/addons`
+    -   Use the `linkExtension` script to create a link of the plugin to the Blender extension folder
 -   Run Blender:
-    -   Find and check the `GlPortal XML Format` box. Wait a moment for activation to complete.
-    -   Find and click on right arrow to display details and preferences.
-    -   Go to `Set up GlPortal data directory` and find GlPortal data directory.
-    -   Go to `Set up GlPortal executable` and find GlPortal executable.
-    -   Click `Save User Settings` and close the window. If you are upgrading, you may need to restart Blender.
+    -  Open the Blender settings
+    -  Check the `GlPortal XML Format` box. Wait a moment for activation to complete.
+    -  Click on right arrow to display details and preferences.
+    -  Go to `Set up GlPortal data directory` and select your GlPortal data directory.
+    -  Go to `Set up GlPortal executable` and find GlPortal executable.
+    -  Click `Save User Settings` and close the window. If you are upgrading, you may need to restart Blender.
 
 
 ## Usage of linkExtension
