@@ -7,7 +7,7 @@
 The Radix Map Editor Extension allows Blender to import, edit, create and export Radix maps.
 
 ## Features
-- Import and export of Radix maps
+- Import and export Radix maps
 - Radix specific tool panels
 - Preview with textures
 
