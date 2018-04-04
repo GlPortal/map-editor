@@ -50,8 +50,15 @@ Open terminal in the main repository directory and type:
 
 Where the `blender_version` is replaced with your installed Blender version.
 
-
 ### Example
 ```
 ./linkExtension -b 2.79
 ```
+
+## Create a Release
+On Linux you can create a release very easily:
+```
+./draftRelease
+```
+
+You can then upload the release to github.
