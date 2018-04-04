@@ -29,7 +29,7 @@ If you are upgrading, you may need to restart Blender.
 -   Install Blender
 -   Clone or download this repository
 -   To install the plugin either
-    -   Copy directory `RadixMapEditor` into Blender configuration folder `/home/user/.config/blender/VERSION/scripts/addons`
+    -   Copy the directory `RadixMapEditor` into your Blender configuration folder `/home/user/.config/blender/VERSION/scripts/addons`
     -   Use the `linkExtension` script to create a link of the plugin to the Blender extension folder
 -   Run Blender:
     -  Open the Blender settings
