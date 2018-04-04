@@ -30,7 +30,7 @@ If you are upgrading, you may need to restart Blender.
 -   Clone or download this repository
 -   To install the plugin either
     -   Copy the directory `RadixMapEditor` into your Blender configuration folder `/home/user/.config/blender/VERSION/scripts/addons`
-    -   Use the `linkExtension` script to create a link of the plugin to the Blender extension folder
+    -   Use the `linkPlugin` script to create a link of the plugin to the Blender plugin folder
 -   Run Blender:
     -  Open the Blender settings
     -  Check the `GlPortal XML Format` box. Wait a moment for activation to complete.
@@ -40,19 +40,19 @@ If you are upgrading, you may need to restart Blender.
     -  Click `Save User Settings` and close the window. If you are upgrading, you may need to restart Blender.
 
 
-## Usage of linkExtension
+## Usage of linkPlugin
 
 Open terminal in the main repository directory and type:
 
 ```
-./linkExtension -b blender_version
+./linkPlugin -b blender_version
 ```
 
 Where the `blender_version` is replaced with your installed Blender version.
 
 ### Example
 ```
-./linkExtension -b 2.79
+./linkPlugin -b 2.79
 ```
 
 ## Create a Release
