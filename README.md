@@ -3,8 +3,8 @@
 [![Join the chat at https://gitter.im/GlPortal/glPortal](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GlPortal/glPortal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Join Chat](https://img.shields.io/badge/irc-join_chat-brightgreen.svg)](http://webchat.freenode.net/?channels=%23%23glportal&uio=d4)
 
-# Radix Map Editor Blender Extension
-The Radix Map Editor Extension allows Blender to import, edit, create and export Radix maps.
+# Radix Map Editor Blender Plugin
+The Radix Map Editor Plugin allows Blender to import, edit, create and export Radix maps.
 
 ## Features
 - Import and export Radix maps
