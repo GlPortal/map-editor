@@ -1,4 +1,5 @@
 #!/bin/sh
 cp -r addon RadixMapEditor
+find RadixMapEditor -type d -name "__pycache__" -exec rm -rf {} \;
 zip -r release.zip RadixMapEditor
 rm -rf RadixMapEditor
