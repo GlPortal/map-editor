@@ -1,7 +1,6 @@
 import bpy
 import os
 
-
 MODELS = {}
 BLACKLIST = [
   "GUIElement.obj",
@@ -10,11 +9,9 @@ BLACKLIST = [
   "PortalStencil.obj"
 ]
 
-
 def reload():
   MODELS.clear()
   preload()
-
 
 def preload():
   global MODELS
@@ -25,7 +22,6 @@ def preload():
     return True
 
   return False
-
 
 def create(file="", materialName=""):
   if not file:
