@@ -1,3 +1,0 @@
-[submodule "RadixXmlSchema"]
-	path = addon/xml-schema
-	url = https://github.com/GlPortal/radix-xml-schema.git
