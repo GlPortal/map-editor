@@ -71,7 +71,7 @@ operatorList = [
     }
   },
   {
-    "base": "SearchBase",
+    "base": "SearchOperator",
     "className": "TriggerSearchAudio",
     "properties": {
       "bl_idname": "trigger_search_audio",
@@ -87,7 +87,7 @@ operatorList = [
     }
   },
   {
-    "base": "SearchBase",
+    "base": "SearchOperator",
     "className": "TriggerSearchMap",
     "properties": {
       "bl_idname": "trigger_search_map",
@@ -103,7 +103,7 @@ operatorList = [
     }
   },
   {
-    "base": "AddBase",
+    "base": "AddOperator",
     "className": "TriggerAddAudio",
     "properties": {
       "bl_idname": "trigger_add_audio",
@@ -115,7 +115,7 @@ operatorList = [
     }
   },
   {
-    "base": "AddBase",
+    "base": "AddOperator",
     "className": "TriggerAddMap",
     "properties": {
       "bl_idname": "trigger_add_map",
@@ -127,7 +127,7 @@ operatorList = [
     }
   },
   {
-    "base": "AddBase",
+    "base": "AddOperator",
     "className": "TriggerAddWin",
     "properties": {
       "bl_idname": "trigger_add_win",
@@ -139,7 +139,7 @@ operatorList = [
     }
   },
   {
-    "base": "AddBase",
+    "base": "AddOperator",
     "className": "TriggerAddDeath",
     "properties": {
       "bl_idname": "trigger_add_death",
@@ -151,7 +151,7 @@ operatorList = [
     }
   },
   {
-    "base": "AddBase",
+    "base": "AddOperator",
     "className": "TriggerAddRadiation",
     "properties": {
       "bl_idname": "trigger_add_radiation",
@@ -186,7 +186,7 @@ operatorList = [
     }
   },
   {
-    "base": "AddBase",
+    "base": "AddOperator",
     "className": "WallAddMetal",
     "properties": {
       "bl_idname": "wall_add_metal",
@@ -198,7 +198,7 @@ operatorList = [
     }
   },
   {
-    "base": "AddBase",
+    "base": "AddOperator",
     "className": "WallAddPortalable",
     "properties": {
       "bl_idname": "wall_add_portalable",
@@ -223,7 +223,7 @@ operatorList = [
     }
   },
   {
-    "base": "AddBase",
+    "base": "AddOperator",
     "className": "VolumeAddAcid",
     "properties": {
       "bl_idname": "volume_add_acid",
@@ -236,7 +236,7 @@ operatorList = [
   },
   # Managers
   {
-    "base": "SearchBase",
+    "base": "SearchOperator",
     "className": "ManagerSearchAddModel",
     "properties": {
       "bl_idname": "manager_search_add_model",
@@ -252,7 +252,7 @@ operatorList = [
     }
   },
   {
-    "base": "SearchBase",
+    "base": "SearchOperator",
     "className": "ManagerSearchSetMaterial",
     "properties": {
       "bl_idname": "manager_search_set_material",

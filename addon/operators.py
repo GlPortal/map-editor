@@ -5,42 +5,11 @@ from bpy.props import StringProperty, BoolProperty, EnumProperty
 from .operatorsList import operatorList
 from .operatorHelpers import resetTriggerSettings, simpleCube, setTrigger
 from .managers import ModelManager
+from .SearchOperator import SearchOperator
+from .AddOperator import AddOperator
 
 operators = []
 idnamePrefix = "radix"
-
-class SearchBase(bpy.types.Operator):
-  bl_idname = "radix.search"
-  bl_label = "Add search"
-  bl_description = 'Base for search operator'
-  bl_property = "items"
-  bl_options = {'INTERNAL'}
-
-  action = None
-  kwargs = None
-  items = EnumProperty(items=[("none", "none", "none")])
-
-  def execute(self, context):
-    if self.items and self.items != "none":
-      if self.action:
-        if isinstance(self.action, str):
-          self.action = getattr(getattr(bpy.ops, idnamePrefix), self.action)
-
-        if self.kwargs and isinstance(self.kwargs, dict):
-          args = self.kwargs.copy()
-          args[self.kwargs["items"]] = self.items
-          del args["items"]
-
-          self.action(**args)
-        else:
-          self.action(self.items)
-        return {'FINISHED'}
-    return {'CANCELLED'}
-
-  def invoke(self, context, event):
-    context.window_manager.invoke_search_popup(self)
-    return {'FINISHED'}
-
 
 class TriggerSetBase(bpy.types.Operator):
   """Base for trigger set operators"""
@@ -133,34 +102,6 @@ class VolumeSetBase(bpy.types.Operator):
           {'ERROR'}, "Object of type '%s' can't be converted to the volume." % (object.type)
         )
     return {'FINISHED'}
-
-
-class AddBase(bpy.types.Operator):
-  """Base for add operator"""
-  bl_idname = 'gpl.add'
-  bl_label = 'Add'
-  bl_description = 'Base for add operator'
-  bl_options = {'INTERNAL'}
-
-  action = None
-  kwargs = None
-
-  def execute(self, context):
-    if self.action:
-      if isinstance(self.action, str):
-        self.action = getattr(getattr(bpy.ops, idnamePrefix), self.action)
-
-      if simpleCube():
-        if self.kwargs:
-          if isinstance(self.kwargs, dict):
-            self.action(**self.kwargs)
-          elif isinstance(self.kwargs, list):
-            self.action(*self.kwargs)
-        else:
-          self.action()
-        return {'FINISHED'}
-    return {'CANCELLED'}
-
 
 def addOperators():
   for opData in operatorList:
