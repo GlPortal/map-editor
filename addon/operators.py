@@ -6,10 +6,8 @@ from .operatorsList import operatorList
 from .operatorHelpers import resetTriggerSettings, simpleCube, setTrigger
 from .managers import ModelManager
 
-
 operators = []
 idnamePrefix = "radix"
-
 
 class SearchBase(bpy.types.Operator):
   bl_idname = "radix.search"
