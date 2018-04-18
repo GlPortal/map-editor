@@ -1,4 +1,5 @@
-Copyright (c) 2017 Henry Hirsch
+Copyright (c) 2018 Henry Hirsch
+
 Contributors: Julian Thijssen, Juraj Oravec
 Please drop me a message if you are missing on this list.
 
