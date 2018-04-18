@@ -2,7 +2,6 @@ import bpy
 import sys
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 
-from .operatorsList import operatorList
 from .operatorHelpers import resetTriggerSettings, simpleCube, setTrigger
 from .managers import ModelManager
 
