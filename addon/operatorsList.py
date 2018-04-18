@@ -164,7 +164,7 @@ operatorList = [
   },
   # Walls
   {
-    "base": "WallSetBase",
+    "base": "WallSetOperator",
     "className": "WallSetMetal",
     "properties": {
       "bl_idname": "wall_set_metal",
@@ -175,7 +175,7 @@ operatorList = [
     }
   },
   {
-    "base": "WallSetBase",
+    "base": "WallSetOperator",
     "className": "WallSetPortalable",
     "properties": {
       "bl_idname": "wall_set_portalable",
