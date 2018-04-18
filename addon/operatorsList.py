@@ -211,7 +211,7 @@ operatorList = [
   },
   # Volumes
   {
-    "base": "VolumeSetBase",
+    "base": "VolumeSetOperator",
     "className": "VolumeSetAcid",
     "properties": {
       "bl_idname": "volume_set_acid",

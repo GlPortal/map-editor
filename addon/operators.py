@@ -9,39 +9,10 @@ from .SearchOperator import SearchOperator
 from .AddOperator import AddOperator
 from .TriggerSetOperator import TriggerSetOperator
 from .WallSetOperator import WallSetOperator
+from .VolumeSetOperator import VolumeSetOperator
 
 operators = []
 idnamePrefix = "radix"
-
-class VolumeSetBase(bpy.types.Operator):
-  """Base for volume set operators"""
-  bl_idname = "radix.volume"
-  bl_label = "Volume"
-  bl_description = "Mark the selection as volume."
-  bl_options = {'INTERNAL'}
-
-  material = StringProperty(default="")
-  volumeType = StringProperty(default="")
-
-  def execute(self, context):
-    objects = bpy.context.selected_objects
-
-    if not (objects and self.material and self.volumeType):
-      return {'CANCELLED'}
-
-    for object in objects:
-      if object.type == 'MESH':
-        if object.radixTypes != "model":
-          resetTriggerSettings(object)
-          object.radixTypes = "volume"
-          object.radixVolumeTypes = self.volumeType
-
-        object.radixMaterial = self.material
-      else:
-        self.report(
-          {'ERROR'}, "Object of type '%s' can't be converted to the volume." % (object.type)
-        )
-    return {'FINISHED'}
 
 def addOperators():
   for opData in operatorList:
