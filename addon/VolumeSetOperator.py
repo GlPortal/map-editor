@@ -6,8 +6,6 @@ from .operatorsList import operatorList
 from .operatorHelpers import resetTriggerSettings, simpleCube, setTrigger
 from .managers import ModelManager
 
-idnamePrefix = "radix"
-
 class VolumeSetOperator(bpy.types.Operator):
   """Volume set operator"""
   bl_idname = "radix.volume"
