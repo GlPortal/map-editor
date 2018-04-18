@@ -6,7 +6,7 @@ from .managers import ModelManager, MaterialManager
 operatorList = [
   # Triggers
   {
-    "base": "TriggerSetBase",
+    "base": "TriggerSetOperator",
     "className": "TriggerSetAudio",
     "properties": {
       "bl_idname": "trigger_set_audio",
@@ -19,7 +19,7 @@ operatorList = [
     }
   },
   {
-    "base": "TriggerSetBase",
+    "base": "TriggerSetOperator",
     "className": "TriggerSetMap",
     "properties": {
       "bl_idname": "trigger_set_map",
@@ -32,7 +32,7 @@ operatorList = [
     }
   },
   {
-    "base": "TriggerSetBase",
+    "base": "TriggerSetOperator",
     "className": "TriggerSetWin",
     "properties": {
       "bl_idname": "trigger_set_win",
@@ -45,7 +45,7 @@ operatorList = [
     }
   },
   {
-    "base": "TriggerSetBase",
+    "base": "TriggerSetOperator",
     "className": "TriggerSetDeath",
     "properties": {
       "bl_idname": "trigger_set_death",
@@ -58,7 +58,7 @@ operatorList = [
     }
   },
   {
-    "base": "TriggerSetBase",
+    "base": "TriggerSetOperator",
     "className": "TriggerSetRadiation",
     "properties": {
       "bl_idname": "trigger_set_radiation",
