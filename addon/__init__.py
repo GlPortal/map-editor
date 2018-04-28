@@ -19,25 +19,21 @@ execfile(directory + '/environment.py')
 
 import bpy
 blender = bpy
-
-def exportMenuOperator(self, context):
-  self.layout.operator("radix.export", text="Radix Map (.xml)")
-
-
-def importMenuOperator(self, context):
-  self.layout.operator("radix.import", text="Radix Map (.xml)")
+from .RadixMenu import RadixMenu
 
 def addMenuItems():
+  menu = RadixMenu()
   types = blender.types
-  types.INFO_MT_file_export.append(exportMenuOperator)
-  types.INFO_MT_file_import.append(importMenuOperator)
-  types.INFO_MT_add.prepend(radixMenuAdd.radix_add_menu)
+  types.INFO_MT_file_export.append(menu.getExportMenuOperator)
+  types.INFO_MT_file_import.append(menu.getImportMenuOperator)
+  types.INFO_MT_add.prepend(menu.addMainMenu)
 
 def removeMenuItems():
+  menu = RadixMenu()
   types = blender.types
-  types.INFO_MT_file_import.remove(importMenuOperator)
-  types.INFO_MT_file_export.remove(exportMenuOperator)
-  types.INFO_MT_add.remove(radixMenuAdd.radix_add_menu)
+  types.INFO_MT_file_import.remove(menu.getImportMenuOperator)
+  types.INFO_MT_file_export.remove(menu.getexportMenuOperator)
+  types.INFO_MT_add.remove(menu.addMainMenu)
 
 def register():
   blender.utils.register_module(__name__)

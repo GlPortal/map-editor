@@ -1,13 +1,5 @@
 from bpy.types import Menu
 
-
-def radix_add_menu(self, context):
-  layout = self.layout
-
-  layout.menu("radixMenu.main", icon='WORLD')
-  layout.separator()
-
-
 class MenuMain(Menu):
   bl_idname = "radixMenu.main"
   bl_label = "Radix"
