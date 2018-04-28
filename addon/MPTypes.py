@@ -69,11 +69,3 @@ def MPItemIdUpdate(self, context):
 
       if "tags" in material:
         wm.radixMatTags = material["tags"]
-
-    #prefs = bpy.context.user_preferences.addons[__package__].preferences
-    #path = os.path.expanduser(prefs.dataDir + "textures/" +  material["texture"])
-    #MM.createTexture(path, material["fancyname"])
-
-  #for area in bpy.context.screen.areas:
-  #  if area.type in ['PROPERTIES']:
-  #    area.tag_redraw()
