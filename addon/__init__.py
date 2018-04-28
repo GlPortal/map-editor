@@ -15,7 +15,7 @@ if "bpy" not in locals():
   from . import exportRadixFormat
   from . import importRadixFormat
   from . import operatorsList
-  from . import operators
+  from . import OperatorManager
   from . import mapOperators
   from . import preferences
   from . import mapHelpers
@@ -112,13 +112,13 @@ def register():
   AudioManager.preload()
   MaterialPanel.initRows()
 
-  operators.addOperators()
+  OperatorManager.addOperators()
 
 
 def unregister():
   blender.utils.unregister_module(__name__)
 
-  operators.removeOperators()
+  OperatorManager.removeOperators()
 
   MaterialManager.radixMaterialReset()
   MaterialManager.MATERIALS.clear()
