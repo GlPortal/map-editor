@@ -10,13 +10,15 @@ bl_info = {
   "tracker_url":  "https://github.com/GlPortal/map-editor/issues"
 }
 
+import os
+
 from past.builtins import execfile
-execfile('environment.py')
+pathToThisFile = os.path.realpath(__file__)
+directory = os.path.dirname(pathToThisFile)
+execfile(directory + '/environment.py')
 
 import bpy
 blender = bpy
-import os
-
 
 def exportMenuOperator(self, context):
   self.layout.operator("radix.export", text="Radix Map (.xml)")
@@ -36,7 +38,6 @@ def removeMenuItems():
   types.INFO_MT_file_import.remove(importMenuOperator)
   types.INFO_MT_file_export.remove(exportMenuOperator)
   types.INFO_MT_add.remove(radixMenuAdd.radix_add_menu)
-
 
 def register():
   blender.utils.register_module(__name__)
