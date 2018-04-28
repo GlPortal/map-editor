@@ -31,7 +31,7 @@ class ObjectPanel(bpy.types.Panel):
     elif object.radixTypes == "volume":
       layout.prop(object, "radixVolumeTypes")
 
-    if object.radixMaterial:
+    if object.radixMaterial != "none":
       layout.label(text="Material properties", icon='MATERIAL')
 
       layout.prop(object, "radixMaterial", text="Name ")
