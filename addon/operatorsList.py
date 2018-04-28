@@ -1,10 +1,50 @@
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 
-from .operatorHelpers import itemsMaterial, itemsModel, itemsAudio, itemsMap
+from .operatorHelpers import itemsMaterial, itemsModel, itemsAudio, itemsMap, itemsDestination
 from .managers import ModelManager, MaterialManager
 
 operatorList = [
   # Triggers
+  {
+    "base": "DestinationSetOperator",
+    "className": "DestinationSet",
+    "properties": {
+      "bl_idname": "set_destination",
+      "bl_label": "Set destination",
+      "bl_description": "Mark the selection as destination.",
+      "bl_options": {'REGISTER', 'UNDO'},
+      "destinationName": StringProperty(default="", options={'HIDDEN'})
+    }
+  },
+  {
+    "base": "TriggerSetOperator",
+    "className": "TriggerSetTeleport",
+    "properties": {
+      "bl_idname": "trigger_set_teleport",
+      "bl_label": "Set Teleport Trigger",
+      "bl_description": "Mark the selection as teleport trigger.",
+      "bl_options": {'REGISTER', 'UNDO'},
+      "type": StringProperty(default="teleport", options={'HIDDEN'}),
+      "loop": BoolProperty(default=False, options={'HIDDEN'}),
+      "filePath": StringProperty(default="", options={'HIDDEN'})
+    }
+  },
+  {
+    "base": "SearchOperator",
+    "className": "ManagerSearchSetDestination",
+    "properties": {
+      "bl_idname": "manager_search_set_destination",
+      "bl_label": "Set destination",
+      "bl_description": "Search and set destination to selected objects.",
+      "bl_options": {'REGISTER', 'UNDO'},
+      "bl_property": "items",
+      "items": EnumProperty(items=itemsDestination, options={'HIDDEN'}),
+      "action": MaterialManager.setRadixMaterial,
+      "kwargs": {
+        "items": "destination"
+      }
+    }
+  },
   {
     "base": "TriggerSetOperator",
     "className": "TriggerSetAudio",
@@ -100,6 +140,30 @@ operatorList = [
       "kwargs": {
         "items": "filePath"
       }
+    }
+  },
+  {
+    "base": "AddOperator",
+    "className": "TriggerAddDestination",
+    "properties": {
+      "bl_idname": "trigger_add_destination",
+      "bl_label": "Add teleport destination",
+      "bl_description": "Add teleport destination.",
+      "bl_options": {'REGISTER', 'UNDO'},
+      "action": "trigger_search_destination",
+      "kwargs": ['INVOKE_DEFAULT']
+    }
+  },
+  {
+    "base": "AddOperator",
+    "className": "TriggerAddTeleport",
+    "properties": {
+      "bl_idname": "trigger_add_teleport",
+      "bl_label": "Add teleport Trigger",
+      "bl_description": "Add teleport trigger.",
+      "bl_options": {'REGISTER', 'UNDO'},
+      "action": "trigger_set_destination",
+      "kwargs": ['INVOKE_DEFAULT']
     }
   },
   {

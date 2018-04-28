@@ -30,7 +30,8 @@ class ObjectPanel(bpy.types.Panel):
           layout.prop(object, "radixTriggerAudioLoop")
     elif object.radixTypes == "volume":
       layout.prop(object, "radixVolumeTypes")
-
+    elif object.radixTypes == "destination":
+      layout.prop(object, "radixDestinationName", text="Name ")
     if object.radixTypes == "model" or object.radixTypes == "wall" or object.radixTypes == "volume":
       layout.label(text="Material properties", icon='MATERIAL')
 

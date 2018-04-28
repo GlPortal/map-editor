@@ -35,6 +35,16 @@ def setTrigger(object, type, filePath="", loop=False):
   if filePath:
     object.radixTriggerFilepath = filePath
 
+def setDestination(object, name):
+  prefs = bpy.context.user_preferences.addons[__package__].preferences
+  clearRadixProperties(object)
+
+  object.radixTypes = "destination"
+  object.radixDestinationName = name
+  object.draw_type = 'WIRE'
+  object.show_x_ray = prefs.triggerXrays
+  object.show_bounds = True
+  object.draw_bounds_type = 'CAPSULE'
 
 def clearRadixProperties(object):
   MaterialManager.reset(object)
@@ -49,11 +59,15 @@ def clearRadixProperties(object):
     object.radixTriggerFilepath = "none"
   if object.radixTriggerAudioLoop:
     object.radixTriggerAudioLoop = False
+  if object.radixDestinationName != "none":
+    object.radixDestinationName = "none"
 
 
 def itemsMaterial(self, context):
   return [(name, fancyName, tooltip) for name, fancyName, tooltip in types.RADIX_MATERIAL_TYPES]
 
+def itemsDestination(self, context):
+  return [(name, fancyName, tooltip) for name, fancyName, tooltip in types.RADIX_DESTINATION_TYPES]
 
 def itemsModel(self, centext):
   return [(file, fancyName, fancyName) for file, fancyName in ModelManager.MODELS.items()]

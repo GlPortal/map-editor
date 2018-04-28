@@ -26,6 +26,9 @@ class SidePanel(bpy.types.Panel):
     layout.operator("radix.trigger_set_win", icon='MESH_CUBE', text="Win")
     layout.operator("radix.trigger_search_map", icon='MESH_CUBE', text="Map")
     layout.operator("radix.trigger_search_audio", icon='MESH_CUBE', text="Audio")
+    layout.operator("radix.trigger_set_teleport", icon='MESH_CUBE', text="Teleport")
+    layout.separator()
+    layout.operator("radix.set_destination", icon='MESH_CUBE', text="Destination")
 
     layout.label("Light:")
     layout.operator("radix.set_light_common", icon='LAMP_POINT')

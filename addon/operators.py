@@ -10,6 +10,7 @@ from .AddOperator import AddOperator
 from .TriggerSetOperator import TriggerSetOperator
 from .WallSetOperator import WallSetOperator
 from .VolumeSetOperator import VolumeSetOperator
+from .DestinationSetOperator import DestinationSetOperator
 
 operators = []
 idnamePrefix = "radix"

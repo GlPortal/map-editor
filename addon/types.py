@@ -7,7 +7,8 @@ RADIX_TYPES = [
   ("wall", "Wall", "Wall"),
   ("volume", "Volume", "Volume"),
   ("trigger", "Trigger", "Trigger"),
-  ("model", "Model", "Model")
+  ("model", "Model", "Model"),
+  ("destination", "Destination", "Destination")
 ]
 RADIX_VOLUME_TYPES = [
   ("none", "None", "No special property"),
@@ -19,12 +20,15 @@ RADIX_TRIGGER_TYPES = [
   ("map", "Map", "Area triggers new map"),
   ("audio", "Audio", "Area triggers new audio"),
   ("death", "Death", "Area triggers death"),
-  ("radiation", "Radiation", "Area triggers radiation")
+  ("radiation", "Radiation", "Area triggers radiation"),
+  ("teleport", "Teleport", "Area triggers teleportation")
 ]
 RADIX_MATERIAL_TYPES = [
   ("none", "None", "No material")
 ]
-
+RADIX_DESTINATION_TYPES = [
+  ("none", "None", "No destination")
+]
 
 def onUpdateRadixTypes(self, context):
   """Update object name based on object's game function"""
@@ -47,7 +51,7 @@ def onUpdateRadixTypes(self, context):
 
 
 def setProperties():
-  """Register properties for Blender"""
+  """Register radix specific properties to objects"""
   bpy.types.Object.radixTypes = EnumProperty(
     items=RADIX_TYPES,
     name="Type",
@@ -83,14 +87,17 @@ def setProperties():
     default="none",
     update=onUpdateRadixTypes
   )
+  bpy.types.Object.radixDestinationName = StringProperty(
+    name="Destination Name",
+    default="none"
+  )
   bpy.types.WindowManager.importedFilepath = StringProperty(
     name="Imported filepath",
     default="none"
   )
 
-
 def delProperties():
-  """Unregister properties from Blender"""
+  """Unregister radix properties from objects"""
   del bpy.types.Object.radixTypes
   del bpy.types.Object.radixVolumeTypes
   del bpy.types.Object.radixTriggerTypes
@@ -99,3 +106,4 @@ def delProperties():
   del bpy.types.Object.radixModel
   del bpy.types.WindowManager.importedFilepath
   del bpy.types.Object.radixMaterial
+  del bpy.types.Object.radixDestinationName
