@@ -9,7 +9,7 @@ if "bpy" not in locals():
   from . import mapHelpers
   from . import radixMenuAdd
   from . import updateTextures
-  from . import lightsOperators
+  from .operators import lightsOperators
   from . import Exporter
   from . import importer
   from . import operatorHelpers
