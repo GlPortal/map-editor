@@ -38,13 +38,3 @@ class MenuTriggers(Menu):
     layout.operator("radix.trigger_add_win", icon='MESH_CUBE', text="Win")
     layout.operator("radix.trigger_add_map", icon='MESH_CUBE', text="Map")
     layout.operator("radix.trigger_add_audio", icon='MESH_CUBE', text="Audio")
-
-
-class MenuVolumes(Menu):
-  bl_idname = "radixMenu.volumes"
-  bl_label = "Volumes"
-
-  def draw(self, context):
-    layout = self.layout
-
-    layout.operator("radix.volume_add_acid", icon='MESH_CUBE', text="Acid")
