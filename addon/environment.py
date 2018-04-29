@@ -7,7 +7,8 @@ if "bpy" not in locals():
   from . import mapOperators
   from . import preferences
   from . import mapHelpers
-  from . import radixMenuAdd
+  from .menu import MenuMain
+  from .menu import MenuWalls
   from .menu import MenuTriggers
   from .menu import MenuVolumes
   from .menu import MenuLights
