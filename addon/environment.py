@@ -21,9 +21,9 @@ if "bpy" not in locals():
   from .managers import ModelManager
   from .managers import MapManager
   from .managers import AudioManager
-  from . import CreationPanel
-  from . import SidePanel
-  from . import ObjectPanel
+  from .panels import CreationPanel
+  from .panels import SidePanel
+  from .panels import ObjectPanel
 else:
   import importlib
 

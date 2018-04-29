@@ -1,6 +1,6 @@
 import bpy
 
-from .managers import MaterialManager
+from ..managers import MaterialManager
 
 
 class ObjectPanel(bpy.types.Panel):
