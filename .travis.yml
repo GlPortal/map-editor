@@ -7,6 +7,6 @@ before_install:
 before_script:
   - docker run -it glportal/whale-blender blender --version
 script:
-  - docker run -it -v $(pwd)/tests:/data -v $(pwd)/addon:/usr/share/blender/2.79/scripts/addons/toGlPortalXml -v $(pwd)/glportal-data:/root/.glportal/data glportal/whale-blender
+  - docker run -it -v $(pwd)/tests:/data -v $(pwd)/addon:/usr/share/blender/2.79/scripts/addons/toGlPortalXml -v $(pwd)/glportal-data:/root/.glportal/data glportal/whale-blender bash -c "run-tests"
 notifications:
   irc: "chat.freenode.net#glportal"
