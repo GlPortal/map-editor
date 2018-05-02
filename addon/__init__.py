@@ -12,10 +12,13 @@ bl_info = {
 
 import os
 
-from past.builtins import execfile
 pathToThisFile = os.path.realpath(__file__)
 directory = os.path.dirname(pathToThisFile)
-execfile(directory + '/environment.py')
+
+fileHandle = open(directory + '/environment.py')
+environmentBootstrapCode = fileHandle.read()
+fileHandle.close()
+exec(environmentBootstrapCode)
 
 import bpy
 blender = bpy
