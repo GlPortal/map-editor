@@ -39,7 +39,6 @@ else:
   importlib.reload(mapOperators)
   importlib.reload(preferences)
   importlib.reload(mapHelpers)
-  importlib.reload(radixMenuAdd)
   importlib.reload(updateTextures)
   importlib.reload(lightsOperators)
   importlib.reload(Exporter)

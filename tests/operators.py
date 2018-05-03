@@ -126,7 +126,7 @@ try:
 
     def testDynamicOperatorsRegistered(self):
       """ Test if operators are registered """
-      for operator in RadixMapEditor.operators.operatorList:
+      for operator in RadixMapEditor.operatorsList.operatorList:
         print("Checking:", operator["properties"]["bl_idname"])
         self.assertTrue(
           hasattr(bpy.types, "RADIX_OT_" + operator["properties"]["bl_idname"].lstrip("radix.")),
