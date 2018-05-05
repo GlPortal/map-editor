@@ -15,6 +15,29 @@ class ObjectPanel(bpy.types.Panel):
       return True
     return False
 
+  def drawMaterialSelection(self, context):
+    object = context.active_object
+    layout = self.layout
+    layout.label(text="Material properties", icon='MATERIAL')
+
+    layout.prop(object, "radixMaterial", text="Name ")
+
+    if object.radixMaterial != "none":
+      mat = MaterialManager.MATERIALS[object.radixMaterial]
+
+      row = layout.row(align=True)
+      row.alignment = 'EXPAND'
+      row.label(text="Portalable : ")
+      if mat['portalable']:
+        row.label(text="Yes")
+      else:
+        row.label(text="No")
+
+      row = layout.row(align=True)
+      row.alignment = 'EXPAND'
+      row.label(text="Kind : ")
+      row.label(text=mat["kind"])
+
   def draw(self, context):
     object = context.active_object
     layout = self.layout
@@ -33,22 +56,4 @@ class ObjectPanel(bpy.types.Panel):
     elif object.radixTypes == "destination":
       layout.prop(object, "radixDestinationName", text="Name ")
     if object.radixTypes == "model" or object.radixTypes == "wall" or object.radixTypes == "volume":
-      layout.label(text="Material properties", icon='MATERIAL')
-
-      layout.prop(object, "radixMaterial", text="Name ")
-
-      if object.radixMaterial != "none":
-        mat = MaterialManager.MATERIALS[object.radixMaterial]
-
-        row = layout.row(align=True)
-        row.alignment = 'EXPAND'
-        row.label(text="Portalable : ")
-        if mat['portalable']:
-          row.label(text="Yes")
-        else:
-          row.label(text="No")
-
-        row = layout.row(align=True)
-        row.alignment = 'EXPAND'
-        row.label(text="Kind : ")
-        row.label(text=mat["kind"])
+      self.drawMaterialSelection(context)
