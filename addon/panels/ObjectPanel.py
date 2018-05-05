@@ -41,19 +41,21 @@ class ObjectPanel(bpy.types.Panel):
   def draw(self, context):
     object = context.active_object
     layout = self.layout
-
+    type        = object.radixTypes
+    triggerType = object.radixTriggerTypes
     layout.prop(object, "radixTypes")
-    if object.radixTypes == "trigger":
+    if type == "trigger":
       layout.prop(object, "radixTriggerTypes")
 
-      if object.radixTriggerTypes in {"map", "audio"}:
+      if triggerType in {"map", "audio"}:
         layout.prop(object, "radixTriggerFilepath")
 
-        if object.radixTriggerTypes == "audio":
+        if triggerType == "audio":
           layout.prop(object, "radixTriggerAudioLoop")
-    elif object.radixTypes == "volume":
+
+    elif type == "volume":
       layout.prop(object, "radixVolumeTypes")
-    elif object.radixTypes == "destination":
+    elif type == "destination":
       layout.prop(object, "radixDestinationName", text="Name ")
-    if object.radixTypes == "model" or object.radixTypes == "wall" or object.radixTypes == "volume":
+    if type in {"model", "wall", "volume"}:
       self.drawMaterialSelection(context)
